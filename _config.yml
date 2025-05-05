@@ -36,6 +36,7 @@ copyright_url            : # "copyright" URL, defaults to site.url
 comments:
   provider               : "giscus"  # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
   giscus:
+    repo: "JeonghwanY/JeonghwanY.github.io"
     repo_id: "R_kgDOOdAEQQ"
     category_name: "General"
     category_id: "DIC_kwDOOdAEQc4CpVDo"
