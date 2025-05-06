@@ -1,15 +1,15 @@
 /* giscus-custom.css */
 .giscus {
-    background-color: #f3f3f3 !important;
+    background-color: #1e1e1e !important; /* 배경색 (너무 밝은 회색은 다크모드랑 충돌) */
     border: none !important;
     box-shadow: none !important;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 10px;
+    max-width: 700px !important;
+    margin: 20px auto !important;
+    padding: 0 !important;
   }
   
+  /* iframe 자체 높이 줄이기 위한 시도 */
   .giscus-frame {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: 600px !important; /* 댓글 높이 충분히 확보 */
+    min-height: 200px !important;
+    max-height: 600px !important;
   }
