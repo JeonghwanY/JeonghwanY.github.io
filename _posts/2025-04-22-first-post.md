@@ -4,6 +4,7 @@ date: 2025-04-22 11:00:00 +0900
 categories: [TIL]
 tags: [Python, GitHub, Blog]
 comments: true
+layout: single
 author_profile: ture
 ---
 
