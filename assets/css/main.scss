@@ -7,3 +7,21 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+/* Giscus 커스터마이징 */
+.giscus {
+    background-color: #f3f3f3 !important;
+    border: none !important;
+    box-shadow: none !important;
+    max-width: 700px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+  
+  .giscus .giscus-frame {
+    margin-top: 0 !important;
+  }
+  
+  .giscus span:has(> strong:contains("Leave a comment")) {
+    display: none !important;
+  }
