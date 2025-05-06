@@ -1,7 +1,7 @@
----
-# Only the main Sass file needs front matter (the dashes are enough)
-search: false
----
+// ---
+// # Only the main Sass file needs front matter (the dashes are enough)
+// search: false
+// ---
 
 @charset "utf-8";
 
@@ -9,19 +9,4 @@ search: false
 @import "minimal-mistakes"; // main partials
 
 /* Giscus 커스터마이징 */
-.giscus {
-    background-color: #f3f3f3 !important;
-    border: none !important;
-    box-shadow: none !important;
-    max-width: 700px !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-  }
-  
-  .giscus .giscus-frame {
-    margin-top: 0 !important;
-  }
-  
-  .giscus span:has(> strong:contains("Leave a comment")) {
-    display: none !important;
-  }
+/* Giscus 스타일 커스터마이징 - 인스타 느낌 */

@@ -1,15 +1,35 @@
 /* giscus-custom.css */
+/* Giscus 스타일 커스터마이징 - 인스타 느낌 */
 .giscus {
-    background-color: #1e1e1e !important; /* 배경색 (너무 밝은 회색은 다크모드랑 충돌) */
+    background-color: transparent !important; /* 완전 투명 배경 */
     border: none !important;
     box-shadow: none !important;
     max-width: 700px !important;
-    margin: 20px auto !important;
+    margin: 0 auto !important;
     padding: 0 !important;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 14px;
   }
   
-  /* iframe 자체 높이 줄이기 위한 시도 */
+  /* 댓글 입력 박스 크기 줄이기 */
   .giscus-frame {
-    min-height: 200px !important;
-    max-height: 600px !important;
+    min-height: 150px !important;
+    max-height: 500px !important;
+    background-color: transparent !important;
+  }
+  
+  /* "Leave a comment" 문구 숨기기 */
+  .giscus span:has(> strong:contains("Leave a comment")) {
+    display: none !important;
+  }
+  
+  /* 댓글 간 간격 줄이기 */
+  .giscus .giscus-comment {
+    margin-bottom: 10px !important;
+  }
+  
+  /* 반응 아이콘 너무 크게 잡히는 것 줄이기 */
+  .giscus .giscus-reactions {
+    margin-top: 4px !important;
+    scale: 0.85;
   }
