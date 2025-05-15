@@ -1,6 +1,8 @@
 ---
 title: "정환의 개발 블로그 첫 글"
 date: 2025-04-22 11:00:00 +0900
+header:
+  teaser: /assets/images/winter.jpeg
 categories: [TIL]
 tags: [Python, GitHub, Blog]
 comments: true

@@ -7,6 +7,11 @@
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
-
+@import "custom";  // 확장자 및 경로 생략
 /* Giscus 커스터마이징 */
 /* Giscus 스타일 커스터마이징 - 인스타 느낌 */
+.page__meta-sep::before {
+    content: "\2022"; // • 기호
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
