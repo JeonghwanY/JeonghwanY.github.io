@@ -28,7 +28,7 @@ repository               : "JeonghwanY/JeonghwanY.github.io" # GitHub username/r
 teaser                   : "/assets/images/winter.jpeg"
 logo                     : "/assets/images/customTitle.png"
 masthead_title           : "안녕하살법"
-breadcrumbs              : # true, false (default)
+breadcrumbs              : true # truefalse (default)
 words_per_minute         : 200
 enable_copy_code_button  : true
 copyright                : # "copyright" name, defaults to site.title
