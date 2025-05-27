@@ -1,7 +1,7 @@
 ---
-layout: single
-title: "About"
+layout: search
+title: "search"
 permalink: /about/
 ---
 
-개발자가 되기 위해 공부 중입니다.
+검색할거면 해보십시오
