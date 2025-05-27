@@ -10,11 +10,13 @@ main:
   #   url: /collection-archive/
   # - title: "Sitemap"
   #   url: /sitemap/
-  - title: "Home"
-    url: "/"
   - title: "About"
-    url: "/about/"
+    url: /about/
   - title: "TIL"
-    url: "/til/"
+    url: /til/
   - title: "Projects"
-    url: "/projects/"
+    url: /projects/
+  - title: "CS"
+    url: /cs/
+  - title: "Tags"
+    url: /tags/
