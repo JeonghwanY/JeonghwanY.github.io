@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>해시 테이블(Hash table), 해시법(Hashing) | hwan log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="해시 테이블(Hash table), 해시법(Hashing)" />
+<meta name="author" content="JeongHwan Yun" />
+<meta property="og:locale" content="ko_KR, en_US" />
+<meta name="description" content="기술블로그" />
+<meta property="og:description" content="기술블로그" />
+<meta property="og:site_name" content="hwan log" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-03-24T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="해시 테이블(Hash table), 해시법(Hashing)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2025-03-24T00:00:00+00:00","datePublished":"2025-03-24T00:00:00+00:00","description":"기술블로그","headline":"해시 테이블(Hash table), 해시법(Hashing)","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/algorithm/hash-table-and-hashing/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/algorithm/hash-table-and-hashing/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="color-scheme" content="dark light">
+
+
+
+  <meta name="theme-color" content="rgb(200,200,200)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="hwan log">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="hwan log">
+
+<meta name="generator" content="Hydejack v9.2.1" />
+
+
+<link rel="alternate" href="/blog/algorithm/hash-table-and-hashing/" hreflang="ko-kr, en-us">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.2.1.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<script>((r,a)=>{function d(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=a.createElement("script"),e=(n.src=e,t&&d(n,"load",t,{once:!0}),a.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=a.createElement("script");function o(){r._loaded=!0,t&&d(n,"load",t,{once:!0});var e=a.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():d(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){d(a.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}})(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-06-01T18:16:59+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.2.1.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5);--accent-color-highlight: rgba(200,200,200,0.1);--accent-color-darkened: #b5b5b5;--theme-color: rgb(200,200,200);--dark-mode-body-bg: #2d2d2d;--dark-mode-border-color: #393939}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  ((e,s)=>{var d="light-mode",a="dark-mode",o=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(o=o<=e._sunrise||o>=e._sunset?a:d)==a?d:a,s.body.classList.add(o),s.body.classList.remove(e))})(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/algorithm/">algorithm</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>hash-table-and-hashing</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-algorithm-hash-table-and-hashing" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        해시 테이블(Hash table), 해시법(Hashing)
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-03-24T00:00:00+00:00">24 Mar 2025</time> in <span>Blog</span> / <a href="/algorithm/" class="flip-title">알고리즘</a> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul class="large-only" id="markdown-toc">
+  <li><a href="#아래는-헤시-테이블이야" id="markdown-toc-아래는-헤시-테이블이야">아래는 헤시 테이블이야</a>    <ul>
+      <li><a href="#해시-테이블의-특징은-아래와-같아" id="markdown-toc-해시-테이블의-특징은-아래와-같아">해시 테이블의 특징은 아래와 같아</a></li>
+    </ul>
+  </li>
+  <li><a href="#해시-충돌" id="markdown-toc-해시-충돌">해시 충돌</a>    <ul>
+      <li><a href="#체인법chain" id="markdown-toc-체인법chain">체인법(Chain)</a></li>
+      <li><a href="#hash_value--해시-함수-만들기인데-위-처음에-설명한거처럼-이해해" id="markdown-toc-hash_value--해시-함수-만들기인데-위-처음에-설명한거처럼-이해해">hash_value() : 해시 함수 만들기인데, 위 처음에 설명한거처럼 이해해</a>        <ul>
+          <li><a href="#키로-원소를-검색하는-search-함수" id="markdown-toc-키로-원소를-검색하는-search-함수">키로 원소를 검색하는 search() 함수</a></li>
+        </ul>
+      </li>
+      <li><a href="#원소를-추가하는-add-함수" id="markdown-toc-원소를-추가하는-add-함수">원소를 추가하는 add() 함수</a></li>
+      <li><a href="#원소를-삭제하는-remove-함수" id="markdown-toc-원소를-삭제하는-remove-함수">원소를 삭제하는 remove() 함수</a></li>
+      <li><a href="#원소를-출력하는-dump-함수" id="markdown-toc-원소를-출력하는-dump-함수">원소를 출력하는 dump() 함수</a></li>
+    </ul>
+  </li>
+  <li><a href="#오픈-주소법open-addressing" id="markdown-toc-오픈-주소법open-addressing">오픈 주소법(open addressing)</a>    <ul>
+      <li><a href="#원소-추가하기" id="markdown-toc-원소-추가하기">원소 추가하기</a></li>
+      <li><a href="#원소-삭제하기" id="markdown-toc-원소-삭제하기">원소 삭제하기</a></li>
+      <li><a href="#원소-검색하기" id="markdown-toc-원소-검색하기">원소 검색하기</a></li>
+    </ul>
+  </li>
+  <li><a href="#마무리" id="markdown-toc-마무리">마무리</a></li>
+</ul>
+
+<p>긁어모음, 뒤죽박죽이라는 의미를 가진 해시라는 단어가 파이썬에서는 어떻게 쓰일까.
+데이터를 키(key)와 값(value)의 쌍으로 저장하는 자료구조인 딕셔너리(dict) 또는 해시(hashing)를 배워보자.</p>
+
+<p>해시 테이블에 대해서 먼저 보여주자면, 아래는 그냥 13개의 원소를 갖고 있는는 리스트이고</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span> <span class="mi">75</span><span class="p">]</span>
+</code></pre></div></div>
+<h2 id="아래는-헤시-테이블이야">아래는 헤시 테이블이야</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">키</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th>14</th>
+      <th>20</th>
+      <th>29</th>
+      <th>34</th>
+      <th>37</th>
+      <th>51</th>
+      <th>69</th>
+      <th>75</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">해시값(13으로 나눈 나머지)</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">6</td>
+      <td>1</td>
+      <td>7</td>
+      <td>3</td>
+      <td>8</td>
+      <td>11</td>
+      <td>12</td>
+      <td>4</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>만약 위 테이블에 35라는 수를 추가하고 싶을때, 35와 35를 13으로 나눈 나머지인 9가 같이 저장돼</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">키</th>
+      <th style="text-align: center">5</th>
+      <th style="text-align: center">6</th>
+      <th>14</th>
+      <th>20</th>
+      <th>29</th>
+      <th>34</th>
+      <th>35</th>
+      <th>37</th>
+      <th>51</th>
+      <th>69</th>
+      <th>75</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">해시값(13으로 나눈 나머지)</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">6</td>
+      <td>1</td>
+      <td>7</td>
+      <td>3</td>
+      <td>9</td>
+      <td>8</td>
+      <td>11</td>
+      <td>12</td>
+      <td>4</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>이렇게 되면 정렬이 안깨지면서 원소 이동도 필요 없게 되는거지</p>
+
+<p>이렇게 키를 해시값으로 변환하는 과정을 해시 함수(Hash function)라고 하고 해시 테이블에서 만들어진 원소를 버킷(bucket)이라고 한대</p>
+
+<h3 id="해시-테이블의-특징은-아래와-같아">해시 테이블의 특징은 아래와 같아</h3>
+
+<ul>
+  <li>
+    <p>데이터를 저장할 떄, 키(key: 사슴 느낌)를 해시 함수에 넣어서 나온 결과값(해시값 : 척추동물 느낌)을 기반으로 저장 위치를 정해</p>
+  </li>
+  <li>
+    <p>덕분에 데이터를 빠르게 검색, 삽입, 삭제가 가능</p>
+  </li>
+  <li>
+    <p>평균 시간 복잡도는 O(1)</p>
+  </li>
+  <li>
+    <p>다양한 자료형을 값으로 쓸 수 있어</p>
+  </li>
+  <li>
+    <p>같은 해시값에 키의 값은 중복될 수 없어서, 같은 값을 넣으면 기존 값이 덮어씌워짐</p>
+  </li>
+</ul>
+
+<h2 id="해시-충돌">해시 충돌</h2>
+
+<p>그렇다면, 다른 가정을 한번 해보자 위 테이블에 18을 추가할때, 나머지인 5가 이미 있잖아? 그런데 괜찮아 왜냐하면 1:1 대응이 아니어도 되거든. 예를 들어, 이름 : 철수 와 이름 : 관수 같은 느낌이지. 1:1이 아닌 n:1로 가져가면 돼. 이렇게 버킷이 중복되는 현상을 충돌(collision)이야</p>
+
+<p>2가지 방법으로 대처가 가능해</p>
+
+<ul>
+  <li>
+    <p>체인법 : 해시값이 같은 원소를 연결 리스트로 관리</p>
+  </li>
+  <li>
+    <p>오픈 주소법 : 빈 버킷을 찾을 때까지 해시를 반복</p>
+  </li>
+</ul>
+
+<p>만약 충돌이 나지 않게 된다면, 검색/추가/삭제의 시간 복잡도는 모두 O(1)이야. 그렇다고 해시 테이블을 크게 만들면 메모리를 낭비하니 이것도 주의하자.</p>
+
+<p>해시 충돌을 예방하고자 할때 해시 테이블의 크기는 <strong><em>소수</em></strong>로 하자</p>
+
+<h3 id="체인법chain">체인법(Chain)</h3>
+
+<p>그러면 체인법을 먼저 알아보자. 체인법은 해시값이 같은 데이터를 체인 모양의 연결 리스트로 연결하는 방법이라고 하며, 오픈 해시법(Open hashing)이라고도 한대.</p>
+
+<p>그냥 같은 해시값/버킷에 리스트 구조로 여러 개의 데이터를 저장한다 생각하면 되고, 이 리스트가 너무 길어지면 성능 저하가 발생하니 주의하자.</p>
+
+<p>또한, 해시 함수가 해시 테이블 크기보다 작거나 같은 정수를 고르게 생성해야 해. 그래서 해시 테이블의 크기는 소수를 선호한대, 나눠서 값이 잘 안 떨어지니까?</p>
+
+<p>체인법으로 해시 함수 구현해보기 위해 차근차근 예제를 보자</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Type</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+
+<span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+    <span class="s">"""해시를 구성하는 노드"""</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="nb">next</span><span class="p">:</span> <span class="n">Node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""초기화"""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">key</span>   <span class="o">=</span> <span class="n">key</span>    <span class="c1"># 키
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>  <span class="c1"># 값
+</span>        <span class="bp">self</span><span class="p">.</span><span class="nb">next</span>  <span class="o">=</span> <span class="nb">next</span>   <span class="c1"># 뒤쪽 노드를 참조
+</span></code></pre></div></div>
+
+<p>Node 클래스는 나도 모르지만, 여기서 배워보자. Node 클래스는 개별 버킷을 나타내고 아래와 같이 3개의 필드가 있어. 키 값에 해시 함수를 적용해 해시값을 구한대.</p>
+
+<ul>
+  <li>key : 키(임의의 자료형)</li>
+  <li>value : 값(임의의 자료형)</li>
+  <li>next : 뒤쪽 노드를 참조(Node형)</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ChainedHash</span><span class="p">:</span>
+    <span class="s">"""체인법을 해시 클래스 구현"""</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capacity</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""초기화"""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">capacity</span> <span class="o">=</span> <span class="n">capacity</span>             <span class="c1"># 해시 테이블의 크기를 지정
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">table</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">capacity</span>  <span class="c1"># 해시 테이블(리스트)을 선언
+</span>
+    <span class="k">def</span> <span class="nf">hash_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="s">"""해시값을 구함"""</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">key</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">capacity</span>
+        <span class="k">return</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">hashlib</span><span class="p">.</span><span class="n">sha256</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">).</span><span class="n">encode</span><span class="p">()).</span><span class="n">hexdigest</span><span class="p">(),</span> <span class="mi">16</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">capacity</span><span class="p">)</span>
+</code></pre></div></div>
+<p>ChainedHash 클래스는 필드 2개로만 구성이 돼</p>
+
+<ul>
+  <li>
+    <p>capacity : 해시 테이블의 크기(배열 table의 원소 수)를 가리키고</p>
+  </li>
+  <li>
+    <p>table : 해시 테이블을 저장하는 list형 배열을 가리켜</p>
+  </li>
+</ul>
+
+<p>위의 __init__함수 같은 경우 원소 수가 capacity(배열 table의 원소 수)인 list형의 배열 table을 생성하고 모든 원소를 None으로 한다는 얘기야. 해시 테이블의 각 버킷은 맨 앞부터 table[0], table[1], …, table[capacity-1] 순으로 접근할 수 있다.</p>
+
+<p>지금은 table의 모든 원소는 None이고 버킷은 capacity 만큼 있다.</p>
+
+<h3 id="hash_value--해시-함수-만들기인데-위-처음에-설명한거처럼-이해해">hash_value() : 해시 함수 만들기인데, 위 처음에 설명한거처럼 이해해</h3>
+
+<p>그런데, key가 int형인 경우와 아닌 경우에 따라서 함수가 변해</p>
+
+<ul>
+  <li>
+    <p>key가 int : key를 해시의 크기 capacity로 나눈 나머지를 해시값</p>
+  </li>
+  <li>
+    <p>key != int : 문자열/리스트/클래스형 등은 나눌 수 없기 때문에, 아래 표와 같이 표준 라이브러리로 형 변환을 해야 해시값을 얻을 수가 있어.</p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">sha256 알고리즘</th>
+      <th style="text-align: center">hashlib 모듈에서 제공되며, 주어진 바이트 문자열의 해시값을 구하는 해시 알고림의 생성자</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">encode() 함수</td>
+      <td style="text-align: center">hashlib.sha256에 바이트 문자열의 인수를 전달하면, key를 str형 문자열로 변환한 뒤 그 문자열을 encode() 함수에 전달하여 바이트 문자열을 생성한다</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">hexdigest() 함수</td>
+      <td style="text-align: center">sha256 알고리즘에서 해시값을 16진수 문자열로 꺼냄</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">int() 함수</td>
+      <td style="text-align: center">hexdigest() 함수로 꺼낸 문자열을 16진수 int형으로 변환</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="키로-원소를-검색하는-search-함수">키로 원소를 검색하는 search() 함수</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="s">"""키가 key인 원소를 검색하여 값을 반환"""</span>
+        <span class="nb">hash</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">hash_value</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>  <span class="c1"># 검색하는 키의 해시값
+</span>        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">table</span><span class="p">[</span><span class="nb">hash</span><span class="p">]</span>         <span class="c1"># 노드를 노드
+</span>
+        <span class="k">while</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p</span><span class="p">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                 <span class="k">return</span> <span class="n">p</span><span class="p">.</span><span class="n">value</span>  <span class="c1"># 검색 성공
+</span>            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nb">next</span>           <span class="c1"># 뒤쪽 노드를 주목
+</span>
+        <span class="k">return</span> <span class="bp">None</span>              <span class="c1"># 검색 실패
+</span></code></pre></div></div>
+
+<p>search 함수는 key인 원소를 검색.</p>
+
+<p>해시값이 동일하고 key 값은 다른 원소중에 제일 마지막에 있는것 찾는다 했을때, 먼저 해시값을 찾고 해시값을 순차적으로 찾아간다.</p>
+
+<p>만약 해시값에 대해 해시테이블에 존재하지 않으면 검색 실패</p>
+
+<p>조금 더 자세하게 알려주면,</p>
+
+<ul>
+  <li>
+    <p>해시 함수를 사용하여 키를 해시값으로 변환</p>
+  </li>
+  <li>
+    <p>해시값을 인덱스로 하는 버킷에 주목</p>
+  </li>
+  <li>
+    <p>버킷이 참조하는 연결 리스트를 맨 앞부터 차례로 스캔</p>
+  </li>
+</ul>
+
+<h3 id="원소를-추가하는-add-함수">원소를 추가하는 add() 함수</h3>
+
+<p>add 함수는 키가 key 이고 값이 value인 원소를 추가한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="s">"""키가 key이고 값이 value인 원소를 삽입"""</span>
+        <span class="nb">hash</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">hash_value</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>  <span class="c1"># 삽입하는 키의 해시값
+</span>        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">table</span><span class="p">[</span><span class="nb">hash</span><span class="p">]</span>         <span class="c1"># 주목하는 노드
+</span>
+        <span class="k">while</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p</span><span class="p">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>         <span class="c1"># 삽입 실패
+</span>            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nb">next</span>               <span class="c1"># 뒤쪽 노드에 주목
+</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">table</span><span class="p">[</span><span class="nb">hash</span><span class="p">])</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">table</span><span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>      <span class="c1"># 노드를 삽입
+</span>        <span class="k">return</span> <span class="bp">True</span>                  <span class="c1"># 삽입 성공
+</span></code></pre></div></div>
+
+<p>add함수의 lifecycle을 정리하자면 아래와 같다</p>
+
+<ul>
+  <li>
+    <p>해시값을 먼저 구한다</p>
+  </li>
+  <li>
+    <p>해시값을 인덱스로 하는 버킷에 주목</p>
+  </li>
+  <li>
+    <p>버킷이 비어 있다면, value를 저장하는 노드 생성/ 버킷이 참조하는 연결 리스트가 있으면, 연결 리스트 맨 앞부터 선형 검색을 진행 -&gt; 키와 같은 값이 발견되면 추가 실패, 그렇지 않고 맨끝까지 같은 키가 없다!? 그러면 해시캆인 리스트의 맨 앞에 노드 추가</p>
+  </li>
+</ul>
+
+<h3 id="원소를-삭제하는-remove-함수">원소를 삭제하는 remove() 함수</h3>
+
+<p>add와는 다르게 값이 value는 보지 않고 키가 key인 원소를 삭제한다</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="s">"""키가 key인 원소를 삭제"""</span>
+        <span class="nb">hash</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">hash_value</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>  <span class="c1"># 삭제할 키의 해시값
+</span>        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">table</span><span class="p">[</span><span class="nb">hash</span><span class="p">]</span>         <span class="c1"># 주목하고 있는 노드
+</span>        <span class="n">pp</span> <span class="o">=</span> <span class="bp">None</span>                    <span class="c1"># 바로 앞 주목 노드
+</span>
+        <span class="k">while</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p</span><span class="p">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>  <span class="c1"># key를 발견하면 아래를 실행
+</span>                <span class="k">if</span> <span class="n">pp</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="p">.</span><span class="n">table</span><span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nb">next</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pp</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nb">next</span>
+                <span class="k">return</span> <span class="bp">True</span>  <span class="c1"># key 삭제 성공
+</span>            <span class="n">pp</span> <span class="o">=</span> <span class="n">p</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nb">next</span>       <span class="c1"># 뒤쪽 노드에 주목
+</span>        <span class="k">return</span> <span class="bp">False</span>         <span class="c1"># 삭제 실패(key가 존재하지 않음)
+</span></code></pre></div></div>
+
+<p>remove함수의 lifecycle을 정리하자면 아래와 같다</p>
+
+<ul>
+  <li>
+    <p>해시값을 먼저 구한다</p>
+  </li>
+  <li>
+    <p>해시값을 인덱스로 하는 버킷에 주목</p>
+  </li>
+  <li>
+    <p>버킷이 참조하는 연결 리스트를 맨 앞부터 선형 검색, 키와 같은 값이 발견되면 그 노드를 버킷에서 삭제(삭제한다는 의미는 되쪽 원소에 앞쪽 원소 참조를 넣거나 앞쪽 원소가 없을때, 버킷에 참조를 대입하면 노드는 삭제됨)</p>
+  </li>
+  <li>
+    <p>여기서도 마찬가지로 선형 검색중 키를 못찾으면 삭제 실패</p>
+  </li>
+</ul>
+
+<h3 id="원소를-출력하는-dump-함수">원소를 출력하는 dump() 함수</h3>
+
+<p>모든 원소를 보고 싶나? 그러면 dump를 사용해보자</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""해시 테이블을 덤프"""</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">capacity</span><span class="p">):</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+            <span class="k">while</span> <span class="n">p</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'  → </span><span class="si">{</span><span class="n">p</span><span class="p">.</span><span class="n">key</span><span class="si">}</span><span class="s"> (</span><span class="si">{</span><span class="n">p</span><span class="p">.</span><span class="n">value</span><span class="si">}</span><span class="s">)'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>  <span class="c1"># 해시 테이블에 있는 키와 값을 출력
+</span>                <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nb">next</span>
+            <span class="k">print</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>해시 테이블이 지워지진 않는다. table[0] 부터 table[capacity -1] 까지 뒤쪽 노드를 찾아가면서 각 노드의 키와 값을 출력하는 작업 반복.</p>
+
+<p>이렇게 체인법의 해시 함수들을 나열하였고 이제 오픈 주소법에 대해서 알아보자</p>
+
+<h2 id="오픈-주소법open-addressing">오픈 주소법(open addressing)</h2>
+
+<p>오픈 주소법은 충돌이 발생했을 때 재해시(rehashing)를 수행하여 빈 버킷을 찾는 방법을 말하며 <strong><em>닫힌 해시법(closed hashing)</em></strong> 이라고 해.</p>
+
+<h3 id="원소-추가하기">원소 추가하기</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="s">"""키가 key이고 값이 value인 요소를 추가"""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>             <span class="c1"># 이미 등록된 키
+</span>
+        <span class="nb">hash</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">hash_value</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>  <span class="c1"># 추가하는 키의 해시값
+</span>        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">table</span><span class="p">[</span><span class="nb">hash</span><span class="p">]</span>         <span class="c1"># 버킷을 주목
+</span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">capacity</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">p</span><span class="p">.</span><span class="n">stat</span> <span class="o">==</span> <span class="n">Status</span><span class="p">.</span><span class="n">EMPTY</span> <span class="ow">or</span> <span class="n">p</span><span class="p">.</span><span class="n">stat</span> <span class="o">==</span> <span class="n">Status</span><span class="p">.</span><span class="n">DELETED</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">table</span><span class="p">[</span><span class="nb">hash</span><span class="p">]</span> <span class="o">=</span> <span class="n">Bucket</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">Status</span><span class="p">.</span><span class="n">OCCUPIED</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">True</span>
+            <span class="nb">hash</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">rehash_value</span><span class="p">(</span><span class="nb">hash</span><span class="p">)</span>  <span class="c1"># 재해시
+</span>            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">table</span><span class="p">[</span><span class="nb">hash</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">False</span>                        <span class="c1"># 해시 테이블이 가득 참
+</span></code></pre></div></div>
+
+<ul>
+  <li>
+    <p>쉽게 설명하자면, 충돌이 발생하면 재해시를 위한 해시 함수를 수행해. 만약 또 충돌하면 재해시를 위한 해시 함수를 또 수행하고…</p>
+  </li>
+  <li>
+    <p>이처럼 오픈 주소법은 빈 버킷이 나올 떄까지 재해시를 반복하므로 <strong><em>선형 탐사법(linear probing)</em></strong> 이라고도 해</p>
+  </li>
+  <li>
+    <p>만약 모든 버킷이 다 찼다면? 그럼 추가하기를 실패해</p>
+  </li>
+</ul>
+
+<h3 id="원소-삭제하기">원소 삭제하기</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="s">"""키가 key인 갖는 요소를 삭제"""</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">search_node</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>  <span class="c1"># 버킷을 주목
+</span>        <span class="k">if</span> <span class="n">p</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>           <span class="c1"># 이 키는 등록되어 있지 않음
+</span>        <span class="n">p</span><span class="p">.</span><span class="n">set_status</span><span class="p">(</span><span class="n">Status</span><span class="p">.</span><span class="n">DELETED</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>원소를 삭제하기 전에, <strong><em>EMPTY/OCCUPIED/DELETED</em></strong> 같은 속성이 오픈 주소법의 버킷에 등록되어 있다는걸 알아야 해</p>
+  </li>
+  <li>
+    <p>키를 못찾으면 실패하고, 키를 찾으면 DELETED 속성을 부여하고 끝나</p>
+  </li>
+</ul>
+
+<h3 id="원소-검색하기">원소 검색하기</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">search_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="s">"""키가 key인 버킷을 검색"""</span>
+        <span class="nb">hash</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">hash_value</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>  <span class="c1"># 검색하는 키의 해시값
+</span>        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">table</span><span class="p">[</span><span class="nb">hash</span><span class="p">]</span>         <span class="c1"># 버킷을 주목
+</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">capacity</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">p</span><span class="p">.</span><span class="n">stat</span> <span class="o">==</span> <span class="n">Status</span><span class="p">.</span><span class="n">EMPTY</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">p</span><span class="p">.</span><span class="n">stat</span> <span class="o">==</span> <span class="n">Status</span><span class="p">.</span><span class="n">OCCUPIED</span> <span class="ow">and</span> <span class="n">p</span><span class="p">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">p</span>
+            <span class="nb">hash</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">rehash_value</span><span class="p">(</span><span class="nb">hash</span><span class="p">)</span>  <span class="c1"># 재해시
+</span>            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">table</span><span class="p">[</span><span class="nb">hash</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>원소 추가하는것과 비슷하게 처음에는 해시값의 버킷을 검색해. 검색했을때 EMPTY 상태면 실패. 왜냐하면 EMPTY였었다면 추가한적도 없고 삭제한적도 없는데, 뭐하러 더 재해시를 하겠어</p>
+  </li>
+  <li>
+    <p>status가 OCCUPIED 이면서 key값이 찾으려는 키값과 같으면, 버킷(인덱스)를 반환해</p>
+  </li>
+  <li>
+    <p>만약 OCCUPIED 이면서 key 값이 다르거나 or DELETED면 뒤쪽으로 순차적으로 검색해</p>
+  </li>
+</ul>
+
+<h2 id="마무리">마무리</h2>
+
+<p>해시법과 해시 테이블같은 경우 동시에 설명해야 하는 내용이라 설명을 순조롭게 못한거 같은데, 다 읽고 한번더 읽으면 괜찮지 않을까 싶다</p>
+
+<p>해시법의 충돌 방지용으로 체인법과 오픈 주소법을 설명했는데, 둘의 특징을 간단하게 정리해본다면 아래와 같을거 같아</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">체인법</th>
+      <th style="text-align: center">버킷을 참조하는 노드 제한이 없음</th>
+      <th style="text-align: center">제한이 없지만 노드가 많아지면 메모리에 부하가 많이 걸릴 수 있어</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">오픈 주소법</td>
+      <td style="text-align: center">버킷 갯수에 따라서 원소 추가 불가</td>
+      <td style="text-align: center">제한은 있지만 메모리 부하 걱정은 덜해도 될거 같아</td>
+    </tr>
+  </tbody>
+</table>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="https://via.placeholder.com/128x128 1x,https://via.placeholder.com/256x256 2x"
+    
+  
+  alt="JeongHwan Yun"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>개발자로의 성장과정</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/cryptography/" class="flip-title"><span>암호학 기초</span></a>  <time class="faded fine" datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/cs/donation/" class="flip-title"><span>Priority Donation: 우선순위 역전을 막는 기부 기법</span></a>  <time class="faded fine" datetime="2025-05-15T00:00:00+00:00">15 May 2025</time></li>          <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>          <li class="h4">  <a href="/blog/algorithm/trie/" class="flip-title"><span>트라이(Trie)</span></a>  <time class="faded fine" datetime="2025-04-02T00:00:00+00:00">02 Apr 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© 2022 JeongHwan Yun.
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(200,200,200);background-image:url(/assets/img/sidebar-bg.png)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/logo.png" class="avatar" alt="hwan log" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">hwan log</h2></a>
+    
+    
+      <p class="">
+        기술블로그
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/algorithm/"
+          class="sidebar-nav-item "
+          
+        >
+          알고리즘
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/cs/"
+          class="sidebar-nav-item "
+          
+        >
+          CS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/techstack/"
+          class="sidebar-nav-item "
+          
+        >
+          Tech Stack
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/ai/"
+          class="sidebar-nav-item "
+          
+        >
+          AI
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/projects/"
+          class="sidebar-nav-item "
+          
+        >
+          PROJECTS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/devlog/"
+          class="sidebar-nav-item "
+          
+        >
+          devlog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/resume/"
+          class="sidebar-nav-item "
+          
+        >
+          RESUME
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>(()=>{var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())})();
+</script>
+  <script src="/assets/js/hydejack-9.2.1.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.2.1.js" nomodule defer></script>
+  
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>

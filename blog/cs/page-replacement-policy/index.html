@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Page Replacement Policy: 어떤 페이지를 희생시킬까? | hwan log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Page Replacement Policy: 어떤 페이지를 희생시킬까?" />
+<meta name="author" content="JeongHwan Yun" />
+<meta property="og:locale" content="ko_KR, en_US" />
+<meta name="description" content="기술블로그" />
+<meta property="og:description" content="기술블로그" />
+<meta property="og:site_name" content="hwan log" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-06-10T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Page Replacement Policy: 어떤 페이지를 희생시킬까?" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2025-06-10T00:00:00+00:00","datePublished":"2025-06-10T00:00:00+00:00","description":"기술블로그","headline":"Page Replacement Policy: 어떤 페이지를 희생시킬까?","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/cs/page-replacement-policy/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/cs/page-replacement-policy/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="color-scheme" content="dark light">
+
+
+
+  <meta name="theme-color" content="rgb(200,200,200)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="hwan log">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="hwan log">
+
+<meta name="generator" content="Hydejack v9.2.1" />
+
+
+<link rel="alternate" href="/blog/cs/page-replacement-policy/" hreflang="ko-kr, en-us">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.2.1.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<script>((r,a)=>{function d(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=a.createElement("script"),e=(n.src=e,t&&d(n,"load",t,{once:!0}),a.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=a.createElement("script");function o(){r._loaded=!0,t&&d(n,"load",t,{once:!0});var e=a.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():d(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){d(a.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}})(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-06-01T18:16:59+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.2.1.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5);--accent-color-highlight: rgba(200,200,200,0.1);--accent-color-darkened: #b5b5b5;--theme-color: rgb(200,200,200);--dark-mode-body-bg: #2d2d2d;--dark-mode-border-color: #393939}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  ((e,s)=>{var d="light-mode",a="dark-mode",o=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(o=o<=e._sunrise||o>=e._sunset?a:d)==a?d:a,s.body.classList.add(o),s.body.classList.remove(e))})(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/cs/">cs</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>page-replacement-policy</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-cs-page-replacement-policy" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        Page Replacement Policy: 어떤 페이지를 희생시킬까?
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-06-10T00:00:00+00:00">10 Jun 2025</time> in <span>Blog</span> / <a href="/cs/" class="flip-title">CS</a> on <a href="/tag-%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/" class="flip-title">운영체제</a>
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul class="large-only" id="markdown-toc">
+  <li><a href="#1-왜-page-replacement-policy가-필요한가" id="markdown-toc-1-왜-page-replacement-policy가-필요한가">1. 왜 Page Replacement Policy가 필요한가?</a></li>
+  <li><a href="#2-정책-설계-시-고려-요소" id="markdown-toc-2-정책-설계-시-고려-요소">2. 정책 설계 시 고려 요소</a></li>
+  <li><a href="#3-대표-알고리즘" id="markdown-toc-3-대표-알고리즘">3. 대표 알고리즘</a>    <ul>
+      <li><a href="#lru-근사-방법" id="markdown-toc-lru-근사-방법">LRU 근사 방법</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-beladys-anomaly" id="markdown-toc-4-beladys-anomaly">4. Belady’s Anomaly</a></li>
+  <li><a href="#5-실제-os-사례" id="markdown-toc-5-실제-os-사례">5. 실제 OS 사례</a></li>
+  <li><a href="#6-성능-분석-방법" id="markdown-toc-6-성능-분석-방법">6. 성능 분석 방법</a></li>
+  <li><a href="#7-요약" id="markdown-toc-7-요약">7. 요약</a></li>
+</ul>
+
+<p>무한대처럼 보이는 가상 메모리도 물리적 한계에 부딪히면 희생양(victim)을 골라야 한다.
+그 희생양을 고르는 규칙, Page Replacement Policy를 살펴본다.</p>
+
+<h2 id="1-왜-page-replacement-policy가-필요한가">1. 왜 Page Replacement Policy가 필요한가?</h2>
+
+<p>가상 메모리는 프로세스마다 “거의 무한대”처럼 보이는 주소 공간을 제공하지만, 실제 물리 프레임 수는 제한적이다. 그래서 다음 상황이 생긴다.</p>
+
+<ol>
+  <li>page fault가 발생해 새 페이지를 적재해야 한다</li>
+  <li>그런데 여유 프레임이 없으면, 커널은 한 프레임을 비워야 한다</li>
+  <li>어떤 페이지를 <strong>희생(victim)</strong> 으로 내보낼지 정하는 규칙이 <strong>Page Replacement Policy</strong>다</li>
+</ol>
+
+<p>목표는 <strong>디스크 I/O 횟수(=페이지 폴트율)를 최소화</strong>해 전체 성능을 높이는 것이다.</p>
+
+<h2 id="2-정책-설계-시-고려-요소">2. 정책 설계 시 고려 요소</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">관점</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">효율성</td>
+      <td style="text-align: left">낮은 페이지 폴트율, 적은 CPU 오버헤드</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">공정성</td>
+      <td style="text-align: left">공유 시 특정 프로세스만 희생되지 않도록</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Stack Property</td>
+      <td style="text-align: left">프레임 수를 늘리면 절대 폴트가 늘지 않는 성질 (OPT·LRU가 가짐)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">실현 가능성</td>
+      <td style="text-align: left">하드웨어 지원(Reference/Dirty 비트) 유무, 구현 복잡도</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">전역 vs 로컬</td>
+      <td style="text-align: left">전역(global): 전체 시스템에서 victim 선정 / 로컬(local): fault를 낸 프로세스의 working set 안에서만 선정</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="3-대표-알고리즘">3. 대표 알고리즘</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">알고리즘</th>
+      <th style="text-align: left">동작</th>
+      <th style="text-align: left">특징</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">OPT / MIN</td>
+      <td style="text-align: left">가장 먼 미래에 참조될 페이지 제거</td>
+      <td style="text-align: left">이론적 최적. 실현 불가능 → 벤치마킹용 하한선(lower bound)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">FIFO</td>
+      <td style="text-align: left">들어온 순서대로 제거</td>
+      <td style="text-align: left">구현 간단. Belady’s Anomaly 발생 가능</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Second-Chance / Clock</td>
+      <td style="text-align: left">FIFO 큐 + 참조 비트(A) 검사. A=1이면 0으로 clear 후 뒤로 회전, A=0이면 victim</td>
+      <td style="text-align: left">간단·저렴, LRU 근사</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">LRU</td>
+      <td style="text-align: left">가장 오래 사용되지 않은 페이지 제거</td>
+      <td style="text-align: left">Stack Property 보장. 정확한 LRU는 하드웨어 타임스탬프 필요 → 보통 근사 사용</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">LFU / NFU</td>
+      <td style="text-align: left">누적 참조 횟수 기반 제거</td>
+      <td style="text-align: left">“cold yet used” 페이지가 안 쫓겨나는 문제 → aging 필요</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Working-Set / WSClock</td>
+      <td style="text-align: left">최근 Δ 참조 내 사용된 페이지 집합 유지 (WSClock은 Clock에 timestamp 추가)</td>
+      <td style="text-align: left">working set 근사, 쓰기 I/O 분산</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Random</td>
+      <td style="text-align: left">무작위 victim</td>
+      <td style="text-align: left">LRU 추적 비용이 클 때 사용 (예: 일부 GPU MMU)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="lru-근사-방법">LRU 근사 방법</h3>
+
+<p>정확한 LRU는 비용이 커서, 실제로는 다음 근사를 쓴다.</p>
+
+<ul>
+  <li><strong>N-비트 Aging</strong>: 주기마다 R 비트를 상위로 시프트</li>
+  <li><strong>카운터 기반</strong>: 하드웨어가 마지막 접근 시각을 기록 (32/64비트)</li>
+  <li><strong>Enhanced Clock / Clock-Pro</strong>: 인접 시계 방식</li>
+</ul>
+
+<h2 id="4-beladys-anomaly">4. Belady’s Anomaly</h2>
+
+<p>Stack Property가 없는 FIFO 계열에서 나타나는 현상이다. <strong>프레임을 늘렸는데 오히려 페이지 폴트가 더 많아질 수 있다</strong> (예: 3프레임보다 4프레임이 더 많은 폴트). 정책 선택 시 주의해야 한다.</p>
+
+<h2 id="5-실제-os-사례">5. 실제 OS 사례</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">OS</th>
+      <th style="text-align: left">구현 요지</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Linux (5.x)</td>
+      <td style="text-align: left">Multi-gen LRU. Active/Inactive 목록으로 hot/cold 구분, <code class="language-plaintext highlighter-rouge">kswapd</code>가 백그라운드 스캔하며 cold &amp; dirty 우선 정리</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Windows</td>
+      <td style="text-align: left">Working-Set + Clock 아키텍처. 프로세스마다 WS 크기 자동 조절, 전역 밸런서가 과점유 시 회수</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">PintOS Project 3</td>
+      <td style="text-align: left">Clock 알고리즘을 직접 구현. <code class="language-plaintext highlighter-rouge">struct frame</code> 리스트 + 핸드 포인터 유지, <code class="language-plaintext highlighter-rouge">pml4_is_accessed()</code>로 R 비트를 확인해 second-chance 부여</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="6-성능-분석-방법">6. 성능 분석 방법</h2>
+
+<ol>
+  <li><strong>Trace 재생</strong>: 메모리 참조 시퀀스를 돌려 폴트 카운트 비교</li>
+  <li><strong>실험 변수</strong>: 프레임 수, Δ(working-set 윈도), R/Dirty 비트 리셋 주기</li>
+  <li><strong>Thrashing 탐지</strong>: 폴트율 급증 + CPU 사용률↓ → 정책·resident set 튜닝 필요</li>
+</ol>
+
+<h2 id="7-요약">7. 요약</h2>
+
+<ul>
+  <li>Page Replacement Policy는 <strong>희생 페이지를 고르는 규칙</strong>이다</li>
+  <li>이상적인 OPT는 불가능하므로, <strong>LRU 근사나 Clock 계열</strong>이 실용적이다</li>
+  <li>정책마다 <strong>복잡도·메모리 오버헤드·성능·공정성</strong>의 trade-off가 있다</li>
+  <li>실제 커널은 다단계 큐 + 참조/더티 비트로 LRU를 근사하고, 백그라운드 데몬(<code class="language-plaintext highlighter-rouge">kswapd</code> 등)으로 지속 튜닝한다</li>
+  <li>PintOS 같은 교육용 OS에서는 <strong>Clock(Second-Chance)</strong> 구현이 가장 흔하며, R/Dirty 비트 처리·프레임 테이블 관리·swap I/O 동기화가 핵심이다</li>
+</ul>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="https://via.placeholder.com/128x128 1x,https://via.placeholder.com/256x256 2x"
+    
+  
+  alt="JeongHwan Yun"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>개발자로의 성장과정</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/cryptography/" class="flip-title"><span>암호학 기초</span></a>  <time class="faded fine" datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/cs/thread/" class="flip-title"><span>스레드(Thread): 프로세스 안의 실행 단위</span></a>  <time class="faded fine" datetime="2025-05-13T00:00:00+00:00">13 May 2025</time></li>          <li class="h4">  <a href="/blog/algorithm/greedy-algorithm/" class="flip-title"><span>욕심쟁이 알고리즘(Greedy Algorithm)</span></a>  <time class="faded fine" datetime="2025-04-03T00:00:00+00:00">03 Apr 2025</time></li>          <li class="h4">  <a href="/blog/cs/swap-disk/" class="flip-title"><span>Swap Disk: 메모리가 부족할 때 페이지를 잠시 맡기는 곳</span></a>  <time class="faded fine" datetime="2025-06-12T00:00:00+00:00">12 Jun 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© 2022 JeongHwan Yun.
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(200,200,200);background-image:url(/assets/img/sidebar-bg.png)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/logo.png" class="avatar" alt="hwan log" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">hwan log</h2></a>
+    
+    
+      <p class="">
+        기술블로그
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/algorithm/"
+          class="sidebar-nav-item "
+          
+        >
+          알고리즘
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/cs/"
+          class="sidebar-nav-item "
+          
+        >
+          CS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/techstack/"
+          class="sidebar-nav-item "
+          
+        >
+          Tech Stack
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/ai/"
+          class="sidebar-nav-item "
+          
+        >
+          AI
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/projects/"
+          class="sidebar-nav-item "
+          
+        >
+          PROJECTS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/devlog/"
+          class="sidebar-nav-item "
+          
+        >
+          devlog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/resume/"
+          class="sidebar-nav-item "
+          
+        >
+          RESUME
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>(()=>{var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())})();
+</script>
+  <script src="/assets/js/hydejack-9.2.1.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.2.1.js" nomodule defer></script>
+  
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>

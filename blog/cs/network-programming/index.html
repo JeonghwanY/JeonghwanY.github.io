@@ -1,0 +1,2217 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>CS:APP 11장 네트워크 프로그래밍 &amp; Proxy 서버 C언어로 구현 | hwan log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="CS:APP 11장 네트워크 프로그래밍 &amp; Proxy 서버 C언어로 구현" />
+<meta name="author" content="JeongHwan Yun" />
+<meta property="og:locale" content="ko_KR, en_US" />
+<meta name="description" content="웹 검색, 이메일, 온라인 게임 등 우리가 쓰는 모든 것은 네트워크 응용이다. 소켓 인터페이스부터 Tiny 웹 서버, 프록시 서버까지 직접 구현해본다." />
+<meta property="og:description" content="웹 검색, 이메일, 온라인 게임 등 우리가 쓰는 모든 것은 네트워크 응용이다. 소켓 인터페이스부터 Tiny 웹 서버, 프록시 서버까지 직접 구현해본다." />
+<meta property="og:site_name" content="hwan log" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-07T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="CS:APP 11장 네트워크 프로그래밍 &amp; Proxy 서버 C언어로 구현" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2025-05-07T00:00:00+00:00","datePublished":"2025-05-07T00:00:00+00:00","description":"웹 검색, 이메일, 온라인 게임 등 우리가 쓰는 모든 것은 네트워크 응용이다. 소켓 인터페이스부터 Tiny 웹 서버, 프록시 서버까지 직접 구현해본다.","headline":"CS:APP 11장 네트워크 프로그래밍 &amp; Proxy 서버 C언어로 구현","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/cs/network-programming/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/cs/network-programming/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="color-scheme" content="dark light">
+
+
+
+  <meta name="theme-color" content="rgb(200,200,200)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="hwan log">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="hwan log">
+
+<meta name="generator" content="Hydejack v9.2.1" />
+
+
+<link rel="alternate" href="/blog/cs/network-programming/" hreflang="ko-kr, en-us">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.2.1.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<script>((r,a)=>{function d(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=a.createElement("script"),e=(n.src=e,t&&d(n,"load",t,{once:!0}),a.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=a.createElement("script");function o(){r._loaded=!0,t&&d(n,"load",t,{once:!0});var e=a.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():d(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){d(a.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}})(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-06-01T18:16:59+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.2.1.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5);--accent-color-highlight: rgba(200,200,200,0.1);--accent-color-darkened: #b5b5b5;--theme-color: rgb(200,200,200);--dark-mode-body-bg: #2d2d2d;--dark-mode-border-color: #393939}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  ((e,s)=>{var d="light-mode",a="dark-mode",o=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(o=o<=e._sunrise||o>=e._sunset?a:d)==a?d:a,s.body.classList.add(o),s.body.classList.remove(e))})(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/cs/">cs</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>network-programming</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-cs-network-programming" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        CS:APP 11장 네트워크 프로그래밍 & Proxy 서버 C언어로 구현
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-05-07T00:00:00+00:00">07 May 2025</time> in <span>Blog</span> / <a href="/cs/" class="flip-title">CS</a> on <a href="/tag-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/" class="flip-title">네트워크</a>
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      웹 검색, 이메일, 온라인 게임 등 우리가 쓰는 모든 것은 네트워크 응용이다. 소켓 인터페이스부터 Tiny 웹 서버, 프록시 서버까지 직접 구현해본다.
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <ul class="large-only" id="markdown-toc">
+  <li><a href="#1-클라이언트-서버-프로그래밍-모델" id="markdown-toc-1-클라이언트-서버-프로그래밍-모델">1. 클라이언트-서버 프로그래밍 모델</a></li>
+  <li><a href="#2-네트워크-구조" id="markdown-toc-2-네트워크-구조">2. 네트워크 구조</a>    <ul>
+      <li><a href="#2-1-nic-network-interface-card" id="markdown-toc-2-1-nic-network-interface-card">2-1. NIC (Network Interface Card)</a></li>
+      <li><a href="#2-2-이더넷-ethernet" id="markdown-toc-2-2-이더넷-ethernet">2-2. 이더넷 (Ethernet)</a>        <ul>
+          <li><a href="#더-큰-lan--브릿지의-등장" id="markdown-toc-더-큰-lan--브릿지의-등장">더 큰 LAN — 브릿지의 등장</a></li>
+        </ul>
+      </li>
+      <li><a href="#2-3-wan-wide-area-network" id="markdown-toc-2-3-wan-wide-area-network">2-3. WAN (Wide Area Network)</a></li>
+      <li><a href="#2-4-internet" id="markdown-toc-2-4-internet">2-4. internet</a></li>
+    </ul>
+  </li>
+  <li><a href="#3-글로벌-ip-인터넷" id="markdown-toc-3-글로벌-ip-인터넷">3. 글로벌 IP 인터넷</a>    <ul>
+      <li><a href="#3-1-ip-주소" id="markdown-toc-3-1-ip-주소">3-1. IP 주소</a>        <ul>
+          <li><a href="#dotted-decimal" id="markdown-toc-dotted-decimal">Dotted-decimal</a></li>
+        </ul>
+      </li>
+      <li><a href="#3-2-인터넷-도메인-이름" id="markdown-toc-3-2-인터넷-도메인-이름">3-2. 인터넷 도메인 이름</a></li>
+      <li><a href="#3-3-인터넷-연결" id="markdown-toc-3-3-인터넷-연결">3-3. 인터넷 연결</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-소켓-인터페이스" id="markdown-toc-4-소켓-인터페이스">4. 소켓 인터페이스</a>    <ul>
+      <li><a href="#4-1-소켓-주소-구조체" id="markdown-toc-4-1-소켓-주소-구조체">4-1. 소켓 주소 구조체</a></li>
+      <li><a href="#4-2-주요-함수" id="markdown-toc-4-2-주요-함수">4-2. 주요 함수</a>        <ul>
+          <li><a href="#듣기-식별자-vs-연결-식별자" id="markdown-toc-듣기-식별자-vs-연결-식별자">듣기 식별자 vs 연결 식별자</a></li>
+        </ul>
+      </li>
+      <li><a href="#4-3-호스트서비스-변환-getaddrinfo--getnameinfo" id="markdown-toc-4-3-호스트서비스-변환-getaddrinfo--getnameinfo">4-3. 호스트·서비스 변환: getaddrinfo &amp; getnameinfo</a></li>
+      <li><a href="#4-4-open_clientfd--open_listenfd" id="markdown-toc-4-4-open_clientfd--open_listenfd">4-4. open_clientfd / open_listenfd</a></li>
+    </ul>
+  </li>
+  <li><a href="#5-echo-클라이언트와-서버" id="markdown-toc-5-echo-클라이언트와-서버">5. Echo 클라이언트와 서버</a></li>
+  <li><a href="#6-웹-기초" id="markdown-toc-6-웹-기초">6. 웹 기초</a>    <ul>
+      <li><a href="#6-1-웹-콘텐츠" id="markdown-toc-6-1-웹-콘텐츠">6-1. 웹 콘텐츠</a></li>
+      <li><a href="#6-2-동적-콘텐츠-처리" id="markdown-toc-6-2-동적-콘텐츠-처리">6-2. 동적 콘텐츠 처리</a></li>
+    </ul>
+  </li>
+  <li><a href="#7-소형-웹-서버-tiny" id="markdown-toc-7-소형-웹-서버-tiny">7. 소형 웹 서버 (Tiny)</a>    <ul>
+      <li><a href="#7-1-동영상-파일-추가-과제" id="markdown-toc-7-1-동영상-파일-추가-과제">7-1. 동영상 파일 추가 과제</a></li>
+    </ul>
+  </li>
+  <li><a href="#8-웹-프록시-서버" id="markdown-toc-8-웹-프록시-서버">8. 웹 프록시 서버</a>    <ul>
+      <li><a href="#8-1-웹-프록시란" id="markdown-toc-8-1-웹-프록시란">8-1. 웹 프록시란?</a></li>
+      <li><a href="#8-2-기본-프록시-구현" id="markdown-toc-8-2-기본-프록시-구현">8-2. 기본 프록시 구현</a></li>
+      <li><a href="#8-3-한계와-개선" id="markdown-toc-8-3-한계와-개선">8-3. 한계와 개선</a></li>
+    </ul>
+  </li>
+  <li><a href="#9-프록시-서버-쓰레딩--캐싱" id="markdown-toc-9-프록시-서버-쓰레딩--캐싱">9. 프록시 서버: 쓰레딩 + 캐싱</a></li>
+</ul>
+
+<p>모든 네트워크 응용은 동일한 기본 프로그래밍 모델에 기초하며, 비슷한 논리 구조와 동일한 프로그래밍 인터페이스(소켓)를 쓴다. 이 글에서는 개념을 정리한 뒤 그것들을 엮어 작지만 실제로 동작하는 웹 서버와 프록시 서버를 만든다.</p>
+
+<h2 id="1-클라이언트-서버-프로그래밍-모델">1. 클라이언트-서버 프로그래밍 모델</h2>
+
+<p>모든 네트워크 응용은 <strong>클라이언트-서버 모델</strong>에 기초한다. 한 개의 서버 프로세스와 한 개 이상의 클라이언트 프로세스로 구성된다.</p>
+
+<p><img src="/assets/img/blog/cs/clientservertransaction.png" alt="클라이언트 서버 모델" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">순서</th>
+      <th style="text-align: left">동작</th>
+      <th style="text-align: left">예시 (웹)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">클라이언트가 요청(request)을 보내 트랜잭션 개시</td>
+      <td style="text-align: left">브라우저가 파일이 필요해 서버에 요청</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: left">서버가 요청을 받아 해석하고 자원을 조작</td>
+      <td style="text-align: left">웹 서버가 디스크 파일을 읽음</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: left">서버가 응답(response)을 보내고 다음 요청 대기</td>
+      <td style="text-align: left">웹 서버가 파일을 클라이언트로 반환</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: left">클라이언트가 응답을 받아 처리</td>
+      <td style="text-align: left">브라우저가 페이지를 화면에 표시</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2-네트워크-구조">2. 네트워크 구조</h2>
+
+<p>네트워크는 지리적 위치에 따른 <strong>계층구조 시스템</strong>이다. 하위 수준은 빌딩·캠퍼스 규모의 <strong>LAN(Local Area Network)</strong> 이며, 가장 대중적인 LAN 기술은 이더넷(Ethernet)이다.</p>
+
+<h3 id="2-1-nic-network-interface-card">2-1. NIC (Network Interface Card)</h3>
+
+<p>호스트 입장에서 네트워크는 또 다른 I/O 디바이스일 뿐이다. 네트워크에서 수신한 데이터는 I/O·메모리 버스를 거쳐 어댑터에서 메모리로 (대개 DMA 전송으로) 복사되며, 반대 방향도 가능하다.</p>
+
+<p><img src="/assets/img/blog/cs/hosthardwareorganization.png" alt="호스트의 네트워크 구성" /></p>
+
+<h3 id="2-2-이더넷-ethernet">2-2. 이더넷 (Ethernet)</h3>
+
+<p>이더넷 세그먼트는 몇 개의 전선과 <strong>허브</strong>라는 작은 상자로 구성된다. 한쪽 끝은 호스트 어댑터에, 다른 끝은 허브 포트에 연결되며, 허브는 한 포트에서 받은 모든 비트를 다른 모든 포트로 복사한다.</p>
+
+<p><img src="/assets/img/blog/cs/ethernetsegment.png" alt="이더넷 세그먼트" /></p>
+
+<ul>
+  <li>이더넷 어댑터는 비휘발성 메모리에 저장된 <strong>전체적으로 고유한 48비트 주소</strong>를 가진다</li>
+  <li>호스트는 <strong>프레임(frame)</strong> 단위로 비트를 다른 호스트에 보낸다</li>
+  <li>각 프레임은 소스·목적지·길이를 식별하는 고정 헤더 비트 뒤에 데이터 비트가 이어진다</li>
+  <li>모든 어댑터가 프레임을 볼 수 있지만, 목적지 호스트만 실제로 읽어들인다</li>
+</ul>
+
+<h4 id="더-큰-lan--브릿지의-등장">더 큰 LAN — 브릿지의 등장</h4>
+
+<p>전선과 <strong>브릿지</strong>라는 작은 상자로 여러 이더넷 세그먼트를 연결하면, <strong>브릿지형 이더넷</strong>이라는 더 큰 LAN을 구성할 수 있다.</p>
+
+<p><img src="/assets/img/blog/cs/bridgedethernetsegments.png" alt="브릿지로 연결된 이더넷 세그먼트" /></p>
+
+<p>일부 선은 브릿지끼리, 다른 선은 브릿지-허브를 잇는다. 선마다 대역폭이 다를 수 있다(예: 브릿지-브릿지 1Gb/s, 허브-브릿지 100Mb/s).</p>
+
+<p><strong>브릿지와 허브의 차이:</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">장비</th>
+      <th style="text-align: left">동작</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">허브</td>
+      <td style="text-align: left">한 포트에서 받은 모든 비트를 다른 모든 포트로 무조건 복사</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">브릿지</td>
+      <td style="text-align: left">분산 알고리즘으로 필요한 경우에만 선택적으로 한 포트에서 다른 포트로 프레임 복사 (대역폭도 더 높음)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-3-wan-wide-area-network">2-3. WAN (Wide Area Network)</h3>
+
+<p>계층 상부에서, 서로 비호환적인 여러 LAN은 <strong>라우터</strong>라는 특별한 컴퓨터로 연결된다. 라우터는 네트워크 간 연결(상호연결 네트워크)을 구성하며, 각 네트워크마다 어댑터(포트)를 가진다. 고속 point-to-point 연결로 LAN보다 넓은 지역을 잇는 네트워크가 바로 <strong>WAN</strong>이다.</p>
+
+<h3 id="2-4-internet">2-4. internet</h3>
+
+<p>internet의 핵심 특성은 <strong>서로 다르고 비호환적인 기술의 LAN·WAN들로 이루어져 있다</strong>는 점이다. 이를 연결하기 위해 internet 프로토콜은 두 가지 기능을 제공한다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">기능</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">명명법 (Naming Scheme)</td>
+      <td style="text-align: left">호스트 주소의 통일된 포맷을 정의해 기술 차이를 줄임</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">전달기법 (Delivery Mechanism)</td>
+      <td style="text-align: left">데이터 비트를 <strong>패킷(packet)</strong> 이라는 단위로 묶는 통일된 방법 정의. 패킷은 크기·소스·목적지 주소를 담은 헤더 + 데이터로 구성되며, Datagram이라고도 부름</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="/assets/img/blog/cs/internetpacket.png" alt="인터넷 패킷화 과정" /></p>
+
+<h2 id="3-글로벌-ip-인터넷">3. 글로벌 IP 인터넷</h2>
+
+<p>인터넷 클라이언트-서버 응용의 기본 하드웨어·소프트웨어 구조는 1980년대 이후로 안정적이었다. 각 호스트는 <strong>TCP/IP 프로토콜</strong>을 구현한 소프트웨어를 실행한다.</p>
+
+<p><img src="/assets/img/blog/cs/clientserverstructure.png" alt="클라이언트 서버 구조" /></p>
+
+<p>관련 프로토콜은 <a href="../../computersystem/http-tcp-udp" class="heading flip-title">HTTP, TCP, UDP</a>를 참고하자.</p>
+
+<h3 id="3-1-ip-주소">3-1. IP 주소</h3>
+
+<p>IPv4 주소는 부호 없는 32비트 정수이며, 다음 구조체에 저장한다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* IP address structure */</span>
+<span class="k">struct</span> <span class="n">in_addr</span> <span class="p">{</span>
+    <span class="kt">uint32_t</span> <span class="n">s_addr</span><span class="p">;</span> <span class="cm">/* Address in network byte order (big-endian) */</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>TCP/IP는 패킷 헤더의 모든 정수형 데이터에 대해 통일된 <strong>Network Byte Order(Big Endian)</strong> 를 정의한다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">방식</th>
+      <th style="text-align: left">저장 순서</th>
+      <th style="text-align: left">사용처</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Big Endian</td>
+      <td style="text-align: left">최상위 바이트를 가장 낮은 주소에 저장</td>
+      <td style="text-align: left">네트워크 바이트 순서</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Little Endian</td>
+      <td style="text-align: left">최하위 바이트를 가장 낮은 주소에 저장</td>
+      <td style="text-align: left">x86, ARM 등 현대 CPU 대부분</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="dotted-decimal">Dotted-decimal</h4>
+
+<p>사람이 읽기 쉽도록 각 바이트를 십진수로 쓰고 점으로 구분하는 표기다.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">linux&gt;</span><span class="w"> </span><span class="nb">hostname</span> <span class="nt">-i</span>
+<span class="go">128.2.210.175
+</span></code></pre></div></div>
+
+<h3 id="3-2-인터넷-도메인-이름">3-2. 인터넷 도메인 이름</h3>
+
+<p><strong>DNS(Domain Name System)</strong> 는 도메인 이름 집합과 IP 주소 집합 사이의 매핑을 정의한다. 매핑은 네 가지 형태가 있다.</p>
+
+<ol>
+  <li>도메인 이름 ↔ IP 주소 <strong>일대일</strong> 매핑</li>
+</ol>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">linux&gt;</span><span class="w"> </span>nslookup whaleshark.ics.cs.cmu.edu
+<span class="go">Address: 128.2.210.175
+</span></code></pre></div></div>
+
+<ol>
+  <li><strong>여러 도메인 이름 → 하나의 IP</strong></li>
+</ol>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">linux&gt;</span><span class="w"> </span>nslookup cs.mit.edu
+<span class="go">Address: 18.62.1.6
+</span><span class="gp">linux&gt;</span><span class="w"> </span>nslookup eecs.mit.edu
+<span class="go">Address: 18.62.1.6
+</span></code></pre></div></div>
+
+<ol>
+  <li><strong>여러 도메인 이름 → 여러 IP</strong></li>
+</ol>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">linux&gt;</span><span class="w"> </span>nslookup www.twitter.com
+<span class="go">Address: 199.16.156.6
+Address: 199.16.156.70
+Address: 199.16.156.102
+Address: 199.16.156.230
+</span></code></pre></div></div>
+
+<ol>
+  <li>일부 유효한 도메인 이름은 <strong>어떤 IP에도 매핑되지 않음</strong></li>
+</ol>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">linux&gt;</span><span class="w"> </span>nslookup edu
+<span class="go">*** Can't find edu: No answer
+</span></code></pre></div></div>
+
+<h3 id="3-3-인터넷-연결">3-3. 인터넷 연결</h3>
+
+<p>인터넷 클라이언트와 서버는 <strong>연결(connection)</strong> 을 통해 바이트 스트림을 주고받는다. 이 연결은 두 프로세스를 잇는 <strong>point-to-point</strong> 이고, 양방향 동시 통신이 가능한 <strong>완전양방향(full-duplex)</strong> 이다.</p>
+
+<ul>
+  <li><strong>소켓(Socket)</strong> 은 연결의 종단점이다</li>
+  <li>각 소켓은 인터넷 주소 + 16비트 포트로 이루어진 소켓 주소를 가지며, <code class="language-plaintext highlighter-rouge">address:port</code>로 표기한다</li>
+  <li>클라이언트 포트는 연결 요청 시 커널이 자동 할당하는 <strong>단기(Ephemeral) 포트</strong>다</li>
+  <li>서버는 서비스에 연관된 well-known 포트를 사용한다</li>
+  <li>하나의 연결은 양 종단점의 소켓 주소 쌍(<strong>소켓 쌍</strong>)으로 유일하게 식별된다</li>
+</ul>
+
+<p><img src="/assets/img/blog/cs/internetconnection.png" alt="인터넷 연결의 구조" /></p>
+
+<h2 id="4-소켓-인터페이스">4. 소켓 인터페이스</h2>
+
+<p>소켓 인터페이스는 Unix I/O 함수들과 함께 네트워크 응용을 만드는 함수 집합으로, 대부분의 현대 시스템에서 구현되어 있다.</p>
+
+<p><img src="/assets/img/blog/cs/socketinterfaceoverview.png" alt="소켓 인터페이스 개요" /></p>
+
+<h3 id="4-1-소켓-주소-구조체">4-1. 소켓 주소 구조체</h3>
+
+<p>리눅스 커널 관점에서 소켓은 통신의 끝점이고, Unix 프로그램 관점에서는 식별자를 가진 열린 파일이다(네트워크도 파일처럼 다뤄진다).</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* IP socket address structure */</span>
+<span class="k">struct</span> <span class="n">sockaddr_in</span> <span class="p">{</span>
+    <span class="kt">uint16_t</span> <span class="n">sin_family</span><span class="p">;</span>       <span class="cm">/* Protocol family (always AF_INET) */</span>
+    <span class="kt">uint16_t</span> <span class="n">sin_port</span><span class="p">;</span>         <span class="cm">/* Port number in network byte order */</span>
+    <span class="k">struct</span> <span class="n">in_addr</span> <span class="n">sin_addr</span><span class="p">;</span>   <span class="cm">/* IP address in network byte order */</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">sin_zero</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="cm">/* Pad to sizeof(struct sockaddr) */</span>
+<span class="p">};</span>
+
+<span class="cm">/* Generic socket address structure (for connect, bind, accept) */</span>
+<span class="k">struct</span> <span class="n">sockaddr</span> <span class="p">{</span>
+    <span class="kt">uint16_t</span> <span class="n">sa_family</span><span class="p">;</span> <span class="cm">/* Protocol family */</span>
+    <span class="kt">char</span> <span class="n">sa_data</span><span class="p">[</span><span class="mi">14</span><span class="p">];</span>   <span class="cm">/* Address data */</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">sockaddr_in</code>은 IPv4 전용 구조체, <code class="language-plaintext highlighter-rouge">sockaddr</code>은 TCP·IPv4·IPv6·UDP 등 범용 구조체다. 전자를 후자로 캐스팅할 때 다음 타입을 쓴다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="n">SA</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="4-2-주요-함수">4-2. 주요 함수</h3>
+
+<p>각 함수의 역할을 먼저 표로 정리하면 다음과 같다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">함수</th>
+      <th style="text-align: center">사용 주체</th>
+      <th style="text-align: left">역할</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">socket</code></td>
+      <td style="text-align: center">client·server</td>
+      <td style="text-align: left">소켓 식별자 생성 (커널 소켓 자료구조의 핸들)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">connect</code></td>
+      <td style="text-align: center">client</td>
+      <td style="text-align: left">서버와 연결 수립 (성공/에러까지 블록)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">bind</code></td>
+      <td style="text-align: center">server</td>
+      <td style="text-align: left">서버 소켓 주소를 식별자에 연결</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">listen</code></td>
+      <td style="text-align: center">server</td>
+      <td style="text-align: left">능동 소켓을 듣기 소켓으로 변환</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">accept</code></td>
+      <td style="text-align: center">server</td>
+      <td style="text-align: left">연결 요청을 기다려 연결 식별자 반환</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">socket</span><span class="p">(</span><span class="kt">int</span> <span class="n">domain</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="kt">int</span> <span class="n">protocol</span><span class="p">);</span>
+<span class="cm">/* Returns: nonnegative descriptor if OK, −1 on error */</span>
+
+<span class="kt">int</span> <span class="nf">connect</span><span class="p">(</span><span class="kt">int</span> <span class="n">clientfd</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">addr</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="n">addrlen</span><span class="p">);</span>
+<span class="cm">/* Returns: 0 if OK, −1 on error */</span>
+
+<span class="kt">int</span> <span class="nf">bind</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">addr</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="n">addrlen</span><span class="p">);</span>
+<span class="cm">/* Returns: 0 if OK, −1 on error */</span>
+
+<span class="kt">int</span> <span class="nf">listen</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">backlog</span><span class="p">);</span>
+<span class="cm">/* Returns: 0 if OK, −1 on error */</span>
+
+<span class="kt">int</span> <span class="nf">accept</span><span class="p">(</span><span class="kt">int</span> <span class="n">listenfd</span><span class="p">,</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">addr</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">addrlen</span><span class="p">);</span>
+<span class="cm">/* Returns: nonnegative connected descriptor if OK, −1 on error */</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">connect</code>가 성공하면 <code class="language-plaintext highlighter-rouge">clientfd</code>는 읽기/쓰기 준비가 되며, 연결은 소켓 쌍 <code class="language-plaintext highlighter-rouge">(x:y, addr.sin_addr:addr.sin_port)</code>로 규정된다.</p>
+
+<h4 id="듣기-식별자-vs-연결-식별자">듣기 식별자 vs 연결 식별자</h4>
+
+<p>이 둘의 구분이 자주 헷갈린다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">식별자</th>
+      <th style="text-align: left">역할</th>
+      <th style="text-align: left">수명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">듣기 식별자 (listenfd)</td>
+      <td style="text-align: left">클라이언트 연결 요청의 끝점</td>
+      <td style="text-align: left">한 번 생성되어 서버가 사는 동안 유지</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">연결 식별자 (connfd)</td>
+      <td style="text-align: left">성립된 연결의 끝점</td>
+      <td style="text-align: left">연결 수락마다 생성, 서비스하는 동안만 존재</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="/assets/img/blog/cs/listeningandconnecteddescriptor.png" alt="듣기와 연결 식별자의 역할" /></p>
+
+<ol>
+  <li>server가 <code class="language-plaintext highlighter-rouge">accept</code>를 호출해 연결 요청이 듣기 식별자(가정: 식별자 3)에 도달하기를 기다린다 (식별자 0~2는 표준 파일용)</li>
+  <li>client가 <code class="language-plaintext highlighter-rouge">connect</code>를 호출해 listenfd로 연결 요청을 보낸다</li>
+  <li><code class="language-plaintext highlighter-rouge">accept</code>가 새 연결 식별자 connfd(가정: 식별자 4)를 열어 연결을 수립하고 응용에 반환한다. 이제 client/server는 clientfd와 connfd를 읽고 쓰며 데이터를 주고받는다</li>
+</ol>
+
+<h3 id="4-3-호스트서비스-변환-getaddrinfo--getnameinfo">4-3. 호스트·서비스 변환: getaddrinfo &amp; getnameinfo</h3>
+
+<p>리눅스는 IP 버전에 의존하지 않는 네트워크 프로그램을 짤 수 있게 해주는 강력한 변환 함수를 제공한다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">getaddrinfo</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">host</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">service</span><span class="p">,</span>
+                <span class="k">const</span> <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">*</span><span class="n">hints</span><span class="p">,</span> <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">**</span><span class="n">result</span><span class="p">);</span>
+<span class="cm">/* Returns: 0 if OK, nonzero error code on error */</span>
+
+<span class="kt">void</span> <span class="nf">freeaddrinfo</span><span class="p">(</span><span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">*</span><span class="n">result</span><span class="p">);</span>
+<span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">gai_strerror</span><span class="p">(</span><span class="kt">int</span> <span class="n">errcode</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">getaddrinfo</code>는 host와 service를 받아, 대응되는 소켓 주소 구조체들을 가리키는 <code class="language-plaintext highlighter-rouge">addrinfo</code> <strong>연결 리스트</strong>를 <code class="language-plaintext highlighter-rouge">result</code>로 반환한다.</p>
+
+<p><img src="/assets/img/blog/cs/getaddrinfolinkedlist.png" alt="getaddrinfo result의 자료구조" /></p>
+
+<p>연결 리스트로 반환하는 이유는, 하나의 IP 접속이 실패할 수 있어 <strong>백업용으로 여러 IP를 포함</strong>하기 위함이다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">addrinfo</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">ai_flags</span><span class="p">;</span>             <span class="cm">/* Hints argument flags */</span>
+    <span class="kt">int</span> <span class="n">ai_family</span><span class="p">;</span>            <span class="cm">/* First arg to socket function */</span>
+    <span class="kt">int</span> <span class="n">ai_socktype</span><span class="p">;</span>          <span class="cm">/* Second arg to socket function */</span>
+    <span class="kt">int</span> <span class="n">ai_protocol</span><span class="p">;</span>          <span class="cm">/* Third arg to socket function */</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">ai_canonname</span><span class="p">;</span>       <span class="cm">/* Canonical hostname */</span>
+    <span class="kt">size_t</span> <span class="n">ai_addrlen</span><span class="p">;</span>        <span class="cm">/* Size of ai_addr struct */</span>
+    <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">ai_addr</span><span class="p">;</span> <span class="cm">/* Ptr to socket address structure */</span>
+    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="o">*</span><span class="n">ai_next</span><span class="p">;</span> <span class="cm">/* Ptr to next item in linked list */</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">getnameinfo</code>는 그 역으로, 소켓 주소 구조체를 host·service 이름 스트링으로 변환한다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">getnameinfo</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">sa</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="n">salen</span><span class="p">,</span>
+                <span class="kt">char</span> <span class="o">*</span><span class="n">host</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">hostlen</span><span class="p">,</span>
+                <span class="kt">char</span> <span class="o">*</span><span class="n">service</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">servlen</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">);</span>
+<span class="cm">/* Returns: 0 if OK, nonzero error code on error */</span>
+</code></pre></div></div>
+
+<h3 id="4-4-open_clientfd--open_listenfd">4-4. open_clientfd / open_listenfd</h3>
+
+<p>위 함수들을 묶어, client는 <code class="language-plaintext highlighter-rouge">open_clientfd</code>로 연결을 설정하고 server는 <code class="language-plaintext highlighter-rouge">open_listenfd</code>로 듣기 식별자를 만든다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">open_clientfd</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">hostname</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">port</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">clientfd</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="n">hints</span><span class="p">,</span> <span class="o">*</span><span class="n">listp</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+
+    <span class="cm">/* Get a list of potential server addresses */</span>
+    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">addrinfo</span><span class="p">));</span>
+    <span class="n">hints</span><span class="p">.</span><span class="n">ai_socktype</span> <span class="o">=</span> <span class="n">SOCK_STREAM</span><span class="p">;</span> <span class="cm">/* Open a connection */</span>
+    <span class="n">hints</span><span class="p">.</span><span class="n">ai_flags</span> <span class="o">=</span> <span class="n">AI_NUMERICSERV</span><span class="p">;</span> <span class="cm">/* ... using a numeric port arg. */</span>
+    <span class="n">hints</span><span class="p">.</span><span class="n">ai_flags</span> <span class="o">|=</span> <span class="n">AI_ADDRCONFIG</span><span class="p">;</span> <span class="cm">/* Recommended for connections */</span>
+    <span class="n">Getaddrinfo</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">listp</span><span class="p">);</span>
+
+    <span class="cm">/* Walk the list for one that we can successfully connect to */</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">listp</span><span class="p">;</span> <span class="n">p</span><span class="p">;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_next</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">clientfd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_socktype</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_protocol</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">continue</span><span class="p">;</span> <span class="cm">/* Socket failed, try the next */</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">connect</span><span class="p">(</span><span class="n">clientfd</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_addr</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_addrlen</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">break</span><span class="p">;</span> <span class="cm">/* Success */</span>
+        <span class="n">Close</span><span class="p">(</span><span class="n">clientfd</span><span class="p">);</span> <span class="cm">/* Connect failed, try another */</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* Clean up */</span>
+    <span class="n">Freeaddrinfo</span><span class="p">(</span><span class="n">listp</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">p</span><span class="p">)</span> <span class="cm">/* All connects failed */</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">else</span> <span class="cm">/* The last connect succeeded */</span>
+        <span class="k">return</span> <span class="n">clientfd</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">open_listenfd</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">port</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">addrinfo</span> <span class="n">hints</span><span class="p">,</span> <span class="o">*</span><span class="n">listp</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">listenfd</span><span class="p">,</span> <span class="n">optval</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="cm">/* Get a list of potential server addresses */</span>
+    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">addrinfo</span><span class="p">));</span>
+    <span class="n">hints</span><span class="p">.</span><span class="n">ai_socktype</span> <span class="o">=</span> <span class="n">SOCK_STREAM</span><span class="p">;</span>             <span class="cm">/* Accept connections */</span>
+    <span class="n">hints</span><span class="p">.</span><span class="n">ai_flags</span> <span class="o">=</span> <span class="n">AI_PASSIVE</span> <span class="o">|</span> <span class="n">AI_ADDRCONFIG</span><span class="p">;</span> <span class="cm">/* ... on any IP address */</span>
+    <span class="n">hints</span><span class="p">.</span><span class="n">ai_flags</span> <span class="o">|=</span> <span class="n">AI_NUMERICSERV</span><span class="p">;</span>            <span class="cm">/* ... using port number */</span>
+    <span class="n">Getaddrinfo</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">hints</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">listp</span><span class="p">);</span>
+
+    <span class="cm">/* Walk the list for one that we can bind to */</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">p</span> <span class="o">=</span> <span class="n">listp</span><span class="p">;</span> <span class="n">p</span><span class="p">;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_next</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">listenfd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_socktype</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_protocol</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">continue</span><span class="p">;</span> <span class="cm">/* Socket failed, try the next */</span>
+
+        <span class="cm">/* Eliminates "Address already in use" error from bind */</span>
+        <span class="n">Setsockopt</span><span class="p">(</span><span class="n">listenfd</span><span class="p">,</span> <span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">SO_REUSEADDR</span><span class="p">,</span>
+                   <span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">optval</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">bind</span><span class="p">(</span><span class="n">listenfd</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_addr</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">ai_addrlen</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">break</span><span class="p">;</span> <span class="cm">/* Success */</span>
+        <span class="n">Close</span><span class="p">(</span><span class="n">listenfd</span><span class="p">);</span> <span class="cm">/* Bind failed, try the next */</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* Clean up */</span>
+    <span class="n">Freeaddrinfo</span><span class="p">(</span><span class="n">listp</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">p</span><span class="p">)</span> <span class="cm">/* No address worked */</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="cm">/* Make it a listening socket ready to accept connection requests */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">listen</span><span class="p">(</span><span class="n">listenfd</span><span class="p">,</span> <span class="n">LISTENQ</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Close</span><span class="p">(</span><span class="n">listenfd</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">listenfd</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="5-echo-클라이언트와-서버">5. Echo 클라이언트와 서버</h2>
+
+<p>client가 보낸 데이터를 server가 그대로 되돌려주는 예제다. 먼저 교재 예제를 따라 구현했다.</p>
+
+<p><strong>echoclient.c</strong></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"csapp.h"</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">clientfd</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">host</span><span class="p">,</span> <span class="o">*</span><span class="n">port</span><span class="p">,</span> <span class="o">*</span><span class="n">buf</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+    <span class="n">rio_t</span> <span class="n">rio</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"usage: %s &lt;host&gt; &lt;port&gt;</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+    <span class="n">clientfd</span> <span class="o">=</span> <span class="n">Open_clientfd</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">);</span>
+    <span class="n">Rio_readinitb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio</span><span class="p">,</span> <span class="n">clientfd</span><span class="p">);</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">Fgets</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">,</span> <span class="n">stdin</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Rio_writen</span><span class="p">(</span><span class="n">clientfd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>   <span class="c1">// 서버로 전송</span>
+        <span class="n">Rio_readlineb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">);</span>        <span class="c1">// 서버 응답 수신</span>
+        <span class="n">Fputs</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">stdout</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">Close</span><span class="p">(</span><span class="n">clientfd</span><span class="p">);</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>echoserveri.c</strong> — 한 번에 한 client씩 반복 처리하는 <strong>반복 서버(iterative server)</strong> 다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"csapp.h"</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">echo</span><span class="p">(</span><span class="kt">int</span> <span class="n">connfd</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">listenfd</span><span class="p">,</span> <span class="n">connfd</span><span class="p">;</span>
+    <span class="n">socklen_t</span> <span class="n">clientlen</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">sockaddr_storage</span> <span class="n">clientaddr</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">client_hostname</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">client_port</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"usage: %s &lt;port&gt;</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">listenfd</span> <span class="o">=</span> <span class="n">Open_listenfd</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">clientlen</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr_storage</span><span class="p">);</span>
+        <span class="n">connfd</span> <span class="o">=</span> <span class="n">Accept</span><span class="p">(</span><span class="n">listenfd</span><span class="p">,</span> <span class="p">(</span><span class="n">SA</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">clientaddr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">clientlen</span><span class="p">);</span>
+        <span class="n">Getnameinfo</span><span class="p">((</span><span class="n">SA</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">clientaddr</span><span class="p">,</span> <span class="n">clientlen</span><span class="p">,</span> <span class="n">client_hostname</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">,</span>
+                    <span class="n">client_port</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Connected to (%s, %s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">client_hostname</span><span class="p">,</span> <span class="n">client_port</span><span class="p">);</span>
+        <span class="n">echo</span><span class="p">(</span><span class="n">connfd</span><span class="p">);</span>
+        <span class="n">Close</span><span class="p">(</span><span class="n">connfd</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>echo.c</strong></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"csapp.h"</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">echo</span><span class="p">(</span><span class="kt">int</span> <span class="n">connfd</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">n</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+    <span class="n">rio_t</span> <span class="n">rio</span><span class="p">;</span>
+
+    <span class="n">Rio_readinitb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio</span><span class="p">,</span> <span class="n">connfd</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">((</span><span class="n">n</span> <span class="o">=</span> <span class="n">Rio_readlineb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"server received %zu bytes</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+        <span class="n">Rio_writen</span><span class="p">(</span><span class="n">connfd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>  <span class="c1">// 받은 데이터를 그대로 반환 (Echo!)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="6-웹-기초">6. 웹 기초</h2>
+
+<p>웹 client와 server는 텍스트 기반 응용수준 프로토콜인 <strong>HTTP</strong>로 상호 연동한다. FTP 같은 전통적 파일 전송과의 주요 차이는, 웹 콘텐츠가 <strong>HTML(Hypertext Markup Language)</strong> 로 작성될 수 있다는 점이다. HTML의 태그는 브라우저에게 텍스트·그래픽 객체를 어떻게 표시할지 알려준다.</p>
+
+<h3 id="6-1-웹-콘텐츠">6-1. 웹 콘텐츠</h3>
+
+<p>콘텐츠는 연관된 <strong>MIME 타입</strong>을 갖는 바이트 배열이다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">MIME type</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">text/html</td>
+      <td style="text-align: left">HTML page</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">text/plain</td>
+      <td style="text-align: left">Unformatted text</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">application/postscript</td>
+      <td style="text-align: left">Postscript document</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">image/gif</td>
+      <td style="text-align: left">GIF 인코딩 이미지</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">image/png</td>
+      <td style="text-align: left">PNG 인코딩 이미지</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">image/jpeg</td>
+      <td style="text-align: left">JPEG 인코딩 이미지</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>웹 서버는 두 방식으로 콘텐츠를 제공한다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">종류</th>
+      <th style="text-align: left">방식</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">정적 콘텐츠</td>
+      <td style="text-align: left">디스크 파일을 읽어 그대로 client에게 전송</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">동적 콘텐츠</td>
+      <td style="text-align: left">실행 파일을 돌려 그 출력을 client에게 전송</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>서버가 반환하는 모든 내용은 <strong>URL(Universal Resource Locator)</strong> 이라는 고유 이름을 가진다. 예를 들어,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.google.com:80/index.html
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">부분</th>
+      <th style="text-align: left">값</th>
+      <th style="text-align: left">역할</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">접두어</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">https://www.google.com:80</code></td>
+      <td style="text-align: left">서버 종류·위치·포트 결정</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">접미어</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">/index.html</code></td>
+      <td style="text-align: left">파일 시스템에서 파일 검색, 정적/동적 여부 결정</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>실행 파일 URL은 <code class="language-plaintext highlighter-rouge">?</code>로 파일명과 인자를 구분하고, 각 인자는 <code class="language-plaintext highlighter-rouge">&amp;</code>로 나눈다. 예: <code class="language-plaintext highlighter-rouge">.../cgi-bin/adder?15000&amp;213</code>은 <code class="language-plaintext highlighter-rouge">adder</code>를 인자 15000, 213과 함께 호출한다.</p>
+
+<h3 id="6-2-동적-콘텐츠-처리">6-2. 동적 콘텐츠 처리</h3>
+
+<p>(이 부분은 추후 더 깊이 정리할 예정)</p>
+
+<h2 id="7-소형-웹-서버-tiny">7. 소형 웹 서버 (Tiny)</h2>
+
+<p>GET 메서드로 정적·동적 콘텐츠를 제공하는 반복형 HTTP/1.0 서버다. 흐름은 <code class="language-plaintext highlighter-rouge">doit</code>(요청 1사이클) → <code class="language-plaintext highlighter-rouge">parse_uri</code>(정적/동적 판별) → <code class="language-plaintext highlighter-rouge">serve_static</code> / <code class="language-plaintext highlighter-rouge">serve_dynamic</code>으로 이어진다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * tiny.c - A simple, iterative HTTP/1.0 Web server that uses the
+ *     GET method to serve static and dynamic content.
+ */</span>
+<span class="cp">#include</span> <span class="cpf">"csapp.h"</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">doit</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">read_requesthdrs</span><span class="p">(</span><span class="n">rio_t</span> <span class="o">*</span><span class="n">rp</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">parse_uri</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">uri</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">cgiargs</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">serve_static</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">,</span> <span class="kt">int</span> <span class="n">filesize</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">get_filetype</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filetype</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">serve_dynamic</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">cgiargs</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">clienterror</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">cause</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">errnum</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">shortmsg</span><span class="p">,</span>
+                 <span class="kt">char</span> <span class="o">*</span><span class="n">longmsg</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">listenfd</span><span class="p">,</span> <span class="n">connfd</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">hostname</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">port</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+    <span class="n">socklen_t</span> <span class="n">clientlen</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">sockaddr_storage</span> <span class="n">clientaddr</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"usage: %s &lt;port&gt;</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">listenfd</span> <span class="o">=</span> <span class="n">Open_listenfd</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">clientlen</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">clientaddr</span><span class="p">);</span>
+        <span class="n">connfd</span> <span class="o">=</span> <span class="n">Accept</span><span class="p">(</span><span class="n">listenfd</span><span class="p">,</span> <span class="p">(</span><span class="n">SA</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">clientaddr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">clientlen</span><span class="p">);</span>
+        <span class="n">Getnameinfo</span><span class="p">((</span><span class="n">SA</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">clientaddr</span><span class="p">,</span> <span class="n">clientlen</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Accepted connection from (%s, %s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">);</span>
+        <span class="n">doit</span><span class="p">(</span><span class="n">connfd</span><span class="p">);</span>
+        <span class="n">Close</span><span class="p">(</span><span class="n">connfd</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/* 요청을 읽고 응답을 보내는 한 사이클 */</span>
+<span class="kt">void</span> <span class="nf">doit</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">is_static</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">stat</span> <span class="n">sbuf</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">method</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">uri</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">version</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">filename</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">cgiargs</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+    <span class="n">rio_t</span> <span class="n">rio</span><span class="p">;</span>
+
+    <span class="cm">/* 요청 라인 읽기: 예) GET /index.html HTTP/1.1 */</span>
+    <span class="n">Rio_readinitb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio</span><span class="p">,</span> <span class="n">fd</span><span class="p">);</span>
+    <span class="n">Rio_readlineb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Request line: %s"</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+    <span class="n">sscanf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"%s %s %s"</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">version</span><span class="p">);</span>
+
+    <span class="cm">/* GET 이외 메서드는 거절 */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">strcasecmp</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="s">"GET"</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">clienterror</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="s">"501"</span><span class="p">,</span> <span class="s">"Not implemented"</span><span class="p">,</span>
+                    <span class="s">"Tiny does not implement this method"</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">read_requesthdrs</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio</span><span class="p">);</span> <span class="cm">/* 나머지 헤더는 읽고 무시 */</span>
+
+    <span class="cm">/* URI 파싱 (정적/동적 판별) */</span>
+    <span class="n">is_static</span> <span class="o">=</span> <span class="n">parse_uri</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">cgiargs</span><span class="p">);</span>
+
+    <span class="cm">/* 파일 존재 확인 */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">stat</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sbuf</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">clienterror</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="s">"404"</span><span class="p">,</span> <span class="s">"Not found"</span><span class="p">,</span>
+                    <span class="s">"Tiny couldn't find this file"</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">is_static</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* 정적 콘텐츠 */</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">S_ISREG</span><span class="p">(</span><span class="n">sbuf</span><span class="p">.</span><span class="n">st_mode</span><span class="p">))</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="n">S_IRUSR</span> <span class="o">&amp;</span> <span class="n">sbuf</span><span class="p">.</span><span class="n">st_mode</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">clienterror</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="s">"403"</span><span class="p">,</span> <span class="s">"Forbidden"</span><span class="p">,</span>
+                        <span class="s">"Tiny couldn't read the file"</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">serve_static</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">sbuf</span><span class="p">.</span><span class="n">st_size</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span> <span class="cm">/* 동적 콘텐츠 (CGI) */</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">S_ISREG</span><span class="p">(</span><span class="n">sbuf</span><span class="p">.</span><span class="n">st_mode</span><span class="p">))</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="n">S_IXUSR</span> <span class="o">&amp;</span> <span class="n">sbuf</span><span class="p">.</span><span class="n">st_mode</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">clienterror</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="s">"403"</span><span class="p">,</span> <span class="s">"Forbidden"</span><span class="p">,</span>
+                        <span class="s">"Tiny couldn't run the CGI program"</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">serve_dynamic</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">cgiargs</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/* 에러 응답 생성 */</span>
+<span class="kt">void</span> <span class="nf">clienterror</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">cause</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">errnum</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">shortmsg</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">longmsg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">body</span><span class="p">[</span><span class="n">MAXBUF</span><span class="p">];</span>
+
+    <span class="cm">/* HTML 본문 작성 */</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s">"&lt;html&gt;&lt;title&gt;Tiny Error&lt;/title&gt;"</span><span class="p">);</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s">"%s&lt;body bgcolor=</span><span class="se">\"</span><span class="s">ffffff</span><span class="se">\"</span><span class="s">&gt;</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">body</span><span class="p">);</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s">"%s%s: %s</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">errnum</span><span class="p">,</span> <span class="n">shortmsg</span><span class="p">);</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s">"%s&lt;p&gt;%s: %s</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">longmsg</span><span class="p">,</span> <span class="n">cause</span><span class="p">);</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s">"%s&lt;hr&gt;&lt;em&gt;The Tiny Web server&lt;/em&gt;</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">body</span><span class="p">);</span>
+
+    <span class="cm">/* HTTP 응답 헤더 + 본문 전송 */</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"HTTP/1.0 %s %s</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">errnum</span><span class="p">,</span> <span class="n">shortmsg</span><span class="p">);</span>
+    <span class="n">Rio_writen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"Content-type: text/html</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">Rio_writen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"Content-length: %d</span><span class="se">\r\n\r\n</span><span class="s">"</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">strlen</span><span class="p">(</span><span class="n">body</span><span class="p">));</span>
+    <span class="n">Rio_writen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+    <span class="n">Rio_writen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">body</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="cm">/* 요청 헤더를 빈 줄까지 읽고 무시 */</span>
+<span class="kt">void</span> <span class="nf">read_requesthdrs</span><span class="p">(</span><span class="n">rio_t</span> <span class="o">*</span><span class="n">rp</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+
+    <span class="n">Rio_readlineb</span><span class="p">(</span><span class="n">rp</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"</span><span class="se">\r\n</span><span class="s">"</span><span class="p">))</span> <span class="p">{</span> <span class="cm">/* HTTP 헤더는 빈 줄로 끝난다 */</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Header: %s"</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+        <span class="n">Rio_readlineb</span><span class="p">(</span><span class="n">rp</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* URI가 정적/동적인지 판별하고 파일명·CGI 인자 추출 (1=정적, 0=동적) */</span>
+<span class="kt">int</span> <span class="nf">parse_uri</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">uri</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">cgiargs</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strstr</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="s">"cgi-bin"</span><span class="p">))</span> <span class="p">{</span> <span class="cm">/* 정적 콘텐츠 */</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">cgiargs</span><span class="p">,</span> <span class="s">""</span><span class="p">);</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">"."</span><span class="p">);</span>
+        <span class="n">strcat</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">uri</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">uri</span><span class="p">[</span><span class="n">strlen</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">'/'</span><span class="p">)</span>
+            <span class="n">strcat</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">"home.html"</span><span class="p">);</span> <span class="cm">/* 폴더면 기본 파일 */</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span> <span class="cm">/* 동적 콘텐츠 */</span>
+        <span class="n">ptr</span> <span class="o">=</span> <span class="n">index</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="sc">'?'</span><span class="p">);</span> <span class="cm">/* '?' 기준으로 인자 분리 */</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">strcpy</span><span class="p">(</span><span class="n">cgiargs</span><span class="p">,</span> <span class="n">ptr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">strcpy</span><span class="p">(</span><span class="n">cgiargs</span><span class="p">,</span> <span class="s">""</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">"."</span><span class="p">);</span>
+        <span class="n">strcat</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">uri</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/* 정적 파일을 클라이언트로 전송 */</span>
+<span class="kt">void</span> <span class="nf">serve_static</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">,</span> <span class="kt">int</span> <span class="n">filesize</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">srcfd</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">srcp</span><span class="p">,</span> <span class="n">filetype</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">buf</span><span class="p">[</span><span class="n">MAXBUF</span><span class="p">];</span>
+
+    <span class="n">get_filetype</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">filetype</span><span class="p">);</span> <span class="cm">/* MIME 타입 결정 */</span>
+
+    <span class="cm">/* 응답 헤더 작성·전송 */</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"HTTP/1.0 200 OK</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="s">"Server: Tiny Web Server</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="s">"Connection: close</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="s">"Content-length: %d</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">filesize</span><span class="p">);</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="s">"Content-type: %s</span><span class="se">\r\n\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">filetype</span><span class="p">);</span>
+    <span class="n">Rio_writen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Response headers:</span><span class="se">\n</span><span class="s">%s"</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+
+    <span class="cm">/* 파일을 읽어 메모리에 올린 뒤 전송 (mmap 대신 malloc + Rio_readn) */</span>
+    <span class="n">srcfd</span> <span class="o">=</span> <span class="n">Open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">srcp</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">filesize</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">srcp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Close</span><span class="p">(</span><span class="n">srcfd</span><span class="p">);</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"Error: malloc failed for file %s (size: %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+                <span class="n">filename</span><span class="p">,</span> <span class="n">filesize</span><span class="p">);</span>
+        <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"HTTP/1.0 500 Internal Server Error</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="s">"Content-type: text/html</span><span class="se">\r\n\r\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span>
+                <span class="s">"&lt;html&gt;&lt;body&gt;&lt;p&gt;Server error: memory allocation failed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="n">Rio_writen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">Rio_readn</span><span class="p">(</span><span class="n">srcfd</span><span class="p">,</span> <span class="n">srcp</span><span class="p">,</span> <span class="n">filesize</span><span class="p">);</span>
+    <span class="n">Close</span><span class="p">(</span><span class="n">srcfd</span><span class="p">);</span>
+    <span class="n">Rio_writen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">srcp</span><span class="p">,</span> <span class="n">filesize</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">srcp</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* 확장자로 MIME 타입 결정 */</span>
+<span class="kt">void</span> <span class="nf">get_filetype</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filetype</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">strstr</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">".html"</span><span class="p">))</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">filetype</span><span class="p">,</span> <span class="s">"text/html"</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">strstr</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">".gif"</span><span class="p">))</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">filetype</span><span class="p">,</span> <span class="s">"image/gif"</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">strstr</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">".mpg"</span><span class="p">))</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">filetype</span><span class="p">,</span> <span class="s">"video/mp4"</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">strstr</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">".png"</span><span class="p">))</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">filetype</span><span class="p">,</span> <span class="s">"image/png"</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">strstr</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">".jpg"</span><span class="p">))</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">filetype</span><span class="p">,</span> <span class="s">"image/jpeg"</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">filetype</span><span class="p">,</span> <span class="s">"text/plain"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* CGI 프로그램을 실행해 동적 콘텐츠 전송 */</span>
+<span class="kt">void</span> <span class="nf">serve_dynamic</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">cgiargs</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="o">*</span><span class="n">emptylist</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="nb">NULL</span><span class="p">};</span>
+
+    <span class="cm">/* 최소한의 응답 헤더 먼저 전송 */</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"HTTP/1.0 200 OK</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">Rio_writen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"Server: Tiny Web Server</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">Rio_writen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">Fork</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* 자식 프로세스 */</span>
+        <span class="n">setenv</span><span class="p">(</span><span class="s">"QUERY_STRING"</span><span class="p">,</span> <span class="n">cgiargs</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>  <span class="cm">/* 인자 전달 */</span>
+        <span class="n">Dup2</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">STDOUT_FILENO</span><span class="p">);</span>             <span class="cm">/* stdout을 소켓으로 리다이렉션 */</span>
+        <span class="n">Execve</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">emptylist</span><span class="p">,</span> <span class="n">environ</span><span class="p">);</span><span class="cm">/* CGI 실행 */</span>
+    <span class="p">}</span>
+    <span class="n">Wait</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span> <span class="cm">/* 부모는 자식 종료 대기 (좀비 방지) */</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>테스트용 HTML은 다음과 같다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;img</span> <span class="na">align=</span><span class="s">"middle"</span> <span class="na">src=</span><span class="s">"godzilla.gif"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;br&gt;&lt;br&gt;</span>
+Dave O'Hallaron
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h3 id="7-1-동영상-파일-추가-과제">7-1. 동영상 파일 추가 과제</h3>
+
+<p>여기에 동영상을 넣으라는 과제가 있었다. <code class="language-plaintext highlighter-rouge">tiny.c</code>의 <code class="language-plaintext highlighter-rouge">get_filetype</code>에 <code class="language-plaintext highlighter-rouge">.mpg</code> → <code class="language-plaintext highlighter-rouge">video/mp4</code> 매핑을 두고(위 코드에 이미 반영), HTML에 <code class="language-plaintext highlighter-rouge">&lt;video&gt;</code> 태그와 <code class="language-plaintext highlighter-rouge">videoplayback.mp4</code>를 추가했다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;video</span> <span class="na">width=</span><span class="s">"320"</span> <span class="na">height=</span><span class="s">"240"</span> <span class="na">controls</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;source</span> <span class="na">src=</span><span class="s">"videoplayback.mp4"</span> <span class="na">type=</span><span class="s">"video/mp4"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/video&gt;</span>
+</code></pre></div></div>
+
+<h2 id="8-웹-프록시-서버">8. 웹 프록시 서버</h2>
+
+<p>Tiny 구현 후 프록시 서버 과제가 주어졌다.</p>
+
+<h3 id="8-1-웹-프록시란">8-1. 웹 프록시란?</h3>
+
+<p>웹 브라우저와 웹 서버 <strong>사이의 중간자</strong> 역할을 하는 프로그램이다. 브라우저는 서버에 직접 요청하지 않고 프록시에 요청을 보내며, 프록시가 그 요청을 웹 서버로 전달하고 응답을 받아 다시 브라우저로 돌려준다.</p>
+
+<h3 id="8-2-기본-프록시-구현">8-2. 기본 프록시 구현</h3>
+
+<p>시행착오 끝에 나온 기본 코드다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"csapp.h"</span><span class="cp">
+</span>
+<span class="cp">#define MAX_CACHE_SIZE 1049000
+#define MAX_OBJECT_SIZE 102400
+</span>
+<span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">user_agent_hdr</span> <span class="o">=</span>
+    <span class="s">"User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 "</span>
+    <span class="s">"Firefox/10.0.3</span><span class="se">\r\n</span><span class="s">"</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">doit</span><span class="p">(</span><span class="kt">int</span> <span class="n">connfd</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">parse_uri</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">uri</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">hostname</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">port</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">build_http_header</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">http_header</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">hostname</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">listenfd</span><span class="p">,</span> <span class="n">connfd</span><span class="p">;</span>
+    <span class="n">socklen_t</span> <span class="n">clientlen</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">sockaddr_storage</span> <span class="n">clientaddr</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">port</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">host</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"Usage: %s &lt;port&gt;</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">listenfd</span> <span class="o">=</span> <span class="n">Open_listenfd</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">clientlen</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">clientaddr</span><span class="p">);</span>
+        <span class="n">connfd</span> <span class="o">=</span> <span class="n">Accept</span><span class="p">(</span><span class="n">listenfd</span><span class="p">,</span> <span class="p">(</span><span class="n">SA</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">clientaddr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">clientlen</span><span class="p">);</span>
+        <span class="n">Getnameinfo</span><span class="p">((</span><span class="n">SA</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">clientaddr</span><span class="p">,</span> <span class="n">clientlen</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Accepted connection from (%s, %s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">);</span>
+        <span class="n">doit</span><span class="p">(</span><span class="n">connfd</span><span class="p">);</span>
+        <span class="n">Close</span><span class="p">(</span><span class="n">connfd</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">doit</span><span class="p">(</span><span class="kt">int</span> <span class="n">connfd</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">method</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">uri</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">version</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">hostname</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">port</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">http_header</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+    <span class="n">rio_t</span> <span class="n">rio_client</span><span class="p">,</span> <span class="n">rio_server</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">serverfd</span><span class="p">;</span>
+
+    <span class="n">Rio_readinitb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio_client</span><span class="p">,</span> <span class="n">connfd</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">Rio_readlineb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio_client</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">sscanf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"%s %s %s"</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">version</span><span class="p">);</span>
+
+    <span class="cm">/* URI 앞 '/' 제거 ("/http://..." → "http://...") */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">uri</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">'/'</span><span class="p">)</span>
+        <span class="n">memmove</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">uri</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">uri</span><span class="p">));</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Received URI: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">uri</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">strcasecmp</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="s">"GET"</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Proxy does not implement the method %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">method</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">parse_uri</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"URI parsing failed: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">uri</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">build_http_header</span><span class="p">(</span><span class="n">http_header</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="n">path</span><span class="p">);</span>
+    <span class="n">serverfd</span> <span class="o">=</span> <span class="n">Open_clientfd</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">serverfd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Connection to server %s:%s failed.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">Rio_readinitb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio_server</span><span class="p">,</span> <span class="n">serverfd</span><span class="p">);</span>
+    <span class="n">Rio_writen</span><span class="p">(</span><span class="n">serverfd</span><span class="p">,</span> <span class="n">http_header</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">http_header</span><span class="p">));</span>
+
+    <span class="kt">size_t</span> <span class="n">n</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">((</span><span class="n">n</span> <span class="o">=</span> <span class="n">Rio_readlineb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio_server</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Rio_writen</span><span class="p">(</span><span class="n">connfd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">Close</span><span class="p">(</span><span class="n">serverfd</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">parse_uri</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">uri</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">hostname</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">port</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">hostbegin</span><span class="p">,</span> <span class="o">*</span><span class="n">pathbegin</span><span class="p">,</span> <span class="o">*</span><span class="n">portpos</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">strncasecmp</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="s">"http://"</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="n">hostbegin</span> <span class="o">=</span> <span class="n">uri</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+    <span class="n">pathbegin</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">hostbegin</span><span class="p">,</span> <span class="sc">'/'</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">pathbegin</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">pathbegin</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">"/"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* host:port만 분리하기 위해 별도 복사 */</span>
+    <span class="kt">char</span> <span class="n">hostcopy</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pathbegin</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">pathbegin</span> <span class="o">-</span> <span class="n">hostbegin</span><span class="p">;</span>
+        <span class="n">strncpy</span><span class="p">(</span><span class="n">hostcopy</span><span class="p">,</span> <span class="n">hostbegin</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+        <span class="n">hostcopy</span><span class="p">[</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">hostcopy</span><span class="p">,</span> <span class="n">hostbegin</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">portpos</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">hostcopy</span><span class="p">,</span> <span class="sc">':'</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">portpos</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">*</span><span class="n">portpos</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">hostcopy</span><span class="p">);</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">portpos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">hostcopy</span><span class="p">);</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="s">"80"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">build_http_header</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">http_header</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">hostname</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">http_header</span><span class="p">,</span> <span class="s">"GET %s HTTP/1.0</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">path</span><span class="p">);</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"Host: %s</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">hostname</span><span class="p">);</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">http_header</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">http_header</span><span class="p">,</span> <span class="n">user_agent_hdr</span><span class="p">);</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">http_header</span><span class="p">,</span> <span class="s">"Connection: close</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">http_header</span><span class="p">,</span> <span class="s">"Proxy-Connection: close</span><span class="se">\r\n\r\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이를 구현하기 위해 AWS EC2 인스턴스 2개를 만들어 하나는 Tiny 서버, 하나는 프록시 서버로 두고, 내 컴퓨터를 client로 사용했다. 아래 사진에서 프록시 서버와 메인 서버가 연결된 것을 확인할 수 있다.</p>
+
+<p><img src="/assets/img/blog/cs/proxytinyconnected.png" alt="프록시 서버와 메인 서버 연결" /></p>
+
+<h3 id="8-3-한계와-개선">8-3. 한계와 개선</h3>
+
+<p>다만 위 구현은 아래처럼 메인 서버 주소를 URI로 직접 넣어줘야 했다.</p>
+
+<p><img src="/assets/img/blog/cs/mainserveruri.png" alt="메인 서버 URI" /></p>
+
+<p>“이러면 프록시로서의 기능이 없는 것 아닌가?”라는 의문이 들어, <code class="language-plaintext highlighter-rouge">doit</code>의 <code class="language-plaintext highlighter-rouge">parse_uri</code> 호출 부분을</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">parse_uri</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"URI parsing failed: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">uri</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>이미 알고 있던 EC2 인스턴스 IP로 고정하도록 바꿨다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 고정된 최종 서버 정보</span>
+<span class="n">strcpy</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="s">"15.164.219.65"</span><span class="p">);</span>
+<span class="n">strcpy</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="s">"8080"</span><span class="p">);</span>
+<span class="n">strcpy</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">uri</span><span class="p">);</span>  <span class="c1">// 예: "/home.html", "/godzilla.jpg"</span>
+</code></pre></div></div>
+
+<p>그 결과 아래처럼 프록시로서의 기능을 충분히 하는 것을 확인했다.</p>
+
+<p><img src="/assets/img/blog/cs/afterdoitrevision.png" alt="doit 함수 수정 후" /></p>
+
+<h2 id="9-프록시-서버-쓰레딩--캐싱">9. 프록시 서버: 쓰레딩 + 캐싱</h2>
+
+<p>팀원들과 함께 쓰레딩과 캐싱 기능을 추가했다. 핵심 설계는 다음과 같다.</p>
+
+<ul>
+  <li><strong>쓰레딩</strong>: 연결마다 <code class="language-plaintext highlighter-rouge">Pthread_create</code>로 스레드를 띄우고 <code class="language-plaintext highlighter-rouge">Pthread_detach</code>로 자원을 자동 회수해, 여러 client를 동시에 처리한다</li>
+  <li><strong>캐싱</strong>: URL을 키로 응답을 저장한다. 캐시 히트면 서버에 가지 않고 즉시 반환하고, 미스면 서버에서 받아 전달하며 동시에 캐싱한다</li>
+  <li><strong>동시성 제어</strong>: 캐시 전체는 <code class="language-plaintext highlighter-rouge">mutex</code>로, 각 항목은 <code class="language-plaintext highlighter-rouge">pthread_rwlock</code>(읽기/쓰기 락)으로 보호한다. 공간이 부족하면 <strong>LRU</strong>(가장 오래 안 쓰인 항목) 정책으로 제거한다</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"csapp.h"</span><span class="cp">
+#include</span> <span class="cpf">&lt;limits.h&gt;</span><span class="c1">  /* ULONG_MAX */</span><span class="cp">
+</span>
+<span class="cp">#define MAX_CACHE_SIZE 1049000
+#define MAX_OBJECT_SIZE 102400
+</span>
+<span class="cm">/* 캐시 항목 */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">url</span><span class="p">;</span>               <span class="cm">/* 캐시된 URL */</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">content</span><span class="p">;</span>           <span class="cm">/* 캐시된 웹 객체 */</span>
+    <span class="kt">size_t</span> <span class="n">content_size</span><span class="p">;</span>     <span class="cm">/* 객체 크기 */</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">timestamp</span><span class="p">;</span> <span class="cm">/* LRU용 타임스탬프 */</span>
+    <span class="kt">int</span> <span class="n">is_valid</span><span class="p">;</span>            <span class="cm">/* 유효 여부 */</span>
+    <span class="kt">int</span> <span class="n">readers</span><span class="p">;</span>             <span class="cm">/* 읽는 스레드 수 */</span>
+    <span class="n">pthread_rwlock_t</span> <span class="n">rwlock</span><span class="p">;</span> <span class="cm">/* 읽기/쓰기 락 */</span>
+<span class="p">}</span> <span class="n">cache_entry_t</span><span class="p">;</span>
+
+<span class="cm">/* 캐시 전체 */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">cache_entry_t</span> <span class="o">*</span><span class="n">entries</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">num_entries</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">max_entries</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">current_size</span><span class="p">;</span>
+    <span class="n">pthread_mutex_t</span> <span class="n">mutex</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">cache_t</span><span class="p">;</span>
+
+<span class="n">cache_t</span> <span class="n">cache</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">connfd</span><span class="p">;</span> <span class="p">}</span> <span class="n">thread_args</span><span class="p">;</span>
+
+<span class="k">static</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">user_agent_hdr</span> <span class="o">=</span>
+    <span class="s">"User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:10.0.3) Gecko/20120305 "</span>
+    <span class="s">"Firefox/10.0.3</span><span class="se">\r\n</span><span class="s">"</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">doit</span><span class="p">(</span><span class="kt">int</span> <span class="n">connfd</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">parse_uri</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">uri</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">hostname</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">port</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">build_http_header</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">http_header</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">hostname</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">);</span>
+<span class="kt">void</span> <span class="o">*</span><span class="nf">thread</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">vargp</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="nf">cache_init</span><span class="p">(</span><span class="kt">int</span> <span class="n">max_entries</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">cache_free</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="n">cache_entry_t</span> <span class="o">*</span><span class="nf">cache_find</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">url</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">cache_read_complete</span><span class="p">(</span><span class="n">cache_entry_t</span> <span class="o">*</span><span class="n">entry</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">cache_add</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">url</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">content</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">content_size</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">cache_evict_lru</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">required_size</span><span class="p">);</span>
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="nf">get_timestamp</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">listenfd</span><span class="p">,</span> <span class="n">connfd</span><span class="p">;</span>
+    <span class="n">socklen_t</span> <span class="n">clientlen</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">sockaddr_storage</span> <span class="n">clientaddr</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">port</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">host</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+    <span class="n">pthread_t</span> <span class="n">tid</span><span class="p">;</span>
+    <span class="n">thread_args</span> <span class="o">*</span><span class="n">args</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"Usage: %s &lt;port&gt;</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">Signal</span><span class="p">(</span><span class="n">SIGPIPE</span><span class="p">,</span> <span class="n">SIG_IGN</span><span class="p">);</span> <span class="cm">/* 끊긴 소켓 쓰기 시 종료 방지 */</span>
+    <span class="n">cache_init</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Cache initialized with max size %d bytes</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">MAX_CACHE_SIZE</span><span class="p">);</span>
+
+    <span class="n">listenfd</span> <span class="o">=</span> <span class="n">Open_listenfd</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">clientlen</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">clientaddr</span><span class="p">);</span>
+        <span class="n">connfd</span> <span class="o">=</span> <span class="n">Accept</span><span class="p">(</span><span class="n">listenfd</span><span class="p">,</span> <span class="p">(</span><span class="n">SA</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">clientaddr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">clientlen</span><span class="p">);</span>
+        <span class="n">Getnameinfo</span><span class="p">((</span><span class="n">SA</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">clientaddr</span><span class="p">,</span> <span class="n">clientlen</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Accepted connection from (%s, %s)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">);</span>
+
+        <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">thread_args</span> <span class="o">*</span><span class="p">)</span><span class="n">Malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">thread_args</span><span class="p">));</span>
+        <span class="n">args</span><span class="o">-&gt;</span><span class="n">connfd</span> <span class="o">=</span> <span class="n">connfd</span><span class="p">;</span>
+        <span class="n">Pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tid</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="kr">thread</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span> <span class="cm">/* 연결마다 스레드 */</span>
+    <span class="p">}</span>
+
+    <span class="n">cache_free</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">doit</span><span class="p">(</span><span class="kt">int</span> <span class="n">connfd</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">method</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">uri</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">version</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">hostname</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">port</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+    <span class="n">rio_t</span> <span class="n">rio_client</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">serverfd</span><span class="p">;</span>
+
+    <span class="n">Rio_readinitb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio_client</span><span class="p">,</span> <span class="n">connfd</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">Rio_readlineb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio_client</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Request line: %s"</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+    <span class="n">sscanf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"%s %s %s"</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">version</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">strcasecmp</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="s">"GET"</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Proxy does not implement the method %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">method</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">parse_uri</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"URI parsing failed: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">uri</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* 전체 URL을 캐시 키로 사용 */</span>
+    <span class="kt">char</span> <span class="n">url_key</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">url_key</span><span class="p">,</span> <span class="s">"http://%s:%s%s"</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">path</span><span class="p">);</span>
+
+    <span class="cm">/* 캐시 검색 */</span>
+    <span class="n">cache_entry_t</span> <span class="o">*</span><span class="n">entry</span> <span class="o">=</span> <span class="n">cache_find</span><span class="p">(</span><span class="n">url_key</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* 캐시 히트 */</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Cache hit for %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">url_key</span><span class="p">);</span>
+        <span class="n">Rio_writen</span><span class="p">(</span><span class="n">connfd</span><span class="p">,</span> <span class="n">entry</span><span class="o">-&gt;</span><span class="n">content</span><span class="p">,</span> <span class="n">entry</span><span class="o">-&gt;</span><span class="n">content_size</span><span class="p">);</span>
+        <span class="n">cache_read_complete</span><span class="p">(</span><span class="n">entry</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Cache miss for %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">url_key</span><span class="p">);</span>
+
+    <span class="n">serverfd</span> <span class="o">=</span> <span class="n">Open_clientfd</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">serverfd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Connection to server %s:%s failed.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/* 서버로 보낼 요청 헤더 작성 (클라이언트 헤더 정제) */</span>
+    <span class="kt">char</span> <span class="n">request_hdrs</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">host_hdr</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">],</span> <span class="n">other_hdrs</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">request_hdrs</span><span class="p">,</span> <span class="s">"GET %s HTTP/1.0</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">path</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">is_host_hdr_seen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">other_hdrs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">Rio_readlineb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio_client</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"</span><span class="se">\r\n</span><span class="s">"</span><span class="p">))</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strncasecmp</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"Host:"</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">is_host_hdr_seen</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">strcpy</span><span class="p">(</span><span class="n">host_hdr</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strncasecmp</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"Connection:"</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span> <span class="o">||</span>
+                 <span class="o">!</span><span class="n">strncasecmp</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"Proxy-Connection:"</span><span class="p">,</span> <span class="mi">17</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strncasecmp</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"User-Agent:"</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">strcat</span><span class="p">(</span><span class="n">other_hdrs</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">is_host_hdr_seen</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">sprintf</span><span class="p">(</span><span class="n">host_hdr</span><span class="p">,</span> <span class="s">"Host: %s</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">hostname</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">strcat</span><span class="p">(</span><span class="n">request_hdrs</span><span class="p">,</span> <span class="n">host_hdr</span><span class="p">);</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">request_hdrs</span><span class="p">,</span> <span class="n">user_agent_hdr</span><span class="p">);</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">request_hdrs</span><span class="p">,</span> <span class="s">"Connection: close</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">request_hdrs</span><span class="p">,</span> <span class="s">"Proxy-Connection: close</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">request_hdrs</span><span class="p">,</span> <span class="n">other_hdrs</span><span class="p">);</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">request_hdrs</span><span class="p">,</span> <span class="s">"</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Forwarding request to server %s:%s</span><span class="se">\n</span><span class="s">%s"</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">request_hdrs</span><span class="p">);</span>
+
+    <span class="n">rio_t</span> <span class="n">rio_server</span><span class="p">;</span>
+    <span class="n">Rio_readinitb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio_server</span><span class="p">,</span> <span class="n">serverfd</span><span class="p">);</span>
+    <span class="n">Rio_writen</span><span class="p">(</span><span class="n">serverfd</span><span class="p">,</span> <span class="n">request_hdrs</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">request_hdrs</span><span class="p">));</span>
+
+    <span class="cm">/* 서버 응답을 client에 전달하며 캐싱 */</span>
+    <span class="kt">size_t</span> <span class="n">n</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">total_size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">cache_buf</span><span class="p">[</span><span class="n">MAX_OBJECT_SIZE</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">cacheable</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">((</span><span class="n">n</span> <span class="o">=</span> <span class="n">Rio_readnb</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rio_server</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">MAXLINE</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Rio_writen</span><span class="p">(</span><span class="n">connfd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cacheable</span> <span class="o">&amp;&amp;</span> <span class="n">total_size</span> <span class="o">+</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">MAX_OBJECT_SIZE</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="n">cache_buf</span> <span class="o">+</span> <span class="n">total_size</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+            <span class="n">total_size</span> <span class="o">+=</span> <span class="n">n</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">total_size</span> <span class="o">+</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="n">MAX_OBJECT_SIZE</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">cacheable</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* 최대 크기 초과 → 캐시 불가 */</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">cacheable</span> <span class="o">&amp;&amp;</span> <span class="n">total_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cache_add</span><span class="p">(</span><span class="n">url_key</span><span class="p">,</span> <span class="n">cache_buf</span><span class="p">,</span> <span class="n">total_size</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Cached %zu bytes for %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">total_size</span><span class="p">,</span> <span class="n">url_key</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">Close</span><span class="p">(</span><span class="n">serverfd</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">parse_uri</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">uri</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">hostname</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">port</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">hostbegin</span><span class="p">,</span> <span class="o">*</span><span class="n">hostend</span><span class="p">,</span> <span class="o">*</span><span class="n">pathbegin</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">strncasecmp</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="s">"http://"</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">uri</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">'/'</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* 경로만 있는 경우 → localhost로 간주 */</span>
+            <span class="n">strcpy</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="s">"localhost"</span><span class="p">);</span>
+            <span class="n">strcpy</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">uri</span><span class="p">);</span>
+            <span class="n">strcpy</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="s">"80"</span><span class="p">);</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"Error: Invalid URI format (no http://): %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">uri</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">hostbegin</span> <span class="o">=</span> <span class="n">uri</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+    <span class="n">pathbegin</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">hostbegin</span><span class="p">,</span> <span class="sc">'/'</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">pathbegin</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">hostend</span> <span class="o">=</span> <span class="n">pathbegin</span><span class="p">;</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">pathbegin</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">hostend</span> <span class="o">=</span> <span class="n">hostbegin</span> <span class="o">+</span> <span class="n">strlen</span><span class="p">(</span><span class="n">hostbegin</span><span class="p">);</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">"/"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">char</span> <span class="n">hostcopy</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+    <span class="n">strncpy</span><span class="p">(</span><span class="n">hostcopy</span><span class="p">,</span> <span class="n">hostbegin</span><span class="p">,</span> <span class="n">hostend</span> <span class="o">-</span> <span class="n">hostbegin</span><span class="p">);</span>
+    <span class="n">hostcopy</span><span class="p">[</span><span class="n">hostend</span> <span class="o">-</span> <span class="n">hostbegin</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+
+    <span class="kt">char</span> <span class="o">*</span><span class="n">portPos</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">hostcopy</span><span class="p">,</span> <span class="sc">':'</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">portPos</span><span class="p">)</span> <span class="p">{</span>
+        <span class="o">*</span><span class="n">portPos</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">hostcopy</span><span class="p">);</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">portPos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">hostcopy</span><span class="p">);</span>
+        <span class="n">strcpy</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="s">"80"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Parsed URI - Host: '%s', Path: '%s', Port: '%s'</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">port</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">build_http_header</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">http_header</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">hostname</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="n">MAXLINE</span><span class="p">];</span>
+
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">http_header</span><span class="p">,</span> <span class="s">"GET %s HTTP/1.0</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">path</span><span class="p">);</span>
+    <span class="n">sprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="s">"Host: %s</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">hostname</span><span class="p">);</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">http_header</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">http_header</span><span class="p">,</span> <span class="n">user_agent_hdr</span><span class="p">);</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">http_header</span><span class="p">,</span> <span class="s">"Connection: close</span><span class="se">\r\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="n">strcat</span><span class="p">(</span><span class="n">http_header</span><span class="p">,</span> <span class="s">"Proxy-Connection: close</span><span class="se">\r\n\r\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* 스레드: 연결 하나를 처리 */</span>
+<span class="kt">void</span> <span class="o">*</span><span class="nf">thread</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">vargp</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">thread_args</span> <span class="o">*</span><span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">thread_args</span> <span class="o">*</span><span class="p">)</span><span class="n">vargp</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">connfd</span> <span class="o">=</span> <span class="n">args</span><span class="o">-&gt;</span><span class="n">connfd</span><span class="p">;</span>
+
+    <span class="n">Pthread_detach</span><span class="p">(</span><span class="n">pthread_self</span><span class="p">());</span> <span class="cm">/* 자원 자동 회수 */</span>
+    <span class="n">Free</span><span class="p">(</span><span class="n">vargp</span><span class="p">);</span>
+
+    <span class="n">doit</span><span class="p">(</span><span class="n">connfd</span><span class="p">);</span>
+    <span class="n">Close</span><span class="p">(</span><span class="n">connfd</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">cache_init</span><span class="p">(</span><span class="kt">int</span> <span class="n">max_entries</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cache</span><span class="p">.</span><span class="n">entries</span> <span class="o">=</span> <span class="p">(</span><span class="n">cache_entry_t</span> <span class="o">*</span><span class="p">)</span><span class="n">Calloc</span><span class="p">(</span><span class="n">max_entries</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">cache_entry_t</span><span class="p">));</span>
+    <span class="n">cache</span><span class="p">.</span><span class="n">num_entries</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">cache</span><span class="p">.</span><span class="n">max_entries</span> <span class="o">=</span> <span class="n">max_entries</span><span class="p">;</span>
+    <span class="n">cache</span><span class="p">.</span><span class="n">current_size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">pthread_mutex_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">mutex</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">max_entries</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">is_valid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">url</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">content</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">content_size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">timestamp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">readers</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">pthread_rwlock_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">rwlock</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">cache_free</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">mutex</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cache</span><span class="p">.</span><span class="n">max_entries</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">is_valid</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">Free</span><span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">url</span><span class="p">);</span>
+            <span class="n">Free</span><span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">content</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">pthread_rwlock_destroy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">rwlock</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">Free</span><span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">);</span>
+    <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">mutex</span><span class="p">);</span>
+    <span class="n">pthread_mutex_destroy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">mutex</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">unsigned</span> <span class="kt">long</span> <span class="nf">get_timestamp</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">timeval</span> <span class="n">tv</span><span class="p">;</span>
+    <span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tv</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">tv</span><span class="p">.</span><span class="n">tv_sec</span> <span class="o">*</span> <span class="mi">1000000</span> <span class="o">+</span> <span class="n">tv</span><span class="p">.</span><span class="n">tv_usec</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">cache_entry_t</span> <span class="o">*</span><span class="nf">cache_find</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">url</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">mutex</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cache</span><span class="p">.</span><span class="n">max_entries</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">is_valid</span> <span class="o">&amp;&amp;</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">url</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">pthread_rwlock_rdlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">rwlock</span><span class="p">);</span>
+            <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">get_timestamp</span><span class="p">();</span>
+            <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">mutex</span><span class="p">);</span>
+            <span class="k">return</span> <span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">mutex</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">cache_read_complete</span><span class="p">(</span><span class="n">cache_entry_t</span> <span class="o">*</span><span class="n">entry</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">pthread_rwlock_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">entry</span><span class="o">-&gt;</span><span class="n">rwlock</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">cache_evict_lru</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">required_size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">min_timestamp</span> <span class="o">=</span> <span class="n">ULONG_MAX</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">lru_index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cache</span><span class="p">.</span><span class="n">max_entries</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">is_valid</span> <span class="o">&amp;&amp;</span> <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">timestamp</span> <span class="o">&lt;</span> <span class="n">min_timestamp</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">min_timestamp</span> <span class="o">=</span> <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">timestamp</span><span class="p">;</span>
+            <span class="n">lru_index</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">lru_index</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">pthread_rwlock_wrlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">lru_index</span><span class="p">].</span><span class="n">rwlock</span><span class="p">);</span>
+        <span class="n">Free</span><span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">lru_index</span><span class="p">].</span><span class="n">url</span><span class="p">);</span>
+        <span class="n">Free</span><span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">lru_index</span><span class="p">].</span><span class="n">content</span><span class="p">);</span>
+        <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">lru_index</span><span class="p">].</span><span class="n">url</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">lru_index</span><span class="p">].</span><span class="n">content</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">lru_index</span><span class="p">].</span><span class="n">is_valid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">cache</span><span class="p">.</span><span class="n">current_size</span> <span class="o">-=</span> <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">lru_index</span><span class="p">].</span><span class="n">content_size</span><span class="p">;</span>
+        <span class="n">cache</span><span class="p">.</span><span class="n">num_entries</span><span class="o">--</span><span class="p">;</span>
+        <span class="n">pthread_rwlock_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">lru_index</span><span class="p">].</span><span class="n">rwlock</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">cache_add</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">url</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">content</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">content_size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">content_size</span> <span class="o">&gt;</span> <span class="n">MAX_OBJECT_SIZE</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+    <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">mutex</span><span class="p">);</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="n">current_size</span> <span class="o">+</span> <span class="n">content_size</span> <span class="o">&gt;</span> <span class="n">MAX_CACHE_SIZE</span> <span class="o">||</span>
+           <span class="n">cache</span><span class="p">.</span><span class="n">num_entries</span> <span class="o">&gt;=</span> <span class="n">cache</span><span class="p">.</span><span class="n">max_entries</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cache_evict_lru</span><span class="p">(</span><span class="n">content_size</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">empty_slot</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cache</span><span class="p">.</span><span class="n">max_entries</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">is_valid</span><span class="p">)</span> <span class="p">{</span> <span class="n">empty_slot</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">empty_slot</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">mutex</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">pthread_rwlock_wrlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">empty_slot</span><span class="p">].</span><span class="n">rwlock</span><span class="p">);</span>
+    <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">empty_slot</span><span class="p">].</span><span class="n">url</span> <span class="o">=</span> <span class="n">strdup</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+    <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">empty_slot</span><span class="p">].</span><span class="n">content</span> <span class="o">=</span> <span class="n">Malloc</span><span class="p">(</span><span class="n">content_size</span><span class="p">);</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">empty_slot</span><span class="p">].</span><span class="n">content</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">content_size</span><span class="p">);</span>
+    <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">empty_slot</span><span class="p">].</span><span class="n">content_size</span> <span class="o">=</span> <span class="n">content_size</span><span class="p">;</span>
+    <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">empty_slot</span><span class="p">].</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">get_timestamp</span><span class="p">();</span>
+    <span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">empty_slot</span><span class="p">].</span><span class="n">is_valid</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">cache</span><span class="p">.</span><span class="n">current_size</span> <span class="o">+=</span> <span class="n">content_size</span><span class="p">;</span>
+    <span class="n">cache</span><span class="p">.</span><span class="n">num_entries</span><span class="o">++</span><span class="p">;</span>
+    <span class="n">pthread_rwlock_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">entries</span><span class="p">[</span><span class="n">empty_slot</span><span class="p">].</span><span class="n">rwlock</span><span class="p">);</span>
+    <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cache</span><span class="p">.</span><span class="n">mutex</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="https://via.placeholder.com/128x128 1x,https://via.placeholder.com/256x256 2x"
+    
+  
+  alt="JeongHwan Yun"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>개발자로의 성장과정</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/cryptography/" class="flip-title"><span>암호학 기초</span></a>  <time class="faded fine" datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/algorithm/sort/" class="flip-title"><span>정렬(Sort)</span></a>  <time class="faded fine" datetime="2025-03-18T00:00:00+00:00">18 Mar 2025</time></li>          <li class="h4">  <a href="/blog/cs/page-replacement-policy/" class="flip-title"><span>Page Replacement Policy: 어떤 페이지를 희생시킬까?</span></a>  <time class="faded fine" datetime="2025-06-10T00:00:00+00:00">10 Jun 2025</time></li>          <li class="h4">  <a href="/blog/cs/http-tcp-udp/" class="flip-title"><span>HTTP, TCP, UDP: 계층별 역할과 차이</span></a>  <time class="faded fine" datetime="2025-05-06T00:00:00+00:00">06 May 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© 2022 JeongHwan Yun.
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(200,200,200);background-image:url(/assets/img/sidebar-bg.png)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/logo.png" class="avatar" alt="hwan log" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">hwan log</h2></a>
+    
+    
+      <p class="">
+        기술블로그
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/algorithm/"
+          class="sidebar-nav-item "
+          
+        >
+          알고리즘
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/cs/"
+          class="sidebar-nav-item "
+          
+        >
+          CS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/techstack/"
+          class="sidebar-nav-item "
+          
+        >
+          Tech Stack
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/ai/"
+          class="sidebar-nav-item "
+          
+        >
+          AI
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/projects/"
+          class="sidebar-nav-item "
+          
+        >
+          PROJECTS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/devlog/"
+          class="sidebar-nav-item "
+          
+        >
+          devlog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/resume/"
+          class="sidebar-nav-item "
+          
+        >
+          RESUME
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>(()=>{var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())})();
+</script>
+  <script src="/assets/js/hydejack-9.2.1.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.2.1.js" nomodule defer></script>
+  
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>

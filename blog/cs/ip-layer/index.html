@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>IP Layer: 인터넷을 한 덩어리로 묶는 추상화 | hwan log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="IP Layer: 인터넷을 한 덩어리로 묶는 추상화" />
+<meta name="author" content="JeongHwan Yun" />
+<meta property="og:locale" content="ko_KR, en_US" />
+<meta name="description" content="기술블로그" />
+<meta property="og:description" content="기술블로그" />
+<meta property="og:site_name" content="hwan log" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-03T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="IP Layer: 인터넷을 한 덩어리로 묶는 추상화" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2025-05-03T00:00:00+00:00","datePublished":"2025-05-03T00:00:00+00:00","description":"기술블로그","headline":"IP Layer: 인터넷을 한 덩어리로 묶는 추상화","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/cs/ip-layer/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/cs/ip-layer/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="color-scheme" content="dark light">
+
+
+
+  <meta name="theme-color" content="rgb(200,200,200)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="hwan log">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="hwan log">
+
+<meta name="generator" content="Hydejack v9.2.1" />
+
+
+<link rel="alternate" href="/blog/cs/ip-layer/" hreflang="ko-kr, en-us">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.2.1.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<script>((r,a)=>{function d(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=a.createElement("script"),e=(n.src=e,t&&d(n,"load",t,{once:!0}),a.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=a.createElement("script");function o(){r._loaded=!0,t&&d(n,"load",t,{once:!0});var e=a.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():d(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){d(a.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}})(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-06-01T18:16:59+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.2.1.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5);--accent-color-highlight: rgba(200,200,200,0.1);--accent-color-darkened: #b5b5b5;--theme-color: rgb(200,200,200);--dark-mode-body-bg: #2d2d2d;--dark-mode-border-color: #393939}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  ((e,s)=>{var d="light-mode",a="dark-mode",o=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(o=o<=e._sunrise||o>=e._sunset?a:d)==a?d:a,s.body.classList.add(o),s.body.classList.remove(e))})(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/cs/">cs</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>ip-layer</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-cs-ip-layer" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        IP Layer: 인터넷을 한 덩어리로 묶는 추상화
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-05-03T00:00:00+00:00">03 May 2025</time> in <span>Blog</span> / <a href="/cs/" class="flip-title">CS</a> on <a href="/tag-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/" class="flip-title">네트워크</a>
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul class="large-only" id="markdown-toc">
+  <li><a href="#1-ip-layer란" id="markdown-toc-1-ip-layer란">1. IP Layer란?</a></li>
+  <li><a href="#2-왜-필요한가" id="markdown-toc-2-왜-필요한가">2. 왜 필요한가?</a></li>
+  <li><a href="#3-핵심-기능" id="markdown-toc-3-핵심-기능">3. 핵심 기능</a>    <ul>
+      <li><a href="#3-1-논리적-주소-지정-addressing" id="markdown-toc-3-1-논리적-주소-지정-addressing">3-1. 논리적 주소 지정 (Addressing)</a></li>
+      <li><a href="#3-2-패킷화-encapsulation" id="markdown-toc-3-2-패킷화-encapsulation">3-2. 패킷화 (Encapsulation)</a></li>
+      <li><a href="#3-3-라우팅-routing--forwarding" id="markdown-toc-3-3-라우팅-routing--forwarding">3-3. 라우팅 (Routing &amp; Forwarding)</a></li>
+      <li><a href="#3-4-분할-및-재조합-fragmentation--reassembly" id="markdown-toc-3-4-분할-및-재조합-fragmentation--reassembly">3-4. 분할 및 재조합 (Fragmentation / Reassembly)</a></li>
+      <li><a href="#3-5-품질오류-제어" id="markdown-toc-3-5-품질오류-제어">3-5. 품질·오류 제어</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-ipv4-헤더-구조" id="markdown-toc-4-ipv4-헤더-구조">4. IPv4 헤더 구조</a></li>
+  <li><a href="#5-흐름-예시-간단-시나리오" id="markdown-toc-5-흐름-예시-간단-시나리오">5. 흐름 예시 (간단 시나리오)</a></li>
+  <li><a href="#6-개발자-관점-유용한-cli" id="markdown-toc-6-개발자-관점-유용한-cli">6. 개발자 관점: 유용한 CLI</a></li>
+  <li><a href="#7-자주-헷갈리는-점" id="markdown-toc-7-자주-헷갈리는-점">7. 자주 헷갈리는 점</a></li>
+  <li><a href="#8-마무리" id="markdown-toc-8-마무리">8. 마무리</a></li>
+</ul>
+
+<h2 id="1-ip-layer란">1. IP Layer란?</h2>
+
+<p>IP(Internet Protocol) Layer는 <strong>TCP/IP 4계층 모델</strong>에서 네트워크 계층(Network Layer)에 해당하며, OSI 7계층으로는 <strong>3계층</strong>이다. 핵심 역할은 <strong>논리적 주소(IP 주소)를 기반으로, 패킷을 한 네트워크에서 다른 네트워크로 최적 경로를 따라 전달</strong>하는 라우팅이다.</p>
+
+<h2 id="2-왜-필요한가">2. 왜 필요한가?</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">문제</th>
+      <th style="text-align: left">IP Layer의 해결책</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">물리적으로 떨어진 수많은 LAN·WAN을 하나의 ‘인터넷’으로 묶어야 함</td>
+      <td style="text-align: left">전 세계적으로 유일한 주소 체계(IPv4/IPv6)와 계층적 라우팅</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">이기종 네트워크(이더넷, Wi-Fi, 5G, 광망 등) 간 데이터 전달</td>
+      <td style="text-align: left">서로 다른 링크 계층을 통일된 패킷 형식(IP Datagram)으로 캡슐화</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">큰 데이터그램이 링크 MTU보다 클 때</td>
+      <td style="text-align: left">Fragmentation &amp; Reassembly (IPv4는 조각화, IPv6는 PMTU Discovery)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">전송 중 오류·혼잡·노드 고장 감지</td>
+      <td style="text-align: left">ICMP로 오류·제어 메시지 전달</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="3-핵심-기능">3. 핵심 기능</h2>
+
+<h3 id="3-1-논리적-주소-지정-addressing">3-1. 논리적 주소 지정 (Addressing)</h3>
+
+<ul>
+  <li><strong>IPv4</strong>: 32-bit, dotted-decimal 표기 (<code class="language-plaintext highlighter-rouge">192.0.2.4</code>)</li>
+  <li><strong>IPv6</strong>: 128-bit, 콜론 16진수 표기 (<code class="language-plaintext highlighter-rouge">2001:db8::1</code>)</li>
+  <li>주소를 네트워크/호스트 부분으로 나눠 계층적(aggregation) 라우팅을 가능하게 한다</li>
+</ul>
+
+<h3 id="3-2-패킷화-encapsulation">3-2. 패킷화 (Encapsulation)</h3>
+
+<p>상위 계층(TCP, UDP, ICMP 등)의 세그먼트를 <strong>IP Header + Payload</strong> 형태로 감싼 뒤, 다시 하위 링크 계층(이더넷 프레임 등)에 캡슐화한다.</p>
+
+<h3 id="3-3-라우팅-routing--forwarding">3-3. 라우팅 (Routing &amp; Forwarding)</h3>
+
+<ul>
+  <li><strong>Forwarding</strong>: 라우터가 목적지 주소를 보고 다음 홉(next-hop) 인터페이스로 패킷을 넘김</li>
+  <li><strong>Routing</strong>: 라우터들이 RIP, OSPF, BGP 같은 라우팅 프로토콜로 테이블을 동적으로 구축</li>
+</ul>
+
+<h3 id="3-4-분할-및-재조합-fragmentation--reassembly">3-4. 분할 및 재조합 (Fragmentation / Reassembly)</h3>
+
+<ul>
+  <li>IPv4: 헤더의 <code class="language-plaintext highlighter-rouge">Identification</code>, <code class="language-plaintext highlighter-rouge">Flags</code>, <code class="language-plaintext highlighter-rouge">Fragment Offset</code> 필드로 조각을 추적</li>
+  <li>IPv6: 기본적으로 조각화를 금지하고, 발신 호스트가 Path MTU Discovery로 크기를 조정</li>
+</ul>
+
+<h3 id="3-5-품질오류-제어">3-5. 품질·오류 제어</h3>
+
+<ul>
+  <li>IPv4: <code class="language-plaintext highlighter-rouge">Header Checksum</code>으로 1-hop 오류 검출 (IPv6에는 없으며, 링크·전송 계층에 위임)</li>
+  <li>ICMP를 통해 “Destination Unreachable”, “Time Exceeded” 등의 메시지를 반환</li>
+</ul>
+
+<h2 id="4-ipv4-헤더-구조">4. IPv4 헤더 구조</h2>
+
+<p>IPv4 헤더는 기본 20바이트(옵션 제외)이며, 각 행은 32비트(4바이트)다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">비트 범위</th>
+      <th style="text-align: left">필드</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0–3</td>
+      <td style="text-align: left">Version</td>
+      <td style="text-align: left">IP 버전 (4)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4–7</td>
+      <td style="text-align: left">IHL</td>
+      <td style="text-align: left">헤더 길이 (32비트 word 수)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">8–13</td>
+      <td style="text-align: left">DSCP</td>
+      <td style="text-align: left">서비스 등급 (QoS)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">14–15</td>
+      <td style="text-align: left">ECN</td>
+      <td style="text-align: left">혼잡 알림</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">16–31</td>
+      <td style="text-align: left">Total Length</td>
+      <td style="text-align: left">헤더 + 데이터 전체 길이</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">32–47</td>
+      <td style="text-align: left">Identification</td>
+      <td style="text-align: left">조각 식별자</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">48–50</td>
+      <td style="text-align: left">Flags</td>
+      <td style="text-align: left">조각화 제어 (DF, MF)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">51–63</td>
+      <td style="text-align: left">Fragment Offset</td>
+      <td style="text-align: left">조각 위치</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">64–71</td>
+      <td style="text-align: left">TTL</td>
+      <td style="text-align: left">홉 수 제한 (루프 방지)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">72–79</td>
+      <td style="text-align: left">Protocol</td>
+      <td style="text-align: left">상위 프로토콜 번호 (TCP=6, UDP=17 등)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">80–95</td>
+      <td style="text-align: left">Header Checksum</td>
+      <td style="text-align: left">헤더 오류 검출</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">96–127</td>
+      <td style="text-align: left">Source Address</td>
+      <td style="text-align: left">출발지 IP 주소</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">128–159</td>
+      <td style="text-align: left">Destination Address</td>
+      <td style="text-align: left">목적지 IP 주소</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">160~</td>
+      <td style="text-align: left">Options</td>
+      <td style="text-align: left">Timestamp, Record Route 등 (0~40바이트, 거의 미사용)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>IPv6는 고정 40바이트 헤더에 별도의 확장 헤더 체인을 사용해 처리를 단순화·고속화했다.</p>
+
+<h2 id="5-흐름-예시-간단-시나리오">5. 흐름 예시 (간단 시나리오)</h2>
+
+<p><code class="language-plaintext highlighter-rouge">192.168.1.10:5000</code> → <code class="language-plaintext highlighter-rouge">142.250.78.14:443</code> (TCP) 통신을 가정하면,</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">순서</th>
+      <th style="text-align: left">동작</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">TCP 세그먼트가 IP Datagram으로 캡슐화</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: left">로컬 라우터가 목적지 네트워크(AS15169)를 향한 default route 선택</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: left">중간 BGP 라우터들이 TTL을 1씩 감소시키며 패킷 포워딩</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: left">Google 프런트엔드 서버가 TCP ACK, HTTP/2 응답을 역방향 경로로 전송</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="6-개발자-관점-유용한-cli">6. 개발자 관점: 유용한 CLI</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">작업</th>
+      <th style="text-align: left">IPv4</th>
+      <th style="text-align: left">IPv6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">라우팅 테이블 확인</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ip route show</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ip -6 route show</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">패킷 흐름 추적</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">traceroute 8.8.8.8</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">traceroute -6 2001:4860:4860::8888</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ICMP Echo</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ping -c 4 host</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ping6 -c 4 host</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="7-자주-헷갈리는-점">7. 자주 헷갈리는 점</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">오해</th>
+      <th style="text-align: left">실제</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">“IP = 인터넷 전체 프로토콜 스택”</td>
+      <td style="text-align: left">IP는 한 계층일 뿐. 아래(링크)·위(전송)·맨 위(애플리케이션) 계층이 따로 있다</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">“IP가 연결 지향”</td>
+      <td style="text-align: left">IP는 비연결형·비신뢰성·Best-Effort. 신뢰성은 TCP가 따로 보장한다</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">“IPv6는 단순히 주소 길이만 4배”</td>
+      <td style="text-align: left">헤더 단순화, Neighbor Discovery, 확장 헤더, IPsec 의무 지원 등 근본적 개선을 포함한다</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="8-마무리">8. 마무리</h2>
+
+<p>IP Layer는 <strong>인터넷을 ‘한 덩어리’로 보이게 해주는 추상화</strong>다. 여기서 다룬 주소 지정, 라우팅, 조각화, ICMP 같은 기초가 잡혀 있으면 TCP, UDP, TLS 같은 상위 계층을 배울 때 훨씬 수월해진다.</p>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="https://via.placeholder.com/128x128 1x,https://via.placeholder.com/256x256 2x"
+    
+  
+  alt="JeongHwan Yun"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>개발자로의 성장과정</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/cryptography/" class="flip-title"><span>암호학 기초</span></a>  <time class="faded fine" datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/algorithm/binary-tree-and-binary-search-tree/" class="flip-title"><span>이진 트리(Binary tree) 와 이진 검색 트리(Binary search tree)</span></a>  <time class="faded fine" datetime="2025-03-24T00:00:00+00:00">24 Mar 2025</time></li>          <li class="h4">  <a href="/blog/cs/%EA%B0%80%EC%83%81%EB%A9%94%EB%AA%A8%EB%A6%AC/" class="flip-title"><span>CS:APP 9장 가상메모리 & Malloc C언어로 구현</span></a>  <time class="faded fine" datetime="2025-04-17T00:00:00+00:00">17 Apr 2025</time></li>          <li class="h4">  <a href="/blog/algorithm/8th-week/" class="flip-title"><span>8주차 퀴즈</span></a>  <time class="faded fine" datetime="2025-05-06T00:00:00+00:00">06 May 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© 2022 JeongHwan Yun.
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(200,200,200);background-image:url(/assets/img/sidebar-bg.png)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/logo.png" class="avatar" alt="hwan log" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">hwan log</h2></a>
+    
+    
+      <p class="">
+        기술블로그
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/algorithm/"
+          class="sidebar-nav-item "
+          
+        >
+          알고리즘
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/cs/"
+          class="sidebar-nav-item "
+          
+        >
+          CS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/techstack/"
+          class="sidebar-nav-item "
+          
+        >
+          Tech Stack
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/ai/"
+          class="sidebar-nav-item "
+          
+        >
+          AI
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/projects/"
+          class="sidebar-nav-item "
+          
+        >
+          PROJECTS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/devlog/"
+          class="sidebar-nav-item "
+          
+        >
+          devlog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/resume/"
+          class="sidebar-nav-item "
+          
+        >
+          RESUME
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>(()=>{var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())})();
+</script>
+  <script src="/assets/js/hydejack-9.2.1.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.2.1.js" nomodule defer></script>
+  
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>

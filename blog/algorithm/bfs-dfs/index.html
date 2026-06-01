@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>너비 우선 탐색(Breadth-first search)와 깊이 우선 탐색(Depth-first search) | hwan log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="너비 우선 탐색(Breadth-first search)와 깊이 우선 탐색(Depth-first search)" />
+<meta name="author" content="JeongHwan Yun" />
+<meta property="og:locale" content="ko_KR, en_US" />
+<meta name="description" content="기술블로그" />
+<meta property="og:description" content="기술블로그" />
+<meta property="og:site_name" content="hwan log" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-03-28T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="너비 우선 탐색(Breadth-first search)와 깊이 우선 탐색(Depth-first search)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2025-03-28T00:00:00+00:00","datePublished":"2025-03-28T00:00:00+00:00","description":"기술블로그","headline":"너비 우선 탐색(Breadth-first search)와 깊이 우선 탐색(Depth-first search)","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/algorithm/bfs-dfs/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/algorithm/bfs-dfs/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="color-scheme" content="dark light">
+
+
+
+  <meta name="theme-color" content="rgb(200,200,200)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="hwan log">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="hwan log">
+
+<meta name="generator" content="Hydejack v9.2.1" />
+
+
+<link rel="alternate" href="/blog/algorithm/bfs-dfs/" hreflang="ko-kr, en-us">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.2.1.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<script>((r,a)=>{function d(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=a.createElement("script"),e=(n.src=e,t&&d(n,"load",t,{once:!0}),a.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=a.createElement("script");function o(){r._loaded=!0,t&&d(n,"load",t,{once:!0});var e=a.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():d(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){d(a.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}})(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-06-01T18:16:59+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.2.1.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5);--accent-color-highlight: rgba(200,200,200,0.1);--accent-color-darkened: #b5b5b5;--theme-color: rgb(200,200,200);--dark-mode-body-bg: #2d2d2d;--dark-mode-border-color: #393939}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  ((e,s)=>{var d="light-mode",a="dark-mode",o=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(o=o<=e._sunrise||o>=e._sunset?a:d)==a?d:a,s.body.classList.add(o),s.body.classList.remove(e))})(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/algorithm/">algorithm</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>bfs-dfs</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-algorithm-bfs-dfs" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        너비 우선 탐색(Breadth-first search)와 깊이 우선 탐색(Depth-first search)
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-03-28T00:00:00+00:00">28 Mar 2025</time> in <span>Blog</span> / <a href="/algorithm/" class="flip-title">알고리즘</a> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul class="large-only" id="markdown-toc">
+  <li><a href="#너비-우선-탐색breadth-first-search" id="markdown-toc-너비-우선-탐색breadth-first-search">너비 우선 탐색(Breadth-first search)</a></li>
+  <li><a href="#깊이-우선-검색depth-first-search" id="markdown-toc-깊이-우선-검색depth-first-search">깊이 우선 검색(Depth-first search)</a></li>
+  <li><a href="#bfsdfs-마무리" id="markdown-toc-bfsdfs-마무리">BFS/DFS 마무리</a></li>
+</ul>
+
+<h2 id="너비-우선-탐색breadth-first-search">너비 우선 탐색(Breadth-first search)</h2>
+
+<ul>
+  <li>
+    <p>트리에서는 폭 우선/가로 우선/수평 검색이라고 하며, 낮은 레벨부터 왼쪽에서 오른쪽으로 검색해</p>
+  </li>
+  <li>
+    <p>트리 제외하고는 <strong><em>큐(Queue)</em></strong>를 사용해서 구현해</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="bp">False</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">}</span> <span class="c1"># visited 딕셔너리에 graph의 모든 노드 받아와서 node:False 저장
+</span>    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">start</span><span class="p">])</span> <span class="c1"># start를 deque로 변환
+</span>    <span class="n">visited</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span> <span class="c1"># visited[start] == False 였는데, True로 변환
+</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span> <span class="c1"># queue에 원소가 있을때
+</span>        <span class="n">v</span> <span class="o">=</span> <span class="n">queue</span><span class="p">.</span><span class="n">popleft</span><span class="p">()</span> <span class="c1"># queue의 앞 원소 출력, 그것이 v가 됨
+</span>        <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>  <span class="c1"># 방문 노드 출력
+</span>
+        <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span> <span class="c1"># graph[0] 안에는 [2,3] 존재
+</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]:</span> <span class="c1"># visited[2] 가 이웃(같은 레벨)이고 False라면,
+</span>                <span class="n">queue</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span> <span class="c1"># 큐에 2를 넣는다
+</span>                <span class="n">visited</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span> <span class="c1"># visited[2]의 값을 True로 변경
+</span>
+<span class="c1"># 그래프 예시 (인접 리스트 방식)
+</span><span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+
+<span class="n">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 1부터 탐색 시작, 1 2 3 4 5 출력
+</span></code></pre></div></div>
+
+<h2 id="깊이-우선-검색depth-first-search">깊이 우선 검색(Depth-first search)</h2>
+
+<ul>
+  <li>
+    <p>트리에서는 세로/수직 검색이라고 하며, 리프에 도달할 때까지 아래쪽으로 내려가면서 검색, 리프에 도달하면 부모에 다시 돌아가 다시 또 내려간다.</p>
+  </li>
+  <li>
+    <p>이진 트리에서 <strong><em>깊이 우선 검색</em></strong>은 세 종류의 스캔 방법이 있는데, 아래와 같아</p>
+  </li>
+  <li>
+    <p>전위 순회 : 노드 방문 -&gt; 왼쪽 자식 -&gt; 오른쪽 자식</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">preorder</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">preorder</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">)</span>
+    <span class="n">preorder</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">right</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>중위 순회 : 왼쪽 자식 -&gt; 노드 방문 -&gt; 오른쪽 자식</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">inorder</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">inorder</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">inorder</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">right</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>후위 순회 : 왼쪽 자식 -&gt; 오른쪽 자식 -&gt; 노드 방문</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">postorder</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">postorder</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">)</span>
+    <span class="n">postorder</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">right</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>위 같은 경우 이진 트리에서 사용이 되고 그래프에서의 DFS에 대한 함수 아래에 가져와 봤어</p>
+
+<p>그래프에서의 DFS는 <strong><em>재귀 또는 스택</em></strong>을 사용해</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">visited</span><span class="p">):</span> 
+    <span class="n">visited</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span> <span class="c1"># 방문한 위치 False → True로 값 변경
+</span>    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>  <span class="c1"># 방문 노드 출력
+</span>
+    <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]:</span>
+            <span class="n">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">,</span> <span class="n">visited</span><span class="p">)</span> <span class="c1"># 재귀 함수
+</span>
+<span class="c1"># 그래프 예시 (인접 리스트 방식)
+</span><span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+
+<span class="n">visited</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="bp">False</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">}</span>  <span class="c1"># 방문 여부 초기화
+</span>
+<span class="n">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">visited</span><span class="p">)</span>  <span class="c1"># 1부터 탐색 시작,  1 2 4 5 3 출력
+</span></code></pre></div></div>
+
+<h2 id="bfsdfs-마무리">BFS/DFS 마무리</h2>
+
+<p>일반 그래프에서의 DFS와 이진 트리에서의 DFS가 어떻게 다른지 아래 표로 정리해 봤어</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">항목</th>
+      <th style="text-align: center">일반 DFS (그래프)</th>
+      <th style="text-align: center">전/중/후위 순회 (이진 트리)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">대상</td>
+      <td style="text-align: center">그래프 (사이클 가능 : 돌아오는 것)</td>
+      <td style="text-align: center">이진 트리 (사이클 없음)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">순서</td>
+      <td style="text-align: center">방문 순서만 중요하지 않음</td>
+      <td style="text-align: center">순서 매우 중요</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">구현</td>
+      <td style="text-align: center">재귀 / 스택</td>
+      <td style="text-align: center">재귀</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">용도</td>
+      <td style="text-align: center">경로 탐색, 연결 요소 탐색 등</td>
+      <td style="text-align: center">트리 구조 분석, 정렬 등</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>그리고 아래는 그래프에서의 DFS vs BFS에 대한 요약이야</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">항목</th>
+      <th style="text-align: center">DFS</th>
+      <th style="text-align: center">BFS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">구조</td>
+      <td style="text-align: center">스택 (혹은 재귀)</td>
+      <td style="text-align: center">큐</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">구현 방식</td>
+      <td style="text-align: center">보통 재귀 함수 사용</td>
+      <td style="text-align: center">큐 자료구조 사용</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">사용 예시</td>
+      <td style="text-align: center">미로 탈출, 백트래킹 등</td>
+      <td style="text-align: center">최단 경로 탐색, 레벨 탐색 등</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>마지막으로 BFS/DFS 사용 가능한 자료 구조 표야</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">구조</th>
+      <th style="text-align: center">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">트리(이진 트리 포함)</td>
+      <td style="text-align: center">노드 간에 부모-자식 관계가 있는 구조. 사이클 없음</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">그래프</td>
+      <td style="text-align: center">노드와 간선으로 이루어진 일반적인 구조, 사이클 존재 가능. 방향 그래프, 무방향 그래프 모두 포함</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">격자(Grid)</td>
+      <td style="text-align: center">2차원 배열 형태의 공간도 그래프로 간주 가능(미로 문제 등)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">상태 공간 그래프</td>
+      <td style="text-align: center">퍼즐, 게임판, 혹은 알고리즘 문제에서 상태를 노드로 보고 탐색하는 경우</td>
+    </tr>
+  </tbody>
+</table>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="https://via.placeholder.com/128x128 1x,https://via.placeholder.com/256x256 2x"
+    
+  
+  alt="JeongHwan Yun"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>개발자로의 성장과정</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/cryptography/" class="flip-title"><span>암호학 기초</span></a>  <time class="faded fine" datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/algorithm/dijkstras-floyd-warshall-bellman-ford/" class="flip-title"><span>최단 거리(Shortest path)</span></a>  <time class="faded fine" datetime="2025-03-29T00:00:00+00:00">29 Mar 2025</time></li>          <li class="h4">  <a href="/blog/algorithm/topological-sort/" class="flip-title"><span>위상 정렬(Topological sort)</span></a>  <time class="faded fine" datetime="2025-03-28T00:00:00+00:00">28 Mar 2025</time></li>          <li class="h4">  <a href="/blog/algorithm/hash-table-and-hashing/" class="flip-title"><span>해시 테이블(Hash table), 해시법(Hashing)</span></a>  <time class="faded fine" datetime="2025-03-24T00:00:00+00:00">24 Mar 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© 2022 JeongHwan Yun.
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(200,200,200);background-image:url(/assets/img/sidebar-bg.png)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/logo.png" class="avatar" alt="hwan log" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">hwan log</h2></a>
+    
+    
+      <p class="">
+        기술블로그
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/algorithm/"
+          class="sidebar-nav-item "
+          
+        >
+          알고리즘
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/cs/"
+          class="sidebar-nav-item "
+          
+        >
+          CS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/techstack/"
+          class="sidebar-nav-item "
+          
+        >
+          Tech Stack
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/ai/"
+          class="sidebar-nav-item "
+          
+        >
+          AI
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/projects/"
+          class="sidebar-nav-item "
+          
+        >
+          PROJECTS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/devlog/"
+          class="sidebar-nav-item "
+          
+        >
+          devlog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/resume/"
+          class="sidebar-nav-item "
+          
+        >
+          RESUME
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>(()=>{var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())})();
+</script>
+  <script src="/assets/js/hydejack-9.2.1.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.2.1.js" nomodule defer></script>
+  
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>

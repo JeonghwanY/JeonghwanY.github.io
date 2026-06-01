@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>링커(Linking): 심볼 해석, 재배치, 그리고 로딩 | hwan log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="링커(Linking): 심볼 해석, 재배치, 그리고 로딩" />
+<meta name="author" content="JeongHwan Yun" />
+<meta property="og:locale" content="ko_KR, en_US" />
+<meta name="description" content="기술블로그" />
+<meta property="og:description" content="기술블로그" />
+<meta property="og:site_name" content="hwan log" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-04-12T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="링커(Linking): 심볼 해석, 재배치, 그리고 로딩" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2025-04-12T00:00:00+00:00","datePublished":"2025-04-12T00:00:00+00:00","description":"기술블로그","headline":"링커(Linking): 심볼 해석, 재배치, 그리고 로딩","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/cs/linking/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/cs/linking/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="color-scheme" content="dark light">
+
+
+
+  <meta name="theme-color" content="rgb(200,200,200)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="hwan log">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="hwan log">
+
+<meta name="generator" content="Hydejack v9.2.1" />
+
+
+<link rel="alternate" href="/blog/cs/linking/" hreflang="ko-kr, en-us">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.2.1.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<script>((r,a)=>{function d(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=a.createElement("script"),e=(n.src=e,t&&d(n,"load",t,{once:!0}),a.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=a.createElement("script");function o(){r._loaded=!0,t&&d(n,"load",t,{once:!0});var e=a.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():d(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){d(a.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}})(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-06-01T18:16:59+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.2.1.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5);--accent-color-highlight: rgba(200,200,200,0.1);--accent-color-darkened: #b5b5b5;--theme-color: rgb(200,200,200);--dark-mode-body-bg: #2d2d2d;--dark-mode-border-color: #393939}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  ((e,s)=>{var d="light-mode",a="dark-mode",o=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(o=o<=e._sunrise||o>=e._sunset?a:d)==a?d:a,s.body.classList.add(o),s.body.classList.remove(e))})(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/cs/">cs</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>linking</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-cs-linking" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        링커(Linking): 심볼 해석, 재배치, 그리고 로딩
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-04-12T00:00:00+00:00">12 Apr 2025</time> in <span>Blog</span> / <a href="/cs/" class="flip-title">CS</a> on <a href="/tag-%EC%BB%B4%ED%93%A8%ED%84%B0%EA%B5%AC%EC%A1%B0/" class="flip-title">컴퓨터구조</a>
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul class="large-only" id="markdown-toc">
+  <li><a href="#1-링커의-역할" id="markdown-toc-1-링커의-역할">1. 링커의 역할</a>    <ul>
+      <li><a href="#링킹을-왜-배워야-할까" id="markdown-toc-링킹을-왜-배워야-할까">링킹을 왜 배워야 할까</a></li>
+    </ul>
+  </li>
+  <li><a href="#2-정적-연결-static-linking" id="markdown-toc-2-정적-연결-static-linking">2. 정적 연결 (Static Linking)</a></li>
+  <li><a href="#3-목적파일의-세-가지-형태" id="markdown-toc-3-목적파일의-세-가지-형태">3. 목적파일의 세 가지 형태</a></li>
+  <li><a href="#4-elf-재배치-가능-목적파일-구조" id="markdown-toc-4-elf-재배치-가능-목적파일-구조">4. ELF 재배치 가능 목적파일 구조</a>    <ul>
+      <li><a href="#data-vs-bss-짚고-가기" id="markdown-toc-data-vs-bss-짚고-가기">.data vs .bss 짚고 가기</a></li>
+    </ul>
+  </li>
+  <li><a href="#5-실행-가능-목적파일의-로딩" id="markdown-toc-5-실행-가능-목적파일의-로딩">5. 실행 가능 목적파일의 로딩</a>    <ul>
+      <li><a href="#리눅스-런타임-메모리-이미지" id="markdown-toc-리눅스-런타임-메모리-이미지">리눅스 런타임 메모리 이미지</a></li>
+      <li><a href="#로더-실행-흐름" id="markdown-toc-로더-실행-흐름">로더 실행 흐름</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>링킹(linking)</strong> 은 여러 개의 코드와 데이터를 모아 연결하여, 메모리에 로드되고 실행될 수 있는 하나의 파일로 만드는 작업이다. 링킹은 수행 시점에 따라 나뉜다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">수행 시점</th>
+      <th style="text-align: center">누가 실행</th>
+      <th style="text-align: center">시기</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">로드 타임</td>
+      <td style="text-align: center">로더</td>
+      <td style="text-align: center">프로그램이 메모리에 로드될 때</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">실행 시</td>
+      <td style="text-align: center">응용 프로그램</td>
+      <td style="text-align: center">프로그램 실행 중</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="1-링커의-역할">1. 링커의 역할</h2>
+
+<p>링커는 <strong>독립적인 컴파일</strong>을 가능하게 한다. 큰 응용 프로그램을 하나의 소스 파일로 만드는 대신, 관리하기 쉬운 작은 모듈들로 나눠 별도로 컴파일·수정할 수 있게 해준다.</p>
+
+<ul>
+  <li>모듈 하나를 변경하면, 그 파일만 재컴파일한 뒤 다시 링크하면 된다. 나머지 파일을 재컴파일할 필요가 없다.</li>
+</ul>
+
+<h3 id="링킹을-왜-배워야-할까">링킹을 왜 배워야 할까</h3>
+
+<ul>
+  <li><strong>큰 규모의 프로그램 개발</strong>에서 링커가 참조를 어떻게 해결하는지, 라이브러리가 무엇인지 알면 링커 에러를 해결할 수 있다</li>
+  <li>언어의 <strong>변수 영역 규칙</strong>(전역변수와 지역변수의 차이 등)이 어떻게 구현되는지 이해하게 된다</li>
+  <li><strong>공유 라이브러리</strong>의 동작을 이해할 수 있다</li>
+</ul>
+
+<h2 id="2-정적-연결-static-linking">2. 정적 연결 (Static Linking)</h2>
+
+<p>정적 링커는 <strong>재배치 가능 목적파일(.o)들</strong> 과 <strong>명령줄 인자들</strong> 을 입력으로 받아, 로드·실행 가능한 완전히 링크된 실행 파일을 출력한다. 이 과정에서 링커는 두 가지 핵심 작업을 한다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">작업</th>
+      <th style="text-align: left">설명</th>
+      <th style="text-align: left">목적</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">심볼 해석 (Symbol Resolution)</td>
+      <td style="text-align: left">목적파일들이 정의·참조하는 심볼(함수, 전역변수, <code class="language-plaintext highlighter-rouge">static</code> 변수)을 처리</td>
+      <td style="text-align: left">각 심볼 참조를 <strong>정확히 하나의 심볼 정의</strong>에 연결</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">재배치 (Relocation)</td>
+      <td style="text-align: left">컴파일러·어셈블러가 0번지 기준으로 만든 코드·데이터 섹션을 실제 메모리 위치에 배치</td>
+      <td style="text-align: left">심볼로 가는 <strong>모든 참조를 실제 메모리 위치를 가리키도록 수정</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="3-목적파일의-세-가지-형태">3. 목적파일의 세 가지 형태</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">형태</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">재배치 가능 목적파일 (Relocatable)</td>
+      <td style="text-align: left">다른 재배치 가능 목적파일들과 결합해 실행 파일을 만들 수 있는 바이너리 코드·데이터. 예: <code class="language-plaintext highlighter-rouge">.o</code> 파일</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">실행 가능 목적파일 (Executable)</td>
+      <td style="text-align: left">메모리에 직접 복사해 바로 실행할 수 있는 형태</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">공유 목적파일 (Shared)</td>
+      <td style="text-align: left">로드 타임이나 런타임에 동적으로 링크·로드되는 특수한 재배치 가능 목적파일</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>정리하면, <strong>컴파일러·어셈블러</strong>는 재배치 가능 목적파일을 만들고, <strong>링커</strong>는 실행 가능 목적파일을 만든다.</p>
+
+<h2 id="4-elf-재배치-가능-목적파일-구조">4. ELF 재배치 가능 목적파일 구조</h2>
+
+<p><strong>ELF(Executable and Linkable Format)</strong> 는 리눅스 같은 유닉스 시스템에서 실행 파일·오브젝트 파일에 쓰는 표준 포맷이다(예: <code class="language-plaintext highlighter-rouge">.o</code>, <code class="language-plaintext highlighter-rouge">a.out</code>).</p>
+
+<p>ELF 재배치 가능 목적파일은 다음 섹션들로 구성된다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">섹션</th>
+      <th style="text-align: left">내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">ELF header</td>
+      <td style="text-align: left">파일 맨 앞의 정보 블록. “ELF 파일임”을 알리는 16바이트 배열로 시작하며, 워드 크기·바이트 순서·목적파일 타입·머신 타입·section header table 위치/크기 등을 담는다</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">.text</td>
+      <td style="text-align: left">컴파일된 프로그램의 머신 코드</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">.rodata</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">printf</code> 포맷 스트링, <code class="language-plaintext highlighter-rouge">switch</code> 점프 테이블 등 읽기 전용 데이터</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">.data</td>
+      <td style="text-align: left"><strong>초기화된</strong> C 전역·정적 변수. 실제 값이 파일에 저장됨 (<strong>디스크 공간 차지</strong>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">.bss</td>
+      <td style="text-align: left"><strong>초기화되지 않은</strong>(또는 0으로 초기화된) 전역·정적 변수. 위치만 표시하고 실제 공간은 차지하지 않음 (<strong>디스크 공간 미차지</strong>)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">.symtab</td>
+      <td style="text-align: left">프로그램에서 정의·참조하는 함수·전역변수 정보를 담는 심볼 테이블</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">.rel.text</td>
+      <td style="text-align: left">링크 시 수정해야 하는 <code class="language-plaintext highlighter-rouge">.text</code> 내 위치 리스트</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">.rel.data</td>
+      <td style="text-align: left">모듈이 정의·참조하는 전역변수에 대한 재배치 정보</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">.debug</td>
+      <td style="text-align: left">디버깅 심볼 테이블 (<code class="language-plaintext highlighter-rouge">-g</code> 옵션 시 생성)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">.line</td>
+      <td style="text-align: left">C 소스 라인 번호와 <code class="language-plaintext highlighter-rouge">.text</code> 머신 코드의 매핑 (<code class="language-plaintext highlighter-rouge">-g</code> 옵션 시 생성)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">.strtab</td>
+      <td style="text-align: left">심볼 테이블·섹션 헤더의 이름을 담는 스트링 테이블 (널 종료 스트링 배열)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Section header table</td>
+      <td style="text-align: left">각 섹션의 위치와 크기를 나타내는 테이블</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="data-vs-bss-짚고-가기">.data vs .bss 짚고 가기</h3>
+
+<p>이 둘은 시험에 자주 나오니 예시로 구분해두자.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>          <span class="c1">// 초기화된 전역변수  → .data (값 10이 파일에 기록됨)</span>
+<span class="kt">int</span> <span class="n">b</span><span class="p">;</span>               <span class="c1">// 초기화 안 된 전역  → .bss (공간 미차지, 로드 시 0으로 채워짐)</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>        <span class="c1">// 초기화 안 된 정적  → .bss</span>
+<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>           <span class="c1">// 0으로 초기화된 전역 → .bss</span>
+
+<span class="kt">void</span> <span class="nf">func</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">local</span><span class="p">;</span>       <span class="c1">// 지역변수 → 스택에 들어감 (.data/.bss 아님)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">.bss</code> 변수에 쓰레기 값이 들어가지 않을까 걱정할 수 있는데, 운영체제가 프로그램을 메모리에 올릴 때 <code class="language-plaintext highlighter-rouge">.bss</code> 영역을 <strong>자동으로 0으로 채운다.</strong></p>
+
+<h2 id="5-실행-가능-목적파일의-로딩">5. 실행 가능 목적파일의 로딩</h2>
+
+<p>실행 파일을 다음처럼 실행하면,</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>linux&gt; ./prog
+</code></pre></div></div>
+
+<p>내부에서는 이렇게 동작한다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">prog</code>는 내장 Shell 명령어가 아니므로, Shell은 이를 실행 가능 목적파일로 판단하고 <strong>Loader</strong>(메모리 상주 OS 코드)를 호출한다. 리눅스에서는 <code class="language-plaintext highlighter-rouge">execve</code> 함수가 Loader를 호출한다.</li>
+  <li>Loader는 디스크의 실행 파일 코드·데이터를 메모리로 복사하고, 프로그램의 첫 인스트럭션(<strong>Entry point</strong>)으로 점프해 실행을 시작한다.</li>
+  <li>이렇게 <strong>프로그램을 메모리로 복사하고 실행하는 과정을 로딩(Loading)</strong> 이라 한다.</li>
+</ul>
+
+<h3 id="리눅스-런타임-메모리-이미지">리눅스 런타임 메모리 이미지</h3>
+
+<p><img src="/assets/img/blog/cs/LinuxRuntimeMemory.png" alt="런타임 메모리 이미지" /></p>
+
+<p>낮은 주소부터 높은 주소 순으로 정리하면 다음과 같다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">영역</th>
+      <th style="text-align: left">위치 / 동작</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Code segment</td>
+      <td style="text-align: left">주소 <code class="language-plaintext highlighter-rouge">0x400000</code>에서 시작</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Data segment</td>
+      <td style="text-align: left">code segment 뒤에 위치 (사이에 빈 공간 존재)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Run-time heap</td>
+      <td style="text-align: left">data segment 다음. <code class="language-plaintext highlighter-rouge">malloc</code> 호출로 <strong>위로</strong> 성장</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">공유 라이브러리 영역</td>
+      <td style="text-align: left">공유 모듈을 위해 예약된 영역</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">사용자 스택</td>
+      <td style="text-align: left">가장 큰 합법 주소(2⁴⁸−1) 아래에서 시작해 <strong>아래로</strong> 성장</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">커널 영역</td>
+      <td style="text-align: left">스택 위. OS 상주 부분(커널 코드·데이터)을 위해 예약</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="로더-실행-흐름">로더 실행 흐름</h3>
+
+<p>로더가 실행될 때의 workflow는 다음 단계를 거친다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">순서</th>
+      <th style="text-align: left">단계</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">로더 실행</td>
+      <td style="text-align: left">실행 파일 덩어리를 가상 메모리의 code/data segment로 복사</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: left">Entry point로 점프</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">crt1.o</code>의 <code class="language-plaintext highlighter-rouge">_start</code> 함수 실행</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">_start</code> → <code class="language-plaintext highlighter-rouge">__libc_start_main</code> 호출</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">libc.so</code>의 <code class="language-plaintext highlighter-rouge">__libc_start_main</code> 함수 실행</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">__libc_start_main</code> 동작</td>
+      <td style="text-align: left">실행 환경 초기화 → 사용자 <code class="language-plaintext highlighter-rouge">main</code> 함수 호출 → return 값 처리 → 필요 시 제어권을 커널로 반환</td>
+    </tr>
+  </tbody>
+</table>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="https://via.placeholder.com/128x128 1x,https://via.placeholder.com/256x256 2x"
+    
+  
+  alt="JeongHwan Yun"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>개발자로의 성장과정</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/cryptography/" class="flip-title"><span>암호학 기초</span></a>  <time class="faded fine" datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/cs/multi-level-feedback-queue-scheduler/" class="flip-title"><span>Multi-Level Feedback Queue Scheduler (MLFQS)</span></a>  <time class="faded fine" datetime="2025-05-26T00:00:00+00:00">26 May 2025</time></li>          <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>          <li class="h4">  <a href="/blog/algorithm/7th-week/" class="flip-title"><span>7주차 퀴즈</span></a>  <time class="faded fine" datetime="2025-04-29T00:00:00+00:00">29 Apr 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© 2022 JeongHwan Yun.
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(200,200,200);background-image:url(/assets/img/sidebar-bg.png)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/logo.png" class="avatar" alt="hwan log" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">hwan log</h2></a>
+    
+    
+      <p class="">
+        기술블로그
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/algorithm/"
+          class="sidebar-nav-item "
+          
+        >
+          알고리즘
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/cs/"
+          class="sidebar-nav-item "
+          
+        >
+          CS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/techstack/"
+          class="sidebar-nav-item "
+          
+        >
+          Tech Stack
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/ai/"
+          class="sidebar-nav-item "
+          
+        >
+          AI
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/projects/"
+          class="sidebar-nav-item "
+          
+        >
+          PROJECTS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/devlog/"
+          class="sidebar-nav-item "
+          
+        >
+          devlog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/resume/"
+          class="sidebar-nav-item "
+          
+        >
+          RESUME
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>(()=>{var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())})();
+</script>
+  <script src="/assets/js/hydejack-9.2.1.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.2.1.js" nomodule defer></script>
+  
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>

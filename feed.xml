@@ -1,0 +1,1128 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko-KR, en-US"><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" hreflang="ko-KR, en-US" /><updated>2026-06-01T18:16:59+00:00</updated><id>/feed.xml</id><title type="html">hwan log</title><subtitle>기술블로그
+</subtitle><author><name>JeongHwan Yun</name><email>jh327373@gmail.com</email></author><entry><title type="html">베스핀글로벌 참여 첫날</title><link href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" rel="alternate" type="text/html" title="베스핀글로벌 참여 첫날" /><published>2026-06-01T00:00:00+00:00</published><updated>2026-06-01T00:00:00+00:00</updated><id>/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0</id><content type="html" xml:base="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/"><![CDATA[<ul class="large-only" id="markdown-toc">
+  <li><a href="#베스핀글로벌-입사--웰컴키트" id="markdown-toc-베스핀글로벌-입사--웰컴키트">베스핀글로벌 입사 , 웰컴키트</a></li>
+  <li><a href="#첫번째-과제" id="markdown-toc-첫번째-과제">첫번째 과제</a></li>
+  <li><a href="#첫-출근-느낀점" id="markdown-toc-첫-출근-느낀점">첫 출근 느낀점</a></li>
+</ul>
+
+<h2 id="베스핀글로벌-입사--웰컴키트">베스핀글로벌 입사 , 웰컴키트</h2>
+<p>첫 IT 직무인 만큼 떨림이 있었다. 그래도 인턴동기가 7명이나 있어서 크게 긴장하진 않았다.
+간단히 웰컴키트와 사원증, 노트북을 받고 pc설정을 했다. 사내에선 octa로 인증을 사용하는데 이런 사내 보안 프로그램은 어떻게 만들었는지 궁금했다.
+약 40분가량 pc세팅이 끝나고 앞으로 진행할 과제에 대한 설명을 들을 수 있었다.</p>
+
+<h2 id="첫번째-과제">첫번째 과제</h2>
+<p>OOO이사님와 OOO이사님이 우리 인턴십을 코칭해주신다. 첫날 첫번째로 주어진 개인과제로 주어진 것은 보험관련 문서의 RAG 챗봇을 구현해보는 것 이 였다.
+다만 이번 과제는 손코딩을 지향하신다고 하셨고 내가 왜 이런 파이프라인을 구상하고 그 단계에 왜 이 모델, 라이브러리, 벡터DB를 썼는지 이유가 있어야한다. 중요하게 본다고 하셨다.
+어떤 문제점이 있었고 어떻게 해결했는지, 트러블슈팅을 신경쓰면서 작업해나가야겠다.
+AWS Bedrock key를 주셔서 이걸로 임베딩과 llm모델을 사용할 수 있다.
+이번주 금요일날까지 마무리해 피치를 진행하고 나온 결과로 다음주부턴 팀과제를 맡아서 진행 할 예정이다.</p>
+
+<h2 id="첫-출근-느낀점">첫 출근 느낀점</h2>
+<p>이 회사는 사원이 약 500명 정도라고 하는데 규모가 커보였고, 14,15,16층을 사용한다고 하는데 인원이 500이 될까? 살짝 부족해보이는데 라고 생각했는데 이사님이 회사에서 재택근무도 많이 한다고 말씀해주셨다. 
+그리고 이번 인턴십이 끝나도 기간안에 원하는 인재상이 보이는 사람을 뽑아가고 싶으시다고 말씀하셨다. 한번 열심히 해보아야겠다.
+아 같은 동기들이랑도 인사를 나누었는데 너무 사람들이 좋아보였다. 같이 잘 성장해나가고 싶다.</p>]]></content><author><name>JeongHwan Yun</name><email>jh327373@gmail.com</email></author><category term="blog" /><category term="devlog" /><category term="베스핀글로벌" /><category term="TIL" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">베스핀글로벌 참여 전날</title><link href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" rel="alternate" type="text/html" title="베스핀글로벌 참여 전날" /><published>2026-05-31T00:00:00+00:00</published><updated>2026-05-31T00:00:00+00:00</updated><id>/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0</id><content type="html" xml:base="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/"><![CDATA[<ul class="large-only" id="markdown-toc">
+  <li><a href="#부트캠프-수료-후-취준" id="markdown-toc-부트캠프-수료-후-취준">부트캠프 수료 후 취준</a></li>
+  <li><a href="#개발에-처음-입문하게-된-계기" id="markdown-toc-개발에-처음-입문하게-된-계기">개발에 처음 입문하게 된 계기</a></li>
+  <li><a href="#나는-무엇을-하고-싶을까" id="markdown-toc-나는-무엇을-하고-싶을까">나는 무엇을 하고 싶을까?</a></li>
+  <li><a href="#개발자-직군-첫-인턴" id="markdown-toc-개발자-직군-첫-인턴">개발자 직군 첫 인턴</a></li>
+</ul>
+
+<h2 id="부트캠프-수료-후-취준">부트캠프 수료 후 취준</h2>
+<p>7/31일 크래프톤정글을 수료하고 8월, 9월은 면접일정 때문에 정신없었다.
+진행했던 면접들마다 아쉬운 결과를 받으며 약간 고삐를 놓은 느낌이였다.
+이후 2026년도에는 다시 개발공부들을 복기하며 사이드프로젝트와 취준까지 병행하며 지내왔다.
+취준이 길어지니 공백기간을 가지는게 걱정이 되어 직무를 확장해서 서버, 모니터링, C++까지 면접을 보았고,
+합격소식을 들을 수 있었다. 다만 공백기를 없애고자 별로 관심없는 직무에 시간을 쏟는게 맞는지 의문이 생겼다.</p>
+
+<h2 id="개발에-처음-입문하게-된-계기">개발에 처음 입문하게 된 계기</h2>
+<p>대학교때 코딩으로 무에서 유를 만들어내는게 흥미로워 개발에 관심을 가지게 되었고 우연히 참여한 교내 창업캠프에서
+학우 두명과 돈 좀 벌어보자! 100억으로 엑싯하자는 목표를 가지고 함께 창업동아리를 만들며 창업활동도 하게되었다.
+창업학 교수님 산하로 들어가 국가지원사업까지 경험했지만 점점 개발과는 멀어지는 것 같아 졸업반때 창업을 그만두었다.
+이후 졸업을 하며 창업활동으로 전공수업을 듣지 못한 것이 아쉬워 졸업 후 바로 크래프톤정글이란 부트캠프에 참여했다.
+low레벨의 cs개념부터 알고리즘, 개발지(준비생)들과 협업활동까지 정말 나에겐 값진 시간이였고 개발자커리어로 본다면 대학교4년보다 더 의미있었다.</p>
+
+<h2 id="나는-무엇을-하고-싶을까">나는 무엇을 하고 싶을까?</h2>
+<p>창업을 그만두긴 했지만 싫어한 것은 아니였다. 1년반이란 기간동안 창업활동을 하며 비즈니스 구조를 이해하고 아이디어를 수립해 사업계획서를 작성해보며 학생인 내가 스스로 수익구조를 만들어 보는 경험에 빠져들었었다.
+나는 내가 개발한 서비스로 많은 돈을 벌어보고싶다. 그리고 많은 사람들이 이용하는 서비스를 운영해보고 싶다.
+그렇다면 내가 가야할 길은 1인창업이다..ㅋㅋㅋㅋㅋ 요즘 ai가 잘 되어있어서 정말 가능할 일인것도 같다.
+그래도 현재 취업시장에서 어떤 문을 두드릴지 결정해야한다.
+ai기술로 서비스를 만들거나 사용자트래픽이 많은 서비스에서 개발일을 할 수 있는 직무를 찾아보았고 지원했다.
+인턴, 청년일경험, 신입사원등 다양하게 지원을 했고 청년일겸험으로 베스핀글로벌의 GenAI직무에 합류하게 되었다.</p>
+
+<h2 id="개발자-직군-첫-인턴">개발자 직군 첫 인턴</h2>
+<p>청년일경험은 정부에서 진행하는 인턴형이면서 근무시간이 3시간이나 적은 5시간이다.(8시간-&gt;5시간)
+그래도 개발자직무로 인턴을 할 수 있는게 흥미로우면서 기대된다.
+앞으로는 내가 하기에 달린 것 같다. 현재 개발시장은 너무 빠르게 앞서나가고 있다. 
+ai가 나보다 코드를 잘 짜는 것 같다. 결국은 이 개발시장의 흐름을 잘 파악하고 ai를 업무나 개발에 잘 다루는 사람이
+가치있는 개발자가 될 것 이라고 생각한다. 
+나의 목표인 사람들에게 가치있는 서비스를 제공하는 개발자가 되어보자. 내일 첫 출근 화이팅.</p>]]></content><author><name>JeongHwan Yun</name><email>jh327373@gmail.com</email></author><category term="blog" /><category term="devlog" /><category term="베스핀글로벌" /><category term="TIL" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">암호학 기초</title><link href="/blog/cs/cryptography/" rel="alternate" type="text/html" title="암호학 기초" /><published>2026-01-22T00:00:00+00:00</published><updated>2026-01-22T00:00:00+00:00</updated><id>/blog/cs/cryptography</id><content type="html" xml:base="/blog/cs/cryptography/"><![CDATA[<ul class="large-only" id="markdown-toc">
+  <li><a href="#왜-암호화가-필요한가" id="markdown-toc-왜-암호화가-필요한가">왜 암호화가 필요한가?</a></li>
+  <li><a href="#정보보안-3요소-cia-triad" id="markdown-toc-정보보안-3요소-cia-triad">정보보안 3요소 (CIA Triad)</a></li>
+  <li><a href="#세-가지-핵심-개념" id="markdown-toc-세-가지-핵심-개념">세 가지 핵심 개념</a></li>
+  <li><a href="#암호화-방식" id="markdown-toc-암호화-방식">암호화 방식</a>    <ul>
+      <li><a href="#양방향-암호화" id="markdown-toc-양방향-암호화">양방향 암호화</a>        <ul>
+          <li><a href="#대칭키-방식" id="markdown-toc-대칭키-방식">대칭키 방식</a></li>
+          <li><a href="#비대칭키-방식" id="markdown-toc-비대칭키-방식">비대칭키 방식</a></li>
+        </ul>
+      </li>
+      <li><a href="#단방향-암호화-해시" id="markdown-toc-단방향-암호화-해시">단방향 암호화 (해시)</a></li>
+    </ul>
+  </li>
+  <li><a href="#실생활-적용" id="markdown-toc-실생활-적용">실생활 적용</a></li>
+  <li><a href="#핵심-요약" id="markdown-toc-핵심-요약">핵심 요약</a></li>
+</ul>
+
+<h2 id="왜-암호화가-필요한가">왜 암호화가 필요한가?</h2>
+
+<p>인터넷으로 데이터를 주고받을 때 세 가지 위협이 존재한다.</p>
+
+<ul>
+  <li><strong>도청(Sniffing)</strong> — 전송 중인 데이터를 몰래 엿봄</li>
+  <li><strong>위·변조(Tampering)</strong> — 내용을 바꿔치기함</li>
+  <li><strong>도용(Identity Theft)</strong> — 다른 사람인 척 속임</li>
+</ul>
+
+<hr />
+
+<h2 id="정보보안-3요소-cia-triad">정보보안 3요소 (CIA Triad)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>요소</th>
+      <th>의미</th>
+      <th>달성 방법</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Confidentiality</strong> (기밀성)</td>
+      <td>남이 보지 못하게</td>
+      <td>암호화 (Encryption)</td>
+    </tr>
+    <tr>
+      <td><strong>Integrity</strong> (무결성)</td>
+      <td>내용이 바뀌지 않았음을 보장</td>
+      <td>해시 + 전자서명</td>
+    </tr>
+    <tr>
+      <td><strong>Availability</strong> (가용성)</td>
+      <td>필요할 때 언제든 사용 가능</td>
+      <td>서버 안정성, DDoS 방어</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><strong>+ 인증(Authentication)</strong>: 권한 있는 사람만 접근 가능하게 함</p>
+</blockquote>
+
+<hr />
+
+<h2 id="세-가지-핵심-개념">세 가지 핵심 개념</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>개념</th>
+      <th>설명</th>
+      <th>방향</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>암호화 (Encryption)</strong></td>
+      <td>데이터를 읽을 수 없게 변환</td>
+      <td>복호화(Decryption) 가능</td>
+    </tr>
+    <tr>
+      <td><strong>해시 (Hash)</strong></td>
+      <td>입력값을 고정 길이 “지문”으로 변환</td>
+      <td>단방향, 되돌릴 수 없음</td>
+    </tr>
+    <tr>
+      <td><strong>전자서명 (Digital Signature)</strong></td>
+      <td>메시지에 서명을 붙여 발신자·위조 여부 검증</td>
+      <td>비대칭키 기반</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="암호화-방식">암호화 방식</h2>
+<p><img src="/assets/img/blog/security/암호화방식.png" alt="타임라인" /></p>
+<h3 id="양방향-암호화">양방향 암호화</h3>
+
+<blockquote>
+  <p>암호화 + 복호화 모두 가능 → <strong>기밀성</strong> 목적</p>
+</blockquote>
+
+<h4 id="대칭키-방식">대칭키 방식</h4>
+
+<ul>
+  <li>암호화·복호화에 <strong>동일한 키</strong> 사용</li>
+  <li>빠르지만, 키를 상대에게 안전하게 전달하는 문제가 있음</li>
+  <li>대표 알고리즘: <strong>AES</strong>, Twofish, Blowfish, DES, 3DES</li>
+</ul>
+
+<h4 id="비대칭키-방식">비대칭키 방식</h4>
+
+<ul>
+  <li><strong>공개키(Public Key)</strong> 와 <strong>비공개키(Private Key)</strong> 쌍 사용</li>
+  <li>공개키로 암호화 → 비공개키로만 복호화 (반대도 성립)</li>
+  <li>키를 공개해도 안전하게 통신 가능</li>
+  <li>대표 알고리즘: <strong>RSA</strong></li>
+</ul>
+
+<p>[전자서명 흐름]</p>
+
+<p><img src="/assets/img/blog/security/전자서명%20동작%20원리.png" alt="타임라인" /></p>
+
+<blockquote>
+  <p><strong>전자서명</strong>: 발신자가 비공개키로 내용에 서명 → 수신자는 공개키로 서명을 복호화해 내용과 대조 → 일치하면 진본·발신자 확인</p>
+</blockquote>
+
+<hr />
+
+<h3 id="단방향-암호화-해시">단방향 암호화 (해시)</h3>
+
+<blockquote>
+  <p>복호화 불가 → <strong>무결성</strong> 목적</p>
+</blockquote>
+
+<ul>
+  <li>입력값이 조금만 달라져도 완전히 다른 해시값 출력</li>
+  <li>비밀번호 저장, 파일 무결성 검증에 사용</li>
+  <li>대표 알고리즘: <strong>SHA-256</strong>, SHA-512, MD5, SHA-1</li>
+</ul>
+
+<hr />
+
+<h2 id="실생활-적용">실생활 적용</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>상황</th>
+      <th>암호화 방식</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>HTTPS</strong></td>
+      <td>비대칭키로 세션키 교환 → AES(대칭키)로 데이터 암호화</td>
+    </tr>
+    <tr>
+      <td><strong>비밀번호 저장</strong></td>
+      <td>해시(SHA 등)로 저장, 복원 불가 → 비교만 함</td>
+    </tr>
+    <tr>
+      <td><strong>E2EE 메신저</strong> (카카오 비밀채팅, WhatsApp)</td>
+      <td>종단간 암호화, 서버 관리자도 내용 열람 불가</td>
+    </tr>
+    <tr>
+      <td><strong>파일/USB 암호화</strong></td>
+      <td>AES 기반 대칭키 방식</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="핵심-요약">핵심 요약</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>암호화 방식
+├── 양방향 (복호화 가능) — 기밀성
+│   ├── 대칭키: 같은 키 사용 → AES, DES
+│   └── 비대칭키: 공개키/비공개키 쌍 → RSA, 전자서명
+└── 단방향 (복호화 불가) — 무결성
+    └── 해시: SHA-256, MD5
+</code></pre></div></div>
+
+<blockquote>
+  <p>참고 영상: <a href="https://www.youtube.com/playlist?list=PLuHgQVnccGMD-9lk4xmb6EG1XK1OmwC3u">생활코딩 암호학</a></p>
+</blockquote>]]></content><author><name>JeongHwan Yun</name><email>jh327373@gmail.com</email></author><category term="blog" /><category term="cs" /><category term="보안" /><summary type="html"><![CDATA[crypto(비밀) + graphy(방법) — 핵심만 빠르게]]></summary></entry><entry><title type="html">HTTP vs HTTPS — SSL/TLS 정리</title><link href="/blog/cs/HTTPS/" rel="alternate" type="text/html" title="HTTP vs HTTPS — SSL/TLS 정리" /><published>2026-01-15T00:00:00+00:00</published><updated>2026-01-15T00:00:00+00:00</updated><id>/blog/cs/HTTPS</id><content type="html" xml:base="/blog/cs/HTTPS/"><![CDATA[<ul class="large-only" id="markdown-toc">
+  <li><a href="#http-vs-https" id="markdown-toc-http-vs-https">HTTP vs HTTPS</a></li>
+  <li><a href="#암호화-계층의-역사" id="markdown-toc-암호화-계층의-역사">암호화 계층의 역사</a>    <ul>
+      <li><a href="#ssl-secure-sockets-layer" id="markdown-toc-ssl-secure-sockets-layer">SSL (Secure Sockets Layer)</a></li>
+      <li><a href="#tls-transport-layer-security" id="markdown-toc-tls-transport-layer-security">TLS (Transport Layer Security)</a></li>
+    </ul>
+  </li>
+  <li><a href="#타임라인-요약" id="markdown-toc-타임라인-요약">타임라인 요약</a></li>
+  <li><a href="#핵심-정리" id="markdown-toc-핵심-정리">핵심 정리</a>    <ul>
+      <li><a href="#tls-13의-주요-개선점" id="markdown-toc-tls-13의-주요-개선점">TLS 1.3의 주요 개선점</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="http-vs-https">HTTP vs HTTPS</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>HTTP</th>
+      <th>HTTPS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>암호화</td>
+      <td>없음 (평문 전송)</td>
+      <td>있음 (TLS 계층 추가)</td>
+    </tr>
+    <tr>
+      <td>포트</td>
+      <td>80</td>
+      <td>443</td>
+    </tr>
+    <tr>
+      <td>보안</td>
+      <td>도청·변조 위험</td>
+      <td>기밀성·무결성 보장</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="암호화-계층의-역사">암호화 계층의 역사</h2>
+
+<h3 id="ssl-secure-sockets-layer">SSL (Secure Sockets Layer)</h3>
+
+<p>Netscape가 1990년대에 개발한 최초의 암호화 통신 프로토콜.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>버전</th>
+      <th>연도</th>
+      <th>현재 상태</th>
+      <th>비고</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SSL 1.0</td>
+      <td>-</td>
+      <td>-</td>
+      <td>공개되지 않음</td>
+    </tr>
+    <tr>
+      <td>SSL 2.0</td>
+      <td>1995</td>
+      <td><strong>사용 금지</strong></td>
+      <td>구조적 결함, TLS에서 협상 금지 (RFC 6176)</td>
+    </tr>
+    <tr>
+      <td>SSL 3.0</td>
+      <td>1996</td>
+      <td><strong>사용 금지</strong></td>
+      <td>POODLE 공격(2014)으로 폐기 (RFC 7568)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="tls-transport-layer-security">TLS (Transport Layer Security)</h3>
+
+<p>SSL의 후속 표준. IETF가 관리. 현재 유일하게 사용되는 프로토콜.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>버전</th>
+      <th>연도</th>
+      <th>RFC</th>
+      <th>현재 상태</th>
+      <th>핵심 변경점</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TLS 1.0</td>
+      <td>1999</td>
+      <td>RFC 2246</td>
+      <td><strong>2021년 폐기</strong></td>
+      <td>SSL 3.0 표준화. BEAST 공격(2011)으로 퇴출</td>
+    </tr>
+    <tr>
+      <td>TLS 1.1</td>
+      <td>2006</td>
+      <td>RFC 4346</td>
+      <td><strong>2021년 폐기</strong></td>
+      <td>CBC에 명시적 IV 도입. RFC 8996으로 폐기</td>
+    </tr>
+    <tr>
+      <td>TLS 1.2</td>
+      <td>2008</td>
+      <td>RFC 5246</td>
+      <td><strong>현역</strong> (1.3 권장)</td>
+      <td>AEAD(AES-GCM) 등 현대 암호 도입</td>
+    </tr>
+    <tr>
+      <td>TLS 1.3</td>
+      <td>2018</td>
+      <td>RFC 8446</td>
+      <td><strong>최신 권장</strong></td>
+      <td>핸드셰이크 간소화(1-RTT), RSA 키교환·CBC 제거</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="타임라인-요약">타임라인 요약</h2>
+
+<p><img src="/assets/img/blog/security/svg_타임라인.png" alt="타임라인" /></p>
+
+<blockquote>
+  <p>2021년 RFC 8996으로 TLS 1.0 / 1.1이 공식 폐기됨</p>
+</blockquote>
+
+<hr />
+
+<h2 id="핵심-정리">핵심 정리</h2>
+
+<ul>
+  <li><strong>SSL은 사라진 옛 프로토콜</strong> — SSL 2.0/3.0 모두 사용 금지</li>
+  <li><strong>TLS만 현재 유효</strong> — 그중에서도 TLS 1.2 / TLS 1.3만 써야 함</li>
+  <li><strong>“SSL 인증서”는 관행적 명칭</strong> — 실제로는 TLS 인증서가 맞는 말</li>
+</ul>
+
+<h3 id="tls-13의-주요-개선점">TLS 1.3의 주요 개선점</h3>
+
+<ul>
+  <li>핸드셰이크가 1-RTT로 단순화 → 연결 속도 향상</li>
+  <li>Forward Secrecy(FS)가 기본 적용</li>
+  <li>취약한 암호 방식 제거: RSA 키교환, CBC 모드, RC4</li>
+  <li>0-RTT 재개 지원 (단, 재생 공격 주의)</li>
+</ul>]]></content><author><name>JeongHwan Yun</name><email>jh327373@gmail.com</email></author><category term="blog" /><category term="cs" /><category term="보안" /><summary type="html"><![CDATA[HTTPS의 암호화 계층, SSL과 TLS의 역사와 차이를 한눈에 정리]]></summary></entry><entry><title type="html">KRAFTON JUNGLE 16주차 회고</title><link href="/blog/devlog/jungle-16week/" rel="alternate" type="text/html" title="KRAFTON JUNGLE 16주차 회고" /><published>2025-07-31T00:00:00+00:00</published><updated>2025-07-31T00:00:00+00:00</updated><id>/blog/devlog/jungle-16week</id><content type="html" xml:base="/blog/devlog/jungle-16week/"><![CDATA[<ul class="large-only" id="markdown-toc">
+  <li><a href="#14주차" id="markdown-toc-14주차">14주차</a></li>
+  <li><a href="#나만무" id="markdown-toc-나만무">나만무</a></li>
+</ul>
+
+<h2 id="14주차">14주차</h2>
+<p>13주차를 마치고 14주차에는 개인 미니 프로젝트 과제가 주어졌다. CRUD기반의 게시판 서비스를 만들라는 과제였다.</p>
+
+<h2 id="나만무">나만무</h2>]]></content><author><name>JeongHwan Yun</name><email>jh327373@gmail.com</email></author><category term="blog" /><category term="devlog" /><category term="krafton-jungle" /><category term="회고" /><summary type="html"><![CDATA[]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/img/blog/devlog/jungle5.jpg" /><media:content medium="image" url="/assets/img/blog/devlog/jungle5.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">KRAFTON JUNGLE 12주차 회고</title><link href="/blog/devlog/jungle-12week/" rel="alternate" type="text/html" title="KRAFTON JUNGLE 12주차 회고" /><published>2025-06-14T00:00:00+00:00</published><updated>2025-06-14T00:00:00+00:00</updated><id>/blog/devlog/jungle-12week</id><content type="html" xml:base="/blog/devlog/jungle-12week/"><![CDATA[<ul class="large-only" id="markdown-toc">
+  <li><a href="#9주차" id="markdown-toc-9주차">9주차</a></li>
+</ul>
+
+<p>8주차를 마치면서 이제 PintOS주간에 들어오게 되었다. 여태까지 해왔던 과정들이 PintOS를 위한 것이었고 이번 과정을 통해 많이 얻고자 노력할 것이다.</p>
+
+<h2 id="9주차">9주차</h2>
+
+<p>이번에는 1주씩 팀이 바뀌는 기존과는 다르게 총 3주동안 할 팀원이 배정되었다.</p>]]></content><author><name>JeongHwan Yun</name><email>jh327373@gmail.com</email></author><category term="blog" /><category term="devlog" /><category term="krafton-jungle" /><category term="회고" /><summary type="html"><![CDATA[]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/img/blog/devlog/jungle4.jpg" /><media:content medium="image" url="/assets/img/blog/devlog/jungle4.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Swap Disk: 메모리가 부족할 때 페이지를 잠시 맡기는 곳</title><link href="/blog/cs/swap-disk/" rel="alternate" type="text/html" title="Swap Disk: 메모리가 부족할 때 페이지를 잠시 맡기는 곳" /><published>2025-06-12T00:00:00+00:00</published><updated>2025-06-12T00:00:00+00:00</updated><id>/blog/cs/swap-disk</id><content type="html" xml:base="/blog/cs/swap-disk/"><![CDATA[<ul class="large-only" id="markdown-toc">
+  <li><a href="#1-스왑-디스크란" id="markdown-toc-1-스왑-디스크란">1. 스왑 디스크란?</a></li>
+  <li><a href="#2-동작-흐름" id="markdown-toc-2-동작-흐름">2. 동작 흐름</a>    <ul>
+      <li><a href="#2-1-page-fault" id="markdown-toc-2-1-page-fault">2-1. Page Fault</a></li>
+      <li><a href="#2-2-물리-프레임-할당-실패" id="markdown-toc-2-2-물리-프레임-할당-실패">2-2. 물리 프레임 할당 실패</a></li>
+      <li><a href="#2-3-swap-out" id="markdown-toc-2-3-swap-out">2-3. Swap-out</a></li>
+      <li><a href="#2-4-swap-in-해당-가상-주소-재접근-시" id="markdown-toc-2-4-swap-in-해당-가상-주소-재접근-시">2-4. Swap-in (해당 가상 주소 재접근 시)</a></li>
+      <li><a href="#2-5-io-세부" id="markdown-toc-2-5-io-세부">2-5. I/O 세부</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="1-스왑-디스크란">1. 스왑 디스크란?</h2>
+
+<p><strong>스왑 디스크(Swap Disk)</strong> 는 물리 메모리(RAM)가 부족할 때, 당장 쓰지 않는 페이지를 보조 저장장치(SSD/HDD)에 임시로 맡겨 두는 공간이다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">개념</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">목적</td>
+      <td style="text-align: left">RAM 부족 시 사용하지 않는 페이지(4KB 단위)를 보조 저장장치에 임시 저장</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">형태</td>
+      <td style="text-align: left">① 스왑 파티션(독립된 블록 디바이스) / ② 스왑 파일(파일시스템 위의 파일)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">상태 구분</td>
+      <td style="text-align: left">RAM에 있으면 present, 스왑으로 나가면 swapped (PTE의 present 비트 = 0, 나머지 비트에 스왑 슬롯 번호 등 메타데이터 저장)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">근거</td>
+      <td style="text-align: left">가상 메모리에서 page fault 시 디스크 I/O(DMA)로 페이지를 교체</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2-동작-흐름">2. 동작 흐름</h2>
+
+<h3 id="2-1-page-fault">2-1. Page Fault</h3>
+
+<p>CPU가 PTE의 present 비트를 확인해 0이면 트랩이 걸리고, 커널의 <strong>page-fault 핸들러</strong>로 진입한다.</p>
+
+<h3 id="2-2-물리-프레임-할당-실패">2-2. 물리 프레임 할당 실패</h3>
+
+<p>모든 프레임이 사용 중이면, <strong>페이지 교체 정책</strong>(LRU/Clock 등)으로 희생 페이지(victim)를 선정한다.</p>
+
+<h3 id="2-3-swap-out">2-3. Swap-out</h3>
+
+<ol>
+  <li>스왑 비트맵(bitmap)에서 빈 슬롯을 찾는다</li>
+  <li>페이지 내용을 8섹터(512B × 8 = 4KB) 단위로 <code class="language-plaintext highlighter-rouge">block_write()</code>한다</li>
+  <li>PTE의 present를 0으로 두고, swapped 플래그와 슬롯 번호를 기록한다</li>
+</ol>
+
+<h3 id="2-4-swap-in-해당-가상-주소-재접근-시">2-4. Swap-in (해당 가상 주소 재접근 시)</h3>
+
+<ol>
+  <li>새 프레임을 확보한 뒤 <code class="language-plaintext highlighter-rouge">block_read()</code>로 8섹터를 읽는다</li>
+  <li>PTE의 present를 1로 바꾸고, 스왑 메타데이터를 초기화하며, TLB를 flush한다</li>
+  <li>비트맵 슬롯을 free한다</li>
+</ol>
+
+<h3 id="2-5-io-세부">2-5. I/O 세부</h3>
+
+<p>실제 전송은 디스크 컨트롤러가 <strong>DMA</strong>로 처리한다. 완료되면 인터럽트가 발생하고, 커널은 잠들어 있던 프로세스를 깨운다.</p>
+
+<p>이 흐름은 Anonymous page의 백업 메커니즘 그 자체다. 원본 파일이 없는 익명 페이지는 evict될 때 갈 곳이 swap뿐이기 때문이다. (관련: <a href="../../computersystem/anon-file" class="heading flip-title">Anonymous &amp; File-backed Page</a>, <a href="../../computersystem/page-replacement-policy" class="heading flip-title">Page Replacement Policy</a>)</p>]]></content><author><name>JeongHwan Yun</name><email>jh327373@gmail.com</email></author><category term="blog" /><category term="cs" /><category term="운영체제" /><summary type="html"><![CDATA[Anonymous Page 구현의 필수 개념인 Swap Disk를 알아본다.]]></summary></entry><entry><title type="html">Paging: OS는 가상 메모리를 어떻게 관리할까?</title><link href="/blog/cs/paging/" rel="alternate" type="text/html" title="Paging: OS는 가상 메모리를 어떻게 관리할까?" /><published>2025-06-11T00:00:00+00:00</published><updated>2025-06-11T00:00:00+00:00</updated><id>/blog/cs/paging</id><content type="html" xml:base="/blog/cs/paging/"><![CDATA[<ul class="large-only" id="markdown-toc">
+  <li><a href="#1-페이징-기본-개념" id="markdown-toc-1-페이징-기본-개념">1. 페이징 기본 개념</a></li>
+  <li><a href="#2-주소-변환-과정" id="markdown-toc-2-주소-변환-과정">2. 주소 변환 과정</a>    <ul>
+      <li><a href="#2-1-cr3-레지스터" id="markdown-toc-2-1-cr3-레지스터">2-1. CR3 레지스터</a></li>
+      <li><a href="#2-2-pte의-rw--us--p-비트" id="markdown-toc-2-2-pte의-rw--us--p-비트">2-2. PTE의 R/W · U/S · P 비트</a>        <ul>
+          <li><a href="#cpl-current-privilege-level" id="markdown-toc-cpl-current-privilege-level">CPL (Current Privilege Level)</a></li>
+        </ul>
+      </li>
+      <li><a href="#2-3-tlb-히트" id="markdown-toc-2-3-tlb-히트">2-3. TLB 히트</a></li>
+    </ul>
+  </li>
+  <li><a href="#3-운영체제의-역할" id="markdown-toc-3-운영체제의-역할">3. 운영체제의 역할</a>    <ul>
+      <li><a href="#tlb-flush" id="markdown-toc-tlb-flush">TLB Flush</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-페이지-교체-page-replacement" id="markdown-toc-4-페이지-교체-page-replacement">4. 페이지 교체 (Page Replacement)</a></li>
+  <li><a href="#5-pintos-관점-요약" id="markdown-toc-5-pintos-관점-요약">5. PintOS 관점 요약</a></li>
+  <li><a href="#6-다단계-페이징을-쓰는-이유" id="markdown-toc-6-다단계-페이징을-쓰는-이유">6. 다단계 페이징을 쓰는 이유</a></li>
+  <li><a href="#7-페이지-크기와-내부-단편화" id="markdown-toc-7-페이지-크기와-내부-단편화">7. 페이지 크기와 내부 단편화</a></li>
+  <li><a href="#8-정리" id="markdown-toc-8-정리">8. 정리</a></li>
+</ul>
+
+<p>페이징은 가상 주소와 물리 주소 사이에 간접층을 두어 각 프로세스에 독립적인 주소 공간을 제공한다.
+주소 변환, CR3, PTE, TLB, 다단계 페이징까지 정리한다.</p>
+
+<h2 id="1-페이징-기본-개념">1. 페이징 기본 개념</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">용어</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">페이지 (Page)</td>
+      <td style="text-align: left">OS의 관리 단위인 고정 크기(보통 4KB)의 가상 메모리 블록</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">프레임 (Frame)</td>
+      <td style="text-align: left">물리 메모리에서 페이지와 1:1로 매핑되는 동일 크기 블록</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">페이지 테이블 (Page Table)</td>
+      <td style="text-align: left">“가상 페이지 번호 → 물리 프레임 번호 + 접근 권한”을 저장하는 자료구조</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">TLB (Translation Look-aside Buffer)</td>
+      <td style="text-align: left">MMU 내부의 작은 캐시. 최근 주소 변환 결과를 보관해 속도를 높임</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>페이징은 가상 주소와 물리 주소 사이에 <strong>간접층</strong>을 삽입해, 각 프로세스가 독립적인 주소 공간을 갖게 하는 기술이다. 이를 통해 ① 보호(Protection), ② 공유(Sharing), ③ 공간 활용(세그먼트 단편화 제거)을 달성한다.</p>
+
+<h2 id="2-주소-변환-과정">2. 주소 변환 과정</h2>
+
+<ol>
+  <li>가상 주소(48bit)를 상위 9비트씩 잘라 <code class="language-plaintext highlighter-rouge">PML4 → PDPT → PD → PT → Offset</code> 순으로 인덱싱한다 (x86-64 4-level 페이징)</li>
+  <li><strong>MMU</strong>가 CR3 레지스터의 PML4 물리 주소를 읽어 다단계 테이블을 탐색한다</li>
+  <li>최종 PTE에서 <strong>PFN(프레임 번호)</strong> 와 권한 비트(R/W, U/S, P)를 읽는다
+    <ul>
+      <li>접근 허용이면 <strong>물리 주소 = PFN × 4KB + Offset</strong></li>
+      <li>접근 위반이거나 P 비트 = 0이면 <strong>Page Fault</strong> 발생 → OS 개입</li>
+    </ul>
+  </li>
+</ol>
+
+<p>TLB가 히트하면 1~3단계가 생략되어 수십 ns 이내로 끝난다.</p>
+
+<h3 id="2-1-cr3-레지스터">2-1. CR3 레지스터</h3>
+
+<p>CR3는 x86-64의 Control Register 3로, <strong>현재 주소 공간의 PML4 물리 주소</strong>를 담는다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">비트 범위</th>
+      <th style="text-align: left">이름</th>
+      <th style="text-align: left">내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">63–52</td>
+      <td style="text-align: left">Reserved</td>
+      <td style="text-align: left">CPU 모델별 확장</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">51–12</td>
+      <td style="text-align: left">PML4 물리 베이스</td>
+      <td style="text-align: left">4KB 정렬된 최상위 테이블 주소</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">11–0</td>
+      <td style="text-align: left">PCID / 플래그</td>
+      <td style="text-align: left">Process-Context ID(0~4095) 및 제어 플래그</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>컨텍스트 스위칭 때 CR3를 바꾸면 MMU가 “새 주소 공간으로 바뀌었다”고 간주하며, 대부분의 TLB 엔트리가 자동 무효화된다. CR3의 역할을 정리하면 다음과 같다.</p>
+
+<ul>
+  <li><strong>주소 공간 식별</strong>: 커널이 컨텍스트 스위칭 시 CR3를 새 값으로 로드한다. PCID가 이전과 다르면 TLB 엔트리가 ‘다른 주소 공간’으로 구분되어 대부분 유지되므로 <strong>TLB flush 비용이 줄어든다</strong></li>
+  <li><strong>전역(Global) 페이지</strong>: PTE의 G 비트를 1로 두면 CR3 변경에도 flush되지 않는다 (커널 코드·데이터용)</li>
+  <li><strong>Selective flush</strong>: <code class="language-plaintext highlighter-rouge">invlpg (addr)</code>로 특정 페이지만 무효화한다. SMP 환경에서는 같은 주소 공간을 쓰는 다른 코어에도 IPI로 전파해야 한다</li>
+</ul>
+
+<p>PintOS처럼 PCID를 쓰지 않는 단순 구현도, CR3를 재로드하면 “전체 TLB flush” 효과를 얻는다.</p>
+
+<h3 id="2-2-pte의-rw--us--p-비트">2-2. PTE의 R/W · U/S · P 비트</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">비트</th>
+      <th style="text-align: left">이름</th>
+      <th style="text-align: left">1일 때</th>
+      <th style="text-align: left">0일 때</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">R/W</td>
+      <td style="text-align: left">쓰기 권한</td>
+      <td style="text-align: left">읽기 + 쓰기 허용</td>
+      <td style="text-align: left">읽기 전용. write 시 폴트</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">U/S</td>
+      <td style="text-align: left">특권 등급</td>
+      <td style="text-align: left">CPL 3(유저)도 접근 가능</td>
+      <td style="text-align: left">커널(CPL 0~2)만 접근. 유저 접근 시 폴트</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">P</td>
+      <td style="text-align: left">존재 여부</td>
+      <td style="text-align: left">물리 프레임에 매핑됨 → 정상 접근</td>
+      <td style="text-align: left">없음 → 접근 시 page fault</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="cpl-current-privilege-level">CPL (Current Privilege Level)</h4>
+
+<p>CPL은 현재 실행 중인 명령어의 권한 레벨이다. 별도 레지스터가 아니라 <strong>CS 세그먼트의 하위 2비트</strong>가 CPL로 해석된다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ring / CPL</th>
+      <th style="text-align: left">용도</th>
+      <th style="text-align: center">유저 코드 진입</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: left">커널·하이퍼바이저·펌웨어 (최상위 권한)</td>
+      <td style="text-align: center">✗</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">일부 마이크로커널·드라이버 (거의 미사용)</td>
+      <td style="text-align: center">✗</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: left">특수 계층 (Windows NT 초기 등, 거의 미사용)</td>
+      <td style="text-align: center">✗</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: left">일반 사용자 애플리케이션</td>
+      <td style="text-align: center">✓</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>페이징 권한 검사는 U/S 비트가 0이면 CPL 0~2만, R/W 비트가 0이면 (CPL 무관) 읽기만 허용한다. 시스템 콜(<code class="language-plaintext highlighter-rouge">syscall</code>, <code class="language-plaintext highlighter-rouge">int 0x80</code>)은 게이트를 통해 Ring 3 → Ring 0으로 권한을 상승한 뒤, 커널이 <code class="language-plaintext highlighter-rouge">iretq</code>로 돌아올 때 Ring 3로 복귀한다.</p>
+
+<h3 id="2-3-tlb-히트">2-3. TLB 히트</h3>
+
+<p>CPU가 가상 주소를 던졌을 때 TLB에 그 VA→PA 매핑이 이미 있으면 <strong>히트(hit)</strong> 다. 이 경우 페이지 테이블을 걷지 않으므로 변환이 한두 사이클에 끝난다. 없으면 <strong>미스(miss)</strong> → 긴 4단계 페이지 테이블 워크가 수행된다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">레벨</th>
+      <th style="text-align: left">커버 범위</th>
+      <th style="text-align: left">페이지 크기</th>
+      <th style="text-align: left">방식</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">L1-DTLB</td>
+      <td style="text-align: left">데이터 변환 전용</td>
+      <td style="text-align: left">4KB / 2MB</td>
+      <td style="text-align: left">64 엔트리, 4-way</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">L1-ITLB</td>
+      <td style="text-align: left">코드 변환 전용</td>
+      <td style="text-align: left">4KB / 2MB</td>
+      <td style="text-align: left">128 엔트리, 4-way</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">STLB (L2)</td>
+      <td style="text-align: left">Unified</td>
+      <td style="text-align: left">4KB / 2MB / 1GB</td>
+      <td style="text-align: left">1536 엔트리 이상</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><strong>히트</strong>: 요청한 VPN이 TLB 태그에 있어 PFN을 즉시 반환</li>
+  <li><strong>미스</strong>: MMU가 다단계 페이지 테이블 워크를 수행하며 메모리를 읽어야 해 수십~수백 ns 지연</li>
+  <li><strong>멀티코어 일관성</strong>: PTE가 바뀌면 IPI(Inter-Processor Interrupt)로 다른 코어에 TLB flush를 요청해 무효화한다</li>
+</ul>
+
+<p>체감상 L1 TLB 히트 ≈ 1~3 cycle, STLB 히트 ≈ 5~10 cycle, 미스 ≈ 수십 cycle이므로, <strong>TLB 친화적인(순차·지역성 높은) 메모리 접근</strong>이 성능에 큰 영향을 준다.</p>
+
+<h2 id="3-운영체제의-역할">3. 운영체제의 역할</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">시점</th>
+      <th style="text-align: left">OS가 하는 일</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">프로세스 생성</td>
+      <td style="text-align: left">새 페이지 테이블 구성, 코드/데이터 PTE를 “not-present”로 표기</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">페이지 폴트</td>
+      <td style="text-align: left">ⓐ 유효하나 매핑 없음 → Demand Paging(프레임 할당 → 디스크 로드 → PTE 갱신 → 재실행) / ⓑ 스택 확장 조건 위배·보호 위반 → Segmentation Fault</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">메모리 부족</td>
+      <td style="text-align: left">페이지 교체 알고리즘으로 victim 선정 → swap out → PTE 수정</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">컨텍스트 스위칭</td>
+      <td style="text-align: left">CR3에 새 프로세스의 PML4 물리 주소 기록, TLB flush</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="tlb-flush">TLB Flush</h3>
+
+<p>“페이지 테이블을 고쳤으니 캐시에 남은 옛 변환을 버려라”는 명령이다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mov %cr3, ... / mov ..., %cr3</code>: CR3 재로드로 전체(비-Global) TLB 무효화</li>
+  <li><code class="language-plaintext highlighter-rouge">invlpg (addr)</code>: 지정 페이지 하나만 정밀 무효화</li>
+</ul>
+
+<p>둘 다 커널 모드 전용이며, SMP 환경에서는 다른 CPU에도 IPI로 flush를 전파해야 한다.</p>
+
+<h2 id="4-페이지-교체-page-replacement">4. 페이지 교체 (Page Replacement)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">알고리즘</th>
+      <th style="text-align: left">개요</th>
+      <th style="text-align: left">장단점</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Optimal (OPT)</td>
+      <td style="text-align: left">가장 늦게 재참조될 페이지 제거</td>
+      <td style="text-align: left">이론적 최적, 실현 불가</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">LRU</td>
+      <td style="text-align: left">가장 오래 안 쓴 페이지 선택</td>
+      <td style="text-align: left">hit율 좋음, 구현 비용 높음</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Clock (2nd-chance)</td>
+      <td style="text-align: left">원형 큐 + reference bit로 LRU 근사</td>
+      <td style="text-align: left">구현 간단, 성능 무난</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>PintOS Project 3에서는 Clock 변형으로 구현했다. (자세한 내용은 <a href="../../computersystem/page-replacement-policy" class="heading flip-title">Page Replacement Policy</a> 참고)</p>
+
+<h2 id="5-pintos-관점-요약">5. PintOS 관점 요약</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">구조체 / 함수</th>
+      <th style="text-align: left">하는 일</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">struct page</code></td>
+      <td style="text-align: left">한 가상 페이지의 메타데이터(SPT key), 타입(anon/file), 프레임, dirty 등</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Supplemental Page Table (SPT)</td>
+      <td style="text-align: left">프로세스별 해시 맵/트리. <code class="language-plaintext highlighter-rouge">spt_find_page()</code>, <code class="language-plaintext highlighter-rouge">spt_insert_page()</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">vm_try_handle_fault()</code></td>
+      <td style="text-align: left">페이지 폴트 핸들러 진입점. 스택 성장·lazy loading 로직 포함</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">swap_in/out()</code></td>
+      <td style="text-align: left">스왑 디스크 I/O 실행. Clock victim이 anon이면 out, fault 시 in</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">file_backed_initializer()</code></td>
+      <td style="text-align: left">mmap·lazy file load에 쓸 custom swap_in/out 등록</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="6-다단계-페이징을-쓰는-이유">6. 다단계 페이징을 쓰는 이유</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">이유</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">공간 절약</td>
+      <td style="text-align: left">4-level 구조에서 <strong>사용된 테이블만</strong> 할당해 메모리 절약</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">보호</td>
+      <td style="text-align: left">각 레벨 테이블을 4KB 페이지로 두고 U/S 비트로 커널이 관리</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">공유</td>
+      <td style="text-align: left">fork 시 상위 테이블을 copy-on-write로 공유 가능</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="7-페이지-크기와-내부-단편화">7. 페이지 크기와 내부 단편화</h2>
+
+<ul>
+  <li>페이지가 크면 → TLB miss 감소(+), 내부 단편화 증가(−), I/O 효율 향상(+)</li>
+  <li>현대 x86-64는 <strong>4KB 기본 + 2MB/1GB Huge Page</strong> 옵션을 제공한다</li>
+</ul>
+
+<h2 id="8-정리">8. 정리</h2>
+
+<p>페이징은 프로세스마다 <strong>독립적·선형적인 주소 공간</strong>을 제공하면서, OS가 필요할 때만 물리 메모리·디스크를 할당하고, TLB와 다단계 페이지 테이블로 성능과 메모리 사용량을 균형 있게 최적화하는 메커니즘이다. PintOS에서 구현·조정하는 모든 VM 기능은 이 큰 틀 안에 위치한다.</p>]]></content><author><name>JeongHwan Yun</name><email>jh327373@gmail.com</email></author><category term="blog" /><category term="cs" /><category term="운영체제" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Page Replacement Policy: 어떤 페이지를 희생시킬까?</title><link href="/blog/cs/page-replacement-policy/" rel="alternate" type="text/html" title="Page Replacement Policy: 어떤 페이지를 희생시킬까?" /><published>2025-06-10T00:00:00+00:00</published><updated>2025-06-10T00:00:00+00:00</updated><id>/blog/cs/page-replacement-policy</id><content type="html" xml:base="/blog/cs/page-replacement-policy/"><![CDATA[<ul class="large-only" id="markdown-toc">
+  <li><a href="#1-왜-page-replacement-policy가-필요한가" id="markdown-toc-1-왜-page-replacement-policy가-필요한가">1. 왜 Page Replacement Policy가 필요한가?</a></li>
+  <li><a href="#2-정책-설계-시-고려-요소" id="markdown-toc-2-정책-설계-시-고려-요소">2. 정책 설계 시 고려 요소</a></li>
+  <li><a href="#3-대표-알고리즘" id="markdown-toc-3-대표-알고리즘">3. 대표 알고리즘</a>    <ul>
+      <li><a href="#lru-근사-방법" id="markdown-toc-lru-근사-방법">LRU 근사 방법</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-beladys-anomaly" id="markdown-toc-4-beladys-anomaly">4. Belady’s Anomaly</a></li>
+  <li><a href="#5-실제-os-사례" id="markdown-toc-5-실제-os-사례">5. 실제 OS 사례</a></li>
+  <li><a href="#6-성능-분석-방법" id="markdown-toc-6-성능-분석-방법">6. 성능 분석 방법</a></li>
+  <li><a href="#7-요약" id="markdown-toc-7-요약">7. 요약</a></li>
+</ul>
+
+<p>무한대처럼 보이는 가상 메모리도 물리적 한계에 부딪히면 희생양(victim)을 골라야 한다.
+그 희생양을 고르는 규칙, Page Replacement Policy를 살펴본다.</p>
+
+<h2 id="1-왜-page-replacement-policy가-필요한가">1. 왜 Page Replacement Policy가 필요한가?</h2>
+
+<p>가상 메모리는 프로세스마다 “거의 무한대”처럼 보이는 주소 공간을 제공하지만, 실제 물리 프레임 수는 제한적이다. 그래서 다음 상황이 생긴다.</p>
+
+<ol>
+  <li>page fault가 발생해 새 페이지를 적재해야 한다</li>
+  <li>그런데 여유 프레임이 없으면, 커널은 한 프레임을 비워야 한다</li>
+  <li>어떤 페이지를 <strong>희생(victim)</strong> 으로 내보낼지 정하는 규칙이 <strong>Page Replacement Policy</strong>다</li>
+</ol>
+
+<p>목표는 <strong>디스크 I/O 횟수(=페이지 폴트율)를 최소화</strong>해 전체 성능을 높이는 것이다.</p>
+
+<h2 id="2-정책-설계-시-고려-요소">2. 정책 설계 시 고려 요소</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">관점</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">효율성</td>
+      <td style="text-align: left">낮은 페이지 폴트율, 적은 CPU 오버헤드</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">공정성</td>
+      <td style="text-align: left">공유 시 특정 프로세스만 희생되지 않도록</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Stack Property</td>
+      <td style="text-align: left">프레임 수를 늘리면 절대 폴트가 늘지 않는 성질 (OPT·LRU가 가짐)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">실현 가능성</td>
+      <td style="text-align: left">하드웨어 지원(Reference/Dirty 비트) 유무, 구현 복잡도</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">전역 vs 로컬</td>
+      <td style="text-align: left">전역(global): 전체 시스템에서 victim 선정 / 로컬(local): fault를 낸 프로세스의 working set 안에서만 선정</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="3-대표-알고리즘">3. 대표 알고리즘</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">알고리즘</th>
+      <th style="text-align: left">동작</th>
+      <th style="text-align: left">특징</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">OPT / MIN</td>
+      <td style="text-align: left">가장 먼 미래에 참조될 페이지 제거</td>
+      <td style="text-align: left">이론적 최적. 실현 불가능 → 벤치마킹용 하한선(lower bound)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">FIFO</td>
+      <td style="text-align: left">들어온 순서대로 제거</td>
+      <td style="text-align: left">구현 간단. Belady’s Anomaly 발생 가능</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Second-Chance / Clock</td>
+      <td style="text-align: left">FIFO 큐 + 참조 비트(A) 검사. A=1이면 0으로 clear 후 뒤로 회전, A=0이면 victim</td>
+      <td style="text-align: left">간단·저렴, LRU 근사</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">LRU</td>
+      <td style="text-align: left">가장 오래 사용되지 않은 페이지 제거</td>
+      <td style="text-align: left">Stack Property 보장. 정확한 LRU는 하드웨어 타임스탬프 필요 → 보통 근사 사용</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">LFU / NFU</td>
+      <td style="text-align: left">누적 참조 횟수 기반 제거</td>
+      <td style="text-align: left">“cold yet used” 페이지가 안 쫓겨나는 문제 → aging 필요</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Working-Set / WSClock</td>
+      <td style="text-align: left">최근 Δ 참조 내 사용된 페이지 집합 유지 (WSClock은 Clock에 timestamp 추가)</td>
+      <td style="text-align: left">working set 근사, 쓰기 I/O 분산</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Random</td>
+      <td style="text-align: left">무작위 victim</td>
+      <td style="text-align: left">LRU 추적 비용이 클 때 사용 (예: 일부 GPU MMU)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="lru-근사-방법">LRU 근사 방법</h3>
+
+<p>정확한 LRU는 비용이 커서, 실제로는 다음 근사를 쓴다.</p>
+
+<ul>
+  <li><strong>N-비트 Aging</strong>: 주기마다 R 비트를 상위로 시프트</li>
+  <li><strong>카운터 기반</strong>: 하드웨어가 마지막 접근 시각을 기록 (32/64비트)</li>
+  <li><strong>Enhanced Clock / Clock-Pro</strong>: 인접 시계 방식</li>
+</ul>
+
+<h2 id="4-beladys-anomaly">4. Belady’s Anomaly</h2>
+
+<p>Stack Property가 없는 FIFO 계열에서 나타나는 현상이다. <strong>프레임을 늘렸는데 오히려 페이지 폴트가 더 많아질 수 있다</strong> (예: 3프레임보다 4프레임이 더 많은 폴트). 정책 선택 시 주의해야 한다.</p>
+
+<h2 id="5-실제-os-사례">5. 실제 OS 사례</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">OS</th>
+      <th style="text-align: left">구현 요지</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Linux (5.x)</td>
+      <td style="text-align: left">Multi-gen LRU. Active/Inactive 목록으로 hot/cold 구분, <code class="language-plaintext highlighter-rouge">kswapd</code>가 백그라운드 스캔하며 cold &amp; dirty 우선 정리</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Windows</td>
+      <td style="text-align: left">Working-Set + Clock 아키텍처. 프로세스마다 WS 크기 자동 조절, 전역 밸런서가 과점유 시 회수</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">PintOS Project 3</td>
+      <td style="text-align: left">Clock 알고리즘을 직접 구현. <code class="language-plaintext highlighter-rouge">struct frame</code> 리스트 + 핸드 포인터 유지, <code class="language-plaintext highlighter-rouge">pml4_is_accessed()</code>로 R 비트를 확인해 second-chance 부여</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="6-성능-분석-방법">6. 성능 분석 방법</h2>
+
+<ol>
+  <li><strong>Trace 재생</strong>: 메모리 참조 시퀀스를 돌려 폴트 카운트 비교</li>
+  <li><strong>실험 변수</strong>: 프레임 수, Δ(working-set 윈도), R/Dirty 비트 리셋 주기</li>
+  <li><strong>Thrashing 탐지</strong>: 폴트율 급증 + CPU 사용률↓ → 정책·resident set 튜닝 필요</li>
+</ol>
+
+<h2 id="7-요약">7. 요약</h2>
+
+<ul>
+  <li>Page Replacement Policy는 <strong>희생 페이지를 고르는 규칙</strong>이다</li>
+  <li>이상적인 OPT는 불가능하므로, <strong>LRU 근사나 Clock 계열</strong>이 실용적이다</li>
+  <li>정책마다 <strong>복잡도·메모리 오버헤드·성능·공정성</strong>의 trade-off가 있다</li>
+  <li>실제 커널은 다단계 큐 + 참조/더티 비트로 LRU를 근사하고, 백그라운드 데몬(<code class="language-plaintext highlighter-rouge">kswapd</code> 등)으로 지속 튜닝한다</li>
+  <li>PintOS 같은 교육용 OS에서는 <strong>Clock(Second-Chance)</strong> 구현이 가장 흔하며, R/Dirty 비트 처리·프레임 테이블 관리·swap I/O 동기화가 핵심이다</li>
+</ul>]]></content><author><name>JeongHwan Yun</name><email>jh327373@gmail.com</email></author><category term="blog" /><category term="cs" /><category term="운영체제" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Lazy Loading: 진짜 필요할 때 불러오는 전략</title><link href="/blog/cs/lazy-loading/" rel="alternate" type="text/html" title="Lazy Loading: 진짜 필요할 때 불러오는 전략" /><published>2025-06-09T00:00:00+00:00</published><updated>2025-06-09T00:00:00+00:00</updated><id>/blog/cs/lazy-loading</id><content type="html" xml:base="/blog/cs/lazy-loading/"><![CDATA[<ul class="large-only" id="markdown-toc">
+  <li><a href="#1-lazy-loading이란" id="markdown-toc-1-lazy-loading이란">1. Lazy Loading이란?</a></li>
+  <li><a href="#2-가상-메모리에서의-lazy-loading--demand-paging" id="markdown-toc-2-가상-메모리에서의-lazy-loading--demand-paging">2. 가상 메모리에서의 Lazy Loading = Demand Paging</a></li>
+  <li><a href="#3-다른-영역에서의-활용" id="markdown-toc-3-다른-영역에서의-활용">3. 다른 영역에서의 활용</a></li>
+  <li><a href="#4-장점과-단점" id="markdown-toc-4-장점과-단점">4. 장점과 단점</a></li>
+  <li><a href="#5-정리" id="markdown-toc-5-정리">5. 정리</a></li>
+</ul>
+
+<p>처음 보는 개념이 있다면 <a href="../../computersystem/paging" class="heading flip-title">Paging</a> 글을 먼저 참고하자.</p>
+
+<p>메모리를 무한대로 쓸 수 없다면, 데이터를 어떻게 효율적으로 올릴까?
+그 답 중 하나인 Lazy Loading을 살펴본다.</p>
+
+<h2 id="1-lazy-loading이란">1. Lazy Loading이란?</h2>
+
+<blockquote>
+  <p>“필요해질 때까지 실제 데이터를 읽지 않고 최소한의 메타데이터만 준비해 두었다가, 첫 접근 시점에 비로소 불러오는 기법”</p>
+</blockquote>
+
+<p>이 핵심 아이디어는 메모리·스토리지·웹에서 모두 동일하게 공유된다.</p>
+
+<h2 id="2-가상-메모리에서의-lazy-loading--demand-paging">2. 가상 메모리에서의 Lazy Loading = Demand Paging</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">시점</th>
+      <th style="text-align: left">커널이 하는 일</th>
+      <th style="text-align: left">이득</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">exec 시</td>
+      <td style="text-align: left">각 세그먼트의 PTE를 P=0(not-present)으로만 채우고, “어느 파일 오프셋에서 몇 바이트를 읽을지” 보조 정보를 보관</td>
+      <td style="text-align: left">프로세스 시작이 빨라지고, 안 쓰이는 코드는 끝까지 안 올려도 됨</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">첫 접근 (Page Fault)</td>
+      <td style="text-align: left">① HW가 page fault를 발생시켜 커널에 트랩 → ② lazy loader가 파일에서 해당 범위를 읽거나(File-backed) 0으로 초기화(Anon)한 뒤 <code class="language-plaintext highlighter-rouge">install_page()</code>로 P=1로 변경 → ③ 사용자 코드 재시작</td>
+      <td style="text-align: left">실제 사용량만큼만 메모리 소비, I/O 병목 감소</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>PintOS Project 3에서 구현하는 <code class="language-plaintext highlighter-rouge">uninit_new()</code> / <code class="language-plaintext highlighter-rouge">vm_try_handle_fault()</code> 흐름이 정확히 이 구조다. 실행 파일을 로드할 때 <code class="language-plaintext highlighter-rouge">lazy_load_segment()</code>를 등록해 두고, page fault가 오면 <code class="language-plaintext highlighter-rouge">file_read_at()</code>으로 필요한 바이트만 채운 뒤 PTE를 present로 갱신한다.</p>
+
+<h2 id="3-다른-영역에서의-활용">3. 다른 영역에서의 활용</h2>
+
+<p>Lazy Loading은 OS 밖에서도 같은 원리로 널리 쓰인다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">영역</th>
+      <th style="text-align: left">형태</th>
+      <th style="text-align: left">주의할 점</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">파일 mmap</td>
+      <td style="text-align: left">매핑만 걸고 실제 I/O는 첫 접근 때 수행 (페이지 캐시에 적재)</td>
+      <td style="text-align: left">dirty page write-back 정책, <code class="language-plaintext highlighter-rouge">msync</code>·<code class="language-plaintext highlighter-rouge">munmap</code> 시점 처리</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Copy-on-Write (COW)</td>
+      <td style="text-align: left">fork 후 부모·자식이 물리 페이지를 공유하다가, 쓰기 폴트 시 복사</td>
+      <td style="text-align: left">PTE의 R/W 비트 관리, race condition 방지용 락</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Web Frontend</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;img loading="lazy"&gt;</code>, React lazy import 등</td>
+      <td style="text-align: left">LCP·CLS 같은 Web Vitals 모니터링</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">모듈/플러그인 로더</td>
+      <td style="text-align: left">필요한 함수만 <code class="language-plaintext highlighter-rouge">dlopen()</code> / <code class="language-plaintext highlighter-rouge">LoadLibrary()</code></td>
+      <td style="text-align: left">호출 경로 예외 처리, 초기화 지연의 성능 영향 측정</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="4-장점과-단점">4. 장점과 단점</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">장점</th>
+      <th style="text-align: left">단점</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">메모리 footprint↓, 시작 latency↓</td>
+      <td style="text-align: left">첫 접근 시 page fault 오버헤드 (context switch + I/O)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">I/O를 실제 필요 시점으로 분산해 burst I/O 완화</td>
+      <td style="text-align: left">커널 코드가 복잡해지고 동기화 비용 증가</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">COW와 결합하면 fork 성능 개선</td>
+      <td style="text-align: left">예측 불가한 지연이 실시간 워크로드에 영향 가능</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="5-정리">5. 정리</h2>
+
+<p>Lazy Loading은 데이터·코드를 <strong>“나중에, 진짜 필요할 때”</strong> 불러오는 철저한 지연 전략이다. 운영체제에서는 demand paging 형태로 구현되어 프로세스 시작 시간을 줄이고 메모리를 절약한다. PintOS Project 3의 핵심 과제이므로, <strong>보조 정보 구조체 설계, PTE 플래그 관리, 동기화</strong> 세 가지에 특히 신경 쓰자.</p>]]></content><author><name>JeongHwan Yun</name><email>jh327373@gmail.com</email></author><category term="blog" /><category term="cs" /><category term="운영체제" /><summary type="html"><![CDATA[]]></summary></entry></feed>

@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>연결 리스트(Linked List) | hwan log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="연결 리스트(Linked List)" />
+<meta name="author" content="JeongHwan Yun" />
+<meta property="og:locale" content="ko_KR, en_US" />
+<meta name="description" content="기술블로그" />
+<meta property="og:description" content="기술블로그" />
+<meta property="og:site_name" content="hwan log" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-03-26T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="연결 리스트(Linked List)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2025-03-26T00:00:00+00:00","datePublished":"2025-03-26T00:00:00+00:00","description":"기술블로그","headline":"연결 리스트(Linked List)","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/algorithm/linked-list/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/algorithm/linked-list/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="color-scheme" content="dark light">
+
+
+
+  <meta name="theme-color" content="rgb(200,200,200)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="hwan log">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="hwan log">
+
+<meta name="generator" content="Hydejack v9.2.1" />
+
+
+<link rel="alternate" href="/blog/algorithm/linked-list/" hreflang="ko-kr, en-us">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.2.1.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<script>((r,a)=>{function d(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=a.createElement("script"),e=(n.src=e,t&&d(n,"load",t,{once:!0}),a.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=a.createElement("script");function o(){r._loaded=!0,t&&d(n,"load",t,{once:!0});var e=a.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():d(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){d(a.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}})(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-06-01T18:16:59+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.2.1.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5);--accent-color-highlight: rgba(200,200,200,0.1);--accent-color-darkened: #b5b5b5;--theme-color: rgb(200,200,200);--dark-mode-body-bg: #2d2d2d;--dark-mode-border-color: #393939}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  ((e,s)=>{var d="light-mode",a="dark-mode",o=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(o=o<=e._sunrise||o>=e._sunset?a:d)==a?d:a,s.body.classList.add(o),s.body.classList.remove(e))})(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/algorithm/">algorithm</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>linked-list</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-algorithm-linked-list" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        연결 리스트(Linked List)
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-03-26T00:00:00+00:00">26 Mar 2025</time> in <span>Blog</span> / <a href="/algorithm/" class="flip-title">알고리즘</a> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul class="large-only" id="markdown-toc">
+  <li><a href="#연결-리스트" id="markdown-toc-연결-리스트">연결 리스트</a>    <ul>
+      <li><a href="#배열로-연결-리스트-만들기" id="markdown-toc-배열로-연결-리스트-만들기">배열로 연결 리스트 만들기</a></li>
+    </ul>
+  </li>
+  <li><a href="#포인터로-연결-리스트-만들기" id="markdown-toc-포인터로-연결-리스트-만들기">포인터로 연결 리스트 만들기</a>    <ul>
+      <li><a href="#노드-클래스-init-함수" id="markdown-toc-노드-클래스-init-함수">노드 클래스 <strong>init</strong>() 함수</a></li>
+      <li><a href="#linkedlist-클래스-init-len-함수--그-외" id="markdown-toc-linkedlist-클래스-init-len-함수--그-외">LinkedList 클래스 <strong>init</strong>(), <strong>len</strong>() 함수, + 그 외</a></li>
+      <li><a href="#linkedlist-클래스-search-contains-함수" id="markdown-toc-linkedlist-클래스-search-contains-함수">LinkedList 클래스 search(), <strong>contains</strong>() 함수</a></li>
+      <li><a href="#linkedlist-클래스-add_first-add_last-함수" id="markdown-toc-linkedlist-클래스-add_first-add_last-함수">LinkedList 클래스 add_first(), add_last() 함수</a>        <ul>
+          <li><a href="#중요중요" id="markdown-toc-중요중요">중요!!!!중요</a></li>
+        </ul>
+      </li>
+      <li><a href="#linkedlist-클래스-remove_first-remove_last-함수" id="markdown-toc-linkedlist-클래스-remove_first-remove_last-함수">LinkedList 클래스 remove_first(), remove_last() 함수</a></li>
+      <li><a href="#linkedlist-클래스-remove-remove_current_node-함수" id="markdown-toc-linkedlist-클래스-remove-remove_current_node-함수">LinkedList 클래스 remove(), remove_current_node() 함수</a></li>
+      <li><a href="#linkedlist-클래스-clear-next-함수" id="markdown-toc-linkedlist-클래스-clear-next-함수">LinkedList 클래스 clear(), next() 함수</a></li>
+      <li><a href="#linkedlist-클래스-print_current_node-print-함수" id="markdown-toc-linkedlist-클래스-print_current_node-print-함수">LinkedList 클래스 print_current_node(), print() 함수</a></li>
+      <li><a href="#각-함수-수행-후-주목current-노드의-값-정리" id="markdown-toc-각-함수-수행-후-주목current-노드의-값-정리">각 함수 수행 후 주목(current) 노드의 값 정리</a></li>
+    </ul>
+  </li>
+  <li><a href="#커서로-연결-리스트-만들기" id="markdown-toc-커서로-연결-리스트-만들기">커서로 연결 리스트 만들기</a>    <ul>
+      <li><a href="#선형-리스트-클래스-init-len-함수" id="markdown-toc-선형-리스트-클래스-init-len-함수">선형 리스트 클래스 <strong>init</strong>(), <strong>len</strong>() 함수</a></li>
+      <li><a href="#선형-리스트-클래스-get_insert_index-delete_index-함수" id="markdown-toc-선형-리스트-클래스-get_insert_index-delete_index-함수">선형 리스트 클래스 get_insert_index(), delete_index() 함수</a></li>
+    </ul>
+  </li>
+  <li><a href="#원형-이중-연결-리스트의-기반" id="markdown-toc-원형-이중-연결-리스트의-기반">원형 이중 연결 리스트의 기반</a>    <ul>
+      <li><a href="#원형-리스트circular-list" id="markdown-toc-원형-리스트circular-list">원형 리스트(Circular list)</a></li>
+      <li><a href="#이중-연결-리스트doubly-linked-list" id="markdown-toc-이중-연결-리스트doubly-linked-list">이중 연결 리스트(Doubly linked list)</a></li>
+    </ul>
+  </li>
+  <li><a href="#원형-이중-연결-리스트circular-doubly-linked-list" id="markdown-toc-원형-이중-연결-리스트circular-doubly-linked-list">원형 이중 연결 리스트(Circular doubly linked list)</a>    <ul>
+      <li><a href="#노드-클래스-init-함수-1" id="markdown-toc-노드-클래스-init-함수-1">노드 클래스 <strong>init</strong>() 함수</a></li>
+      <li><a href="#doublelinkedlist-클래스-init-len-is_empty-함수" id="markdown-toc-doublelinkedlist-클래스-init-len-is_empty-함수">DoubleLinkedList 클래스 <strong>init</strong>(), <strong>len</strong>(), is_empty() 함수</a></li>
+      <li><a href="#doublelinkedlist-클래스-search-contains-함수" id="markdown-toc-doublelinkedlist-클래스-search-contains-함수">DoubleLinkedList 클래스 search(), <strong>contains</strong>() 함수</a>        <ul>
+          <li><a href="#p가-참조하는-노드의-위치-판단하기" id="markdown-toc-p가-참조하는-노드의-위치-판단하기">p가 참조하는 노드의 위치 판단하기</a></li>
+        </ul>
+      </li>
+      <li><a href="#doublelinkedlist-클래스-print_current_nod-print-print_reverse-함수" id="markdown-toc-doublelinkedlist-클래스-print_current_nod-print-print_reverse-함수">DoubleLinkedList 클래스 print_current_nod(), print(), print_reverse() 함수</a></li>
+      <li><a href="#doublelinkedlist-클래스-next-prev-함수" id="markdown-toc-doublelinkedlist-클래스-next-prev-함수">DoubleLinkedList 클래스 next(), prev() 함수</a></li>
+      <li><a href="#doublelinkedlist-클래스-add-add_first-add_last-함수" id="markdown-toc-doublelinkedlist-클래스-add-add_first-add_last-함수">DoubleLinkedList 클래스 add(), add_first(), add_last() 함수</a></li>
+      <li><a href="#doublelinkedlist-클래스-remove_current_node-removep-함수" id="markdown-toc-doublelinkedlist-클래스-remove_current_node-removep-함수">DoubleLinkedList 클래스 remove_current_node(), remove(p) 함수</a></li>
+      <li><a href="#doublelinkedlist-클래스-remove_first-remove_last-clear-함수" id="markdown-toc-doublelinkedlist-클래스-remove_first-remove_last-clear-함수">DoubleLinkedList 클래스 remove_first(), remove_last(), clear() 함수</a></li>
+      <li><a href="#doublelinkedlistiterator-클래스" id="markdown-toc-doublelinkedlistiterator-클래스">DoubleLinkedListIterator 클래스</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>데이터에 순서를 매겨 늘어놓은 자료구조를 <strong><em>리스트</em></strong> 라고 해. 여기서는 <strong><em>연결 리스트</em></strong>, <strong><em>포인터를 이용한 연결 리스트</em></strong>, <strong><em>커서를 이용한 연결 리스트</em></strong>, <strong><em>원형 이중 연결 리스트</em></strong>에 대해서 다뤄볼거야</p>
+
+<h2 id="연결-리스트">연결 리스트</h2>
+
+<p>구조가 단순한 리스트이며, 아래 그림을 보면 A가 B에게, B가 C에게 차례대로 연락하는 비상 연락망 같은 구조야. 이런 구조에서는 건너뛰거나 뒤돌아 앞 사람에게 연락이 안되지</p>
+
+<p><img src="/assets/img/blog/algorithm/연결%20리스트의%20기본%20구조.png" alt="연결 리스트 기본 구조" /></p>
+
+<p>연결 리스트 각각의 원소를 노드(node)라고 해. 노드 안에는 데이터와 뒤쪽 노드를 가리키는(참조) 포인터(pointer)가 존재해.</p>
+
+<ul>
+  <li>
+    <p>맨 앞에 있는 노드를 <strong><em>머리 노드(head node)</em></strong></p>
+  </li>
+  <li>
+    <p>맨 끝에 있는 <strong><em>꼬리 노드(tail node)</em></strong></p>
+  </li>
+  <li>
+    <p>노드 바로 앞에 있는 노드를 <strong><em>앞쪽 노드(predecessor node)</em></strong></p>
+  </li>
+  <li>
+    <p>노드 바로 뒤쪽에 있는 노드를 <strong><em>뒤쪽 노드(successor node)</em></strong></p>
+  </li>
+</ul>
+
+<h3 id="배열로-연결-리스트-만들기">배열로 연결 리스트 만들기</h3>
+
+<p><img src="/assets/img/blog/algorithm/배열로연결리스트만들기.png" alt="배열로 연결 리스트 만들기" /></p>
+
+<p>위에서 설명했던 연결 리스트를 아래 구현해 봤어.</p>
+
+<ul>
+  <li>
+    <p>뒤쪽 노드를 꺼내고 싶다면, 첫번째부터 시작해서 뒤쪽 노드 꺼내기를 이용해 인덱스 1씩 증가시켜서 원소에 접근할수 있어.</p>
+  </li>
+  <li>
+    <p>사진처럼 55의 데이터를 12와 33사이에 넣고 싶다면, 뒤쪽 노드를 하나씩 이동시켜야해. 원소 삭제도 마찬가지로 배열 안의 원소들을 이동시켜야해. 고로 <strong><em>데이터 삽입/삭제에 용이하지 않단 것이지</em></strong></p>
+  </li>
+</ul>
+
+<h2 id="포인터로-연결-리스트-만들기">포인터로 연결 리스트 만들기</h2>
+
+<p>배열 연결 리스트에서는 인덱스를 1씩 증가시키는 방식을 채택했지만, 이거는 노드마다 뒤쪽 노드를 가리키는 포인터가 포함되도록 구현하는 연결 리스트야. 대신에 클래스 Node를 사용해야해</p>
+
+<ul>
+  <li>
+    <p>데이터 삽입시, 노드용 인스턴스 생성</p>
+  </li>
+  <li>
+    <p>데이터 삭제시, 노드용 인스턴스 삭제</p>
+  </li>
+</ul>
+
+<p>여기서 Node는 자신과 같은 클래스형의 인스턴스를 참조하기위한 참조용 필드 next를 보유해. 이와 같은 자신과 같은 클래스의 인스턴스를 참조하는 필드가 있는 구조를 <strong><em>자기 참조(self-referential)</em></strong>형이라 해</p>
+
+<p><img src="/assets/img/blog/algorithm/같은클래스의참조.png" alt="같은 클래스의 참조" /></p>
+
+<p>위 사진을 보면, 뒤쪽 포인터 next에는 뒤쪽 노드에 대한 참조를 저장해. 만약 꼬리 노드라면, 뒤쪽 포인터 next에는 None이 저장돼</p>
+
+<p>그러면 이제 포인터로 연결 리스트를 구현하는 함수에 대해서 알아보자</p>
+
+<h3 id="노드-클래스-init-함수">노드 클래스 <strong>init</strong>() 함수</h3>
+
+<p>노드 클래스 Node의 필드에는 2개가 있어</p>
+
+<ul>
+  <li>
+    <p>data : 데이터(데이터라고 데이터가 아니야! 데이터에 대한 참조일뿐)</p>
+  </li>
+  <li>
+    <p>next : 뒤쪽 포인터(뒤쪽 노드에 대한 참조)</p>
+  </li>
+</ul>
+
+<p>예제 : <strong>init</strong>() 함수, 전달받은 data와 next를 해당 필드에 대입. 이때 주목 노드를 보면 next야, next를 생략하면 None으로 들어가.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+    <span class="s">"""연결 리스트용 노드 클래스"""</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="nb">next</span><span class="p">:</span> <span class="n">Node</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="s">"""초기화"""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>  <span class="c1"># 데이터
+</span>        <span class="bp">self</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="nb">next</span>  <span class="c1"># 뒤쪽 포인터
+</span></code></pre></div></div>
+
+<h3 id="linkedlist-클래스-init-len-함수--그-외">LinkedList 클래스 <strong>init</strong>(), <strong>len</strong>() 함수, + 그 외</h3>
+
+<p>LinkedList 클래스 필드에는 3가지가 있어</p>
+
+<ul>
+  <li>
+    <p>no : 리스트에 등록된 노드의 개수</p>
+  </li>
+  <li>
+    <p>head : 머리 노드에 대한 참조</p>
+  </li>
+  <li>
+    <p>current : 현재 주목하고 있는 노드에 대한 참조, 포인터이기도 해</p>
+  </li>
+</ul>
+
+<p>예제 : <strong>init</strong>() 함수, 노드가 하나도 없는 빈 연결 리스트 생성, 머리 노드를 참조하기 위한 Node형 필드 head에 None 입력한다. 그 이유는 아직 아무 데이터가 없기 때문</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
+    <span class="s">"""연결 리스트 클래스"""</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""초기화"""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">no</span> <span class="o">=</span> <span class="mi">0</span>          <span class="c1"># 노드의 개수
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">head</span> <span class="o">=</span> <span class="bp">None</span>     <span class="c1"># 머리 노드
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c1"># 주목 노드
+</span></code></pre></div></div>
+
+<p>예제 : <strong>len</strong>() 함수, 연결리스트의 개수를 반환하는 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="s">"""연결 리스트의 노드 개수를 반환"""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">no</span>
+</code></pre></div></div>
+
+<p>좀더 나아가 보자, 아래거를 이해하면 Node에 대해서 이해력도 높아질거야</p>
+
+<p>만약에 연결 리스트가 비어 있다면? (no == 0)함수를 사용해도 되겠지만, head가 없을것이기 때문에 아래와 같은 함수로 확인이 가능해</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">head</span> <span class="ow">is</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<p>노드가 1개만일때는? head 말고 더 없을테니까 head의 next값은 참조하고 있는게 없을거야. 그러면 아래와 같아지겠지</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">head</span><span class="p">.</span><span class="nb">next</span> <span class="ow">is</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<p>그렇다면 노드가 2개일때는? 헤드 뒤에 뒤쪽 노드(successor node) 가 존재할테고 그 노드의 next값은 None이겠지?</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">head</span><span class="p">.</span><span class="nb">next</span><span class="p">.</span><span class="nb">next</span> <span class="ow">is</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<h3 id="linkedlist-클래스-search-contains-함수">LinkedList 클래스 search(), <strong>contains</strong>() 함수</h3>
+
+<p>검색 같은 경우 선형 검색(처음부터 차례대로 검색)을 사용</p>
+
+<p>예제 : search() 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="s">"""data와 값이 같은 노드를 검색"""</span>
+        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span>
+        <span class="k">while</span> <span class="n">ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ptr</span><span class="p">.</span><span class="n">data</span> <span class="o">==</span> <span class="n">data</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">ptr</span>
+                <span class="k">return</span> <span class="n">cnt</span>
+            <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="nb">next</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<p>검색이 성공하면, cnt를 반환하고 검색이 실패하면 -1을 반환한다.</p>
+
+<p>예제 : <strong>contains</strong>() 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="s">"""연결 리스트에 data가 포함되어 있는가?"""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+</code></pre></div></div>
+
+<p>위 search 함수 사용하는데, self 에 data와 같은 같이 있는지 판단, True or False 반환</p>
+
+<h3 id="linkedlist-클래스-add_first-add_last-함수">LinkedList 클래스 add_first(), add_last() 함수</h3>
+
+<p>예제 : add_first() 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">add_first</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""맨 앞에 노드를 삽입"""</span>
+        <span class="n">ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span>  <span class="c1"># 삽입 전의 머리 노드
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ptr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">no</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>A포인터에 현재!머리 노드를 저장</p>
+  </li>
+  <li>
+    <p>현재! 머리 노드에 노드(date, ptr(A포인터로써 원래의 머리노드를 참조))가 추가된다.</p>
+  </li>
+</ul>
+
+<h4 id="중요중요">중요!!!!중요</h4>
+
+<ul>
+  <li>여기서 self.current가 왜 중간에 삽입이 되었을까? 궁금하지 않아? 저 수식(A=B=C)같은 경우에 결국에는 C를 A와 B에 저장하겠다는 거야. 그렇다면 current는 왜 있냐. 가장 마지막에 함수를 쓰면 current값이 update가 될거야. 내가 아래에 더 함수를 더 나열할건데, 아래에 current를 기준으로 함수를 사용해. 이점 알아두면 돼</li>
+</ul>
+
+<p>예제 : add_last() 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">add_last</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+        <span class="s">"""맨 끝에 노드를 삽입"""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span> <span class="ow">is</span> <span class="bp">None</span> <span class="p">:</span>    <span class="c1"># 리스트가 비어 있으면
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">add_first</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># 맨앞에 노드 삽입
+</span>        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span>
+            <span class="k">while</span> <span class="n">ptr</span><span class="p">.</span><span class="nb">next</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="nb">next</span>  <span class="c1"># while문을 종료할 때 ptr은 꼬리 노드를 참조
+</span>            <span class="n">ptr</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">no</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>먼저 리스트가 비어있는지 확인</p>
+  </li>
+  <li>
+    <p>ptr is None을 찾을때까지 순차적으로 노드를 탐색</p>
+  </li>
+  <li>
+    <p>prt이 None을 갖고있는 ptr.next를 찾았을때, 추가할 노드의 정보(next : None으로)를 대입한다.</p>
+  </li>
+  <li>
+    <p>LinkedList의 number를 1추가</p>
+  </li>
+</ul>
+
+<h3 id="linkedlist-클래스-remove_first-remove_last-함수">LinkedList 클래스 remove_first(), remove_last() 함수</h3>
+
+<p>예제 : remove_first() 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">remove_first</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""머리 노드를 삭제"""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>  <span class="c1"># 리스트가 비어 있으면
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="nb">next</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">no</span> <span class="o">-=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>first 용어를 통해 알겠지만, 머리 노드를 삭제하는 함수이다.</p>
+
+<ul>
+  <li>
+    <p>먼저 머리 노드가 None이면 안됨</p>
+  </li>
+  <li>
+    <p>머리 노드에 다음 노드 대입</p>
+  </li>
+  <li>
+    <p>number 1개 감소</p>
+  </li>
+</ul>
+
+<p>예제 : remove_last() 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">remove_last</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""꼬리 노드 삭제"""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="nb">next</span> <span class="ow">is</span> <span class="bp">None</span> <span class="p">:</span>  <span class="c1"># 노드가 1개 뿐이라면
+</span>                <span class="bp">self</span><span class="p">.</span><span class="n">remove_first</span><span class="p">()</span>      <span class="c1"># 머리 노드를 삭제
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span>  <span class="c1"># 스캔 중인 노드
+</span>                <span class="n">pre</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span>  <span class="c1"># 스캔 중인 노드의 앞쪽 노드
+</span>
+                <span class="k">while</span> <span class="n">ptr</span><span class="p">.</span><span class="nb">next</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">pre</span> <span class="o">=</span> <span class="n">ptr</span>
+                    <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="nb">next</span> <span class="c1"># while문 종료시 ptr은 꼬리 노드를 참조하고 pre는 맨끝에서 두 번째 노드 참조
+</span>                <span class="n">pre</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c1"># pre는 삭제 뒤 꼬리 노드
+</span>                <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">pre</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">no</span> <span class="o">-=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>이번것은 꼬리 노드를 삭제하는 함수이다.</p>
+
+<ul>
+  <li>
+    <p>먼저 머리 노드가 None이면 안됨</p>
+  </li>
+  <li>
+    <p>머리 노드밖에 없다면, 머리 노드를 삭제한다</p>
+  </li>
+  <li>
+    <p>머리 노드외에도 더 있다면, 임의의 변수 ptr과 pre가 생성됨. 이때 ptr과 pre는 머리 노드임</p>
+  </li>
+  <li>
+    <p>ptr.next가 None이 아니라면, pre는 ptr의 값이 되고 ptr은 자기보다 앞 노드를 참조(위에서 보면 알겠지만, 처음에만 pre와 ptr이 같지 나중에는 ptr이 꼬리 노드를 참조하고 pre는 꼬리 노드의 앞쪽 노드이다)</p>
+  </li>
+  <li>
+    <p>이제 알겠지만 pre.next가 None이 되면서 꼬리 노드가 짤리게 돼</p>
+  </li>
+  <li>
+    <p>number 1 감소하면서 마무리</p>
+  </li>
+</ul>
+
+<h3 id="linkedlist-클래스-remove-remove_current_node-함수">LinkedList 클래스 remove(), remove_current_node() 함수</h3>
+
+<p>예제 : remove_last() 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">Node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""노드 p를 삭제"""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">:</span>       <span class="c1"># p가 머리 ​​노드이면
+</span>                <span class="bp">self</span><span class="p">.</span><span class="n">remove_first</span><span class="p">()</span>  <span class="c1"># 머리 노드를 삭제
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span>
+
+                <span class="k">while</span> <span class="n">ptr</span><span class="p">.</span><span class="nb">next</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">p</span><span class="p">:</span>
+                    <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="nb">next</span>
+                    <span class="k">if</span> <span class="n">ptr</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                        <span class="k">return</span>  <span class="c1"># ptr은 리스트에 존재하지 않음
+</span>                <span class="n">ptr</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nb">next</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">ptr</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">no</span> <span class="o">-=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>특정 노드를 삭제하고 싶다면 remove_last()함수를 써야해</p>
+
+<ul>
+  <li>
+    <p>먼저 머리 노드가 None이면 안돼, 만약 특정 노득가 머리 노드라면 -&gt; 머리 노드를 삭제</p>
+  </li>
+  <li>
+    <p>먼저 포인터(ptr)을 머리 노드로 지정하고 포인터의 next가 특정 노드가 아니라면, 다음 노드로 넘어감</p>
+  </li>
+  <li>
+    <p>포인터의 next가 특정 노드라면, 포인터의 next를 특정 노드의 next로 바꿔. 쉽게 설명하면, 특정 노드는 뒤에 있고 포인터는 앞에 있으니까 포인터의 넥스트는 특정 노드 뒤쪽 노드 참조로 바꿔 버리는 거지</p>
+  </li>
+  <li>
+    <p>만약에 포인터의 next가 특정 노드로 나온게 없다면 return으로 끝나</p>
+  </li>
+</ul>
+
+<p>예제 : remove_current_node() 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">remove_current_node</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""주목 노드를 삭제"""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>이제야 current가 쓰이게 되었네. 아까부터 current가 계속 업데이트 됐었잖아? 업데이트 될때마다 current 값이 바뀌게 되는데, 그 값을 지워버리는 함수야</p>
+
+<h3 id="linkedlist-클래스-clear-next-함수">LinkedList 클래스 clear(), next() 함수</h3>
+
+<p>예제 : clear() 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""전체 노드를 삭제"""</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>  <span class="c1"># 전체가 비어 있게 될 때까지
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">remove_first</span><span class="p">()</span>       <span class="c1"># 머리 노드를 삭제
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">no</span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre></div></div>
+
+<p>모든 노드를 지울때, 쓰는 함수로써 머리 노드가 None이라면 수행이 안되지만, 그렇지 않다면 머리 노드를 계속 삭제한다.</p>
+
+<p>예제 : next() 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="s">"""주목 노드를 한 칸 뒤로 진행"""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="nb">next</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>  <span class="c1"># 진행할 수 없음
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="nb">next</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<p>현재 주목 노드(current node)가 None 또는 next가 None이 아니라면 주목노드를 next인 노드로 바꿔</p>
+
+<h3 id="linkedlist-클래스-print_current_node-print-함수">LinkedList 클래스 print_current_node(), print() 함수</h3>
+
+<p>예제 : print_current_node() 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">print_current_node</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""주목 노드를 출력"""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'주목 노드가 존재하지 않습니다.'</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>현재 주목 노드가 None이라면 ‘주목 노드가 존재하지 않습니다.’ 문구를 띄우고, None이 아니라면 현재 주목 노드의 data 값을 print한다</p>
+
+<p>예제 : print() 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""모든 노드를 출력"""</span>
+        <span class="n">ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span>
+
+        <span class="k">while</span> <span class="n">ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">ptr</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="nb">next</span>
+</code></pre></div></div>
+
+<p>포인터를 먼저 머리노드로 입력 후, 머리 노드 부터 뒤쪽까지 None이 나올때까지 옮겨가면서 data 값을 print한다</p>
+
+<h3 id="각-함수-수행-후-주목current-노드의-값-정리">각 함수 수행 후 주목(current) 노드의 값 정리</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">함수</th>
+      <th style="text-align: center">주목 노드</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>init</strong>()</td>
+      <td style="text-align: center">None</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>len</strong>()</td>
+      <td style="text-align: center">변화 X</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">search()</td>
+      <td style="text-align: center">검색 성공시, 검색된 노드</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>contains</strong>()</td>
+      <td style="text-align: center">변화 X</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">add_first()</td>
+      <td style="text-align: center">머리 노드</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">add_last()</td>
+      <td style="text-align: center">꼬리 노드</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">remove_first()</td>
+      <td style="text-align: center">머리 노드</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">remove_last()</td>
+      <td style="text-align: center">꼬리 노드</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">remove()</td>
+      <td style="text-align: center">삭제한 노드의 앞쪽 노드</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">remove_current_node()</td>
+      <td style="text-align: center">삭제한 노드의 앞쪽 노드</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">clear()</td>
+      <td style="text-align: center">None</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">next()</td>
+      <td style="text-align: center">주목 노드 한칸 뒤로 이동</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">print_current_node()</td>
+      <td style="text-align: center">변화 X</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">print()</td>
+      <td style="text-align: center">변화 X</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="커서로-연결-리스트-만들기">커서로 연결 리스트 만들기</h2>
+
+<p><img src="/assets/img/blog/algorithm/커서연결리스트.png" alt="커서 연결 리스트" /></p>
+
+<p>위 사진을 보면 뒤쪽 포인터는 뒤쪽 노드가 저장되는 원소의 인덱스야. 여기서는 이 포인터를 “커서”라고 칭해. 여기서 A의 뒤쪽 커서 4는 노드 B를 가리키는거지.</p>
+
+<p><strong><em>꼬리 노드</em></strong>의 뒤쪽 커서는 -1이고 <strong><em>머리 노드</em></strong>는 위에 보면 인덱스 1을 기리키니까 A가 머리 노드이지</p>
+
+<p>그렇다면 노드를 추가하면 어떻게 될까</p>
+
+<p><img src="/assets/img/blog/algorithm/커서연결리스트원소추가.png" alt="커서 연결 리스트 원소 추가" /></p>
+
+<p>위 사진 같은 경우 Z가 추가가 된건데, 보면 머리 인덱스값과 6번 인덱스에 값이 추가된것을 확인할 수 있다. 따로 원소들을 대이동할 필요 없다는 것이다.</p>
+
+<p>그러면, 커서로 연결 리스트를 구현하는 함수에 대해 알아보자</p>
+
+<h3 id="선형-리스트-클래스-init-len-함수">선형 리스트 클래스 <strong>init</strong>(), <strong>len</strong>() 함수</h3>
+
+<p>Null = -1 값을 포함하고 시작해</p>
+
+<p>예제 : 선형 리스트 클래스, init() 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Type</span>
+
+<span class="n">Null</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="k">class</span> <span class="nc">ArrayLinkedList</span><span class="p">:</span>
+    <span class="s">"""선형 리스트 클래스(배열 커서 버전)"""</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capacity</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="s">"""초기화"""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">Null</span>                   <span class="c1"># 머리 노드
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">Null</span>                <span class="c1"># 주목 노드
+</span>        <span class="bp">self</span><span class="p">.</span><span class="nb">max</span> <span class="o">=</span> <span class="n">Null</span>                    <span class="c1"># 사용 중인 맨끝 레코드
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">deleted</span> <span class="o">=</span> <span class="n">Null</span>                <span class="c1"># 프리 리스트의 머리 노드
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">capacity</span> <span class="o">=</span> <span class="n">capacity</span>           <span class="c1"># 리스트의 크기
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="p">[</span><span class="n">Node</span><span class="p">()]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">capacity</span>  <span class="c1"># 리스트 본체
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">no</span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre></div></div>
+
+<p>선형 리스트 클래스에는 총 필드가 7개 있어</p>
+
+<p>예제 : len() 함수, 연결리스트의 개수를 반환하는 함수</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="s">"""선형 리스트의 노드 수를 반환"""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">no</span>
+</code></pre></div></div>
+
+<h3 id="선형-리스트-클래스-get_insert_index-delete_index-함수">선형 리스트 클래스 get_insert_index(), delete_index() 함수</h3>
+
+<p>예제 : get_insert_index() 함수,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">get_insert_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""다음에 삽입할 레코드의 첨자를 구합니다"""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">deleted</span> <span class="o">==</span> <span class="n">Null</span><span class="p">:</span>  <span class="c1"># 삭제 레코드는 존재하지 않습니다
+</span>            <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="nb">max</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="p">.</span><span class="n">capacity</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="nb">max</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="nb">max</span>   <span class="c1"># 새 레코드를 사용
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">Null</span>       <span class="c1"># 크기 초과
+</span>        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rec</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">deleted</span>                <span class="c1"># 프리 리스트에서
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">deleted</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">n</span><span class="p">[</span><span class="n">rec</span><span class="p">].</span><span class="n">dnext</span>  <span class="c1"># 맨 앞 rec를 꺼내기
+</span>            <span class="k">return</span> <span class="n">rec</span>
+</code></pre></div></div>
+
+<p>아직 조사중….</p>
+
+<h2 id="원형-이중-연결-리스트의-기반">원형 이중 연결 리스트의 기반</h2>
+
+<h3 id="원형-리스트circular-list">원형 리스트(Circular list)</h3>
+
+<p><strong>원형 리스트(Circular list)</strong>는 연결 리스트의 꼬리 노드가 다시 머리 노드를 가리킨다. 고리 모양으로 늘어선 데이터를 표현하는 데 알맞은 리스트 구조이다.</p>
+
+<h3 id="이중-연결-리스트doubly-linked-list">이중 연결 리스트(Doubly linked list)</h3>
+
+<p><strong>이중 연결 리스트(Doubly linked list)</strong>는 기존 연결 리스트의 앞쪽 노드 찾지 못하는 단점을 개선한 리스트 구조이다. 그럼 어떻게 앞쪽 노드로 갈 수 있냐? 기존 next 포인터 뿐만 아니고 previous 포이터도 주어지기 때문에 앞쪽 노드로 갈 수 있다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">data</th>
+      <th style="text-align: center">데이터에 대한 참조(임의의 형)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">prev</td>
+      <td style="text-align: center">앞쪽 노드에 대한 참조(앞쪽 포인터 : Node형)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">next</td>
+      <td style="text-align: center">뒤쪽 노드에 대한 참조(뒤쪽 포인터 : Node형)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="원형-이중-연결-리스트circular-doubly-linked-list">원형 이중 연결 리스트(Circular doubly linked list)</h2>
+
+<p>원형 이중 연결 리스트는 원형 리스트와 이중 연결 리스트를 결한한 형태이다</p>
+
+<p>이제 원형 이중 연결 리스트의 함수에 대해 알아보자</p>
+
+<h3 id="노드-클래스-init-함수-1">노드 클래스 <strong>init</strong>() 함수</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+    <span class="s">"""원형 이중 연결 리스트용 노드 클래스"""</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">prev</span><span class="p">:</span> <span class="n">Node</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+                       <span class="nb">next</span><span class="p">:</span> <span class="n">Node</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""초기화"""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>          <span class="c1"># 데이터
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">prev</span> <span class="o">=</span> <span class="n">prev</span> <span class="ow">or</span> <span class="bp">self</span>  <span class="c1"># 앞쪽 포인터
+</span>        <span class="bp">self</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="nb">next</span> <span class="ow">or</span> <span class="bp">self</span>  <span class="c1"># 뒤쪽 포인터
+</span></code></pre></div></div>
+
+<ul>
+  <li>
+    <p>원형 이중 연결 리스트용 노드 클래스 Node는 필드 3개(data, prev, next)로 구성됨</p>
+  </li>
+  <li>
+    <p><strong>init</strong>() 함수는 노드의 초기화를 수행하기 위해 매개변수 data, prev, next로 전달받은 값에 해당 필드에 대입.</p>
+  </li>
+  <li>
+    <p>prev, next로 전달받은 값이 None이면, prev와 next에 None이 아닌 self 대입</p>
+  </li>
+  <li>
+    <p>그 결과 앞쪽 포인터와 뒤쪽 포인터는 자신의 인스턴스를 참조 → self.prev = self</p>
+  </li>
+</ul>
+
+<h3 id="doublelinkedlist-클래스-init-len-is_empty-함수">DoubleLinkedList 클래스 <strong>init</strong>(), <strong>len</strong>(), is_empty() 함수</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DoubleLinkedList</span><span class="p">:</span>
+    <span class="s">"""원형 이중 연결 리스트 클래스"""</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""초기화"""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">Node</span><span class="p">()</span>  <span class="c1"># 더미 노드를 생성
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">no</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="s">"""선형 리스트의 노드 수를 반환"""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">no</span>
+
+    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="s">"""리스트가 비어 있는가?"""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="nb">next</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span>  
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p><strong>init</strong>() 함수는 비어 있는 이중 연결 리스트를 생성. 데이터가 없는 노드를 1개 생성하는 것이다. 이때 prev와 next는 Node의 <strong>init</strong>() 함수 동작으로 자신의 노드를 참조. head와 current가 참조하는 곳은 생성한 더미 노드</p>
+  </li>
+  <li>
+    <p><strong>len</strong>() 함수는 리스트에 등록되어 있는 데이터 개수를 반환</p>
+  </li>
+  <li>
+    <p>is_empty() 함수는 리스트가 비어 있는지 확인하는데, 더미 노드의 뒤쪽 포인터 head.next가 더미 노디인 head를 참조하면 비어있는것이 확인된다. True or False로 반환</p>
+  </li>
+  <li>
+    <p>원형 이중 연결 리스트를 나타내는 클래스로 필드 3개로 구성됨</p>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">no</th>
+      <th style="text-align: center">리스트에서 노드의 개수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">head</td>
+      <td style="text-align: center">머리 노드에 대한 참조</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">current</td>
+      <td style="text-align: center">주목 노드에 대한 참조(주목 포인터)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="doublelinkedlist-클래스-search-contains-함수">DoubleLinkedList 클래스 search(), <strong>contains</strong>() 함수</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="s">"""data와 값이 같은 노드를 검색"""</span>
+        <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="nb">next</span>  <span class="c1"># 현재 스캔 중인 노드
+</span>        <span class="k">while</span> <span class="n">ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="n">ptr</span><span class="p">.</span><span class="n">data</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">ptr</span>
+                <span class="k">return</span> <span class="n">cnt</span>  <span class="c1"># 검색 성공
+</span>            <span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="nb">next</span>  <span class="c1"># 뒤쪽 노드에 주목
+</span>        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>           <span class="c1"># 검색 실패
+</span>
+    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="s">"""연결 리스트에 data가 포함되어 있는가?"""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>search() 함수 처음에는 head.next로 시작을 한다. head는 더미 노드이며, 값을 계속 찾다가 한바퀴 돌아오게 될 때 더미노드이자 head에 가게됨다. 이 때 while문에서 탈락한다</p>
+  </li>
+  <li>
+    <p>찾으려는 값을 찾으면 count 값을 반환한다</p>
+  </li>
+  <li>
+    <p><strong>contains</strong>() 함수는 리스트에 데이터와 값이 같은 노드가 존재하는지 판단하는 함수이며, 존재하면 True 그렇지 않으면 False 반환</p>
+  </li>
+</ul>
+
+<h4 id="p가-참조하는-노드의-위치-판단하기">p가 참조하는 노드의 위치 판단하기</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">p.prev is head</th>
+      <th style="text-align: center">p는 머리 노드인가? (더미 노드 미포함)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">p.prev.prev is head</td>
+      <td style="text-align: center">p는 맨 앞에서 2번째 노드인가? (더미 노드 미포함)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">p.next is head</td>
+      <td style="text-align: center">p는 꼬리 노드인가?</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">p.next.next is head</td>
+      <td style="text-align: center">p는 맨 끝에서 2번째 노드인가?</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="doublelinkedlist-클래스-print_current_nod-print-print_reverse-함수">DoubleLinkedList 클래스 print_current_nod(), print(), print_reverse() 함수</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">print_current_node</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""주목 노드를 출력"""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'주목 노드는 없습니다.'</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">print</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""모든 노드를 출력"""</span>
+        <span class="n">ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="nb">next</span>  <span class="c1"># 더미 노드의 뒤쪽 노드
+</span>        <span class="k">while</span> <span class="n">ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">ptr</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="nb">next</span>
+
+    <span class="k">def</span> <span class="nf">print_reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""모든 노드를 역순으로 출력"""</span>
+        <span class="n">ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">prev</span>  <span class="c1"># 더미 노드의 앞쪽 노드
+</span>        <span class="k">while</span> <span class="n">ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">ptr</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="n">prev</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>print_current_nod() 함수는 주목 노드의 데이터를 출력하는 함수로써 리스트가 비어 있으면 ‘주목 노드는 없습니다.’ 출력</p>
+  </li>
+  <li>
+    <p>print() 함수는 리스트의 모든 노드를 맨 앞부터 맨 끝까지 순서대로 출력</p>
+  </li>
+  <li>
+    <p>print_reverse() 함수는 모든 노드를 맨 끝부터 맨 앞까지 순서대로 출력</p>
+  </li>
+</ul>
+
+<h3 id="doublelinkedlist-클래스-next-prev-함수">DoubleLinkedList 클래스 next(), prev() 함수</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="s">"""주목 노드를 한 칸 뒤로 이동"""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">is_empty</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="nb">next</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>  <span class="c1"># 이동할 수 없음
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="nb">next</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">prev</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="s">"""주목 노드를 한 칸 앞으로 이동"""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">is_empty</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">prev</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>  <span class="c1"># 이동할 수 없음
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">prev</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>next() 함수는 주목 노드를 한 칸 뒤로 이동시키는 함수인데, 리스트가 비어있지 않아야 하고 주목 노드에 뒤쪽 노드가 존재해야 이동한다</p>
+  </li>
+  <li>
+    <p>prev() 함수는 주목 노드를 한 칸 앞으로 이동시키는 함수로서 리스트가 비어있지 않아야 하고 주목 노드에 앞쪽 노드가 존재해야 이동한다</p>
+  </li>
+</ul>
+
+<h3 id="doublelinkedlist-클래스-add-add_first-add_last-함수">DoubleLinkedList 클래스 add(), add_first(), add_last() 함수</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""주목 노드의 바로 뒤에 노드를 삽입"""</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="nb">next</span><span class="p">)</span> <span class="c1"># data, prev, next 순
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="nb">next</span><span class="p">.</span><span class="n">prev</span> <span class="o">=</span> <span class="n">node</span> <span class="c1"># 다음 노드의 이전값에 자기 자신 저장
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="n">node</span> <span class="c1"># 본인의 앞 위치의 next 에 자기 자신 저장
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">node</span> <span class="c1"># 주목 노드에 자기 본인 저장 
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">no</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">add_first</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""맨 앞에 노드를 삽입"""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span>  <span class="c1"># 더미 노드 head의 바로 뒤에 삽입
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_last</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""맨 뒤에 노드를 삽입"""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">prev</span>  <span class="c1"># 꼬리 노드 head.prev의 바로 뒤에 삽입
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>add() 함수는 주목 노드 바로 뒤에 노드를 삽입하는데, 삽입하면서 다음 노드의 prev 값과 이전 노드의 next 값, 그리고 마지막으로 주목노드에 자기 자신을 저장한다</p>
+  </li>
+  <li>
+    <p>add_first() 함수는 주목노드를 머리노드로 바꾼 후 맨 앞쪽에 add() 함수 실행</p>
+  </li>
+  <li>
+    <p>add_last() 함수는 주목노드를 꼬리노드로 바꾼 후 맨 뒤쪽에 add() 함수 실행</p>
+  </li>
+</ul>
+
+<h3 id="doublelinkedlist-클래스-remove_current_node-removep-함수">DoubleLinkedList 클래스 remove_current_node(), remove(p) 함수</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">remove_current_node</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""주목 노드 삭제"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">prev</span><span class="p">.</span><span class="nb">next</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="nb">next</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="nb">next</span><span class="p">.</span><span class="n">prev</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">prev</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">prev</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">no</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="nb">next</span>
+
+    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">Node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""노드 p를 삭제"""</span>
+        <span class="n">ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="nb">next</span>
+
+        <span class="k">while</span> <span class="n">ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ptr</span> <span class="ow">is</span> <span class="n">p</span><span class="p">:</span>  <span class="c1"># p를 발견
+</span>                <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">p</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">remove_current_node</span><span class="p">()</span>
+                <span class="k">break</span>
+            <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="p">.</span><span class="nb">next</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>remove_current_node() 함수는 주목 노드를 삭제하는 함수로써 먼저 리스트가 비어있는지 확인한다. 주목 노드의 이전값의 next를 주목노드의 next 값으로 바꾸고 주목 노드의 이후값의 prev를 주목 노드의 이전값으로 저장한다. 그리고 주목노드를 앞쪽 노드로 바꾸고 노드의 수를 1 뺀다. 모든 과정 진행 후에 주목 노드가 머리 노드가 된다면, 주목노드 값을 첫번째 노드로 저장해</p>
+  </li>
+  <li>
+    <p>remove(p)함수는 p를 찾을때까지 주목 노드를 update하고 찾았다면 remove_current_node()함수를 수행하게 된다. 만약 못 찾으면 아무일도 일어나지 않게 된다</p>
+  </li>
+</ul>
+
+<h3 id="doublelinkedlist-클래스-remove_first-remove_last-clear-함수">DoubleLinkedList 클래스 remove_first(), remove_last(), clear() 함수</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">remove_first</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""머리 노드 삭제"""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="nb">next</span>  <span class="c1"># 머리 노드 head.next를 삭제
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">remove_current_node</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">remove_last</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""꼬리 노드 삭제"""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">.</span><span class="n">prev</span>  <span class="c1"># 꼬리 노드 head.prev를 삭제
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">remove_current_node</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""모든 노드를 삭제"""</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">is_empty</span><span class="p">():</span>  <span class="c1"># 리스트 전체가 빌 때까지
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">remove_first</span><span class="p">()</span>  <span class="c1"># 머리 노드를 삭제
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">no</span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>remove_first() 함수는 주목 노드를 맨 앞 노드로 바꾼 후 remove_current_node()함수를 수행</p>
+  </li>
+  <li>
+    <p>remove_last() 함수는 주목 노드를 맨 뒤 노드로 바꾼 후 remove_current_node()함수를 수행</p>
+  </li>
+  <li>
+    <p>clear() 함수는 모든 노드를 삭제하는 함수로써 모든 노드가 빌 때까지 remove_first() 함수 수행. 수행 후 number 0으로 저장</p>
+  </li>
+</ul>
+
+<h3 id="doublelinkedlistiterator-클래스">DoubleLinkedListIterator 클래스</h3>
+
+<p>반복문 수행을 위해서 아래와 같이 Iterator 클래스 사용이 가능해</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DoubleLinkedListIterator</span><span class="p">:</span>
+        <span class="s">"""반복자를 반환"""</span>
+        <span class="k">return</span> <span class="n">DoubleLinkedListIterator</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__reversed__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DoubleLinkedListReverseIterator</span><span class="p">:</span>
+        <span class="s">"""내림차순 반복자를 반환"""</span>
+        <span class="k">return</span> <span class="n">DoubleLinkedListReverseIterator</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">DoubleLinkedListIterator</span><span class="p">:</span>
+    <span class="s">"""DoubleLinkedList의 반복자용 클래스"""</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Node</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">head</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">head</span><span class="p">.</span><span class="nb">next</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DoubleLinkedListIterator</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">StopIteration</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">data</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="nb">next</span>
+            <span class="k">return</span> <span class="n">data</span>
+
+<span class="k">class</span> <span class="nc">DoubleLinkedListReverseIterator</span><span class="p">:</span>
+    <span class="s">"""DoubleLinkedList의 내림차순 반복자용 클래스"""</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Node</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">head</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">head</span><span class="p">.</span><span class="n">prev</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DoubleLinkedListReverseIterator</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">.</span><span class="n">head</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">StopIteration</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">data</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">prev</span>
+            <span class="k">return</span> <span class="n">data</span>
+</code></pre></div></div>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="https://via.placeholder.com/128x128 1x,https://via.placeholder.com/256x256 2x"
+    
+  
+  alt="JeongHwan Yun"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>개발자로의 성장과정</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/cryptography/" class="flip-title"><span>암호학 기초</span></a>  <time class="faded fine" datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/algorithm/dynamic-programming/" class="flip-title"><span>동적 계획법(Dynamic programming)</span></a>  <time class="faded fine" datetime="2025-04-03T00:00:00+00:00">03 Apr 2025</time></li>          <li class="h4">  <a href="/blog/algorithm/vertex-edge-node-arc/" class="flip-title"><span>그래프(Graph)</span></a>  <time class="faded fine" datetime="2025-03-28T00:00:00+00:00">28 Mar 2025</time></li>          <li class="h4">  <a href="/blog/cs/demand-zero-memory/" class="flip-title"><span>Demand-zero memory: 필요할 때 0으로 채워 붙이는 메모리</span></a>  <time class="faded fine" datetime="2025-04-22T00:00:00+00:00">22 Apr 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© 2022 JeongHwan Yun.
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(200,200,200);background-image:url(/assets/img/sidebar-bg.png)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/logo.png" class="avatar" alt="hwan log" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">hwan log</h2></a>
+    
+    
+      <p class="">
+        기술블로그
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/algorithm/"
+          class="sidebar-nav-item "
+          
+        >
+          알고리즘
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/cs/"
+          class="sidebar-nav-item "
+          
+        >
+          CS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/techstack/"
+          class="sidebar-nav-item "
+          
+        >
+          Tech Stack
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/ai/"
+          class="sidebar-nav-item "
+          
+        >
+          AI
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/projects/"
+          class="sidebar-nav-item "
+          
+        >
+          PROJECTS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/devlog/"
+          class="sidebar-nav-item "
+          
+        >
+          devlog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/resume/"
+          class="sidebar-nav-item "
+          
+        >
+          RESUME
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>(()=>{var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())})();
+</script>
+  <script src="/assets/js/hydejack-9.2.1.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.2.1.js" nomodule defer></script>
+  
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>

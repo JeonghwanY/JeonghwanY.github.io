@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Paging: OS는 가상 메모리를 어떻게 관리할까? | hwan log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Paging: OS는 가상 메모리를 어떻게 관리할까?" />
+<meta name="author" content="JeongHwan Yun" />
+<meta property="og:locale" content="ko_KR, en_US" />
+<meta name="description" content="기술블로그" />
+<meta property="og:description" content="기술블로그" />
+<meta property="og:site_name" content="hwan log" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-06-11T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Paging: OS는 가상 메모리를 어떻게 관리할까?" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2025-06-11T00:00:00+00:00","datePublished":"2025-06-11T00:00:00+00:00","description":"기술블로그","headline":"Paging: OS는 가상 메모리를 어떻게 관리할까?","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/cs/paging/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/cs/paging/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="color-scheme" content="dark light">
+
+
+
+  <meta name="theme-color" content="rgb(200,200,200)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="hwan log">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="hwan log">
+
+<meta name="generator" content="Hydejack v9.2.1" />
+
+
+<link rel="alternate" href="/blog/cs/paging/" hreflang="ko-kr, en-us">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.2.1.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<script>((r,a)=>{function d(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=a.createElement("script"),e=(n.src=e,t&&d(n,"load",t,{once:!0}),a.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=a.createElement("script");function o(){r._loaded=!0,t&&d(n,"load",t,{once:!0});var e=a.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():d(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){d(a.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}})(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-06-01T18:16:59+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.2.1.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5);--accent-color-highlight: rgba(200,200,200,0.1);--accent-color-darkened: #b5b5b5;--theme-color: rgb(200,200,200);--dark-mode-body-bg: #2d2d2d;--dark-mode-border-color: #393939}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  ((e,s)=>{var d="light-mode",a="dark-mode",o=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(o=o<=e._sunrise||o>=e._sunset?a:d)==a?d:a,s.body.classList.add(o),s.body.classList.remove(e))})(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/cs/">cs</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>paging</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-cs-paging" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        Paging: OS는 가상 메모리를 어떻게 관리할까?
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-06-11T00:00:00+00:00">11 Jun 2025</time> in <span>Blog</span> / <a href="/cs/" class="flip-title">CS</a> on <a href="/tag-%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/" class="flip-title">운영체제</a>
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul class="large-only" id="markdown-toc">
+  <li><a href="#1-페이징-기본-개념" id="markdown-toc-1-페이징-기본-개념">1. 페이징 기본 개념</a></li>
+  <li><a href="#2-주소-변환-과정" id="markdown-toc-2-주소-변환-과정">2. 주소 변환 과정</a>    <ul>
+      <li><a href="#2-1-cr3-레지스터" id="markdown-toc-2-1-cr3-레지스터">2-1. CR3 레지스터</a></li>
+      <li><a href="#2-2-pte의-rw--us--p-비트" id="markdown-toc-2-2-pte의-rw--us--p-비트">2-2. PTE의 R/W · U/S · P 비트</a>        <ul>
+          <li><a href="#cpl-current-privilege-level" id="markdown-toc-cpl-current-privilege-level">CPL (Current Privilege Level)</a></li>
+        </ul>
+      </li>
+      <li><a href="#2-3-tlb-히트" id="markdown-toc-2-3-tlb-히트">2-3. TLB 히트</a></li>
+    </ul>
+  </li>
+  <li><a href="#3-운영체제의-역할" id="markdown-toc-3-운영체제의-역할">3. 운영체제의 역할</a>    <ul>
+      <li><a href="#tlb-flush" id="markdown-toc-tlb-flush">TLB Flush</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-페이지-교체-page-replacement" id="markdown-toc-4-페이지-교체-page-replacement">4. 페이지 교체 (Page Replacement)</a></li>
+  <li><a href="#5-pintos-관점-요약" id="markdown-toc-5-pintos-관점-요약">5. PintOS 관점 요약</a></li>
+  <li><a href="#6-다단계-페이징을-쓰는-이유" id="markdown-toc-6-다단계-페이징을-쓰는-이유">6. 다단계 페이징을 쓰는 이유</a></li>
+  <li><a href="#7-페이지-크기와-내부-단편화" id="markdown-toc-7-페이지-크기와-내부-단편화">7. 페이지 크기와 내부 단편화</a></li>
+  <li><a href="#8-정리" id="markdown-toc-8-정리">8. 정리</a></li>
+</ul>
+
+<p>페이징은 가상 주소와 물리 주소 사이에 간접층을 두어 각 프로세스에 독립적인 주소 공간을 제공한다.
+주소 변환, CR3, PTE, TLB, 다단계 페이징까지 정리한다.</p>
+
+<h2 id="1-페이징-기본-개념">1. 페이징 기본 개념</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">용어</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">페이지 (Page)</td>
+      <td style="text-align: left">OS의 관리 단위인 고정 크기(보통 4KB)의 가상 메모리 블록</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">프레임 (Frame)</td>
+      <td style="text-align: left">물리 메모리에서 페이지와 1:1로 매핑되는 동일 크기 블록</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">페이지 테이블 (Page Table)</td>
+      <td style="text-align: left">“가상 페이지 번호 → 물리 프레임 번호 + 접근 권한”을 저장하는 자료구조</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">TLB (Translation Look-aside Buffer)</td>
+      <td style="text-align: left">MMU 내부의 작은 캐시. 최근 주소 변환 결과를 보관해 속도를 높임</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>페이징은 가상 주소와 물리 주소 사이에 <strong>간접층</strong>을 삽입해, 각 프로세스가 독립적인 주소 공간을 갖게 하는 기술이다. 이를 통해 ① 보호(Protection), ② 공유(Sharing), ③ 공간 활용(세그먼트 단편화 제거)을 달성한다.</p>
+
+<h2 id="2-주소-변환-과정">2. 주소 변환 과정</h2>
+
+<ol>
+  <li>가상 주소(48bit)를 상위 9비트씩 잘라 <code class="language-plaintext highlighter-rouge">PML4 → PDPT → PD → PT → Offset</code> 순으로 인덱싱한다 (x86-64 4-level 페이징)</li>
+  <li><strong>MMU</strong>가 CR3 레지스터의 PML4 물리 주소를 읽어 다단계 테이블을 탐색한다</li>
+  <li>최종 PTE에서 <strong>PFN(프레임 번호)</strong> 와 권한 비트(R/W, U/S, P)를 읽는다
+    <ul>
+      <li>접근 허용이면 <strong>물리 주소 = PFN × 4KB + Offset</strong></li>
+      <li>접근 위반이거나 P 비트 = 0이면 <strong>Page Fault</strong> 발생 → OS 개입</li>
+    </ul>
+  </li>
+</ol>
+
+<p>TLB가 히트하면 1~3단계가 생략되어 수십 ns 이내로 끝난다.</p>
+
+<h3 id="2-1-cr3-레지스터">2-1. CR3 레지스터</h3>
+
+<p>CR3는 x86-64의 Control Register 3로, <strong>현재 주소 공간의 PML4 물리 주소</strong>를 담는다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">비트 범위</th>
+      <th style="text-align: left">이름</th>
+      <th style="text-align: left">내용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">63–52</td>
+      <td style="text-align: left">Reserved</td>
+      <td style="text-align: left">CPU 모델별 확장</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">51–12</td>
+      <td style="text-align: left">PML4 물리 베이스</td>
+      <td style="text-align: left">4KB 정렬된 최상위 테이블 주소</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">11–0</td>
+      <td style="text-align: left">PCID / 플래그</td>
+      <td style="text-align: left">Process-Context ID(0~4095) 및 제어 플래그</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>컨텍스트 스위칭 때 CR3를 바꾸면 MMU가 “새 주소 공간으로 바뀌었다”고 간주하며, 대부분의 TLB 엔트리가 자동 무효화된다. CR3의 역할을 정리하면 다음과 같다.</p>
+
+<ul>
+  <li><strong>주소 공간 식별</strong>: 커널이 컨텍스트 스위칭 시 CR3를 새 값으로 로드한다. PCID가 이전과 다르면 TLB 엔트리가 ‘다른 주소 공간’으로 구분되어 대부분 유지되므로 <strong>TLB flush 비용이 줄어든다</strong></li>
+  <li><strong>전역(Global) 페이지</strong>: PTE의 G 비트를 1로 두면 CR3 변경에도 flush되지 않는다 (커널 코드·데이터용)</li>
+  <li><strong>Selective flush</strong>: <code class="language-plaintext highlighter-rouge">invlpg (addr)</code>로 특정 페이지만 무효화한다. SMP 환경에서는 같은 주소 공간을 쓰는 다른 코어에도 IPI로 전파해야 한다</li>
+</ul>
+
+<p>PintOS처럼 PCID를 쓰지 않는 단순 구현도, CR3를 재로드하면 “전체 TLB flush” 효과를 얻는다.</p>
+
+<h3 id="2-2-pte의-rw--us--p-비트">2-2. PTE의 R/W · U/S · P 비트</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">비트</th>
+      <th style="text-align: left">이름</th>
+      <th style="text-align: left">1일 때</th>
+      <th style="text-align: left">0일 때</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">R/W</td>
+      <td style="text-align: left">쓰기 권한</td>
+      <td style="text-align: left">읽기 + 쓰기 허용</td>
+      <td style="text-align: left">읽기 전용. write 시 폴트</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">U/S</td>
+      <td style="text-align: left">특권 등급</td>
+      <td style="text-align: left">CPL 3(유저)도 접근 가능</td>
+      <td style="text-align: left">커널(CPL 0~2)만 접근. 유저 접근 시 폴트</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">P</td>
+      <td style="text-align: left">존재 여부</td>
+      <td style="text-align: left">물리 프레임에 매핑됨 → 정상 접근</td>
+      <td style="text-align: left">없음 → 접근 시 page fault</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="cpl-current-privilege-level">CPL (Current Privilege Level)</h4>
+
+<p>CPL은 현재 실행 중인 명령어의 권한 레벨이다. 별도 레지스터가 아니라 <strong>CS 세그먼트의 하위 2비트</strong>가 CPL로 해석된다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ring / CPL</th>
+      <th style="text-align: left">용도</th>
+      <th style="text-align: center">유저 코드 진입</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: left">커널·하이퍼바이저·펌웨어 (최상위 권한)</td>
+      <td style="text-align: center">✗</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">일부 마이크로커널·드라이버 (거의 미사용)</td>
+      <td style="text-align: center">✗</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: left">특수 계층 (Windows NT 초기 등, 거의 미사용)</td>
+      <td style="text-align: center">✗</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: left">일반 사용자 애플리케이션</td>
+      <td style="text-align: center">✓</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>페이징 권한 검사는 U/S 비트가 0이면 CPL 0~2만, R/W 비트가 0이면 (CPL 무관) 읽기만 허용한다. 시스템 콜(<code class="language-plaintext highlighter-rouge">syscall</code>, <code class="language-plaintext highlighter-rouge">int 0x80</code>)은 게이트를 통해 Ring 3 → Ring 0으로 권한을 상승한 뒤, 커널이 <code class="language-plaintext highlighter-rouge">iretq</code>로 돌아올 때 Ring 3로 복귀한다.</p>
+
+<h3 id="2-3-tlb-히트">2-3. TLB 히트</h3>
+
+<p>CPU가 가상 주소를 던졌을 때 TLB에 그 VA→PA 매핑이 이미 있으면 <strong>히트(hit)</strong> 다. 이 경우 페이지 테이블을 걷지 않으므로 변환이 한두 사이클에 끝난다. 없으면 <strong>미스(miss)</strong> → 긴 4단계 페이지 테이블 워크가 수행된다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">레벨</th>
+      <th style="text-align: left">커버 범위</th>
+      <th style="text-align: left">페이지 크기</th>
+      <th style="text-align: left">방식</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">L1-DTLB</td>
+      <td style="text-align: left">데이터 변환 전용</td>
+      <td style="text-align: left">4KB / 2MB</td>
+      <td style="text-align: left">64 엔트리, 4-way</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">L1-ITLB</td>
+      <td style="text-align: left">코드 변환 전용</td>
+      <td style="text-align: left">4KB / 2MB</td>
+      <td style="text-align: left">128 엔트리, 4-way</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">STLB (L2)</td>
+      <td style="text-align: left">Unified</td>
+      <td style="text-align: left">4KB / 2MB / 1GB</td>
+      <td style="text-align: left">1536 엔트리 이상</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><strong>히트</strong>: 요청한 VPN이 TLB 태그에 있어 PFN을 즉시 반환</li>
+  <li><strong>미스</strong>: MMU가 다단계 페이지 테이블 워크를 수행하며 메모리를 읽어야 해 수십~수백 ns 지연</li>
+  <li><strong>멀티코어 일관성</strong>: PTE가 바뀌면 IPI(Inter-Processor Interrupt)로 다른 코어에 TLB flush를 요청해 무효화한다</li>
+</ul>
+
+<p>체감상 L1 TLB 히트 ≈ 1~3 cycle, STLB 히트 ≈ 5~10 cycle, 미스 ≈ 수십 cycle이므로, <strong>TLB 친화적인(순차·지역성 높은) 메모리 접근</strong>이 성능에 큰 영향을 준다.</p>
+
+<h2 id="3-운영체제의-역할">3. 운영체제의 역할</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">시점</th>
+      <th style="text-align: left">OS가 하는 일</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">프로세스 생성</td>
+      <td style="text-align: left">새 페이지 테이블 구성, 코드/데이터 PTE를 “not-present”로 표기</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">페이지 폴트</td>
+      <td style="text-align: left">ⓐ 유효하나 매핑 없음 → Demand Paging(프레임 할당 → 디스크 로드 → PTE 갱신 → 재실행) / ⓑ 스택 확장 조건 위배·보호 위반 → Segmentation Fault</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">메모리 부족</td>
+      <td style="text-align: left">페이지 교체 알고리즘으로 victim 선정 → swap out → PTE 수정</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">컨텍스트 스위칭</td>
+      <td style="text-align: left">CR3에 새 프로세스의 PML4 물리 주소 기록, TLB flush</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="tlb-flush">TLB Flush</h3>
+
+<p>“페이지 테이블을 고쳤으니 캐시에 남은 옛 변환을 버려라”는 명령이다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mov %cr3, ... / mov ..., %cr3</code>: CR3 재로드로 전체(비-Global) TLB 무효화</li>
+  <li><code class="language-plaintext highlighter-rouge">invlpg (addr)</code>: 지정 페이지 하나만 정밀 무효화</li>
+</ul>
+
+<p>둘 다 커널 모드 전용이며, SMP 환경에서는 다른 CPU에도 IPI로 flush를 전파해야 한다.</p>
+
+<h2 id="4-페이지-교체-page-replacement">4. 페이지 교체 (Page Replacement)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">알고리즘</th>
+      <th style="text-align: left">개요</th>
+      <th style="text-align: left">장단점</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Optimal (OPT)</td>
+      <td style="text-align: left">가장 늦게 재참조될 페이지 제거</td>
+      <td style="text-align: left">이론적 최적, 실현 불가</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">LRU</td>
+      <td style="text-align: left">가장 오래 안 쓴 페이지 선택</td>
+      <td style="text-align: left">hit율 좋음, 구현 비용 높음</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Clock (2nd-chance)</td>
+      <td style="text-align: left">원형 큐 + reference bit로 LRU 근사</td>
+      <td style="text-align: left">구현 간단, 성능 무난</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>PintOS Project 3에서는 Clock 변형으로 구현했다. (자세한 내용은 <a href="../../computersystem/page-replacement-policy" class="heading flip-title">Page Replacement Policy</a> 참고)</p>
+
+<h2 id="5-pintos-관점-요약">5. PintOS 관점 요약</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">구조체 / 함수</th>
+      <th style="text-align: left">하는 일</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">struct page</code></td>
+      <td style="text-align: left">한 가상 페이지의 메타데이터(SPT key), 타입(anon/file), 프레임, dirty 등</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Supplemental Page Table (SPT)</td>
+      <td style="text-align: left">프로세스별 해시 맵/트리. <code class="language-plaintext highlighter-rouge">spt_find_page()</code>, <code class="language-plaintext highlighter-rouge">spt_insert_page()</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">vm_try_handle_fault()</code></td>
+      <td style="text-align: left">페이지 폴트 핸들러 진입점. 스택 성장·lazy loading 로직 포함</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">swap_in/out()</code></td>
+      <td style="text-align: left">스왑 디스크 I/O 실행. Clock victim이 anon이면 out, fault 시 in</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">file_backed_initializer()</code></td>
+      <td style="text-align: left">mmap·lazy file load에 쓸 custom swap_in/out 등록</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="6-다단계-페이징을-쓰는-이유">6. 다단계 페이징을 쓰는 이유</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">이유</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">공간 절약</td>
+      <td style="text-align: left">4-level 구조에서 <strong>사용된 테이블만</strong> 할당해 메모리 절약</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">보호</td>
+      <td style="text-align: left">각 레벨 테이블을 4KB 페이지로 두고 U/S 비트로 커널이 관리</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">공유</td>
+      <td style="text-align: left">fork 시 상위 테이블을 copy-on-write로 공유 가능</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="7-페이지-크기와-내부-단편화">7. 페이지 크기와 내부 단편화</h2>
+
+<ul>
+  <li>페이지가 크면 → TLB miss 감소(+), 내부 단편화 증가(−), I/O 효율 향상(+)</li>
+  <li>현대 x86-64는 <strong>4KB 기본 + 2MB/1GB Huge Page</strong> 옵션을 제공한다</li>
+</ul>
+
+<h2 id="8-정리">8. 정리</h2>
+
+<p>페이징은 프로세스마다 <strong>독립적·선형적인 주소 공간</strong>을 제공하면서, OS가 필요할 때만 물리 메모리·디스크를 할당하고, TLB와 다단계 페이지 테이블로 성능과 메모리 사용량을 균형 있게 최적화하는 메커니즘이다. PintOS에서 구현·조정하는 모든 VM 기능은 이 큰 틀 안에 위치한다.</p>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="https://via.placeholder.com/128x128 1x,https://via.placeholder.com/256x256 2x"
+    
+  
+  alt="JeongHwan Yun"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>개발자로의 성장과정</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/cryptography/" class="flip-title"><span>암호학 기초</span></a>  <time class="faded fine" datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/algorithm/tree/" class="flip-title"><span>트리(tree)</span></a>  <time class="faded fine" datetime="2025-03-24T00:00:00+00:00">24 Mar 2025</time></li>          <li class="h4">  <a href="/blog/cs/thread/" class="flip-title"><span>스레드(Thread): 프로세스 안의 실행 단위</span></a>  <time class="faded fine" datetime="2025-05-13T00:00:00+00:00">13 May 2025</time></li>          <li class="h4">  <a href="/blog/cs/system-call/" class="flip-title"><span>System Call: 응용 프로그램이 커널에게 일을 부탁하는 통로</span></a>  <time class="faded fine" datetime="2025-04-30T00:00:00+00:00">30 Apr 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© 2022 JeongHwan Yun.
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(200,200,200);background-image:url(/assets/img/sidebar-bg.png)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/logo.png" class="avatar" alt="hwan log" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">hwan log</h2></a>
+    
+    
+      <p class="">
+        기술블로그
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/algorithm/"
+          class="sidebar-nav-item "
+          
+        >
+          알고리즘
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/cs/"
+          class="sidebar-nav-item "
+          
+        >
+          CS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/techstack/"
+          class="sidebar-nav-item "
+          
+        >
+          Tech Stack
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/ai/"
+          class="sidebar-nav-item "
+          
+        >
+          AI
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/projects/"
+          class="sidebar-nav-item "
+          
+        >
+          PROJECTS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/devlog/"
+          class="sidebar-nav-item "
+          
+        >
+          devlog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/resume/"
+          class="sidebar-nav-item "
+          
+        >
+          RESUME
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>(()=>{var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())})();
+</script>
+  <script src="/assets/js/hydejack-9.2.1.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.2.1.js" nomodule defer></script>
+  
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>

@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>OSI 7계층(OSI 7 Layer): 네트워크 통신을 7단계로 나눈 설계도 | hwan log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="OSI 7계층(OSI 7 Layer): 네트워크 통신을 7단계로 나눈 설계도" />
+<meta name="author" content="JeongHwan Yun" />
+<meta property="og:locale" content="ko_KR, en_US" />
+<meta name="description" content="기술블로그" />
+<meta property="og:description" content="기술블로그" />
+<meta property="og:site_name" content="hwan log" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-04T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="OSI 7계층(OSI 7 Layer): 네트워크 통신을 7단계로 나눈 설계도" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2025-05-04T00:00:00+00:00","datePublished":"2025-05-04T00:00:00+00:00","description":"기술블로그","headline":"OSI 7계층(OSI 7 Layer): 네트워크 통신을 7단계로 나눈 설계도","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/cs/osi-7-layer/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/cs/osi-7-layer/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="color-scheme" content="dark light">
+
+
+
+  <meta name="theme-color" content="rgb(200,200,200)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="hwan log">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="hwan log">
+
+<meta name="generator" content="Hydejack v9.2.1" />
+
+
+<link rel="alternate" href="/blog/cs/osi-7-layer/" hreflang="ko-kr, en-us">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.2.1.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<script>((r,a)=>{function d(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=a.createElement("script"),e=(n.src=e,t&&d(n,"load",t,{once:!0}),a.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=a.createElement("script");function o(){r._loaded=!0,t&&d(n,"load",t,{once:!0});var e=a.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():d(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){d(a.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}})(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-06-01T18:16:59+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.2.1.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5);--accent-color-highlight: rgba(200,200,200,0.1);--accent-color-darkened: #b5b5b5;--theme-color: rgb(200,200,200);--dark-mode-body-bg: #2d2d2d;--dark-mode-border-color: #393939}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  ((e,s)=>{var d="light-mode",a="dark-mode",o=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(o=o<=e._sunrise||o>=e._sunset?a:d)==a?d:a,s.body.classList.add(o),s.body.classList.remove(e))})(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/cs/">cs</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>osi-7-layer</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-cs-osi-7-layer" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        OSI 7계층(OSI 7 Layer): 네트워크 통신을 7단계로 나눈 설계도
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-05-04T00:00:00+00:00">04 May 2025</time> in <span>Blog</span> / <a href="/cs/" class="flip-title">CS</a> on <a href="/tag-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/" class="flip-title">네트워크</a>
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul class="large-only" id="markdown-toc">
+  <li><a href="#1-한눈에-보는-osi-7계층" id="markdown-toc-1-한눈에-보는-osi-7계층">1. 한눈에 보는 OSI 7계층</a></li>
+  <li><a href="#2-계층별-세부사항" id="markdown-toc-2-계층별-세부사항">2. 계층별 세부사항</a>    <ul>
+      <li><a href="#1계층-물리-physical" id="markdown-toc-1계층-물리-physical">1계층. 물리 (Physical)</a></li>
+      <li><a href="#2계층-데이터링크-data-link" id="markdown-toc-2계층-데이터링크-data-link">2계층. 데이터링크 (Data-Link)</a></li>
+      <li><a href="#3계층-네트워크-network" id="markdown-toc-3계층-네트워크-network">3계층. 네트워크 (Network)</a></li>
+      <li><a href="#4계층-전송-transport" id="markdown-toc-4계층-전송-transport">4계층. 전송 (Transport)</a></li>
+      <li><a href="#5계층-세션-session" id="markdown-toc-5계층-세션-session">5계층. 세션 (Session)</a></li>
+      <li><a href="#6계층-표현-presentation" id="markdown-toc-6계층-표현-presentation">6계층. 표현 (Presentation)</a></li>
+      <li><a href="#7계층-응용-application" id="markdown-toc-7계층-응용-application">7계층. 응용 (Application)</a></li>
+    </ul>
+  </li>
+  <li><a href="#3-왜-tcpip-4계층을-더-많이-쓸까" id="markdown-toc-3-왜-tcpip-4계층을-더-많이-쓸까">3. 왜 TCP/IP 4계층을 더 많이 쓸까?</a></li>
+  <li><a href="#4-osi-7계층을-배우는-이유" id="markdown-toc-4-osi-7계층을-배우는-이유">4. OSI 7계층을 배우는 이유</a></li>
+</ul>
+
+<p><strong>OSI 7계층</strong>은 물리 신호부터 사용자 애플리케이션까지, <strong>네트워크 기능을 7단계로 나눈 개념적 설계도</strong>다. 실무에서는 TCP/IP 4계층으로 단순화해 쓰지만, 문제 분석과 개념 정리에는 여전히 유용하다.
+각 계층마다 맡은 역할이 정해져 있어, 복잡한 통신 과정을 구조화하고 표준화하는 데 도움을 준다.</p>
+
+<h2 id="1-한눈에-보는-osi-7계층">1. 한눈에 보는 OSI 7계층</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">번호</th>
+      <th style="text-align: left">계층 이름</th>
+      <th style="text-align: left">주요 기능</th>
+      <th style="text-align: left">예시</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">7</td>
+      <td style="text-align: left">응용 (Application)</td>
+      <td style="text-align: left">사용자와 직접 상호작용, 네트워크 서비스 제공</td>
+      <td style="text-align: left">HTTP/HTTPS, FTP, SMTP, DNS, SSH</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td style="text-align: left">표현 (Presentation)</td>
+      <td style="text-align: left">데이터 형식 변환, 암호화/복호화, 압축</td>
+      <td style="text-align: left">JPEG, MP3, SSL</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: left">세션 (Session)</td>
+      <td style="text-align: left">연결 설정·유지·종료, 세션 관리</td>
+      <td style="text-align: left">NetBIOS, RPC, PPTP</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: left">전송 (Transport)</td>
+      <td style="text-align: left">데이터 전송 신뢰성 보장, 오류 제어</td>
+      <td style="text-align: left">TCP, UDP, QUIC, SCTP</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: left">네트워크 (Network)</td>
+      <td style="text-align: left">주소 지정, 경로 선택(라우팅)</td>
+      <td style="text-align: left">IP, ICMP, ARP, OSPF, BGP</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: left">데이터링크 (Data-Link)</td>
+      <td style="text-align: left">프레임 생성, MAC 주소 기반 전달, 에러 감지</td>
+      <td style="text-align: left">Ethernet, Wi-Fi(802.11), PPP, VLAN, 스위치</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">물리 (Physical)</td>
+      <td style="text-align: left">0/1 신호를 실제 매체로 전송</td>
+      <td style="text-align: left">UTP 케이블, 광섬유, 전파, 허브, 리피터</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="2-계층별-세부사항">2. 계층별 세부사항</h2>
+
+<p>물리 계층(1)부터 응용 계층(7)까지, 아래에서 위로 올라가며 추상화 수준이 높아진다.</p>
+
+<h3 id="1계층-물리-physical">1계층. 물리 (Physical)</h3>
+
+<blockquote>
+  <p>“전깃줄에 0과 1을 어떻게 흘려보낼까?”</p>
+</blockquote>
+
+<ul>
+  <li>전압 크기, 광펄스 세기, 라디오 주파수 등 <strong>신호의 물리적 특성</strong>을 정의한다</li>
+  <li>허브·리피터처럼 “증폭만 하고 아무 판단도 못 하는” 장비가 여기에 속한다</li>
+</ul>
+
+<h3 id="2계층-데이터링크-data-link">2계층. 데이터링크 (Data-Link)</h3>
+
+<blockquote>
+  <p>“같은 네트워크(브로드캐스트 도메인) 안에서 누가 누구인지 구분하려면?”</p>
+</blockquote>
+
+<ul>
+  <li><strong>MAC 주소</strong>를 붙여 프레임 단위로 전송하며, CRC로 프레임 오류를 검출한다</li>
+  <li>스위치·브리지, VLAN, ARP 캐시 같은 개념이 등장한다</li>
+</ul>
+
+<h3 id="3계층-네트워크-network">3계층. 네트워크 (Network)</h3>
+
+<blockquote>
+  <p>“지구 반대편 호스트까지 가려면 중간 경로(라우팅)를 어떻게 잡을까?”</p>
+</blockquote>
+
+<ul>
+  <li><strong>IP 주소</strong>를 붙이고, 라우터가 최적 경로를 찾아 포워딩한다</li>
+  <li>ICMP의 ‘목적지 도달 불가’, OSPF/BGP 같은 라우팅 프로토콜이 여기에 있다</li>
+</ul>
+
+<h3 id="4계층-전송-transport">4계층. 전송 (Transport)</h3>
+
+<blockquote>
+  <p>“프로세스 간에 패킷이 유실돼도 재전송하고, 순서도 맞춰야지”</p>
+</blockquote>
+
+<ul>
+  <li><strong>TCP</strong>: 3-Way Handshake, 흐름/혼잡 제어, 세그먼트 재전송</li>
+  <li><strong>UDP</strong>: 최소한의 헤더로 “빠르지만 책임지지 않는” 전송</li>
+  <li><strong>QUIC</strong>: HTTP/3가 쓰는 신흥 강자. UDP 위에 신뢰성과 TLS를 포함</li>
+</ul>
+
+<h3 id="5계층-세션-session">5계층. 세션 (Session)</h3>
+
+<blockquote>
+  <p>“논리적인 대화방(세션)을 열고 닫는 관리를 맡자”</p>
+</blockquote>
+
+<ul>
+  <li>체크포인트·재동기화·다중 스트림 제어가 가능하다</li>
+  <li>실무에서는 구분이 애매하다. OSI만의 전통적 구분이며, 실제 구현은 주로 응용/전송 계층이 흡수한다</li>
+</ul>
+
+<h3 id="6계층-표현-presentation">6계층. 표현 (Presentation)</h3>
+
+<blockquote>
+  <p>“바이트를 사람이 읽을 수 있게, 또는 암호화된 형태로 변환하자”</p>
+</blockquote>
+
+<ul>
+  <li>문자 집합 변환(UTF-8 ↔ EUC-KR), 압축(GZIP), 암복호화(TLS)를 담당한다</li>
+  <li>응용 계층과 합쳐 다루는 경우가 많지만, 보안·멀티미디어 코덱을 설명할 때 유용하다</li>
+</ul>
+
+<h3 id="7계층-응용-application">7계층. 응용 (Application)</h3>
+
+<blockquote>
+  <p>“사용자 프로그램이 원하는 서비스 그 자체”</p>
+</blockquote>
+
+<ul>
+  <li>웹브라우저-HTTP, 메일-SMTP/IMAP, 파일전송-FTP/SFTP처럼 <strong>실제 앱 프로토콜</strong>이 자리한다</li>
+  <li>API 호출(REST/GraphQL), 메신저 프로토콜도 여기서 논의된다</li>
+</ul>
+
+<h2 id="3-왜-tcpip-4계층을-더-많이-쓸까">3. 왜 TCP/IP 4계층을 더 많이 쓸까?</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">OSI 계층</th>
+      <th style="text-align: center">TCP/IP (실무)</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">7–5</td>
+      <td style="text-align: center">응용 계층</td>
+      <td style="text-align: left">HTTP·TLS·RPC 등을 한 덩어리로 묶음</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">전송 계층</td>
+      <td style="text-align: left">TCP·UDP·QUIC</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">인터넷 계층</td>
+      <td style="text-align: left">IP, ICMP 등</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2–1</td>
+      <td style="text-align: center">네트워크 접근 계층</td>
+      <td style="text-align: left">Ethernet·Wi-Fi·물리 매체</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><strong>간소화</strong>: 실제 구현에서 세션·표현 계층이 따로 분리돼 작동하지 않는 경우가 많아 4단계로 줄였다</li>
+  <li><strong>표준화 주체 차이</strong>: OSI는 ISO(국제표준화기구), TCP/IP는 IETF(인터넷 엔지니어링 태스크포스)가 주도한다</li>
+</ul>
+
+<h2 id="4-osi-7계층을-배우는-이유">4. OSI 7계층을 배우는 이유</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">이유</th>
+      <th style="text-align: left">설명</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">문제 진단</td>
+      <td style="text-align: left">“이건 3계층 문제인가, 4계층 문제인가?”를 구분해야 디버깅이 쉽다</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">역할 분리</td>
+      <td style="text-align: left">새 프로토콜 설계 시 “이 기능은 어느 계층 책임인가?”를 결정하는 기준이 된다</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">학습 프레임</td>
+      <td style="text-align: left">물리 → 응용으로 올라가며 추상화와 책임 범위를 체계적으로 이해할 수 있다</td>
+    </tr>
+  </tbody>
+</table>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="https://via.placeholder.com/128x128 1x,https://via.placeholder.com/256x256 2x"
+    
+  
+  alt="JeongHwan Yun"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>개발자로의 성장과정</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/cryptography/" class="flip-title"><span>암호학 기초</span></a>  <time class="faded fine" datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/algorithm/self-balancing-binary-search-tree/" class="flip-title"><span>자기 균형 이진 탐색 트리(Self-Balancing Binary Search Tree)</span></a>  <time class="faded fine" datetime="2025-03-30T00:00:00+00:00">30 Mar 2025</time></li>          <li class="h4">  <a href="/blog/algorithm/sort/" class="flip-title"><span>정렬(Sort)</span></a>  <time class="faded fine" datetime="2025-03-18T00:00:00+00:00">18 Mar 2025</time></li>          <li class="h4">  <a href="/blog/cs/thread-advanced/" class="flip-title"><span>스레드(Thread) 심화: 스케줄링 전략과 타이밍</span></a>  <time class="faded fine" datetime="2025-05-12T00:00:00+00:00">12 May 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© 2022 JeongHwan Yun.
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(200,200,200);background-image:url(/assets/img/sidebar-bg.png)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/logo.png" class="avatar" alt="hwan log" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">hwan log</h2></a>
+    
+    
+      <p class="">
+        기술블로그
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/algorithm/"
+          class="sidebar-nav-item "
+          
+        >
+          알고리즘
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/cs/"
+          class="sidebar-nav-item "
+          
+        >
+          CS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/techstack/"
+          class="sidebar-nav-item "
+          
+        >
+          Tech Stack
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/ai/"
+          class="sidebar-nav-item "
+          
+        >
+          AI
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/projects/"
+          class="sidebar-nav-item "
+          
+        >
+          PROJECTS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/devlog/"
+          class="sidebar-nav-item "
+          
+        >
+          devlog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/resume/"
+          class="sidebar-nav-item "
+          
+        >
+          RESUME
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>(()=>{var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())})();
+</script>
+  <script src="/assets/js/hydejack-9.2.1.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.2.1.js" nomodule defer></script>
+  
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>

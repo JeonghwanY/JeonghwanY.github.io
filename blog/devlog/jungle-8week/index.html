@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>KRAFTON JUNGLE 8주차 회고 | hwan log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="KRAFTON JUNGLE 8주차 회고" />
+<meta name="author" content="JeongHwan Yun" />
+<meta property="og:locale" content="ko_KR, en_US" />
+<meta name="description" content="기술블로그" />
+<meta property="og:description" content="기술블로그" />
+<meta property="og:site_name" content="hwan log" />
+<meta property="og:image" content="/assets/img/blog/devlog/jungle2.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-14T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/assets/img/blog/devlog/jungle2.jpg" />
+<meta property="twitter:title" content="KRAFTON JUNGLE 8주차 회고" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2025-05-14T00:00:00+00:00","datePublished":"2025-05-14T00:00:00+00:00","description":"기술블로그","headline":"KRAFTON JUNGLE 8주차 회고","image":"/assets/img/blog/devlog/jungle2.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/devlog/jungle-8week/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/devlog/jungle-8week/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="color-scheme" content="dark light">
+
+
+
+  <meta name="theme-color" content="rgb(200,200,200)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="hwan log">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="hwan log">
+
+<meta name="generator" content="Hydejack v9.2.1" />
+
+
+<link rel="alternate" href="/blog/devlog/jungle-8week/" hreflang="ko-kr, en-us">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.2.1.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<script>((r,a)=>{function d(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=a.createElement("script"),e=(n.src=e,t&&d(n,"load",t,{once:!0}),a.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=a.createElement("script");function o(){r._loaded=!0,t&&d(n,"load",t,{once:!0});var e=a.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():d(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){d(a.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}})(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-06-01T18:16:59+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.2.1.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5);--accent-color-highlight: rgba(200,200,200,0.1);--accent-color-darkened: #b5b5b5;--theme-color: rgb(200,200,200);--dark-mode-body-bg: #2d2d2d;--dark-mode-border-color: #393939}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  ((e,s)=>{var d="light-mode",a="dark-mode",o=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(o=o<=e._sunrise||o>=e._sunset?a:d)==a?d:a,s.body.classList.add(o),s.body.classList.remove(e))})(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/devlog/">devlog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>jungle-8week</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-devlog-jungle-8week" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        KRAFTON JUNGLE 8주차 회고
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-05-14T00:00:00+00:00">14 May 2025</time> in <span>Blog</span> / <a href="/devlog/" class="flip-title">devlog</a> on <a href="/tag-krafton-jungle/" class="flip-title">크래프톤 정글</a>, <a href="/tag-%ED%9A%8C%EA%B3%A0/" class="flip-title">회고</a>
+      </span>
+      
+    </div>
+
+    
+    
+      
+        <div class="img-wrapper lead aspect-ratio sixteen-nine flip-project-img">
+          
+
+
+<img
+  
+    src="/assets/img/blog/devlog/jungle2.jpg"
+    
+    
+  
+  alt="KRAFTON JUNGLE 8주차 회고"
+  
+  
+  width="864"
+  height="486"
+  loading="lazy"
+/>
+
+        </div>
+      
+      
+    
+
+    
+
+
+
+  
+
+
+  </header>
+
+  
+    <ul class="large-only" id="markdown-toc">
+  <li><a href="#5주차" id="markdown-toc-5주차">5주차</a></li>
+  <li><a href="#6주차" id="markdown-toc-6주차">6주차</a></li>
+  <li><a href="#7주차" id="markdown-toc-7주차">7주차</a></li>
+  <li><a href="#8주차" id="markdown-toc-8주차">8주차</a></li>
+</ul>
+
+<p>8주차를 마지면서 이제 2달이라는 시간이 지나게 되었다. PintOS를 사용해서 OS 기능을 구축해야 한다. 예전 같았으면 두려웠을 텐데, 지금은 어떻게든 해내겠지 라는 마인드 덕분에 두렵진 않다.</p>
+
+<p>주가 지나가면 지나갈 수록 챙기지 못한 부분들이 점점 쌓여가고 있다. 불쾌한 기분이지만, 우선 현재에 집중해 보자라는 생각이다. 열심히 해보자</p>
+
+<h2 id="5주차">5주차</h2>
+
+<p>파이썬으로 알고리즘을 배우는 첫 달이 끝나고, 이제는 C언어로 컴퓨터에게 깊이 빠져드는 첫 주가 되었다. 과제로 주어진 것은 Linked List/Stack and Queue/Binary Tree/Binary Search Tree 알고리즘 기반으로 문제를 푸는 것이었다.</p>
+
+<p>C언어를 잘 몰랐기에, 먼저 Youtube의 6시간짜리 C 언어 기초 동영상으로 시작을 했다. 졸려가는걸 버티면서 3~4시간쯤 보았을 때, 다른 정들러분들이 문제를 시작한걸 보고 남들보다 진도가 조금 뒤쳐진다는걸 깨달았다. 그래서 우선 기초는 여기까지 마무리하고 문제로 넘어갔다.</p>
+
+<p>문제로 넘어간 뒤에 2시간 동안 코드해석 하는 데에만 쏟았는데, 이 2시간이 의미가 있었다. 언어 해석하는데에 수월해지는 시간이었고 문제를 바로 풀 수 있었다. 5주차를 마무리 하면서 쓰는 결론으로는 Binary Tree 빼고 모든 문제는 다 풀 수 있었다. 당연히 문제를 본인 스스로 다 풀지는 못하였지만, 내 스스로 50%정도는 스스로 풀 수 있었다.</p>
+
+<p>팀원분들과 첫 Core-time을 가졌을때, 많은 것을 얻을 수 있었다. 두분 모두 열심히 준비를 해주셔서 한 주를 잘 시작할 수 있었다. 다만, 아쉽게도 불가피한 사정으로 인해서 두 분 모두 시간을 온전히 투자할 수 있는 상황이 아니었어서 중간에 흐지부지 했었던점이 조금 아쉬웠다. 그럼에도 불구하고 5주차 때 열심히 했어서 많이 도움이 되었다.</p>
+
+<h2 id="6주차">6주차</h2>
+
+<p>6주차에서는 C언어로 Red-Black Tree를 구현하는 과제가 주어졌다. 여태까지 미리 미리 보아두라고 했었지만, 그러지 않았기 때문에, 나에게는 불똥이 떨어진 셈이다. 그나마 다행이었던 것은 모두 Red-Black Tree에 대해서 많이 알지 못했던 것이다. 그래서 같이 시작하면 됐다.</p>
+
+<p>불똥이 떨어졌기 때문에, 트리에 대한 이해를 빠르게 해야만 했다. 첫날에 Red-Black Tree에 대해서 개념을 먼저 다지자고 팀원들과 얘기했고, 빠르게 공부를 시작했다. 아쉽게도 첫날에는 삽입에 대해서만 개념을 다루었고 그 다음날에 삭제까지 개념을 다지면서 마무리가 되었다.</p>
+
+<p>개념을 다지고 이제 C언어로 구현을 해야 하는데, 막막한 느낌이 없지 않아 있었고 알고리즘(Introduction to ALGORITHMS)책을 통해 시작할 수 있게 되었다. 해당 책을 통해 많은 도움을 받았고 직접 구현하기 보다는 이미 짜여진 코드를 이해하는게 더 중요하다고 생각이 되었다. 그 이유에 대해서는, 처음으로 트리를 구현하는 것이었기 때문에, 처음부터 RBTree를 구현하는 것은 많은 시간을 쓸거라고 생각했고, 다른 과제들 또한 있었기 때문에 타협을 본 셈이다.</p>
+
+<p>C언어로 RBTree 구현을 모두 마치고 CS:APP 책 8장과 9장을 읽어야 했다. 결론적으로 다 읽지는 못하였지만, 8장에서 예외처리를 위한 시그널과 9장에서 가상 메모리를 쓰는 이유에 대해 배울 수 있게 되었다. 팀원들과 가졌던 Core-time에서 내가 알고 있던 내용과 팀원들이 알고있던 내용에 다른점이 존재했다. 내가 알고 있던 내용이 맞았고 정정을 해주었던 점이 기억에 남는다. 앞으로도 깊게 파고드는 습관을 유지하면서 공부하고자 하는 계기를 만들었다. 그럼에도 불구하고, 과제를 모두 마치지 못한 첫 주가 되었고 많이 아쉬웠다. 완수를 못한점에 대해 만회하고자 차주부터 열심히 하고자 한다.</p>
+
+<h2 id="7주차">7주차</h2>
+
+<p>Malloc함수를 직접 구현하는 주차가 시작 되었다. 전주에 CS:APP 읽는 과제에 대해 완수를 못했던점이 나에게는 걸리는 부분이어서, 이번 주차에 만회를 하고 싶었다. 아쉽게도 만회는 못하였다.. 대신에 이번주에 필요한 CS:APP 9.9장에 대해서는 완벽하게 이해했다. 9.9장도 쉽지 않았는데, 내 공부법에 문제가 있다고 판단 후, 동료에게서 youtube영상을 보라고 하는 조언을 듣고 내 공부법을 바꾸었다. CS:APP 저자의 영상이어서 믿고 볼 수 있었고, 핵심만 얘기해줬기 때문에, 빠르게 9.9장에 대해서 이해할 수 있었다.</p>
+
+<p>아쉽게도 팀원분들이 불가피하게 초반에 참여를 못하게 되었다. 그래서 C언어로 코드 구현하는것을 조금 늦게 시작하게 되었다. 그럼에도 불구하고 명시적 list로 구현을 완수할 수 있었다. 내가 스스로 구현할려고 해보았지만, segmentation error가 떴었고 동료에 도움 요청했을 때, gdb로도 error를 찾는것이 힘들고 Google AI Studio 통해서 물어보는것이 더 좋다고 들었다. 그래서 Google AI Studio 통해서 물어보았고, 문제되는 부분들에 대해서 수정을 하였다. 명시적 list로 구현했더니 묵시적 list + next-fit 보다 1점 높아지는 결과가 나오게 되었다. 여기서 명시적 list에서는 best-fit이 제일 효율이 좋다고 들었지만, 수요일 저녁때 완성이 되어서 목요일 발표를 위해 추가 작업은 진행하지 못하였다.</p>
+
+<p>발표에 관해서는 명시적 list 코드의 refactoring에 대해서 다루었고 발표는 잘 마무리 되었다. 발표시간에 다른 조 발표를 보았는데, 저번주 보다 훨씬 도움되는 내용들이 많아서 집중도 있게 보게 되었다.</p>
+
+<p>1주가 끝난 후의 느낀점으로는, 컴퓨터에 대해서 깊이 있게 빠져 들었던것이 좋았지만, 많이 구현했던 다른 분들과 비교했을 때, 조금 뒤쳐진다는 느낌을 받아서 아쉬웠다.</p>
+
+<h2 id="8주차">8주차</h2>
+
+<p>이번주 같은 경우 네트워크에 대해 배우는 주차였다. 이동석 코치님께서 이번주가 가장 중요한 주차라고 하시면서, 책과 개념들에 대해 word by word로 꼼꼼히 보라고 하셨다. 주차를 마무리하면서 쓰는 WIL이기 때문에, 결론부터 말하자면, CS:APP 11장에 대해서 모든 부분을 보았다. 처음으로 1장을 완벽하게 다 읽어본적은 처음 이었어서 성취감이 있었다.</p>
+
+<p>책 개념 뿐만 아니고 코드로 네트워크 구축하는 과제도 있어서 진행을 해야 했다. 다만, 초기에 활동할 수 있도록 책에 관련 코드가 있어서 따라 쳤다. 그 이후에, 프록시 서버 구축을 위해서는 개념을 먼저 이해하고 혼자서 짤려고 노력했지만, 쉽지 않아 GPT의 힘을 빌렸다. 그렇게 하여 순차적 처리 proxy 서버 구축을 진행했고, 이걸 통해 팀원들과 같이 쓰레딩과 캐시 기능까지 추가하게 되었다. 쓰레딩과 캐시 기능 모두 GPT의 힘을 빌렸다.</p>
+
+<p>이번주 같은 경우 개념 이해는 괜찮았지만, 실제로 구현하기 위해 코드를 작성하는 것은 쉽지 않았다. GPT의 힘을 빌렸기 때문에, 이정도로 구현을 할 수 있었는데, GPT의 힘을 너무 빌린 점에 대해서 죄책감이 있었다. 그리고 이 글을 쓰고 있는 지금으로 부터 3시간 전에 “AI는 친구인가? 적인가?” 라는 주제로 커피챗을 진행하였다. 얘기를 나누면서 대다수가 동의하는 부분은 “GPT의 발전은 멈출수가 없기 때문에, GPT를 잘 활용하는것이 우리에게 득이 된다” 이었다. 오히려 이런 생각을 많이 갖고 있는 사람들 덕분에 이번주에 느꼈던 죄책감은 덜 수 있었다.</p>
+
+<p>팀원분들과의 팀웍에 관련해서 얘기를 하자면, 처음에는 미적지근한 느낌이 있었는데, 날이 가면 갈수록 점점 발전된 대화를 난누면서 괜찮은 Core-time을 보낼 수 있게 되었다. 이부분에 대해서 팀원분들한테 고맙다.</p>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="https://via.placeholder.com/128x128 1x,https://via.placeholder.com/256x256 2x"
+    
+  
+  alt="JeongHwan Yun"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>개발자로의 성장과정</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/cryptography/" class="flip-title"><span>암호학 기초</span></a>  <time class="faded fine" datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/algorithm/dijkstras-floyd-warshall-bellman-ford/" class="flip-title"><span>최단 거리(Shortest path)</span></a>  <time class="faded fine" datetime="2025-03-29T00:00:00+00:00">29 Mar 2025</time></li>          <li class="h4">  <a href="/blog/cs/http-tcp-udp/" class="flip-title"><span>HTTP, TCP, UDP: 계층별 역할과 차이</span></a>  <time class="faded fine" datetime="2025-05-06T00:00:00+00:00">06 May 2025</time></li>          <li class="h4">  <a href="/blog/algorithm/brute-force/" class="flip-title"><span>완전 탐색(Brute Force)</span></a>  <time class="faded fine" datetime="2025-03-19T00:00:00+00:00">19 Mar 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© 2022 JeongHwan Yun.
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(200,200,200);background-image:url(/assets/img/sidebar-bg.png)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/logo.png" class="avatar" alt="hwan log" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">hwan log</h2></a>
+    
+    
+      <p class="">
+        기술블로그
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/algorithm/"
+          class="sidebar-nav-item "
+          
+        >
+          알고리즘
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/cs/"
+          class="sidebar-nav-item "
+          
+        >
+          CS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/techstack/"
+          class="sidebar-nav-item "
+          
+        >
+          Tech Stack
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/ai/"
+          class="sidebar-nav-item "
+          
+        >
+          AI
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/projects/"
+          class="sidebar-nav-item "
+          
+        >
+          PROJECTS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/devlog/"
+          class="sidebar-nav-item "
+          
+        >
+          devlog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/resume/"
+          class="sidebar-nav-item "
+          
+        >
+          RESUME
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>(()=>{var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())})();
+</script>
+  <script src="/assets/js/hydejack-9.2.1.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.2.1.js" nomodule defer></script>
+  
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>

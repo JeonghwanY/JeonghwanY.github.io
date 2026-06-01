@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>자기 균형 이진 탐색 트리(Self-Balancing Binary Search Tree) | hwan log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="자기 균형 이진 탐색 트리(Self-Balancing Binary Search Tree)" />
+<meta name="author" content="JeongHwan Yun" />
+<meta property="og:locale" content="ko_KR, en_US" />
+<meta name="description" content="기술블로그" />
+<meta property="og:description" content="기술블로그" />
+<meta property="og:site_name" content="hwan log" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-03-30T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="자기 균형 이진 탐색 트리(Self-Balancing Binary Search Tree)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2025-03-30T00:00:00+00:00","datePublished":"2025-03-30T00:00:00+00:00","description":"기술블로그","headline":"자기 균형 이진 탐색 트리(Self-Balancing Binary Search Tree)","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/algorithm/self-balancing-binary-search-tree/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/algorithm/self-balancing-binary-search-tree/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="color-scheme" content="dark light">
+
+
+
+  <meta name="theme-color" content="rgb(200,200,200)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="hwan log">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="hwan log">
+
+<meta name="generator" content="Hydejack v9.2.1" />
+
+
+<link rel="alternate" href="/blog/algorithm/self-balancing-binary-search-tree/" hreflang="ko-kr, en-us">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.2.1.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<script>((r,a)=>{function d(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=a.createElement("script"),e=(n.src=e,t&&d(n,"load",t,{once:!0}),a.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=a.createElement("script");function o(){r._loaded=!0,t&&d(n,"load",t,{once:!0});var e=a.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():d(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){d(a.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}})(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-06-01T18:16:59+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.2.1.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5);--accent-color-highlight: rgba(200,200,200,0.1);--accent-color-darkened: #b5b5b5;--theme-color: rgb(200,200,200);--dark-mode-body-bg: #2d2d2d;--dark-mode-border-color: #393939}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  ((e,s)=>{var d="light-mode",a="dark-mode",o=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(o=o<=e._sunrise||o>=e._sunset?a:d)==a?d:a,s.body.classList.add(o),s.body.classList.remove(e))})(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/algorithm/">algorithm</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>self-balancing-binary-search-tree</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-algorithm-self-balancing-binary-search-tree" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        자기 균형 이진 탐색 트리(Self-Balancing Binary Search Tree)
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-03-30T00:00:00+00:00">30 Mar 2025</time> in <span>Blog</span> / <a href="/algorithm/" class="flip-title">알고리즘</a> 
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul class="large-only" id="markdown-toc">
+  <li><a href="#avl-트리-adelson-velsky--landis" id="markdown-toc-avl-트리-adelson-velsky--landis">AVL 트리 (Adelson-Velsky &amp; Landis)</a>    <ul>
+      <li><a href="#avl-트리의-핵심-요소" id="markdown-toc-avl-트리의-핵심-요소">AVL 트리의 핵심 요소</a></li>
+      <li><a href="#avl-작동-원리" id="markdown-toc-avl-작동-원리">AVL 작동 원리</a>        <ul>
+          <li><a href="#1-ll회전단순-오른쪽-회전" id="markdown-toc-1-ll회전단순-오른쪽-회전">1. LL회전(단순 오른쪽 회전)</a></li>
+          <li><a href="#2-rr회전단순-왼쪽-회전" id="markdown-toc-2-rr회전단순-왼쪽-회전">2. RR회전(단순 왼쪽 회전)</a></li>
+          <li><a href="#3-lr회전왼쪽-자식의-오른쪽--두-번-회전" id="markdown-toc-3-lr회전왼쪽-자식의-오른쪽--두-번-회전">3. LR회전(왼쪽 자식의 오른쪽 → 두 번 회전)</a></li>
+          <li><a href="#4-rl회전오른쪽-자식의-왼쪽--두-번-회전" id="markdown-toc-4-rl회전오른쪽-자식의-왼쪽--두-번-회전">4. RL회전(오른쪽 자식의 왼쪽 → 두 번 회전)</a></li>
+        </ul>
+      </li>
+      <li><a href="#avl-함수" id="markdown-toc-avl-함수">AVL 함수</a></li>
+    </ul>
+  </li>
+  <li><a href="#레드블랙-트리red-black-tree" id="markdown-toc-레드블랙-트리red-black-tree">레드블랙 트리(Red-Black Tree)</a>    <ul>
+      <li><a href="#레드블랙-트리의-핵심-규칙" id="markdown-toc-레드블랙-트리의-핵심-규칙">레드블랙 트리의 핵심 규칙</a></li>
+      <li><a href="#레드블랙-트리-세부-특징" id="markdown-toc-레드블랙-트리-세부-특징">레드블랙 트리 세부 특징</a></li>
+      <li><a href="#레드블랙-트리의-주요-연산삽입--삭제" id="markdown-toc-레드블랙-트리의-주요-연산삽입--삭제">레드블랙 트리의 주요 연산(삽입 &amp; 삭제)</a>        <ul>
+          <li><a href="#삽입" id="markdown-toc-삽입">삽입</a></li>
+          <li><a href="#삭제" id="markdown-toc-삭제">삭제</a></li>
+        </ul>
+      </li>
+      <li><a href="#레드블랙-트리의-회전균형을-위한-핵심" id="markdown-toc-레드블랙-트리의-회전균형을-위한-핵심">레드블랙 트리의 회전(균형을 위한 핵심)</a></li>
+      <li><a href="#레드블랙-트리-삽입-그림으로-이해하기" id="markdown-toc-레드블랙-트리-삽입-그림으로-이해하기">레드블랙 트리 삽입 그림으로 이해하기</a>        <ul>
+          <li><a href="#처음-과정인-루트-노드에-삽입될-때" id="markdown-toc-처음-과정인-루트-노드에-삽입될-때">처음 과정인, 루트 노드에 삽입될 때</a></li>
+          <li><a href="#삽입되는-노드의-부모가-검정일-때" id="markdown-toc-삽입되는-노드의-부모가-검정일-때">삽입되는 노드의 부모가 검정일 때</a></li>
+          <li><a href="#4번-규칙-위반하게-될-경우" id="markdown-toc-4번-규칙-위반하게-될-경우">#4번 규칙 위반하게 될 경우</a></li>
+          <li><a href="#4번-규칙-위반-case-1" id="markdown-toc-4번-규칙-위반-case-1">#4번 규칙 위반 Case 1</a></li>
+          <li><a href="#step-1-10-삽입" id="markdown-toc-step-1-10-삽입">Step 1: 10 삽입</a></li>
+          <li><a href="#step-2-18-삽입" id="markdown-toc-step-2-18-삽입">Step 2: 18 삽입</a></li>
+          <li><a href="#step-3-7-삽입" id="markdown-toc-step-3-7-삽입">Step 3: 7 삽입</a></li>
+          <li><a href="#step-4-15-삽입" id="markdown-toc-step-4-15-삽입">Step 4: 15 삽입</a></li>
+          <li><a href="#해결-삼촌-노드-색-확인" id="markdown-toc-해결-삼촌-노드-색-확인">해결: 삼촌 노드 색 확인</a></li>
+          <li><a href="#step-5-16-삽입" id="markdown-toc-step-5-16-삽입">Step 5: 16 삽입</a></li>
+          <li><a href="#해결-삼촌-노드-색-확인-1" id="markdown-toc-해결-삼촌-노드-색-확인-1">해결: 삼촌 노드 색 확인</a></li>
+          <li><a href="#회전--색-변경-먼저-좌회전left-rotate-on-15" id="markdown-toc-회전--색-변경-먼저-좌회전left-rotate-on-15">회전 + 색 변경, 먼저 좌회전(Left Rotate) on 15</a></li>
+          <li><a href="#회전--색-변경-다음-우회전right-rotate-on-18--색-변경" id="markdown-toc-회전--색-변경-다음-우회전right-rotate-on-18--색-변경">회전 + 색 변경, 다음 우회전(Right Rotate) on 18 + 색 변경</a></li>
+        </ul>
+      </li>
+      <li><a href="#레드블랙-트리-삭제-그림으로-이해하기" id="markdown-toc-레드블랙-트리-삭제-그림으로-이해하기">레드블랙 트리 삭제 그림으로 이해하기</a>        <ul>
+          <li><a href="#step-1-1-삭제하기-간단한-경우" id="markdown-toc-step-1-1-삭제하기-간단한-경우">Step 1: 1 삭제하기 (간단한 경우)</a></li>
+          <li><a href="#해결-전략-double-black-해결" id="markdown-toc-해결-전략-double-black-해결">해결 전략: Double Black 해결</a></li>
+          <li><a href="#double-black-해결-케이스-총정리" id="markdown-toc-double-black-해결-케이스-총정리">Double Black 해결 케이스 총정리</a>            <ul>
+              <li><a href="#case-1-형제-s가-빨강" id="markdown-toc-case-1-형제-s가-빨강">Case 1: 형제 S가 빨강</a></li>
+              <li><a href="#case-2-형제-s가-검정-자식-둘-다-검정" id="markdown-toc-case-2-형제-s가-검정-자식-둘-다-검정">Case 2: 형제 S가 검정, 자식 둘 다 검정</a></li>
+              <li><a href="#case-3-형제가-검정이고-형제의-가까운-자식이-빨강" id="markdown-toc-case-3-형제가-검정이고-형제의-가까운-자식이-빨강">Case 3: 형제가 검정이고, 형제의 가까운 자식이 빨강</a></li>
+              <li><a href="#case-4-형제가-검정이고-형제의-먼-자식이-빨강" id="markdown-toc-case-4-형제가-검정이고-형제의-먼-자식이-빨강">Case 4: 형제가 검정이고, 형제의 먼 자식이 빨강</a></li>
+              <li><a href="#예제로-실제-트리-변경-보기" id="markdown-toc-예제로-실제-트리-변경-보기">예제로 실제 트리 변경 보기</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#정리" id="markdown-toc-정리">정리</a></li>
+</ul>
+
+<p>AVL 트리 (Adelson-Velsky &amp; Landis) 와 레드블랙 트리 같은 경우 이진 탐색 트리(Binary Search Tree, BST)의 일종으로, 자기 균형 이진 트리(Self-balancing BST) 중 하나야. 자기 균형 이진 트리가 필요한 이유는 예전에 내가 다뤘던 이진 검색트리에 대해서 생각해 봐야해. 이전 이진 검색 트리 같은 경우 <strong>키의 오름차순으로 노드가 삽입되면 트리의 높이가 깊어져 선형 리스트가 되어서 빠른 검색을 못해</strong>. 그래서 높이 제한을 하고자 균형 이진 트리가 고안되었어</p>
+
+<p><img src="/assets/img/blog/algorithm/균형이진탐색트리.png" alt="균형 이진 탐색 트리" /></p>
+
+<ul>
+  <li>
+    <p>AVL 트리는 모든 노드에 대해 <strong><em>왼쪽과 오른쪽 서브트리의 높이 차이(균형 인수)가 -1, 0, 1을 유지하도록 자동으로 균형</em></strong>을 맞춰주는 트리야</p>
+  </li>
+  <li>
+    <p>레드 블랙 트리 같은 경우 <strong><em>조금 더 느슨하게 균형을 잡아서 삽입/삭제 시 연산이 더 빠르다는 장점</em></strong>이 있어</p>
+  </li>
+</ul>
+
+<h2 id="avl-트리-adelson-velsky--landis">AVL 트리 (Adelson-Velsky &amp; Landis)</h2>
+
+<p>일반적인 BST는 삽입/삭제가 반복되면 한쪽으로 치우쳐서 <strong>선형 구조(Linked List)</strong>가 되어버릴 수 있어. 그럼 검색 속도도 O(log n)이 아니라 O(n)이 되어버려 😥</p>
+
+<p>그래서 AVL 트리는 이런 불균형을 방지해서 항상 O(log n) 시간복잡도를 보장하게 해주는 거지!</p>
+
+<h3 id="avl-트리의-핵심-요소">AVL 트리의 핵심 요소</h3>
+
+<ul>
+  <li>
+    <p><strong>높이(height)</strong> : 노드의 높이는 자신을 루트로 하는 서브트리의 최대 깊이를 의미해</p>
+  </li>
+  <li>
+    <p><strong>균형 인수(balance factor)</strong> : 아래의 값이 -1, 0, 1을 넘으면 균형이 깨졌다고 판단하고, 회전을 통해 다시 균형을 맞춰야해</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">balance_factor</span> <span class="o">=</span> <span class="n">height</span><span class="p">(</span><span class="n">left</span> <span class="n">subtree</span><span class="p">)</span> <span class="o">-</span> <span class="n">height</span><span class="p">(</span><span class="n">right</span> <span class="n">subtree</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="avl-작동-원리">AVL 작동 원리</h3>
+
+<p>균형 인수값이 넘어서면(트리의 균형이 깨지면), 4가지 유형의 회전 중 하나를 사용해서 균형을 맞춰</p>
+
+<h4 id="1-ll회전단순-오른쪽-회전">1. LL회전(단순 오른쪽 회전)</h4>
+
+<ul>
+  <li>왼쪽 자식의 왼쪽에 삽입된 경우</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1"># LL
+</span>    <span class="k">if</span> <span class="n">balance</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">right_rotate</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="2-rr회전단순-왼쪽-회전">2. RR회전(단순 왼쪽 회전)</h4>
+
+<ul>
+  <li>오른쪽 자식의 오른쪽에 삽입된 경우</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="c1"># RR
+</span>    <span class="k">if</span> <span class="n">balance</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">&gt;</span> <span class="n">node</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">left_rotate</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="3-lr회전왼쪽-자식의-오른쪽--두-번-회전">3. LR회전(왼쪽 자식의 오른쪽 → 두 번 회전)</h4>
+
+<ul>
+  <li>왼쪽 자식의 오른쪽에 삽입된 경우</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1"># LR
+</span>    <span class="k">if</span> <span class="n">balance</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">&gt;</span> <span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="n">node</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left_rotate</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">right_rotate</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="4-rl회전오른쪽-자식의-왼쪽--두-번-회전">4. RL회전(오른쪽 자식의 왼쪽 → 두 번 회전)</h4>
+
+<ul>
+  <li>오른쪽 자식의 왼쪽에 삽입된 경우</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1"># RL
+</span>    <span class="k">if</span> <span class="n">balance</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">node</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="n">node</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right_rotate</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">right</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">left_rotate</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="avl-함수">AVL 함수</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AVLNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># 노드 높이 초기값 (leaf = 1)
+</span>
+<span class="c1"># 높이 반환 함수
+</span><span class="k">def</span> <span class="nf">get_height</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">node</span><span class="p">.</span><span class="n">height</span>
+
+<span class="c1"># 균형 인수 계산
+</span><span class="k">def</span> <span class="nf">get_balance</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">get_height</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">)</span> <span class="o">-</span> <span class="n">get_height</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">right</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">right_rotate</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="p">.</span><span class="n">left</span> <span class="c1"># x는 y의 왼쪽 자식의 값을 받는다
+</span>    <span class="n">T2</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">right</span> <span class="c1"># T2는 x의 오른쪽 자식의 값을 받는다
+</span>
+    <span class="c1"># 회전 수행
+</span>    <span class="n">x</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">y</span> <span class="c1"># x의 오른쪽 자식은 y가 된다
+</span>    <span class="n">y</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">T2</span>
+
+    <span class="c1"># 높이 업데이트
+</span>    <span class="n">y</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">get_height</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">left</span><span class="p">),</span> <span class="n">get_height</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">right</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">x</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">get_height</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">left</span><span class="p">),</span> <span class="n">get_height</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">right</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">left_rotate</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">right</span>
+    <span class="n">T2</span> <span class="o">=</span> <span class="n">y</span><span class="p">.</span><span class="n">left</span>
+
+    <span class="c1"># 회전 수행
+</span>    <span class="n">y</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">x</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">T2</span>
+
+    <span class="c1"># 높이 업데이트
+</span>    <span class="n">x</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">get_height</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">left</span><span class="p">),</span> <span class="n">get_height</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">right</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">y</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">get_height</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">left</span><span class="p">),</span> <span class="n">get_height</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">right</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="c1"># 1. BST 삽입
+</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">AVLNode</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="c1"># root 노드를 새로 생성성
+</span>    <span class="k">elif</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">node</span><span class="p">.</span><span class="n">key</span><span class="p">:</span> <span class="c1"># key가 노드의 값보다 작다면
+</span>        <span class="n">node</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="c1"># 왼쪽 자식 노드로 다시 재귀
+</span>    <span class="k">else</span><span class="p">:</span>
+        <span class="n">node</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">right</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="c1"># key가 노드의 값보다 크다면 오른쪽 자식 노드로 다시 재귀
+</span>
+    <span class="c1"># 2. 높이 업데이트
+</span>    <span class="n">node</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">get_height</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">),</span> <span class="n">get_height</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">right</span><span class="p">))</span> <span class="c1"># 왼쪽 서브트리와 오른쪽 서브트리의 맥스값에 + 1
+</span>
+    <span class="c1"># 3. 균형 인수 계산
+</span>    <span class="n">balance</span> <span class="o">=</span> <span class="n">get_balance</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+    <span class="c1"># 4. 회전으로 균형 잡기
+</span>    <span class="c1"># LL
+</span>    <span class="k">if</span> <span class="n">balance</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">right_rotate</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="c1"># 이때의 노드는 삽입된 노드의 부모 노드이다
+</span>
+    <span class="c1"># RR
+</span>    <span class="k">if</span> <span class="n">balance</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">&gt;</span> <span class="n">node</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">left_rotate</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="c1"># 이때의 노드는 삽입된 노드의 부모 노드이다
+</span>
+    <span class="c1"># LR
+</span>    <span class="k">if</span> <span class="n">balance</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">&gt;</span> <span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="n">node</span><span class="p">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left_rotate</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">left</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">right_rotate</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="c1"># 이때의 노드는 삽입된 노드의 부모 노드이다
+</span>
+    <span class="c1"># RL
+</span>    <span class="k">if</span> <span class="n">balance</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">node</span><span class="p">.</span><span class="n">right</span><span class="p">.</span><span class="n">key</span><span class="p">:</span>
+        <span class="n">node</span><span class="p">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right_rotate</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">right</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">left_rotate</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="c1"># 이때의 노드는 삽입된 노드의 부모 노드이다
+</span>
+    <span class="k">return</span> <span class="n">node</span>
+</code></pre></div></div>
+
+<h2 id="레드블랙-트리red-black-tree">레드블랙 트리(Red-Black Tree)</h2>
+
+<ul>
+  <li>
+    <p>트리의 균형을 유지해서 최악의 경우에도 탐색/삽입/삭제가 O(log n) 이 되게 만든다.</p>
+  </li>
+  <li>
+    <p>삽입/삭제 연산이 자주 일어나는 환경에 적합하다.</p>
+  </li>
+</ul>
+
+<h3 id="레드블랙-트리의-핵심-규칙">레드블랙 트리의 핵심 규칙</h3>
+
+<p>레드블랙 트리는 노드에 색상 정보를 추가해서 균형을 유지해.
+각 노드는 빨간색(red) 또는 검은색(black) 중 하나야</p>
+
+<ol>
+  <li>
+    <p>노드는 빨강 혹은 검정이다</p>
+  </li>
+  <li>
+    <p>루트는 항상 검정이다</p>
+  </li>
+  <li>
+    <p>모든 리프(NIL 노드)는 검정이다. 여기서 리프는 실제 값이 아니라 “없음(None)”을 나타내는 NIL 노드를 말해</p>
+  </li>
+  <li>
+    <p>빨강 노드의 자식은 반드시 검정이어야 한다</p>
+  </li>
+  <li>
+    <p>어떤 노드에서 리프까지 가는 모든 경로에는 같은 개수의 검정 노드가 있다. 이를 검정 높이(Black Height)라고 함</p>
+  </li>
+</ol>
+
+<ul>
+  <li>
+    <p>여기서 4번과 5번 규칙 덕에 트리가 지나치게 한쪽으로 치우치는 것을 방지해. 실제로 <strong>레드블랙 트리의 높이는 2log(n+1)이하로 제한돼</strong></p>
+
+    <ul>
+      <li><strong>최대 높이가 2*log(n+1)인 것에 대한 증명</strong>은 <strong>아래에 기술했어</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="레드블랙-트리-세부-특징">레드블랙 트리 세부 특징</h3>
+
+<ul>
+  <li>
+    <p>nil 노드란?</p>
+  </li>
+  <li>
+    <p>존재하지 않음을 의미하는 노드(→ 자녀가 없을 때 자녀를 nil노드로 표기)</p>
+  </li>
+  <li>
+    <p>값이 있는 노드와 동등하게 취급(→ RB트리에서 leaf 노드는 nil 노드)</p>
+  </li>
+  <li>
+    <p>모든 nil(leaf) 노드는 black</p>
+  </li>
+  <li>
+    <p>5번 규칙 외전</p>
+
+    <ul>
+      <li><strong>두 자녀가 같은 색을 가질 때 부모와 두 자녀의 색을 바꿔도 5번 규칙은 위반되지 않음.</strong> 하지만 이 행동으로 다른 규칙 위반 가능성은 있음음</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="레드블랙-트리의-주요-연산삽입--삭제">레드블랙 트리의 주요 연산(삽입 &amp; 삭제)</h3>
+
+<p>레드블랙 트리는 삽입/삭제 이후에 균형을 맞추기 위해 회전(Rotation)과 재색칠(Recoloring)을 사용해</p>
+
+<h4 id="삽입">삽입</h4>
+
+<ul>
+  <li>
+    <p>삽입 전에는 RB트리 속성 만족한 상태이다</p>
+  </li>
+  <li>
+    <p>일반적인 BST 방식으로 노드를 삽입한다. 새 노드는 항상 <strong><em>빨강</em></strong>으로 시작한다</p>
+  </li>
+  <li>
+    <p>삽입 후 규칙 위반이 있으면 색 변경 혹은 회전으로 균형을 맞춘다, <strong>삽입에서의 규칙 위반은 대부분 #4 규칙</strong></p>
+
+    <ul>
+      <li>삽입에서의 #4번 규칙 위반에서의 Case 판별은 <strong>삼촌의 색깔과 삽입된 노드의 자식 위치(왼쪽 or 오른쪽)</strong>으로 진행</li>
+    </ul>
+  </li>
+  <li>
+    <p>조상의 색을 바꾸거나, 삼촌 노드가 빨강인지 검정인지에 따라 여러 경우로 나뉜다</p>
+  </li>
+  <li>
+    <p>RB트리 속성이 만족되면서 마무리</p>
+  </li>
+</ul>
+
+<h4 id="삭제">삭제</h4>
+
+<ul>
+  <li>
+    <p>삭제 전에는 RB트리 속성 만족한 상태이다</p>
+  </li>
+  <li>
+    <p>BST 규칙에 따라 삭제(기본 구조는 일반 이진 탐색 트리와 동일)</p>
+  </li>
+  <li>
+    <p>Red 노드 삭제시 규칙 위반은 없게 되지만, Black 노드를 삭제하게 되면 #2, #4, #5 규칙 위반. 위반 했을시 색 변경 혹은 회전으로 균형 맞춤</p>
+
+    <ul>
+      <li>
+        <p><strong>전임자와 교체 시에는? 전임자와 교체할때 값만 바꾸고 삭제되는 노드 색깔은 전임자의 색깔</strong></p>
+      </li>
+      <li>
+        <p>#2 규칙 위반은 <strong>Root 노드</strong> 색을 바꾸면서 해결</p>
+      </li>
+      <li>
+        <p>Double Black : #5 규칙 위반이 되어서 삭제된 색(nil포함)의 위치에 부여, 경로에서 black 수를 카운트할 때 Double Black은 하나의 Black으로 카운트됨</p>
+      </li>
+      <li>
+        <p>Red and Black : 삭제된 색이 Red였다면, Double Blackd이 아니고 Red and Black으로 특정됨. 이 경우에는 검정색으로 바꾸면 해결됨</p>
+      </li>
+      <li>
+        <p>삭제에서의 #5번 규칙 위반에서의 Case 판별은 <strong>형제의 색과 그 형제의 자녀들의 색</strong>으로 진행</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>RB트리 속성이 만족되면서 마무리</p>
+  </li>
+</ul>
+
+<h3 id="레드블랙-트리의-회전균형을-위한-핵심">레드블랙 트리의 회전(균형을 위한 핵심)</h3>
+
+<ul>
+  <li>
+    <p><strong>좌회전(Left Rotate)</strong> : 노드가 오른쪽으로 치우쳤을 때 사용</p>
+  </li>
+  <li>
+    <p><strong>우회전(Right Rotate)</strong> : 노드가 왼쪽으로 치우쳤을 때 사용</p>
+  </li>
+</ul>
+
+<p><strong>회전의 부모와 자식이 빨강 노드이면</strong>, 이 회전 연산은 트리의 <strong>BST 성질</strong>은 유지하면서, 구조를 살짝 바꿔서 균형을 맞춰준다.</p>
+
+<p>하지만, 만약 <strong>회전의 부모가 검정 노드라면</strong>, 이야기는 달라진다. 검정 노드가 반대쪽 서브트리로 넘거가면서 #5 규칙을 위반하기 때문이다.</p>
+
+<ul>
+  <li>
+    <p>검정 노드가 반대쪽으로 넘어가면 #5번 규칙이 위반되면서 검정 높이 차이가 2로 된다. 이럴 경우 넘겨준 의미가 없기 때문에, 아래처럼 해결한다</p>
+  </li>
+  <li>
+    <p>노드 삭제 개념에서는 Double black 을 해소하기 위해서 보통 빨간 노드를 보내고 그 빨간 노드가 검정 노드로 바뀔 수 있게 해주면서 해결한다. 이렇게 되면 검정 높이 차이가 1로 시작하기 때문에, 유의미한 회전을 하게된 것이라고 볼 수 있다.</p>
+  </li>
+</ul>
+
+<h3 id="레드블랙-트리-삽입-그림으로-이해하기">레드블랙 트리 삽입 그림으로 이해하기</h3>
+
+<h4 id="처음-과정인-루트-노드에-삽입될-때">처음 과정인, 루트 노드에 삽입될 때</h4>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="err">10</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>삽입될때는 기본적으로 빨강 노드로 삽입되지만, 처음 과정인 root node에 삽입될 때는 #2번 규칙을 위반하게 됨</p>
+
+<p>규칙 #2번에 따라서 노드를 빨강에서 검정으로 바꿔주면 됨</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="err">10</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h4 id="삽입되는-노드의-부모가-검정일-때">삽입되는 노드의 부모가 검정일 때</h4>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="err">10</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+          <span class="err">\</span>
+         <span class="err">18</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>삽입되는 노드의 부모가 검정이라면 #4번 규칙 위반이 되지 않고 다른 모든 규칙도 위반되지 않음</p>
+
+<h4 id="4번-규칙-위반하게-될-경우">#4번 규칙 위반하게 될 경우</h4>
+
+<p>위 두 예제 같은 경우 제외하면, 부모가 Red인 경우가 남는다. 부모가 Red이면서 삼촌의 색과 삽입된 노드의 위치(왼쪽or오른쪽 자식)과 부모의 위치(조부모의 왼쪽or오른쪽 자식)에 따라서 총 3가지 Case가 나오게 된다. 그 3가지 Case에 대해서 어떻게 해결해야 하는지 정리를 했어</p>
+
+<h4 id="4번-규칙-위반-case-1">#4번 규칙 위반 Case 1</h4>
+
+<p>삼촌이 Red일 때</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         <span class="o">(</span><span class="nt">B</span><span class="o">)</span><span class="nt">조부모</span>
+       <span class="o">/</span>     <span class="err">\</span>
+  <span class="nt">부모</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>     <span class="o">(</span><span class="nt">R</span><span class="o">)</span><span class="nt">삼촌</span>
+     <span class="o">/</span>  <span class="err">\</span>    <span class="o">/</span>  <span class="err">\</span>
+   <span class="o">(</span><span class="nt">R</span><span class="o">)</span><span class="nt">or</span><span class="o">(</span><span class="nt">R</span><span class="o">)(</span><span class="nt">R</span><span class="o">)</span><span class="nt">or</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span> <span class="nt">삽입된</span> <span class="nt">노드</span>
+</code></pre></div></div>
+
+<h4 id="step-1-10-삽입">Step 1: 10 삽입</h4>
+
+<ul>
+  <li>
+    <p>트리가 비어 있으니 10을 루트로 만든다.</p>
+  </li>
+  <li>
+    <p>새 노드는 기본적으로 빨강이지만, 루트는 항상 검정이어야 한다.</p>
+  </li>
+</ul>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="err">10</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+          <span class="err">\</span>
+         <span class="err">18</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+</code></pre></div></div>
+<h4 id="step-2-18-삽입">Step 2: 18 삽입</h4>
+
+<ul>
+  <li>
+    <p>일반 BST 방식으로 오른쪽에 삽입</p>
+  </li>
+  <li>
+    <p>새 노드는 빨강</p>
+  </li>
+</ul>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="err">10</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+       <span class="o">/</span>     <span class="err">\</span>
+    <span class="err">7</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>     <span class="err">18</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+</code></pre></div></div>
+<h4 id="step-3-7-삽입">Step 3: 7 삽입</h4>
+
+<ul>
+  <li>
+    <p>7은 10보다 작으니 왼쪽에 삽입.</p>
+  </li>
+  <li>
+    <p>역시 새 노드는 빨강.</p>
+  </li>
+</ul>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="err">10</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+       <span class="o">/</span>     <span class="err">\</span>
+    <span class="err">7</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>     <span class="err">18</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+            <span class="o">/</span>
+         <span class="err">15</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+</code></pre></div></div>
+<h4 id="step-4-15-삽입">Step 4: 15 삽입</h4>
+
+<ul>
+  <li>
+    <p>BST 순서대로 18의 왼쪽에 삽입됨 (18의 왼쪽 자식)</p>
+  </li>
+  <li>
+    <p>새 노드 15는 빨강</p>
+  </li>
+</ul>
+
+<p>🚨 문제 발생!</p>
+
+<ul>
+  <li>15(R)의 부모 18(R)도 빨강이다 → Red-Red Violation! (규칙 4 위반)</li>
+</ul>
+
+<h4 id="해결-삼촌-노드-색-확인">해결: 삼촌 노드 색 확인</h4>
+
+<ul>
+  <li>
+    <p>15의 삼촌 노드는 7(R) (부모 18(R)의 형제)</p>
+  </li>
+  <li>
+    <p>삼촌도 빨강 → Recoloring 진행!</p>
+  </li>
+</ul>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">색</span> <span class="nt">바꾸기</span><span class="o">:</span>
+  <span class="nt">-</span> <span class="err">18</span> <span class="err">→</span> <span class="nt">검정</span>
+  <span class="nt">-</span> <span class="err">7</span>  <span class="err">→</span> <span class="nt">검정</span>
+  <span class="nt">-</span> <span class="err">10</span> <span class="err">→</span> <span class="nt">빨강</span> <span class="o">(</span><span class="nt">부모로</span> <span class="nt">올라감</span><span class="o">)</span>
+
+        <span class="err">10</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+       <span class="o">/</span>     <span class="err">\</span>
+    <span class="err">7</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>     <span class="err">18</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+            <span class="o">/</span>
+         <span class="err">15</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>❗근데 10은 루트 → 루트는 항상 검정 → 다시 10 → 검정으로 바꿈</li>
+</ul>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="err">10</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+       <span class="o">/</span>     <span class="err">\</span>
+    <span class="err">7</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>     <span class="err">18</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+            <span class="o">/</span>
+         <span class="err">15</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>✔ 균형 복구 완료 ✅</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="err">10</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+       <span class="o">/</span>     <span class="err">\</span>
+    <span class="err">7</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>     <span class="err">18</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+            <span class="o">/</span>
+         <span class="err">15</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+              <span class="err">\</span>
+             <span class="err">16</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h4 id="step-5-16-삽입">Step 5: 16 삽입</h4>
+
+<ul>
+  <li>16은 10 &lt; 18 &lt; 16 → 18의 왼쪽 → 15의 오른쪽에 삽입</li>
+</ul>
+
+<p>🚨 다시 Red-Red 발생</p>
+
+<ul>
+  <li>
+    <p>15(R) → 부모</p>
+  </li>
+  <li>
+    <p>16(R) → 자식 → Red-Red violation</p>
+  </li>
+</ul>
+
+<h4 id="해결-삼촌-노드-색-확인-1">해결: 삼촌 노드 색 확인</h4>
+
+<ul>
+  <li>
+    <p>16의 삼촌은 없음 (NIL → 검정)</p>
+  </li>
+  <li>
+    <p>삼촌이 검정이고, 노드가 부모의 오른쪽 자식인 경우 → 좌회전 후 우회전</p>
+  </li>
+</ul>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">→</span> <span class="err">15</span><span class="nt">와</span> <span class="err">16</span><span class="nt">의</span> <span class="nt">관계</span> <span class="nt">변경</span>
+        <span class="err">18</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+       <span class="o">/</span>
+    <span class="err">16</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+    <span class="o">/</span>
+ <span class="err">15</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h4 id="회전--색-변경-먼저-좌회전left-rotate-on-15">회전 + 색 변경, 먼저 좌회전(Left Rotate) on 15</h4>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">→</span> <span class="err">16</span><span class="nt">이</span> <span class="nt">위로</span> <span class="nt">올라감</span> <span class="o">+</span> <span class="err">16</span> <span class="err">→</span> <span class="nt">검정</span> <span class="o">/</span> <span class="err">18</span> <span class="err">→</span> <span class="nt">빨강</span>
+        <span class="err">10</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+       <span class="o">/</span>     <span class="err">\</span>
+    <span class="err">7</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>     <span class="err">16</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+            <span class="o">/</span>     <span class="err">\</span>
+         <span class="err">15</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>    <span class="err">18</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h4 id="회전--색-변경-다음-우회전right-rotate-on-18--색-변경">회전 + 색 변경, 다음 우회전(Right Rotate) on 18 + 색 변경</h4>
+
+<p>✔ 최종 결과, 규칙 모두 만족 ✅</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">상황</th>
+      <th style="text-align: center">조치</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">부모, 삼촌 모두 빨강</td>
+      <td style="text-align: center">부모/삼촌 → 검정, 조부모 → 빨강 (Recolor)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">부모 빨강, 삼촌 검정, 삽입 노드 방향이 꺾여 있음</td>
+      <td style="text-align: center">회전 후 재배치 (Rotate)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">삽입 노드가 부모와 일직선</td>
+      <td style="text-align: center">한 번의 회전으로 조정</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>위 표의 회전 후 재배치와 한 번의 회전의 경우 아래 표를 참고하면 돼</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">방향</th>
+      <th style="text-align: center">Case 이름</th>
+      <th style="text-align: center">회전 방식</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Left-Left (LL)</td>
+      <td style="text-align: center">부모 왼쪽, 자식 왼쪽</td>
+      <td style="text-align: center">Right Rotate</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Right-Right (RR)</td>
+      <td style="text-align: center">부모 오른쪽, 자식 오른쪽</td>
+      <td style="text-align: center">Left Rotate</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Left-Right (LR)</td>
+      <td style="text-align: center">부모 왼쪽, 자식 오른쪽</td>
+      <td style="text-align: center">Left Rotate → Right Rotate</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Right-Left (RL)</td>
+      <td style="text-align: center">부모 오른쪽, 자식 왼쪽</td>
+      <td style="text-align: center">Right Rotate → Left Rotate</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="레드블랙-트리-삭제-그림으로-이해하기">레드블랙 트리 삭제 그림으로 이해하기</h3>
+
+<p>예시: 아래의 레드블랙 트리에서 삭제해보자</p>
+
+<p>10 → 5 → 15 → 1 → 7 → 12 → 17</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         <span class="err">10</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+        <span class="o">/</span>     <span class="err">\</span>
+     <span class="err">5</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>     <span class="err">15</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+    <span class="o">/</span>   <span class="err">\</span>     <span class="o">/</span>    <span class="err">\</span>
+  <span class="err">1</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>  <span class="err">7</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span> <span class="err">12</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span> <span class="err">17</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h4 id="step-1-1-삭제하기-간단한-경우">Step 1: 1 삭제하기 (간단한 경우)</h4>
+
+<ul>
+  <li>
+    <p>1(B)는 리프 노드 (자식 없음)</p>
+  </li>
+  <li>
+    <p>삭제 후 검정 노드가 사라짐 → 검정 높이 불균형 발생</p>
+  </li>
+</ul>
+
+<h4 id="해결-전략-double-black-해결">해결 전략: Double Black 해결</h4>
+
+<ul>
+  <li>
+    <p>“검정 노드를 삭제하면”, 부모나 형제의 색상에 따라 다양한 케이스로 나뉘고, 회전과 색 변경을 조합해 해결해야 해</p>
+  </li>
+  <li>
+    <p>삭제하려는 노드가 검정이면, 검정 높이가 1 줄어들어 규칙 5를 위반해</p>
+  </li>
+  <li>
+    <p>이를 “Double Black” 상태로 표현하고, 다음과 같은 규칙으로 해결해</p>
+  </li>
+</ul>
+
+<h4 id="double-black-해결-케이스-총정리">Double Black 해결 케이스 총정리</h4>
+
+<p>(이해하기 쉽게 비유하자면, 삽입은 “Red-Red”를 잡는 것이고, 삭제는 “Double Black”을 잡는 거야)</p>
+
+<h5 id="case-1-형제-s가-빨강">Case 1: 형제 S가 빨강</h5>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         <span class="nt">P</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+        <span class="o">/</span>
+     <span class="nt">x</span><span class="o">(</span><span class="nt">DB</span><span class="o">)</span>
+        <span class="err">\</span>
+         <span class="nt">S</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>➡ 부모와 형제의 색을 바꾸고, 회전</p>
+
+<ul>
+  <li>
+    <p>S → 검정</p>
+  </li>
+  <li>
+    <p>P → 빨강</p>
+  </li>
+  <li>
+    <p>회전(P 기준)</p>
+  </li>
+</ul>
+
+<p>➡ Double Black 문제는 그대로지만, 형제를 검정으로 만들어 다른 Case로 전환함</p>
+
+<h5 id="case-2-형제-s가-검정-자식-둘-다-검정">Case 2: 형제 S가 검정, 자식 둘 다 검정</h5>
+
+<p>➡ 형제를 빨강으로 칠하고, 부모에게 Double Black을 전가</p>
+
+<ul>
+  <li>
+    <p>S → 빨강</p>
+  </li>
+  <li>
+    <p>x의 Double Black → P로 전파</p>
+  </li>
+</ul>
+
+<p>➡ 루트까지 가면 루트는 그냥 검정으로 고치고 끝</p>
+
+<h5 id="case-3-형제가-검정이고-형제의-가까운-자식이-빨강">Case 3: 형제가 검정이고, 형제의 가까운 자식이 빨강</h5>
+
+<p>➡ 형제의 자식과 형제를 회전 + 색 변경</p>
+
+<ul>
+  <li>
+    <p>S와 자식 사이 회전</p>
+  </li>
+  <li>
+    <p>이후 다시 Case 4로 전환</p>
+  </li>
+</ul>
+
+<h5 id="case-4-형제가-검정이고-형제의-먼-자식이-빨강">Case 4: 형제가 검정이고, 형제의 먼 자식이 빨강</h5>
+
+<p>➡ 부모와 형제의 색을 바꾸고, 회전 후 자식 → 검정</p>
+
+<ul>
+  <li>이 경우 Double Black 문제 해결!</li>
+</ul>
+
+<h5 id="예제로-실제-트리-변경-보기">예제로 실제 트리 변경 보기</h5>
+
+<p>삭제 전</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         <span class="err">10</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+        <span class="o">/</span>     <span class="err">\</span>
+     <span class="err">5</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>     <span class="err">15</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+    <span class="o">/</span>   <span class="err">\</span>     <span class="o">/</span>    <span class="err">\</span>
+  <span class="err">1</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>  <span class="err">7</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span> <span class="err">12</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span> <span class="err">17</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>🔥 1(B) 삭제</p>
+
+<ul>
+  <li>
+    <p>1은 리프 노드 (자식이 NIL = 검정)</p>
+  </li>
+  <li>
+    <p>검정 노드 삭제 → Double Black 발생 at NIL 자리</p>
+  </li>
+</ul>
+
+<p>➡ 부모 5(R) / 형제 7(B)</p>
+
+<ul>
+  <li>형제 7은 검정이고 자식 NIL들 = 검정 → Case 2</li>
+</ul>
+
+<p>👉 해결 과정</p>
+
+<ul>
+  <li>
+    <p>7 → 빨강</p>
+  </li>
+  <li>
+    <p>5 → Double Black 상태 전파</p>
+  </li>
+  <li>
+    <p>5는 빨강이므로 Double Black 해소 후 5 → 검정</p>
+  </li>
+</ul>
+
+<p>삭제 후 트리</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         <span class="err">10</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+        <span class="o">/</span>     <span class="err">\</span>
+     <span class="err">5</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>     <span class="err">15</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span>
+        <span class="err">\</span>     <span class="o">/</span>    <span class="err">\</span>
+       <span class="err">7</span><span class="o">(</span><span class="nt">R</span><span class="o">)</span> <span class="err">12</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span> <span class="err">17</span><span class="o">(</span><span class="nt">B</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>삭제 요약</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Case</th>
+      <th style="text-align: center">조건</th>
+      <th style="text-align: center">조치</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Case 1</td>
+      <td style="text-align: center">형제 빨강</td>
+      <td style="text-align: center">부모-형제 색 바꾸고 회전 → 다른 Case로 전환</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Case 2</td>
+      <td style="text-align: center">형제 검정 + 자식 둘 다 검정</td>
+      <td style="text-align: center">형제 → 빨강, 부모로 전파</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Case 3</td>
+      <td style="text-align: center">형제 검정 + 가까운 자식 빨강</td>
+      <td style="text-align: center">회전 후 Case 4로</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Case 4</td>
+      <td style="text-align: center">형제 검정 + 먼 자식 빨강</td>
+      <td style="text-align: center">색 바꾸고 회전 → 문제 해결</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="정리">정리</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">Red-Black 트리</th>
+      <th style="text-align: center">AVL 트리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">삽입/삭제/검색 시간복잡도</td>
+      <td style="text-align: center">worst case에서도 O(logN)</td>
+      <td style="text-align: center">worst case에서도 O(logN)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">삽입 삭제 성능</td>
+      <td style="text-align: center">AVL 트리에 비해 빠름</td>
+      <td style="text-align: center">Red-Black 트리에 비해 느림(root까지 balance 매번 확인)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">검색 성능</td>
+      <td style="text-align: center">AVL 트리에 비해 느림(균형이 엄격하지 않음)</td>
+      <td style="text-align: center">Red-Black 트리에 비해 빠름(균형이 엄격해서)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">균형 잡는 방식</td>
+      <td style="text-align: center">Red-Black 트리 속성을 만족시키도록</td>
+      <td style="text-align: center">balance factor를 맞추도록</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">응용 사례</td>
+      <td style="text-align: center">linux kernel 내부에서 사용, Java TreeMap 구현, C++ std::map 구현, etc</td>
+      <td style="text-align: center">dictionary, 한번 만들어 놓으면 삽입/삭제가 거의 없고 검색이 대부분인 상황에서 사용</td>
+    </tr>
+  </tbody>
+</table>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="https://via.placeholder.com/128x128 1x,https://via.placeholder.com/256x256 2x"
+    
+  
+  alt="JeongHwan Yun"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>개발자로의 성장과정</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/cryptography/" class="flip-title"><span>암호학 기초</span></a>  <time class="faded fine" datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/devlog/jungle-8week/" class="flip-title"><span>KRAFTON JUNGLE 8주차 회고</span></a>  <time class="faded fine" datetime="2025-05-14T00:00:00+00:00">14 May 2025</time></li>          <li class="h4">  <a href="/blog/algorithm/pre-order-post-order/" class="flip-title"><span>전위 순회(Pre-Order Traversal)와 후위 순회(Post-Order Traversal)의 연관성</span></a>  <time class="faded fine" datetime="2025-04-16T00:00:00+00:00">16 Apr 2025</time></li>          <li class="h4">  <a href="/blog/cs/pintos-system-call/" class="flip-title"><span>PintOS 2~3주차: Argument Passing & System Call 구현</span></a>  <time class="faded fine" datetime="2025-05-29T00:00:00+00:00">29 May 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© 2022 JeongHwan Yun.
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(200,200,200);background-image:url(/assets/img/sidebar-bg.png)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/logo.png" class="avatar" alt="hwan log" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">hwan log</h2></a>
+    
+    
+      <p class="">
+        기술블로그
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/algorithm/"
+          class="sidebar-nav-item "
+          
+        >
+          알고리즘
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/cs/"
+          class="sidebar-nav-item "
+          
+        >
+          CS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/techstack/"
+          class="sidebar-nav-item "
+          
+        >
+          Tech Stack
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/ai/"
+          class="sidebar-nav-item "
+          
+        >
+          AI
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/projects/"
+          class="sidebar-nav-item "
+          
+        >
+          PROJECTS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/devlog/"
+          class="sidebar-nav-item "
+          
+        >
+          devlog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/resume/"
+          class="sidebar-nav-item "
+          
+        >
+          RESUME
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>(()=>{var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())})();
+</script>
+  <script src="/assets/js/hydejack-9.2.1.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.2.1.js" nomodule defer></script>
+  
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>

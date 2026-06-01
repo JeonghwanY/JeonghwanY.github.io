@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>PintOS 2~3주차: Argument Passing &amp; System Call 구현 | hwan log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="PintOS 2~3주차: Argument Passing &amp; System Call 구현" />
+<meta name="author" content="JeongHwan Yun" />
+<meta property="og:locale" content="ko_KR, en_US" />
+<meta name="description" content="기술블로그" />
+<meta property="og:description" content="기술블로그" />
+<meta property="og:site_name" content="hwan log" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-29T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="PintOS 2~3주차: Argument Passing &amp; System Call 구현" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2025-05-29T00:00:00+00:00","datePublished":"2025-05-29T00:00:00+00:00","description":"기술블로그","headline":"PintOS 2~3주차: Argument Passing &amp; System Call 구현","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/cs/pintos-system-call/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/cs/pintos-system-call/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="color-scheme" content="dark light">
+
+
+
+  <meta name="theme-color" content="rgb(200,200,200)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="hwan log">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="hwan log">
+
+<meta name="generator" content="Hydejack v9.2.1" />
+
+
+<link rel="alternate" href="/blog/cs/pintos-system-call/" hreflang="ko-kr, en-us">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.2.1.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<script>((r,a)=>{function d(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=a.createElement("script"),e=(n.src=e,t&&d(n,"load",t,{once:!0}),a.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=a.createElement("script");function o(){r._loaded=!0,t&&d(n,"load",t,{once:!0});var e=a.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():d(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){d(a.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}})(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-06-01T18:16:59+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.2.1.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5);--accent-color-highlight: rgba(200,200,200,0.1);--accent-color-darkened: #b5b5b5;--theme-color: rgb(200,200,200);--dark-mode-body-bg: #2d2d2d;--dark-mode-border-color: #393939}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  ((e,s)=>{var d="light-mode",a="dark-mode",o=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(o=o<=e._sunrise||o>=e._sunset?a:d)==a?d:a,s.body.classList.add(o),s.body.classList.remove(e))})(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/cs/">cs</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>pintos-system-call</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-cs-pintos-system-call" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        PintOS 2~3주차: Argument Passing & System Call 구현
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-05-29T00:00:00+00:00">29 May 2025</time> in <span>Blog</span> / <a href="/cs/" class="flip-title">CS</a> on <a href="/tag-%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/" class="flip-title">운영체제</a>
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul class="large-only" id="markdown-toc">
+  <li><a href="#1-argument-passing-기초" id="markdown-toc-1-argument-passing-기초">1. Argument Passing 기초</a>    <ul>
+      <li><a href="#1-1-호출-규약" id="markdown-toc-1-1-호출-규약">1-1. 호출 규약</a>        <ul>
+          <li><a href="#예시-f1-2-3" id="markdown-toc-예시-f1-2-3">예시: f(1, 2, 3)</a></li>
+        </ul>
+      </li>
+      <li><a href="#1-2-argument-parsing-규칙" id="markdown-toc-1-2-argument-parsing-규칙">1-2. Argument Parsing 규칙</a></li>
+      <li><a href="#1-3-스택-구조-예시" id="markdown-toc-1-3-스택-구조-예시">1-3. 스택 구조 예시</a></li>
+    </ul>
+  </li>
+  <li><a href="#2-argument-passing-구현" id="markdown-toc-2-argument-passing-구현">2. Argument Passing 구현</a></li>
+</ul>
+
+<p>지난주 multiple-thread까지 구현했고, 이번 주부터는 PintOS 2~3주차 <strong>argument passing</strong>과 <strong>system call</strong>을 구현한다.</p>
+
+<h2 id="1-argument-passing-기초">1. Argument Passing 기초</h2>
+
+<p>본격적인 구현 전에 알아둘 것이 있다. 커널은 User program 실행을 허가하기 전에, 초기 함수에 전달할 인자들을 레지스터에 올려둬야 한다. 이 인자들은 <strong>호출 규약(calling convention)</strong> 과 동일한 방식으로 전달된다.</p>
+
+<h3 id="1-1-호출-규약">1-1. 호출 규약</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">순서</th>
+      <th style="text-align: left">동작</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: left">정수 인자는 <code class="language-plaintext highlighter-rouge">%rdi</code>, <code class="language-plaintext highlighter-rouge">%rsi</code>, <code class="language-plaintext highlighter-rouge">%rdx</code>, <code class="language-plaintext highlighter-rouge">%rcx</code>, <code class="language-plaintext highlighter-rouge">%r8</code>, <code class="language-plaintext highlighter-rouge">%r9</code> 순서로 레지스터에 전달</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: left">호출자가 리턴 어드레스를 스택에 push하고 피호출자 첫 인스트럭션으로 점프 (x86-64 <code class="language-plaintext highlighter-rouge">CALL</code> 한 명령이 이 둘을 모두 수행)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: left">피호출자 실행</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: left">리턴 값이 있으면 <code class="language-plaintext highlighter-rouge">%rax</code>에 저장</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: left">피호출자가 <code class="language-plaintext highlighter-rouge">RET</code>로 스택의 리턴 어드레스를 pop해 그 주소로 점프하며 리턴</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="예시-f1-2-3">예시: f(1, 2, 3)</h4>
+
+<p>세 정수 인자를 받는 <code class="language-plaintext highlighter-rouge">f()</code>를 <code class="language-plaintext highlighter-rouge">f(1, 2, 3)</code>으로 호출했을 때, 위 3번(피호출자 실행) 시점의 스택·레지스터 상태는 다음과 같다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                             +----------------+
+stack pointer --&gt; 0x4747fe70 | return address |
+                             +----------------+
+RDI: 0x...0001   RSI: 0x...0002   RDX: 0x...0003
+</code></pre></div></div>
+
+<h3 id="1-2-argument-parsing-규칙">1-2. Argument Parsing 규칙</h3>
+
+<p><code class="language-plaintext highlighter-rouge">/bin/ls -l foo bar</code> 같은 명령이 주어지면 다음 순서로 처리한다.</p>
+
+<ol>
+  <li>명령을 단어로 쪼갠다: <code class="language-plaintext highlighter-rouge">/bin/ls</code>, <code class="language-plaintext highlighter-rouge">-l</code>, <code class="language-plaintext highlighter-rouge">foo</code>, <code class="language-plaintext highlighter-rouge">bar</code></li>
+  <li>단어들을 스택 맨 처음 부분에 놓는다 (순서 무관 — 포인터로 참조하기 때문)</li>
+  <li>각 문자열의 주소와 경계용 널포인터를 <strong>오른쪽 → 왼쪽</strong> 순서로 push한다. 이들이 <code class="language-plaintext highlighter-rouge">argv</code>의 원소가 된다
+    <ul>
+      <li>널포인터 경계는 <code class="language-plaintext highlighter-rouge">argv[argc]</code>가 널이라는 C 표준 요구를 만족시킨다</li>
+      <li>이 순서 덕분에 <code class="language-plaintext highlighter-rouge">argv[0]</code>이 가장 낮은 가상 주소를 갖는다</li>
+      <li>word 크기 정렬 접근이 더 빠르므로, 첫 push 전에 스택 포인터를 <strong>8의 배수로 반올림</strong>한다</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">%rsi</code>가 <code class="language-plaintext highlighter-rouge">argv</code> 주소(<code class="language-plaintext highlighter-rouge">argv[0]</code>의 주소)를, <code class="language-plaintext highlighter-rouge">%rdi</code>가 <code class="language-plaintext highlighter-rouge">argc</code>를 가리키게 한다</li>
+  <li>마지막으로 가짜 “리턴 어드레스”를 push한다. Entry 함수는 리턴하지 않지만, 스택 프레임 구조를 다른 프레임과 동일하게 맞추기 위함이다</li>
+</ol>
+
+<h3 id="1-3-스택-구조-예시">1-3. 스택 구조 예시</h3>
+
+<p>유저 프로그램 시작 직전의 스택·레지스터 상태다. 스택은 <strong>아래 방향(높은 주소 → 낮은 주소)으로 커진다</strong>는 점을 염두에 두자.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Address</th>
+      <th style="text-align: center">Name</th>
+      <th style="text-align: center">Data</th>
+      <th style="text-align: center">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0x4747fffc</td>
+      <td style="text-align: center">argv[3][…]</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">'bar\0'</code></td>
+      <td style="text-align: center">char[4]</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0x4747fff8</td>
+      <td style="text-align: center">argv[2][…]</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">'foo\0'</code></td>
+      <td style="text-align: center">char[4]</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0x4747fff5</td>
+      <td style="text-align: center">argv[1][…]</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">'-l\0'</code></td>
+      <td style="text-align: center">char[3]</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0x4747ffed</td>
+      <td style="text-align: center">argv[0][…]</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">'/bin/ls\0'</code></td>
+      <td style="text-align: center">char[8]</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0x4747ffe8</td>
+      <td style="text-align: center">word-align</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">uint8_t[]</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0x4747ffe0</td>
+      <td style="text-align: center">argv[4]</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">char *</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0x4747ffd8</td>
+      <td style="text-align: center">argv[3]</td>
+      <td style="text-align: center">0x4747fffc</td>
+      <td style="text-align: center">char *</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0x4747ffd0</td>
+      <td style="text-align: center">argv[2]</td>
+      <td style="text-align: center">0x4747fff8</td>
+      <td style="text-align: center">char *</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0x4747ffc8</td>
+      <td style="text-align: center">argv[1]</td>
+      <td style="text-align: center">0x4747fff5</td>
+      <td style="text-align: center">char *</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0x4747ffc0</td>
+      <td style="text-align: center">argv[0]</td>
+      <td style="text-align: center">0x4747ffed</td>
+      <td style="text-align: center">char *</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">0x4747ffb8</td>
+      <td style="text-align: center">return address</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">void (*) ()</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>레지스터는 <code class="language-plaintext highlighter-rouge">RDI: 4</code>(argc), <code class="language-plaintext highlighter-rouge">RSI: 0x4747ffc0</code>(argv) 상태가 된다.</p>
+
+<h2 id="2-argument-passing-구현">2. Argument Passing 구현</h2>
+
+<p>PintOS의 <code class="language-plaintext highlighter-rouge">process_exec()</code>는 새 프로세스에 인자를 전달하는 기능이 없다. 단순히 파일 이름만 받던 것을, <strong>공백 기준으로 여러 단어를 나누도록</strong> 확장해야 한다. 첫 단어는 프로그램 이름, 그다음은 첫 번째 인자, …로 이어진다. <code class="language-plaintext highlighter-rouge">strtok_r()</code>로 구현하면 쉽다.</p>
+
+<p>구현은 다음과 같다. 핵심 흐름은 ① 명령어를 토큰으로 분리 → ② 바이너리 로드 → ③ 인자 문자열·포인터·정렬·가짜 리턴 어드레스를 스택에 차례로 쌓기다.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span>
+<span class="nf">process_exec</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">f_name</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">char</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="n">f_name</span><span class="p">;</span>
+	<span class="kt">char</span> <span class="o">*</span><span class="n">save_ptr</span><span class="p">,</span> <span class="o">*</span><span class="n">token</span><span class="p">;</span>
+	<span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[</span><span class="n">MAX_ARGS</span><span class="p">];</span>
+	<span class="kt">int</span> <span class="n">argc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">bool</span> <span class="n">success</span><span class="p">;</span>
+
+	<span class="cm">/* ① 공백 기준으로 토큰 분리 */</span>
+	<span class="n">token</span> <span class="o">=</span> <span class="n">strtok_r</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="s">" "</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">save_ptr</span><span class="p">);</span>
+	<span class="k">while</span> <span class="p">(</span><span class="n">token</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">argc</span> <span class="o">&lt;</span> <span class="n">MAX_ARGS</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">argv</span><span class="p">[</span><span class="n">argc</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span><span class="p">;</span>
+		<span class="n">token</span> <span class="o">=</span> <span class="n">strtok_r</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="s">" "</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">save_ptr</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="kt">char</span> <span class="o">*</span><span class="n">file_name</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+	<span class="cm">/* We cannot use the intr_frame in the thread structure.
+	 * This is because when current thread rescheduled,
+	 * it stores the execution information to the member. */</span>
+	<span class="k">struct</span> <span class="n">intr_frame</span> <span class="n">_if</span><span class="p">;</span>
+
+	<span class="n">_if</span><span class="p">.</span><span class="n">ds</span> <span class="o">=</span> <span class="n">_if</span><span class="p">.</span><span class="n">es</span> <span class="o">=</span> <span class="n">_if</span><span class="p">.</span><span class="n">ss</span> <span class="o">=</span> <span class="n">SEL_UDSEG</span><span class="p">;</span>
+	<span class="n">_if</span><span class="p">.</span><span class="n">cs</span> <span class="o">=</span> <span class="n">SEL_UCSEG</span><span class="p">;</span>
+	<span class="n">_if</span><span class="p">.</span><span class="n">eflags</span> <span class="o">=</span> <span class="n">FLAG_IF</span> <span class="o">|</span> <span class="n">FLAG_MBS</span><span class="p">;</span>
+
+	<span class="cm">/* We first kill the current context */</span>
+	<span class="n">process_cleanup</span> <span class="p">();</span>
+
+	<span class="cm">/* ② 바이너리 로드 */</span>
+	<span class="n">success</span> <span class="o">=</span> <span class="n">load</span> <span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">_if</span><span class="p">);</span>
+
+	<span class="cm">/* ③ 스택에 인자 쌓기 */</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">success</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">_if</span><span class="p">.</span><span class="n">R</span><span class="p">.</span><span class="n">rdi</span> <span class="o">=</span> <span class="n">argc</span><span class="p">;</span>
+		<span class="kt">void</span> <span class="o">*</span><span class="n">arg_addr</span><span class="p">[</span><span class="n">MAX_ARGS</span><span class="p">];</span>
+		<span class="kt">void</span> <span class="o">*</span><span class="n">start</span> <span class="o">=</span> <span class="n">_if</span><span class="p">.</span><span class="n">rsp</span><span class="p">;</span>
+
+		<span class="cm">/* 인자 문자열을 역순으로 복사 */</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">argc</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="kt">size_t</span> <span class="n">arg_size</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+			<span class="n">start</span> <span class="o">-=</span> <span class="n">arg_size</span><span class="p">;</span>
+			<span class="n">memcpy</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">arg_size</span><span class="p">);</span>
+			<span class="n">arg_addr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+		<span class="p">}</span>
+
+		<span class="cm">/* 16바이트 정렬 */</span>
+		<span class="kt">uintptr_t</span> <span class="n">align</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">start</span> <span class="o">%</span> <span class="mi">16</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">align</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+			<span class="n">start</span> <span class="o">-=</span> <span class="n">align</span><span class="p">;</span>
+
+		<span class="cm">/* argv[argc] = NULL 경계 */</span>
+		<span class="n">start</span> <span class="o">-=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">);</span>
+		<span class="o">*</span><span class="p">(</span><span class="kt">char</span> <span class="o">**</span><span class="p">)</span><span class="n">start</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+		<span class="cm">/* argv 포인터들을 역순으로 push */</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">argc</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">start</span> <span class="o">-=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">);</span>
+			<span class="o">*</span><span class="p">(</span><span class="kt">char</span> <span class="o">**</span><span class="p">)</span><span class="n">start</span> <span class="o">=</span> <span class="n">arg_addr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+		<span class="p">}</span>
+
+		<span class="n">_if</span><span class="p">.</span><span class="n">R</span><span class="p">.</span><span class="n">rsi</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span> <span class="cm">/* argv */</span>
+
+		<span class="cm">/* 가짜 리턴 어드레스 */</span>
+		<span class="n">start</span> <span class="o">-=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">);</span>
+		<span class="o">*</span><span class="p">(</span><span class="kt">void</span> <span class="o">**</span><span class="p">)</span><span class="n">start</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+		<span class="n">_if</span><span class="p">.</span><span class="n">rsp</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="c1">// hex_dump(_if.rsp, _if.rsp, USER_STACK - _if.rsp, true);</span>
+
+	<span class="cm">/* If load failed, quit. */</span>
+	<span class="n">palloc_free_page</span> <span class="p">(</span><span class="n">file_name</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">success</span><span class="p">)</span>
+		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+	<span class="cm">/* Start switched process. */</span>
+	<span class="n">do_iret</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">_if</span><span class="p">);</span>
+	<span class="n">NOT_REACHED</span> <span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">hex_dump</code>는 스택이 의도대로 쌓였는지 디버깅할 때 주석을 풀어 확인하면 된다.</p>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="https://via.placeholder.com/128x128 1x,https://via.placeholder.com/256x256 2x"
+    
+  
+  alt="JeongHwan Yun"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>개발자로의 성장과정</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/cryptography/" class="flip-title"><span>암호학 기초</span></a>  <time class="faded fine" datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/cs/swap-disk/" class="flip-title"><span>Swap Disk: 메모리가 부족할 때 페이지를 잠시 맡기는 곳</span></a>  <time class="faded fine" datetime="2025-06-12T00:00:00+00:00">12 Jun 2025</time></li>          <li class="h4">  <a href="/blog/algorithm/cycle/" class="flip-title"><span>사이클 탐지(Cycle detection)</span></a>  <time class="faded fine" datetime="2025-03-30T00:00:00+00:00">30 Mar 2025</time></li>          <li class="h4">  <a href="/blog/cs/datagram-stream-socket/" class="flip-title"><span>Datagram Socket과 Stream Socket: UDP와 TCP 소켓 비교</span></a>  <time class="faded fine" datetime="2025-05-05T00:00:00+00:00">05 May 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© 2022 JeongHwan Yun.
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(200,200,200);background-image:url(/assets/img/sidebar-bg.png)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/logo.png" class="avatar" alt="hwan log" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">hwan log</h2></a>
+    
+    
+      <p class="">
+        기술블로그
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/algorithm/"
+          class="sidebar-nav-item "
+          
+        >
+          알고리즘
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/cs/"
+          class="sidebar-nav-item "
+          
+        >
+          CS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/techstack/"
+          class="sidebar-nav-item "
+          
+        >
+          Tech Stack
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/ai/"
+          class="sidebar-nav-item "
+          
+        >
+          AI
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/projects/"
+          class="sidebar-nav-item "
+          
+        >
+          PROJECTS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/devlog/"
+          class="sidebar-nav-item "
+          
+        >
+          devlog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/resume/"
+          class="sidebar-nav-item "
+          
+        >
+          RESUME
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>(()=>{var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())})();
+</script>
+  <script src="/assets/js/hydejack-9.2.1.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.2.1.js" nomodule defer></script>
+  
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>

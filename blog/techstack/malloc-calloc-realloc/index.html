@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>동적 메모리 할당 (malloc, calloc, realloc, free) | hwan log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="동적 메모리 할당 (malloc, calloc, realloc, free)" />
+<meta name="author" content="JeongHwan Yun" />
+<meta property="og:locale" content="ko_KR, en_US" />
+<meta name="description" content="기술블로그" />
+<meta property="og:description" content="기술블로그" />
+<meta property="og:site_name" content="hwan log" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-04-11T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="동적 메모리 할당 (malloc, calloc, realloc, free)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2025-04-11T00:00:00+00:00","datePublished":"2025-04-11T00:00:00+00:00","description":"기술블로그","headline":"동적 메모리 할당 (malloc, calloc, realloc, free)","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/techstack/malloc-calloc-realloc/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/techstack/malloc-calloc-realloc/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="color-scheme" content="dark light">
+
+
+
+  <meta name="theme-color" content="rgb(200,200,200)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="hwan log">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="hwan log">
+
+<meta name="generator" content="Hydejack v9.2.1" />
+
+
+<link rel="alternate" href="/blog/techstack/malloc-calloc-realloc/" hreflang="ko-kr, en-us">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.2.1.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<script>((r,a)=>{function d(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=a.createElement("script"),e=(n.src=e,t&&d(n,"load",t,{once:!0}),a.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=a.createElement("script");function o(){r._loaded=!0,t&&d(n,"load",t,{once:!0});var e=a.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():d(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){d(a.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}})(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-06-01T18:16:59+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.2.1.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5);--accent-color-highlight: rgba(200,200,200,0.1);--accent-color-darkened: #b5b5b5;--theme-color: rgb(200,200,200);--dark-mode-body-bg: #2d2d2d;--dark-mode-border-color: #393939}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  ((e,s)=>{var d="light-mode",a="dark-mode",o=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(o=o<=e._sunrise||o>=e._sunset?a:d)==a?d:a,s.body.classList.add(o),s.body.classList.remove(e))})(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/techstack/">techstack</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>malloc-calloc-realloc</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-techstack-malloc-calloc-realloc" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        동적 메모리 할당 (malloc, calloc, realloc, free)
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2025-04-11T00:00:00+00:00">11 Apr 2025</time> in <span>Blog</span> / <a href="/techstack/" class="flip-title">Tech Stack</a> on <a href="/tag-%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/" class="flip-title">운영체제</a>, <a href="/tag-c/" class="flip-title">C 언어</a>
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  <div class="hr pb0"></div>
+
+
+  </header>
+
+  
+    <ul class="large-only" id="markdown-toc">
+  <li><a href="#정적-vs-동적-할당" id="markdown-toc-정적-vs-동적-할당">정적 vs 동적 할당</a></li>
+  <li><a href="#함수별-정리" id="markdown-toc-함수별-정리">함수별 정리</a>    <ul>
+      <li><a href="#malloc--기본-할당" id="markdown-toc-malloc--기본-할당"><code class="language-plaintext highlighter-rouge">malloc</code> — 기본 할당</a></li>
+      <li><a href="#calloc--0-초기화-할당" id="markdown-toc-calloc--0-초기화-할당"><code class="language-plaintext highlighter-rouge">calloc</code> — 0 초기화 할당</a></li>
+      <li><a href="#realloc--크기-변경" id="markdown-toc-realloc--크기-변경"><code class="language-plaintext highlighter-rouge">realloc</code> — 크기 변경</a></li>
+      <li><a href="#realloc-내부동작" id="markdown-toc-realloc-내부동작">REALLOC 내부동작</a></li>
+      <li><a href="#free--메모리-해제" id="markdown-toc-free--메모리-해제"><code class="language-plaintext highlighter-rouge">free</code> — 메모리 해제</a>        <ul>
+          <li><a href="#free-하면-안-되는-경우" id="markdown-toc-free-하면-안-되는-경우"><code class="language-plaintext highlighter-rouge">free</code> 하면 안 되는 경우</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#한눈에-비교" id="markdown-toc-한눈에-비교">한눈에 비교</a>    <ul>
+      <li><a href="#안전한-패턴" id="markdown-toc-안전한-패턴">안전한 패턴</a></li>
+    </ul>
+  </li>
+  <li><a href="#체크리스트" id="markdown-toc-체크리스트">체크리스트</a></li>
+</ul>
+
+<hr />
+
+<h2 id="정적-vs-동적-할당">정적 vs 동적 할당</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>정적 할당</th>
+      <th>동적 할당</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>영역</td>
+      <td>스택</td>
+      <td>힙</td>
+    </tr>
+    <tr>
+      <td>크기</td>
+      <td>고정 (컴파일 타임)</td>
+      <td>유동 (런타임)</td>
+    </tr>
+    <tr>
+      <td>관리</td>
+      <td>자동 해제</td>
+      <td><code class="language-plaintext highlighter-rouge">free()</code> 직접 호출</td>
+    </tr>
+    <tr>
+      <td>크기 한계</td>
+      <td>작음 (MB)</td>
+      <td>큼 (GB도 가능)</td>
+    </tr>
+    <tr>
+      <td>사용 예</td>
+      <td><code class="language-plaintext highlighter-rouge">int arr[10]</code></td>
+      <td><code class="language-plaintext highlighter-rouge">malloc(n * sizeof(int))</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="함수별-정리">함수별 정리</h2>
+<p><img src="/assets/img/blog/cs/함수별비교.png" alt="함수별비교" /></p>
+<h3 id="malloc--기본-할당"><code class="language-plaintext highlighter-rouge">malloc</code> — 기본 할당</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span><span class="o">*</span> <span class="nf">malloc</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">size</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>지정한 바이트만큼 힙에 할당</li>
+  <li>초기화 없음 → 쓰레기값(garbage) 주의</li>
+  <li>실패 시 <code class="language-plaintext highlighter-rouge">NULL</code> 반환</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">*</span> <span class="n">arr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="nf">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">arr</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>  <span class="c1">// NULL 체크 필수</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="calloc--0-초기화-할당"><code class="language-plaintext highlighter-rouge">calloc</code> — 0 초기화 할당</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span><span class="o">*</span> <span class="nf">calloc</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">n</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">n</code>개 요소 × <code class="language-plaintext highlighter-rouge">size</code> 바이트 할당</li>
+  <li>전체를 0으로 초기화 → 배열에 적합</li>
+  <li>실패 시 <code class="language-plaintext highlighter-rouge">NULL</code> 반환</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span><span class="o">*</span> <span class="n">arr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">calloc</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>  <span class="c1">// 모두 0</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">malloc</code>보다 약간 느리지만, 초기화 누락 버그를 원천 차단</p>
+</blockquote>
+
+<hr />
+
+<h3 id="realloc--크기-변경"><code class="language-plaintext highlighter-rouge">realloc</code> — 크기 변경</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span><span class="o">*</span> <span class="nf">realloc</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">ptr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">new_size</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>기존 할당 블록의 크기를 확장하거나 축소</li>
+  <li>뒤에 공간 있으면 <strong>제자리 확장</strong> (주소 그대로)</li>
+  <li>뒤에 공간 없으면 <strong>새 위치로 이동</strong> 후 데이터 복사 → 기존 블록 자동 해제</li>
+  <li>새로 늘어난 부분은 초기화 안 됨</li>
+  <li>실패 시 <code class="language-plaintext highlighter-rouge">NULL</code> 반환 (기존 포인터는 유효한 상태로 유지)</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 잘못된 방법 — 실패시 ptr이 NULL이 되어 기존 메모리 누수</span>
+<span class="n">ptr</span> <span class="o">=</span> <span class="n">realloc</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">new_size</span><span class="p">);</span>
+
+<span class="c1">// 올바른 방법</span>
+<span class="kt">int</span><span class="o">*</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">realloc</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">new_size</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">tmp</span><span class="p">)</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</code></pre></div></div>
+<h3 id="realloc-내부동작">REALLOC 내부동작</h3>
+<p><img src="/assets/img/blog/cs/REALLOC내부동작.png" alt="내부동작" /></p>
+
+<hr />
+
+<h3 id="free--메모리-해제"><code class="language-plaintext highlighter-rouge">free</code> — 메모리 해제</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">free</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">ptr</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>동적 할당된 메모리 반납. <strong>사용 후 반드시 호출</strong></li>
+  <li>해제 후 포인터를 <code class="language-plaintext highlighter-rouge">NULL</code>로 초기화하는 습관 권장</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">free</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+<span class="n">ptr</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>  <span class="c1">// 댕글링 포인터 방지</span>
+</code></pre></div></div>
+
+<h4 id="free-하면-안-되는-경우"><code class="language-plaintext highlighter-rouge">free</code> 하면 안 되는 경우</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>잘못된 예</th>
+      <th>이유</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>스택 변수에 <code class="language-plaintext highlighter-rouge">free(&amp;x)</code></td>
+      <td>동적 할당된 메모리만 해제 가능</td>
+    </tr>
+    <tr>
+      <td>같은 포인터 두 번 <code class="language-plaintext highlighter-rouge">free</code></td>
+      <td>Double free → 힙 손상</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">free</code> 후 포인터 재사용</td>
+      <td>댕글링 포인터 → Undefined Behavior</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">free</code> 없이 종료</td>
+      <td>메모리 누수</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="한눈에-비교">한눈에 비교</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>함수</th>
+      <th>초기화</th>
+      <th>주요 용도</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">malloc</code></td>
+      <td>없음</td>
+      <td>빠르게 할당만 필요할 때</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">calloc</code></td>
+      <td>0으로 초기화</td>
+      <td>배열 등 초기화가 중요할 때</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">realloc</code></td>
+      <td>새 영역 없음</td>
+      <td>크기를 동적으로 바꿔야 할 때</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">free</code></td>
+      <td>—</td>
+      <td>사용 후 반드시 호출</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="안전한-패턴">안전한 패턴</h3>
+<p><img src="/assets/img/blog/cs/안전한패턴.png" alt="안전한패턴" /></p>
+
+<hr />
+
+<h2 id="체크리스트">체크리스트</h2>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><code class="language-plaintext highlighter-rouge">malloc</code> / <code class="language-plaintext highlighter-rouge">calloc</code> 반환값 NULL 체크</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />동적 할당 사용 후 <code class="language-plaintext highlighter-rouge">free()</code> 호출</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><code class="language-plaintext highlighter-rouge">realloc</code>은 반환값을 임시 변수에 먼저 받기</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><code class="language-plaintext highlighter-rouge">free()</code> 후 포인터에 <code class="language-plaintext highlighter-rouge">NULL</code> 대입</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />스택 변수에 <code class="language-plaintext highlighter-rouge">free()</code> 하지 않기</li>
+</ul>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="https://via.placeholder.com/128x128 1x,https://via.placeholder.com/256x256 2x"
+    
+  
+  alt="JeongHwan Yun"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>개발자로의 성장과정</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/cryptography/" class="flip-title"><span>암호학 기초</span></a>  <time class="faded fine" datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/algorithm/queue/" class="flip-title"><span>큐와 우선순위 큐(Queue and Priority Queue)</span></a>  <time class="faded fine" datetime="2025-03-21T00:00:00+00:00">21 Mar 2025</time></li>          <li class="h4">  <a href="/blog/algorithm/sort/" class="flip-title"><span>정렬(Sort)</span></a>  <time class="faded fine" datetime="2025-03-18T00:00:00+00:00">18 Mar 2025</time></li>          <li class="h4">  <a href="/blog/cs/thread-advanced/" class="flip-title"><span>스레드(Thread) 심화: 스케줄링 전략과 타이밍</span></a>  <time class="faded fine" datetime="2025-05-12T00:00:00+00:00">12 May 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© 2022 JeongHwan Yun.
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(200,200,200);background-image:url(/assets/img/sidebar-bg.png)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/logo.png" class="avatar" alt="hwan log" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">hwan log</h2></a>
+    
+    
+      <p class="">
+        기술블로그
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/algorithm/"
+          class="sidebar-nav-item "
+          
+        >
+          알고리즘
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/cs/"
+          class="sidebar-nav-item "
+          
+        >
+          CS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/techstack/"
+          class="sidebar-nav-item "
+          
+        >
+          Tech Stack
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/ai/"
+          class="sidebar-nav-item "
+          
+        >
+          AI
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/projects/"
+          class="sidebar-nav-item "
+          
+        >
+          PROJECTS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/devlog/"
+          class="sidebar-nav-item "
+          
+        >
+          devlog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/resume/"
+          class="sidebar-nav-item "
+          
+        >
+          RESUME
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>(()=>{var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())})();
+</script>
+  <script src="/assets/js/hydejack-9.2.1.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.2.1.js" nomodule defer></script>
+  
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>

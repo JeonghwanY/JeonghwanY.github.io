@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+
+
+
+
+
+
+<head>
+  
+
+
+
+
+
+
+  
+    
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>암호학 기초 | hwan log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="암호학 기초" />
+<meta name="author" content="JeongHwan Yun" />
+<meta property="og:locale" content="ko_KR, en_US" />
+<meta name="description" content="crypto(비밀) + graphy(방법) — 핵심만 빠르게" />
+<meta property="og:description" content="crypto(비밀) + graphy(방법) — 핵심만 빠르게" />
+<meta property="og:site_name" content="hwan log" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-01-22T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="암호학 기초" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2026-01-22T00:00:00+00:00","datePublished":"2026-01-22T00:00:00+00:00","description":"crypto(비밀) + graphy(방법) — 핵심만 빠르게","headline":"암호학 기초","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/cs/cryptography/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/cs/cryptography/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  
+
+  
+
+
+
+  <meta name="color-scheme" content="dark light">
+
+
+
+  <meta name="theme-color" content="rgb(200,200,200)">
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="hwan log">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="application-name" content="hwan log">
+
+<meta name="generator" content="Hydejack v9.2.1" />
+
+
+<link rel="alternate" href="/blog/cs/cryptography/" hreflang="ko-kr, en-us">
+
+<link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
+
+
+<link rel="shortcut icon"    href="/assets/icons/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+
+<link rel="manifest" href="/assets/site.webmanifest">
+
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"><link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+
+
+<link rel="preload" href="/assets/img/swipe.svg" as="image" id="_hrefSwipeSVG">
+
+<link rel="dns-prefetch" href="/assets/js/search-worker-9.2.1.js" as="worker" id="_hrefSearch">
+
+
+
+
+
+<script>((r,a)=>{function d(e,t,n,o){e.addEventListener?e.addEventListener(t,n,o):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n}r.loadJS=function(e,t){var n=a.createElement("script"),e=(n.src=e,t&&d(n,"load",t,{once:!0}),a.scripts[0]);return e.parentNode.insertBefore(n,e),n},r._loaded=!1,r.loadJSDeferred=function(e,t){var n=a.createElement("script");function o(){r._loaded=!0,t&&d(n,"load",t,{once:!0});var e=a.scripts[0];e.parentNode.insertBefore(n,e)}return n.src=e,r._loaded?o():d(r,"load",o,{once:!0}),n},r.setRel=r.setRelStylesheet=function(e){d(a.getElementById(e),"load",function(){this.rel="stylesheet"},{once:!0})}})(window,document);
+!function(a){"use strict";var b=function(b,c,d){function e(a){return h.body?a():void setTimeout(function(){e(a)})}function f(){i.addEventListener&&i.removeEventListener("load",f),i.media=d||"all"}var g,h=a.document,i=h.createElement("link");if(c)g=c;else{var j=(h.body||h.getElementsByTagName("head")[0]).childNodes;g=j[j.length-1]}var k=h.styleSheets;i.rel="stylesheet",i.href=b,i.media="only x",e(function(){g.parentNode.insertBefore(i,c?g:g.nextSibling)});var l=function(a){for(var b=i.href,c=k.length;c--;)if(k[c].href===b)return a();setTimeout(function(){l(a)})};return i.addEventListener&&i.addEventListener("load",f),i.onloadcssdefined=l,l(f),i};"undefined"!=typeof exports?exports.loadCSS=b:a.loadCSS=b}("undefined"!=typeof global?global:this);
+!function(a){if(a.loadCSS){var b=loadCSS.relpreload={};if(b.support=function(){try{return a.document.createElement("link").relList.supports("preload")}catch(b){return!1}},b.poly=function(){for(var b=a.document.getElementsByTagName("link"),c=0;c<b.length;c++){var d=b[c];"preload"===d.rel&&"style"===d.getAttribute("as")&&(a.loadCSS(d.href,d,d.getAttribute("media")),d.rel=null)}},!b.support()){b.poly();var c=a.setInterval(b.poly,300);a.addEventListener&&a.addEventListener("load",function(){b.poly(),a.clearInterval(c)}),a.attachEvent&&a.attachEvent("onload",function(){a.clearInterval(c)})}}}(this);
+!function(w) {
+  w._baseURL = '/';
+  w._publicPath = '/assets/js/';
+  w._noPushState = false;
+  w._noDrawer = false;
+  w._noNavbar = false;
+  w._noToc = false;
+  w._noSearch = false;
+  w._advertise = false;
+  w._search = {
+    DATA_URL: '/assets/sitedata.json?no-cache',
+    STORAGE_KEY: 'mini-search/',
+    INDEX_KEY: 'index--2026-06-01T18:16:59+00:00',
+  };
+  w._clapButton = true;
+}(window);</script>
+
+
+<script async src="/assets/bower_components/MathJax/es5/tex-mml-chtml.js" id="_MathJax"></script>
+
+
+<!--[if gt IE 8]><!---->
+
+  
+
+
+
+
+<link rel="stylesheet" href="/assets/css/hydejack-9.2.1.css" id="_stylePreload">
+<link rel="stylesheet" href="/assets/icomoon/style.css" id="_iconsPreload">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:700%7CNoto+Sans:400,400i,700,700i&display=swap" id="_fontsPreload">
+
+
+
+  <style id="_pageStyle">
+
+html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5);--accent-color-highlight: rgba(200,200,200,0.1);--accent-color-darkened: #b5b5b5;--theme-color: rgb(200,200,200);--dark-mode-body-bg: #2d2d2d;--dark-mode-border-color: #393939}
+
+</style>
+
+
+<!--<![endif]-->
+
+
+
+
+
+</head>
+
+<body class="no-break-layout">
+  
+<script>
+  window._sunrise = 6;
+  window._sunset =  18;
+  ((e,s)=>{var d="light-mode",a="dark-mode",o=(new Date).getHours();"matchMedia"in e&&e.matchMedia("(prefers-color-scheme)")||(e=(o=o<=e._sunrise||o>=e._sunset?a:d)==a?d:a,s.body.classList.add(o),s.body.classList.remove(e))})(window,document);
+
+</script>
+
+
+
+<hy-push-state
+  id="_pushState"
+  replace-selector="#_main"
+  link-selector="a[href]:not([href^='/assets/']):not(.external):not(.no-push-state)"
+  script-selector="script"
+  duration="500"
+  hashchange
+>
+  
+  
+  <div id="_navbar" class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <div class="nav-btn-bar">
+      <a id="_menu" class="nav-btn no-hover" href="#_drawer--opened">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-menu"></span>
+      </a>
+      <div class="nav-span"></div>
+    </div>
+  </div>
+</div>
+<hr class="sr-only" hidden />
+
+  <main
+  id="_main"
+  class="content layout-post"
+  role="main"
+>
+  <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+    <li><a href="/">home</a></li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/">blog</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          
+          
+          <a href="/blog/cs/">cs</a>
+        
+      </li>
+    
+      <li>
+        
+          <span>/</span>
+          <span>cryptography</span>
+        
+      </li>
+    
+  
+</ul></nav>
+  
+
+
+
+
+
+
+
+
+
+
+<article id="post-blog-cs-cryptography" class="page post mb6" role="article">
+  <header>
+    <h1 class="post-title flip-project-title">
+      
+        암호학 기초
+      
+    </h1>
+
+    <div class="post-date">
+      
+      <span class="ellipsis mr1">
+        <time datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time> in <span>Blog</span> / <a href="/cs/" class="flip-title">CS</a> on <a href="/tag-%EB%B3%B4%EC%95%88/" class="flip-title">보안</a>
+      </span>
+      
+    </div>
+
+    
+    
+
+    
+
+
+
+  
+    <p class="note-sm" >
+      crypto(비밀) + graphy(방법) — 핵심만 빠르게
+
+    </p>
+  
+
+
+  </header>
+
+  
+    <ul class="large-only" id="markdown-toc">
+  <li><a href="#왜-암호화가-필요한가" id="markdown-toc-왜-암호화가-필요한가">왜 암호화가 필요한가?</a></li>
+  <li><a href="#정보보안-3요소-cia-triad" id="markdown-toc-정보보안-3요소-cia-triad">정보보안 3요소 (CIA Triad)</a></li>
+  <li><a href="#세-가지-핵심-개념" id="markdown-toc-세-가지-핵심-개념">세 가지 핵심 개념</a></li>
+  <li><a href="#암호화-방식" id="markdown-toc-암호화-방식">암호화 방식</a>    <ul>
+      <li><a href="#양방향-암호화" id="markdown-toc-양방향-암호화">양방향 암호화</a>        <ul>
+          <li><a href="#대칭키-방식" id="markdown-toc-대칭키-방식">대칭키 방식</a></li>
+          <li><a href="#비대칭키-방식" id="markdown-toc-비대칭키-방식">비대칭키 방식</a></li>
+        </ul>
+      </li>
+      <li><a href="#단방향-암호화-해시" id="markdown-toc-단방향-암호화-해시">단방향 암호화 (해시)</a></li>
+    </ul>
+  </li>
+  <li><a href="#실생활-적용" id="markdown-toc-실생활-적용">실생활 적용</a></li>
+  <li><a href="#핵심-요약" id="markdown-toc-핵심-요약">핵심 요약</a></li>
+</ul>
+
+<h2 id="왜-암호화가-필요한가">왜 암호화가 필요한가?</h2>
+
+<p>인터넷으로 데이터를 주고받을 때 세 가지 위협이 존재한다.</p>
+
+<ul>
+  <li><strong>도청(Sniffing)</strong> — 전송 중인 데이터를 몰래 엿봄</li>
+  <li><strong>위·변조(Tampering)</strong> — 내용을 바꿔치기함</li>
+  <li><strong>도용(Identity Theft)</strong> — 다른 사람인 척 속임</li>
+</ul>
+
+<hr />
+
+<h2 id="정보보안-3요소-cia-triad">정보보안 3요소 (CIA Triad)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>요소</th>
+      <th>의미</th>
+      <th>달성 방법</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Confidentiality</strong> (기밀성)</td>
+      <td>남이 보지 못하게</td>
+      <td>암호화 (Encryption)</td>
+    </tr>
+    <tr>
+      <td><strong>Integrity</strong> (무결성)</td>
+      <td>내용이 바뀌지 않았음을 보장</td>
+      <td>해시 + 전자서명</td>
+    </tr>
+    <tr>
+      <td><strong>Availability</strong> (가용성)</td>
+      <td>필요할 때 언제든 사용 가능</td>
+      <td>서버 안정성, DDoS 방어</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><strong>+ 인증(Authentication)</strong>: 권한 있는 사람만 접근 가능하게 함</p>
+</blockquote>
+
+<hr />
+
+<h2 id="세-가지-핵심-개념">세 가지 핵심 개념</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>개념</th>
+      <th>설명</th>
+      <th>방향</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>암호화 (Encryption)</strong></td>
+      <td>데이터를 읽을 수 없게 변환</td>
+      <td>복호화(Decryption) 가능</td>
+    </tr>
+    <tr>
+      <td><strong>해시 (Hash)</strong></td>
+      <td>입력값을 고정 길이 “지문”으로 변환</td>
+      <td>단방향, 되돌릴 수 없음</td>
+    </tr>
+    <tr>
+      <td><strong>전자서명 (Digital Signature)</strong></td>
+      <td>메시지에 서명을 붙여 발신자·위조 여부 검증</td>
+      <td>비대칭키 기반</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="암호화-방식">암호화 방식</h2>
+<p><img src="/assets/img/blog/security/암호화방식.png" alt="타임라인" /></p>
+<h3 id="양방향-암호화">양방향 암호화</h3>
+
+<blockquote>
+  <p>암호화 + 복호화 모두 가능 → <strong>기밀성</strong> 목적</p>
+</blockquote>
+
+<h4 id="대칭키-방식">대칭키 방식</h4>
+
+<ul>
+  <li>암호화·복호화에 <strong>동일한 키</strong> 사용</li>
+  <li>빠르지만, 키를 상대에게 안전하게 전달하는 문제가 있음</li>
+  <li>대표 알고리즘: <strong>AES</strong>, Twofish, Blowfish, DES, 3DES</li>
+</ul>
+
+<h4 id="비대칭키-방식">비대칭키 방식</h4>
+
+<ul>
+  <li><strong>공개키(Public Key)</strong> 와 <strong>비공개키(Private Key)</strong> 쌍 사용</li>
+  <li>공개키로 암호화 → 비공개키로만 복호화 (반대도 성립)</li>
+  <li>키를 공개해도 안전하게 통신 가능</li>
+  <li>대표 알고리즘: <strong>RSA</strong></li>
+</ul>
+
+<p>[전자서명 흐름]</p>
+
+<p><img src="/assets/img/blog/security/전자서명%20동작%20원리.png" alt="타임라인" /></p>
+
+<blockquote>
+  <p><strong>전자서명</strong>: 발신자가 비공개키로 내용에 서명 → 수신자는 공개키로 서명을 복호화해 내용과 대조 → 일치하면 진본·발신자 확인</p>
+</blockquote>
+
+<hr />
+
+<h3 id="단방향-암호화-해시">단방향 암호화 (해시)</h3>
+
+<blockquote>
+  <p>복호화 불가 → <strong>무결성</strong> 목적</p>
+</blockquote>
+
+<ul>
+  <li>입력값이 조금만 달라져도 완전히 다른 해시값 출력</li>
+  <li>비밀번호 저장, 파일 무결성 검증에 사용</li>
+  <li>대표 알고리즘: <strong>SHA-256</strong>, SHA-512, MD5, SHA-1</li>
+</ul>
+
+<hr />
+
+<h2 id="실생활-적용">실생활 적용</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>상황</th>
+      <th>암호화 방식</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>HTTPS</strong></td>
+      <td>비대칭키로 세션키 교환 → AES(대칭키)로 데이터 암호화</td>
+    </tr>
+    <tr>
+      <td><strong>비밀번호 저장</strong></td>
+      <td>해시(SHA 등)로 저장, 복원 불가 → 비교만 함</td>
+    </tr>
+    <tr>
+      <td><strong>E2EE 메신저</strong> (카카오 비밀채팅, WhatsApp)</td>
+      <td>종단간 암호화, 서버 관리자도 내용 열람 불가</td>
+    </tr>
+    <tr>
+      <td><strong>파일/USB 암호화</strong></td>
+      <td>AES 기반 대칭키 방식</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="핵심-요약">핵심 요약</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>암호화 방식
+├── 양방향 (복호화 가능) — 기밀성
+│   ├── 대칭키: 같은 키 사용 → AES, DES
+│   └── 비대칭키: 공개키/비공개키 쌍 → RSA, 전자서명
+└── 단방향 (복호화 불가) — 무결성
+    └── 해시: SHA-256, MD5
+</code></pre></div></div>
+
+<blockquote>
+  <p>참고 영상: <a href="https://www.youtube.com/playlist?list=PLuHgQVnccGMD-9lk4xmb6EG1XK1OmwC3u">생활코딩 암호학</a></p>
+</blockquote>
+
+  
+</article>
+
+
+
+  <hr class="dingbat related mb6" />
+
+
+
+
+
+
+  
+     
+
+
+  <aside class="about related mt4 mb4" role="complementary">
+    
+    
+
+<div class="author mt4">
+  
+
+  
+    
+
+
+<img
+  
+    src="https://via.placeholder.com/128x128"
+    srcset="https://via.placeholder.com/128x128 1x,https://via.placeholder.com/256x256 2x"
+    
+  
+  alt="JeongHwan Yun"
+  class="avatar"
+  
+  width="120"
+  height="120"
+  loading="lazy"
+/>
+
+  
+
+  
+  
+  <h2  class="page-title hr-bottom">
+    About
+  </h2>
+
+  <p>개발자로의 성장과정</p>
+
+
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+
+  </aside>
+
+
+  
+
+  
+    
+
+
+  
+
+  
+    
+
+
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-12week/" class="flip-title"><span>KRAFTON JUNGLE 12주차 회고</span></a>  <time class="faded fine" datetime="2025-06-14T00:00:00+00:00">14 Jun 2025</time></li>            </ul></aside>
+
+  
+
+  
+    
+
+
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/algorithm/dynamic-programming/" class="flip-title"><span>동적 계획법(Dynamic programming)</span></a>  <time class="faded fine" datetime="2025-04-03T00:00:00+00:00">03 Apr 2025</time></li>          <li class="h4">  <a href="/blog/cs/donation/" class="flip-title"><span>Priority Donation: 우선순위 역전을 막는 기부 기법</span></a>  <time class="faded fine" datetime="2025-05-15T00:00:00+00:00">15 May 2025</time></li>          <li class="h4">  <a href="/blog/algorithm/hash-table-and-hashing/" class="flip-title"><span>해시 테이블(Hash table), 해시법(Hashing)</span></a>  <time class="faded fine" datetime="2025-03-24T00:00:00+00:00">24 Mar 2025</time></li>      </ul></aside>
+
+  
+
+  
+    
+
+  
+
+
+  
+<footer class="content" role="contentinfo">
+  <hr/>
+  
+    <p><small class="copyright">© 2022 JeongHwan Yun.
+</small></p>
+  
+  
+  
+  <hr class="sr-only"/>
+</footer>
+
+
+</main>
+
+  <hy-drawer
+  id="_drawer"
+  class=""
+  side="left"
+  threshold="10"
+  noscroll
+  
+>
+  <header id="_sidebar" class="sidebar" role="banner">
+    
+
+
+
+
+<div class="sidebar-bg sidebar-overlay" style="background-color:rgb(200,200,200);background-image:url(/assets/img/sidebar-bg.png)"></div>
+
+    <div class="sidebar-sticky">
+  <div class="sidebar-about">
+    
+      <a class="no-hover" href="/" tabindex="-1">
+        <img src="/assets/img/logo.png" class="avatar" alt="hwan log" width="120" height="120" loading="lazy" />
+      </a>
+    
+    <a class="sidebar-title" href="/"><h2 class="h1">hwan log</h2></a>
+    
+    
+      <p class="">
+        기술블로그
+
+      </p>
+    
+  </div>
+
+  <nav class="sidebar-nav heading" role="navigation">
+    <span class="sr-only">Navigation:</span>
+<ul>
+  
+    
+      
+      <li>
+        <a
+          id="_drawer--opened"
+          href="/algorithm/"
+          class="sidebar-nav-item "
+          
+        >
+          알고리즘
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/cs/"
+          class="sidebar-nav-item "
+          
+        >
+          CS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/techstack/"
+          class="sidebar-nav-item "
+          
+        >
+          Tech Stack
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/ai/"
+          class="sidebar-nav-item "
+          
+        >
+          AI
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/projects/"
+          class="sidebar-nav-item "
+          
+        >
+          PROJECTS
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/devlog/"
+          class="sidebar-nav-item "
+          
+        >
+          devlog
+        </a>
+      </li>
+    
+      
+      <li>
+        <a
+          
+          href="/resume/"
+          class="sidebar-nav-item "
+          
+        >
+          RESUME
+        </a>
+      </li>
+    
+  
+</ul>
+
+  </nav>
+
+  
+  <div class="sidebar-social">
+    <span class="sr-only">Social:</span>
+<ul>
+  
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="https://github.com/JeonghwanY" title="GitHub" class="no-mark-external">
+      <span class="icon-github"></span>
+      <span class="sr-only">GitHub</span>
+    </a>
+  </li>
+
+
+    
+      
+
+
+
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  <li>
+    <a href="mailto:jh327373@gmail.com" title="Email" class="no-mark-external">
+      <span class="icon-mail"></span>
+      <span class="sr-only">Email</span>
+    </a>
+  </li>
+
+
+    
+  
+</ul>
+
+  </div>
+</div>
+  </header>
+</hy-drawer>
+<hr class="sr-only" hidden />
+
+</hy-push-state>
+
+
+  <!--[if gt IE 10]><!---->
+  <script nomodule>(()=>{var t,n=document.createElement("script");!("noModule"in n)&&"onbeforeload"in n&&(t=!1,document.addEventListener("beforeload",function(e){if(e.target===n)t=!0;else if(!e.target.hasAttribute("nomodule")||!t)return;e.preventDefault()},!0),n.type="module",n.src=".",document.head.appendChild(n),n.remove())})();
+</script>
+  <script src="/assets/js/hydejack-9.2.1.js" type="module"></script>
+  <script src="/assets/js/LEGACY-hydejack-9.2.1.js" nomodule defer></script>
+  
+
+  
+
+  <script type="module">
+    if ('serviceWorker' in navigator) {
+      /**/
+      navigator.serviceWorker.getRegistration()
+        .then(r => r.unregister())
+        .catch(() => {});
+      /**/
+    }
+  </script>
+<!--<![endif]-->
+  
+
+
+
+<div hidden>
+  
+  <h2 class="sr-only">Templates (for web app):</h2>
+
+  <template id="_animation-template">
+  <div class="animation-main fixed-top">
+    <nav id="breadcrumbs" class="screen-only"><ul>
+  
+  
+</ul></nav>
+    <div class="content">
+      <div class="page"></div>
+    </div>
+  </div>
+</template>
+
+  <template id="_loading-template">
+  <div class="loading nav-btn fr">
+    <span class="sr-only">Loading…</span>
+    <span class="icon-cog"></span>
+  </div>
+</template>
+
+  <template id="_error-template">
+  <div class="page">
+    <h1 class="page-title">Error</h1>
+    
+    
+    <p class="lead">
+      Sorry, an error occurred while loading <a class="this-link" href=""></a>.
+
+    </p>
+  </div>
+</template>
+
+  <template id="_permalink-template">
+  <a href="#" class="permalink">
+    <span class="sr-only">Permalink</span>
+    <span class="content-hash"></span>
+  </a>
+</template>
+
+  
+    <template id="_cookies-banner-template">
+  <div id="_cookies-banner" class="navbar fixed-bottom CookiesOK">
+    <div class="content">
+      <div class="nav-btn-bar">
+        <small class="faded">
+          <span>This site uses cookies. <a href="/cookies-policy/">Cookies Policy</a>.
+</span>
+          <button id="_cookies-ok" class="btn btn-primary btn-sm">Okay</button>
+        </small>
+      </div>
+    </div>
+  </div>
+</template>
+
+  
+  
+    <template id="_dark-mode-template">
+  <button id="_dark-mode" class="nav-btn no-hover" >
+    <span class="sr-only">Dark Mode</span>
+    <span class="icon-brightness-contrast"></span>
+  </button>
+</template>
+
+  
+  
+    <template id="_search-template">
+  <button id="_search" class="nav-btn no-hover">
+    <label class="sr-only" for="_search-input">Search</label>
+    <span class="icon-search"></span>
+  </button>
+  <div id="_search-box">
+    <div class="nav-btn">
+      <span class="icon-search"></span>
+    </div>
+    <input 
+      id="_search-input"
+      type="search"
+      class="form-control form-control-lg nav-btn"
+      placeholder="Build with JEKYLL_ENV=production to enable search."
+    />
+    <button type="reset" class="nav-btn no-hover">
+      <span class="sr-only">Close</span>
+      <span class="icon-cross"></span>
+    </button>
+  </div>
+  <div id="_hits"></div>
+</template>
+
+  
+</div>
+
+</body>
+</html>
