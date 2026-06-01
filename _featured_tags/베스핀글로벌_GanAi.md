@@ -1,7 +1,7 @@
 ---
 layout: grid
 title: 베스핀글로벌_GanAi
-slug: 베스핀글로벌
+slug: 베스핀글로벌_GanAi
 description: >
   베스핀글로벌 GenAi 인턴기록
 sitemap: true
