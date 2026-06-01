@@ -2,6 +2,7 @@
 layout: post
 title:  "Page Replacement Policy: 어떤 페이지를 희생시킬까?"
 date:   2025-06-10
+categories: cs
 tags: [운영체제]
 hide_last_modified: true
 ---

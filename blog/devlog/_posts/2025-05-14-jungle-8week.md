@@ -2,6 +2,7 @@
 layout: post
 title:  "KRAFTON JUNGLE 8주차 회고"
 date:   2025-05-14
+categories: devlog
 tags: [krafton-jungle,회고]
 image:
     path: /assets/img/blog/devlog/jungle2.jpg

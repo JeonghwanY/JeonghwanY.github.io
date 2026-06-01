@@ -2,6 +2,7 @@
 layout: post
 title:  "Lazy Loading: 진짜 필요할 때 불러오는 전략"
 date:   2025-06-09
+categories: cs
 tags: [운영체제]
 hide_last_modified: true
 ---

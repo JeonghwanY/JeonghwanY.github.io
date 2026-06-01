@@ -2,6 +2,7 @@
 layout: post
 title:  "자기 균형 이진 탐색 트리(Self-Balancing Binary Search Tree)"
 date:   2025-03-30
+categories: algorithm
 hide_last_modified: true
 ---
 

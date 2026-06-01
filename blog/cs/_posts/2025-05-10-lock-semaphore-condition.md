@@ -2,6 +2,7 @@
 layout: post
 title:  "동기화 기법 3대장: Lock / Semaphore / Condition Variable"
 date:   2025-05-10
+categories: cs
 tags: [운영체제]
 hide_last_modified: true
 ---

@@ -4,6 +4,7 @@ title: "암호학 기초"
 description: >
   crypto(비밀) + graphy(방법) — 핵심만 빠르게
 date: 2026-01-22
+categories: cs
 tags: [보안]
 hide_last_modified: true
 ---

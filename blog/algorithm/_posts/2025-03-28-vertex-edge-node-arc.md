@@ -2,6 +2,7 @@
 layout: post
 title:  "그래프(Graph)"
 date:   2025-03-28
+categories: algorithm
 hide_last_modified: true
 ---
 

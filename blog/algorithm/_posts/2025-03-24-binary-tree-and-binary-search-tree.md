@@ -2,6 +2,7 @@
 layout: post
 title:  "이진 트리(Binary tree) 와 이진 검색 트리(Binary search tree)"
 date:   2025-03-24
+categories: algorithm
 hide_last_modified: true
 ---
 

@@ -2,6 +2,7 @@
 layout: post
 title:  "HTTP, TCP, UDP: 계층별 역할과 차이"
 date:   2025-05-06
+categories: cs
 tags: [네트워크]
 hide_last_modified: true
 ---

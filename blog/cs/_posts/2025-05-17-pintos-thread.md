@@ -2,6 +2,7 @@
 layout: post
 title:  "PintOS 1주차: Alarm Clock과 Priority Scheduling 구현"
 date:   2025-05-17
+categories: cs
 tags: [운영체제]
 hide_last_modified: true
 ---

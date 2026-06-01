@@ -2,6 +2,7 @@
 layout: post
 title:  "PintOS 4~5주차: Lazy Loading & Swap 구현"
 date:   2025-06-07
+categories: cs
 tags: [운영체제]
 hide_last_modified: true
 ---

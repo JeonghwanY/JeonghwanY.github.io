@@ -2,6 +2,7 @@
 layout: post
 title:  "시간과 공간 복잡도(w.BigO)"
 date:   2025-03-18
+categories: algorithm
 hide_last_modified: true
 ---
 

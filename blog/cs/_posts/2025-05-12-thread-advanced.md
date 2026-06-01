@@ -2,6 +2,7 @@
 layout: post
 title:  "스레드(Thread) 심화: 스케줄링 전략과 타이밍"
 date:   2025-05-12
+categories: cs
 tags: [운영체제]
 hide_last_modified: true
 ---

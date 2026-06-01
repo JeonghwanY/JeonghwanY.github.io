@@ -2,6 +2,7 @@
 layout: post
 title:  "동적 메모리 할당 (malloc, calloc, realloc, free)"
 date:   2025-04-11
+categories: techstack
 tags: [운영체제,c]
 hide_last_modified: true
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "준비 중"
 date: 2025-01-01
-categories: [ai]
+categories: ai
 sitemap: false
 ---
 

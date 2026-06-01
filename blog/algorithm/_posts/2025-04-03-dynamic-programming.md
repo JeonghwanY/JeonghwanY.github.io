@@ -2,6 +2,7 @@
 layout: post
 title:  "동적 계획법(Dynamic programming)"
 date:   2025-04-03
+categories: algorithm
 hide_last_modified: true
 ---
 

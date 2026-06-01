@@ -2,6 +2,7 @@
 layout: post
 title:  "PintOS Out Of Memory 개념: Demand Paging과 Eviction"
 date:   2025-05-26
+categories: cs
 tags: [운영체제]
 hide_last_modified: true
 ---

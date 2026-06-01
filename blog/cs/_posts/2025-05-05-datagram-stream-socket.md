@@ -2,6 +2,7 @@
 layout: post
 title:  "Datagram Socket과 Stream Socket: UDP와 TCP 소켓 비교"
 date:   2025-05-05
+categories: cs
 tags: [네트워크]
 hide_last_modified: true
 ---

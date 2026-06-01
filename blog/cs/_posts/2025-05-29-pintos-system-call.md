@@ -2,6 +2,7 @@
 layout: post
 title:  "PintOS 2~3주차: Argument Passing & System Call 구현"
 date:   2025-05-29
+categories: cs
 tags: [운영체제]
 hide_last_modified: true
 ---

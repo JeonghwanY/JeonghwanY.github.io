@@ -2,6 +2,7 @@
 layout: post
 title:  "Demand-zero memory: 필요할 때 0으로 채워 붙이는 메모리"
 date:   2025-04-22
+categories: cs
 tags: [운영체제]
 hide_last_modified: true
 ---

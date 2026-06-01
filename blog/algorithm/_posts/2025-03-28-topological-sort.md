@@ -2,6 +2,7 @@
 layout: post
 title:  "위상 정렬(Topological sort)"
 date:   2025-03-28
+categories: algorithm
 hide_last_modified: true
 ---
 

@@ -5,6 +5,7 @@ description: >
  웹 검색, 이메일, 온라인 게임 등 우리가 쓰는 모든 것은 네트워크 응용이다.
  소켓 인터페이스부터 Tiny 웹 서버, 프록시 서버까지 직접 구현해본다.
 date:   2025-05-07
+categories: cs
 tags: [네트워크]
 hide_last_modified: true
 ---

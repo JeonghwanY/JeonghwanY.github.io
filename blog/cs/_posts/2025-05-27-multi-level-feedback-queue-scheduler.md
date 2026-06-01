@@ -2,6 +2,7 @@
 layout: post
 title:  "Multi-Level Feedback Queue Scheduler (MLFQS)"
 date:   2025-05-26
+categories: cs
 tags: [운영체제]
 hide_last_modified: true
 ---

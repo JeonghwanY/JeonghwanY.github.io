@@ -2,6 +2,7 @@
 layout: post
 title:  "욕심쟁이 알고리즘(Greedy Algorithm)"
 date:   2025-04-03
+categories: algorithm
 hide_last_modified: true
 ---
 

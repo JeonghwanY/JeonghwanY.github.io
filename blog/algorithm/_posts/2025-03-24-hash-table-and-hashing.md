@@ -2,6 +2,7 @@
 layout: post
 title:  "해시 테이블(Hash table), 해시법(Hashing)"
 date:   2025-03-24
+categories: algorithm
 hide_last_modified: true
 ---
 
