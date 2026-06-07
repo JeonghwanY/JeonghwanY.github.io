@@ -18,20 +18,20 @@
   
     
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>암호학 기초 | hwan log</title>
+<title>RAG 챗봇 개인과제 정의 | hwan log</title>
 <meta name="generator" content="Jekyll v3.10.0" />
-<meta property="og:title" content="암호학 기초" />
+<meta property="og:title" content="RAG 챗봇 개인과제 정의" />
 <meta name="author" content="JeongHwan Yun" />
 <meta property="og:locale" content="ko_KR, en_US" />
-<meta name="description" content="crypto(비밀) + graphy(방법) — 핵심만 빠르게" />
-<meta property="og:description" content="crypto(비밀) + graphy(방법) — 핵심만 빠르게" />
+<meta name="description" content="기술블로그" />
+<meta property="og:description" content="기술블로그" />
 <meta property="og:site_name" content="hwan log" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-01-22T00:00:00+00:00" />
+<meta property="article:published_time" content="2026-06-02T00:00:00+00:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="암호학 기초" />
+<meta property="twitter:title" content="RAG 챗봇 개인과제 정의" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2026-01-22T00:00:00+00:00","datePublished":"2026-01-22T00:00:00+00:00","description":"crypto(비밀) + graphy(방법) — 핵심만 빠르게","headline":"암호학 기초","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/cs/cryptography/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/cs/cryptography/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"JeongHwan Yun"},"dateModified":"2026-06-02T00:00:00+00:00","datePublished":"2026-06-02T00:00:00+00:00","description":"기술블로그","headline":"RAG 챗봇 개인과제 정의","mainEntityOfPage":{"@type":"WebPage","@id":"/blog/devlog/RAGchatbot/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/img/logo.png"},"name":"JeongHwan Yun"},"url":"/blog/devlog/RAGchatbot/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -63,7 +63,7 @@
 <meta name="generator" content="Hydejack v9.2.1" />
 
 
-<link rel="alternate" href="/blog/cs/cryptography/" hreflang="ko-kr, en-us">
+<link rel="alternate" href="/blog/devlog/RAGchatbot/" hreflang="ko-kr, en-us">
 
 <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="hwan log" />
 
@@ -196,14 +196,14 @@ html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5
           <span>/</span>
           
           
-          <a href="/blog/cs/">cs</a>
+          <a href="/blog/devlog/">devlog</a>
         
       </li>
     
       <li>
         
           <span>/</span>
-          <span>cryptography</span>
+          <span>RAGchatbot</span>
         
       </li>
     
@@ -220,18 +220,18 @@ html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5
 
 
 
-<article id="post-blog-cs-cryptography" class="page post mb6" role="article">
+<article id="post-blog-devlog-RAGchatbot" class="page post mb6" role="article">
   <header>
     <h1 class="post-title flip-project-title">
       
-        암호학 기초
+        RAG 챗봇 개인과제 정의
       
     </h1>
 
     <div class="post-date">
       
       <span class="ellipsis mr1">
-        <time datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time> in <span>Blog</span> / <a href="/cs/" class="flip-title">CS</a> on <a href="/tag-%EB%B3%B4%EC%95%88/" class="flip-title">보안</a>
+        <time datetime="2026-06-02T00:00:00+00:00">02 Jun 2026</time> in <span>Blog</span> / <a href="/devlog/" class="flip-title">devlog</a> on <a href="/tag-%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C/" class="flip-title">베스핀글로벌</a>
       </span>
       
     </div>
@@ -243,205 +243,72 @@ html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5
 
 
 
-  
-    <p class="note-sm" >
-      crypto(비밀) + graphy(방법) — 핵심만 빠르게
-
-    </p>
-  
+  <div class="hr pb0"></div>
 
 
   </header>
 
   
-    <ul class="large-only" id="markdown-toc">
-  <li><a href="#왜-암호화가-필요한가" id="markdown-toc-왜-암호화가-필요한가">왜 암호화가 필요한가?</a></li>
-  <li><a href="#정보보안-3요소-cia-triad" id="markdown-toc-정보보안-3요소-cia-triad">정보보안 3요소 (CIA Triad)</a></li>
-  <li><a href="#세-가지-핵심-개념" id="markdown-toc-세-가지-핵심-개념">세 가지 핵심 개념</a></li>
-  <li><a href="#암호화-방식" id="markdown-toc-암호화-방식">암호화 방식</a>    <ul>
-      <li><a href="#양방향-암호화" id="markdown-toc-양방향-암호화">양방향 암호화</a>        <ul>
-          <li><a href="#대칭키-방식" id="markdown-toc-대칭키-방식">대칭키 방식</a></li>
-          <li><a href="#비대칭키-방식" id="markdown-toc-비대칭키-방식">비대칭키 방식</a></li>
-        </ul>
-      </li>
-      <li><a href="#단방향-암호화-해시" id="markdown-toc-단방향-암호화-해시">단방향 암호화 (해시)</a></li>
-    </ul>
-  </li>
-  <li><a href="#실생활-적용" id="markdown-toc-실생활-적용">실생활 적용</a></li>
-  <li><a href="#핵심-요약" id="markdown-toc-핵심-요약">핵심 요약</a></li>
-</ul>
+    <p><img src="RAG 챗봇 개인과제.png" alt="RAG 챗봇 개인과제" /></p>
 
-<h2 id="왜-암호화가-필요한가">왜 암호화가 필요한가?</h2>
+<p>RAG 기반 챗봇 구현. 사내문서는 삼성 건강보험(올인원 암보험) 관련 문서.</p>
 
-<p>인터넷으로 데이터를 주고받을 때 세 가지 위협이 존재한다.</p>
-
+<h3 id="핵심으로-잡은-세-가지">핵심으로 잡은 세 가지</h3>
 <ul>
-  <li><strong>도청(Sniffing)</strong> — 전송 중인 데이터를 몰래 엿봄</li>
-  <li><strong>위·변조(Tampering)</strong> — 내용을 바꿔치기함</li>
-  <li><strong>도용(Identity Theft)</strong> — 다른 사람인 척 속임</li>
+  <li>LangSmith로 디버깅, 모니터링하며 Tracing을 통해 병목현상이나 개선 부분 도출</li>
+  <li>비용 및 성능 지표를 수립해 데이터 기반으로 문서화</li>
+  <li>문서가 짧고 정형 텍스트라(사진없음) 무거운 외부 도구가 필요 없음. 표·계층 구조 보존 필요. 만약 사진이 있었으면? LlamaParse(OCR + 표 구조 복원) 또는 AWS Textract</li>
 </ul>
 
-<hr />
+<h3 id="진행순서">진행순서</h3>
+<ol>
+  <li>문서 업로드 -&gt; 파싱</li>
+</ol>
 
-<h2 id="정보보안-3요소-cia-triad">정보보안 3요소 (CIA Triad)</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>요소</th>
-      <th>의미</th>
-      <th>달성 방법</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Confidentiality</strong> (기밀성)</td>
-      <td>남이 보지 못하게</td>
-      <td>암호화 (Encryption)</td>
-    </tr>
-    <tr>
-      <td><strong>Integrity</strong> (무결성)</td>
-      <td>내용이 바뀌지 않았음을 보장</td>
-      <td>해시 + 전자서명</td>
-    </tr>
-    <tr>
-      <td><strong>Availability</strong> (가용성)</td>
-      <td>필요할 때 언제든 사용 가능</td>
-      <td>서버 안정성, DDoS 방어</td>
-    </tr>
-  </tbody>
-</table>
-
-<blockquote>
-  <p><strong>+ 인증(Authentication)</strong>: 권한 있는 사람만 접근 가능하게 함</p>
-</blockquote>
-
-<hr />
-
-<h2 id="세-가지-핵심-개념">세 가지 핵심 개념</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>개념</th>
-      <th>설명</th>
-      <th>방향</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>암호화 (Encryption)</strong></td>
-      <td>데이터를 읽을 수 없게 변환</td>
-      <td>복호화(Decryption) 가능</td>
-    </tr>
-    <tr>
-      <td><strong>해시 (Hash)</strong></td>
-      <td>입력값을 고정 길이 “지문”으로 변환</td>
-      <td>단방향, 되돌릴 수 없음</td>
-    </tr>
-    <tr>
-      <td><strong>전자서명 (Digital Signature)</strong></td>
-      <td>메시지에 서명을 붙여 발신자·위조 여부 검증</td>
-      <td>비대칭키 기반</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<h2 id="암호화-방식">암호화 방식</h2>
-<p><img src="/assets/img/blog/security/암호화방식.png" alt="타임라인" /></p>
-<h3 id="양방향-암호화">양방향 암호화</h3>
-
-<blockquote>
-  <p>암호화 + 복호화 모두 가능 → <strong>기밀성</strong> 목적</p>
-</blockquote>
-
-<h4 id="대칭키-방식">대칭키 방식</h4>
-
-<ul>
-  <li>암호화·복호화에 <strong>동일한 키</strong> 사용</li>
-  <li>빠르지만, 키를 상대에게 안전하게 전달하는 문제가 있음</li>
-  <li>대표 알고리즘: <strong>AES</strong>, Twofish, Blowfish, DES, 3DES</li>
-</ul>
-
-<h4 id="비대칭키-방식">비대칭키 방식</h4>
-
-<ul>
-  <li><strong>공개키(Public Key)</strong> 와 <strong>비공개키(Private Key)</strong> 쌍 사용</li>
-  <li>공개키로 암호화 → 비공개키로만 복호화 (반대도 성립)</li>
-  <li>키를 공개해도 안전하게 통신 가능</li>
-  <li>대표 알고리즘: <strong>RSA</strong></li>
-</ul>
-
-<p>[전자서명 흐름]</p>
-
-<p><img src="/assets/img/blog/security/전자서명%20동작%20원리.png" alt="타임라인" /></p>
-
-<blockquote>
-  <p><strong>전자서명</strong>: 발신자가 비공개키로 내용에 서명 → 수신자는 공개키로 서명을 복호화해 내용과 대조 → 일치하면 진본·발신자 확인</p>
-</blockquote>
-
-<hr />
-
-<h3 id="단방향-암호화-해시">단방향 암호화 (해시)</h3>
-
-<blockquote>
-  <p>복호화 불가 → <strong>무결성</strong> 목적</p>
-</blockquote>
-
-<ul>
-  <li>입력값이 조금만 달라져도 완전히 다른 해시값 출력</li>
-  <li>비밀번호 저장, 파일 무결성 검증에 사용</li>
-  <li>대표 알고리즘: <strong>SHA-256</strong>, SHA-512, MD5, SHA-1</li>
-</ul>
-
-<hr />
-
-<h2 id="실생활-적용">실생활 적용</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>상황</th>
-      <th>암호화 방식</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>HTTPS</strong></td>
-      <td>비대칭키로 세션키 교환 → AES(대칭키)로 데이터 암호화</td>
-    </tr>
-    <tr>
-      <td><strong>비밀번호 저장</strong></td>
-      <td>해시(SHA 등)로 저장, 복원 불가 → 비교만 함</td>
-    </tr>
-    <tr>
-      <td><strong>E2EE 메신저</strong> (카카오 비밀채팅, WhatsApp)</td>
-      <td>종단간 암호화, 서버 관리자도 내용 열람 불가</td>
-    </tr>
-    <tr>
-      <td><strong>파일/USB 암호화</strong></td>
-      <td>AES 기반 대칭키 방식</td>
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<h2 id="핵심-요약">핵심 요약</h2>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>암호화 방식
-├── 양방향 (복호화 가능) — 기밀성
-│   ├── 대칭키: 같은 키 사용 → AES, DES
-│   └── 비대칭키: 공개키/비공개키 쌍 → RSA, 전자서명
-└── 단방향 (복호화 불가) — 무결성
-    └── 해시: SHA-256, MD5
+<h3 id="pymupdf">PyMuPDF</h3>
+<p>문서 표는 총 3개 (3페이지 2개, 6페이지 1개). 페이지 수 대비 표 밀도가 높진 않지만, 뽑아보니 구조가 깨짐
+3페이지 “보험기간” 표를 PyMuPDF로 뽑은 결과</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'1종(일시지급형)[순수보장형] 최초 1종(일시지급형) 계약 [만기지급형] 2종(생활자금형)[순수보장형]'  ← 한 셀에 다 뭉침
+'15 ~ 77세\n15 ~ 60세\n15 ~ 78세'  ← 세 행이 한 셀에 합쳐짐
 </code></pre></div></div>
+<p>원본은 “1종 순수보장형 = 남자 15~77세”, “1종 만기지급형 = 남자 15~60세”처럼 행마다 나이가 다른데, 
+PyMuPDF가 <strong>병합 셀(merged cell)</strong>을 못 풀어서 “15~77 / 15~60 / 15~78”을 한 칸에 출력. 이러면 “1종 만기지급형 남자 가입나이?” 물어봤을 때 챗봇이 77인지 60인지 구분하지 못할 가능성 큼.</p>
 
-<blockquote>
-  <p>참고 영상: <a href="https://www.youtube.com/playlist?list=PLuHgQVnccGMD-9lk4xmb6EG1XK1OmwC3u">생활코딩 암호학</a></p>
-</blockquote>
+<h3 id="병합-셀--다단-헤더2줄짜리-헤더">병합 셀 + 다단 헤더(2줄짜리 헤더)</h3>
+<p>1순위 — pymupdf4llm (같은 PyMuPDF 계열, 마크다운 출력)
+PyMuPDF 레이아웃 강화 패키지로 표를 마크다운으로 뽑아주고 기본 find_tables보다 병합/헤더 처리가 우수함. PyMuPDF 쓰는 설계라 의존성 추가가 거의 없어서 1순위. 무료·로컬도 유지돼.
+2순위 — Camelot 또는 pdfplumber (표 전문 추출기)
+표만큼은 격자선(lattice) 기반으로 정밀하게 떠줌. Camelot은 선이 그려진 표(이 문서가 격자 있음)에 특히 강해. 다만 표 3개만 잡으면 되니까 “표 페이지(3,6)만 Camelot으로, 나머지 평문은 PyMuPDF로” 식의 이중 파이프라인이 돼서 코드 증가.
+3순위 — LlamaParse / Upstage Document Parse
+병합 셀·다단 헤더를 LLM이 알아서 정형화. 가장 깔끔하지만 외부 API라 앞에서 말한 비용·재현성 이슈. 단 <strong>Upstage(한국 회사)</strong>는 한국어 문서·표에 특화돼서 이런 한글 보험 표엔 정확도가 제일 높을 가능성이 큼. Bedrock 고집 안 하면 후보로 좋다.</p>
+
+<p>이 문서엔 PyMuPDF(평문) + pymupdf4llm 또는 Camelot(표 3개 전용) 조합.
+표가 병합 셀이라 단순 추출은 깨진다. 근데 표가 3개뿐이라 전체를 외부 API에 맡길 필요는 없고, 표 페이지만 전용 추출기로 처리하면 비용 없이 정확도 확보.
+깨진 결과 vs 살린 결과 비교</p>
+<h3 id="병합셀이란">병합셀이란?</h3>
+<p>┌────────┬──────────┬────────┬─────────────────┬────────┐
+│  구분   │  보험기간  │ 납입기간 │   가입나이        │ 납입주기 │
+│        │          │        ├────────┬────────┤        │
+│        │          │        │  남자   │  여자   │        │   ← 헤더가 2줄
+├────────┼──────────┼────────┼────────┼────────┼────────┤
+│ 1종     │          │        │ 15~77세 │ 15~80세 │        │
+│ 순수보장 │          │        │        │        │        │
+├────────┤          │        ├────────┼────────┤        │
+│ 1종     │   15년    │  전기납  │ 15~60세 │ 15~68세 │  월납   │
+│ 만기지급 │  ←합쳐짐  │ ←합쳐짐 │        │        │ ←합쳐짐 │
+├────────┤          │        ├────────┼────────┤        │
+│ 2종     │          │        │ 15~78세 │ 15~80세 │        │
+└────────┴──────────┴────────┴────────┴────────┴────────┘</p>
+
+<p>세로 병합 — “보험기간(15년)”, “납입기간(전기납)”, “납입주기(월납)”는 1종·만기지급·2종 세 행에 걸쳐 한 칸으로 합쳐져 있다.</p>
+
+<p>다단 헤더(가로 병합 비슷한 구조) — “가입나이”라는 큰 제목 아래에 “남자/여자”가 들어가서 헤더가 2층 구조.</p>
+
+<h3 id="병합셀의-문제">병합셀의 문제</h3>
+<p>사람 눈으론 병합셀을 시각적으로 구분할 수 있지만 PyMuPDF 같은 기본 추출기는 병합 셀을 못 풀어서, 합쳐진 칸의 값을 어느 행에 줘야 할지 모른다.
+그래서 이런 결과를 도출: ‘15 ~ 77세\n15 ~ 60세\n15 ~ 78세’   ← 세 행 나이가 한 칸에 다 뭉침
+이러면 챗봇이 “1종 만기지급형 남자 가입나이가 몇 살이에요?” 물었을 때 77인지 60인지 매칭을 하지 못함. 표의 행-열 관계가 깨짐.
+따라서 병합 셀을 제대로 풀어주는 도구(pymupdf4llm, Camelot, Upstage 등)가 필요하다.</p>
 
   
 </article>
@@ -569,7 +436,7 @@ html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5
     
 
 
-  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/RAGchatbot/" class="flip-title"><span>RAG 챗봇 개인과제 정의</span></a>  <time class="faded fine" datetime="2026-06-02T00:00:00+00:00">02 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
+  <aside class="other-projects related mb0" role="complementary">  <h2>Related Posts</h2>  <ul class="related-posts">                  <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B2%AB%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 첫날</span></a>  <time class="faded fine" datetime="2026-06-01T00:00:00+00:00">01 Jun 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/%EB%B2%A0%EC%8A%A4%ED%95%80%EA%B8%80%EB%A1%9C%EB%B2%8C%EC%9D%B8%ED%84%B4%EC%B0%B8%EC%97%AC%EC%A0%84%EB%82%A0/" class="flip-title"><span>베스핀글로벌 참여 전날</span></a>  <time class="faded fine" datetime="2026-05-31T00:00:00+00:00">31 May 2026</time></li>                        <li class="h4">  <a href="/blog/cs/cryptography/" class="flip-title"><span>암호학 기초</span></a>  <time class="faded fine" datetime="2026-01-22T00:00:00+00:00">22 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/cs/HTTPS/" class="flip-title"><span>HTTP vs HTTPS — SSL/TLS 정리</span></a>  <time class="faded fine" datetime="2026-01-15T00:00:00+00:00">15 Jan 2026</time></li>                        <li class="h4">  <a href="/blog/devlog/jungle-16week/" class="flip-title"><span>KRAFTON JUNGLE 16주차 회고</span></a>  <time class="faded fine" datetime="2025-07-31T00:00:00+00:00">31 Jul 2025</time></li>            </ul></aside>
 
   
 
@@ -577,7 +444,7 @@ html{--accent-color: rgb(200,200,200);--accent-color-faded: rgba(200,200,200,0.5
     
 
 
-  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/techstack/gcc/" class="flip-title"><span>gcc (GNU Compiler Collection)</span></a>  <time class="faded fine" datetime="2025-04-13T00:00:00+00:00">13 Apr 2025</time></li>          <li class="h4">  <a href="/blog/algorithm/binary-tree-and-binary-search-tree/" class="flip-title"><span>이진 트리(Binary tree) 와 이진 검색 트리(Binary search tree)</span></a>  <time class="faded fine" datetime="2025-03-24T00:00:00+00:00">24 Mar 2025</time></li>          <li class="h4">  <a href="/blog/cs/multi-level-feedback-queue-scheduler/" class="flip-title"><span>Multi-Level Feedback Queue Scheduler (MLFQS)</span></a>  <time class="faded fine" datetime="2025-05-26T00:00:00+00:00">26 May 2025</time></li>      </ul></aside>
+  <aside class="related mb4" role="complementary">  <h2 class="hr-bottom">Random Posts</h2>  <ul class="related-posts">          <li class="h4">  <a href="/blog/cs/osi-7-layer/" class="flip-title"><span>OSI 7계층(OSI 7 Layer): 네트워크 통신을 7단계로 나눈 설계도</span></a>  <time class="faded fine" datetime="2025-05-04T00:00:00+00:00">04 May 2025</time></li>          <li class="h4">  <a href="/blog/cs/swap-disk/" class="flip-title"><span>Swap Disk: 메모리가 부족할 때 페이지를 잠시 맡기는 곳</span></a>  <time class="faded fine" datetime="2025-06-12T00:00:00+00:00">12 Jun 2025</time></li>          <li class="h4">  <a href="/blog/cs/ip-layer/" class="flip-title"><span>IP Layer: 인터넷을 한 덩어리로 묶는 추상화</span></a>  <time class="faded fine" datetime="2025-05-03T00:00:00+00:00">03 May 2025</time></li>      </ul></aside>
 
   
 
