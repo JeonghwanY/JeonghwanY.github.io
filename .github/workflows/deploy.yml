@@ -5,15 +5,18 @@ on:
     branches:
       - main
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-22.04
-
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout code
@@ -25,14 +28,23 @@ jobs:
           ruby-version: '3.1'
           bundler-cache: true
 
-      - name: Install dependencies
-        run: bundle install
-
       - name: Build the site
         run: bundle exec jekyll build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+          path: ./_site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-22.04
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
