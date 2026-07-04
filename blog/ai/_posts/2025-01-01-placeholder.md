@@ -1,9 +1,30 @@
 ---
 layout: post
-title: "준비 중"
-date: 2025-01-01
+title: "T-Box / A-Box"
+date: 2026-07-02
 categories: ai
+hide_last_modified: true
 sitemap: false
 ---
 
-포스트 준비 중입니다.
+## T-Box / A-Box
+
+![[Pasted image 20260703162151.png]]
+RDF/OWL 생태계에서 그대로 쓰인다.
+
+|구분|T-Box (Terminological Box)|A-Box (Assertional Box)|
+|---|---|---|
+|담는 내용|**규칙** — 클래스가 뭐고 어떻게 계층지어지는가|**사실** — 실제로 무엇이 존재하는가|
+|표현 수단|OWL / RDFS|RDF 트리플|
+|예시|`자동부활 rdfs:subClassOf RevivalCase`|`revival_789 rdf:type 자동부활`|
+|변화 빈도|안정적, 설계 후 거의 불변|문서 유입마다 계속 증가|
+|팔란티어 대응|Object/Property/Link **타입** 정의|실제 추출된 인스턴스 데이터|
+
+```
+규칙(T-Box):  자동부활 rdfs:subClassOf RevivalCase
+사실(A-Box):  revival_789 rdf:type 자동부활
+     ↓ 추론 엔진이 계산
+새 사실(A-Box): revival_789 rdf:type RevivalCase   ← 자동 생성됨
+```
+
+**중요**: RDFS/OWL이 자동으로 하는 것은 "이미 정의된 규칙을 기존 사실에 적용해 파생 사실을 계산"하는 것이지, **T-Box(규칙) 자체를 스스로 발견해서 만드는 게 아니다.** T-Box는 LPG든 RDF든 항상 사람이 설계해야 한다.
